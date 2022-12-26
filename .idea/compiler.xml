@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for dc3-common" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
+        </processorPath>
+        <module name="dc3-common-constant" />
+        <module name="dc3-common-redis" />
+        <module name="dc3-common-public" />
+        <module name="dc3-common-profiles" />
+        <module name="dc3-common-web" />
+        <module name="dc3-common-exception" />
+        <module name="dc3-common-log" />
+        <module name="dc3-common-thread" />
+        <module name="dc3-common-mysql" />
+        <module name="dc3-common-model" />
+        <module name="dc3-common-feign" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dc3-common-constant" options="-parameters" />
+      <module name="dc3-common-exception" options="-parameters" />
+      <module name="dc3-common-feign" options="-parameters" />
+      <module name="dc3-common-log" options="-parameters" />
+      <module name="dc3-common-model" options="-parameters" />
+      <module name="dc3-common-mysql" options="-parameters" />
+      <module name="dc3-common-profiles" options="-parameters" />
+      <module name="dc3-common-public" options="-parameters" />
+      <module name="dc3-common-redis" options="-parameters" />
+      <module name="dc3-common-thread" options="-parameters" />
+      <module name="dc3-common-web" options="-parameters" />
+    </option>
+  </component>
+</project>
