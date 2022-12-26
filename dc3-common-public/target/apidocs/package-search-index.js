@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"io.github.pnoker.common.base"},{"l":"io.github.pnoker.common.bean"},{"l":"io.github.pnoker.common.bean.auth"},{"l":"io.github.pnoker.common.bean.common"},{"l":"io.github.pnoker.common.utils"},{"l":"所有程序包","u":"allpackages-index.html"}];updateSearchResults();

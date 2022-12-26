@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"io.github.pnoker.common.annotation","l":"Logs"},{"p":"io.github.pnoker.common.annotation","l":"LogsAspect"},{"p":"io.github.pnoker.common.annotation","l":"LogsType"}];updateSearchResults();

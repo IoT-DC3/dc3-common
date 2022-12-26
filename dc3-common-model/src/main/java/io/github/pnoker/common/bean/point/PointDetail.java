@@ -19,8 +19,6 @@ import io.github.pnoker.common.valid.Update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,8 +33,6 @@ import javax.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
-@ToString(callSuper = true)
 public class PointDetail {
 
     @NotBlank(message = "device name can't be empty", groups = {Insert.class})

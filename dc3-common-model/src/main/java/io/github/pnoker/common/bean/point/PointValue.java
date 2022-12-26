@@ -20,7 +20,6 @@ import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -37,7 +36,6 @@ import java.util.List;
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PointValue implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -17,7 +17,6 @@ package io.github.pnoker.common.model;
 import io.github.pnoker.common.bean.model.BaseModel;
 import io.github.pnoker.common.valid.Insert;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -31,7 +30,6 @@ import javax.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class BlackIp extends BaseModel {

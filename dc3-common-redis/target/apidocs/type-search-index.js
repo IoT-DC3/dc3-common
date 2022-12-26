@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"io.github.pnoker.common.config","l":"RedisCacheConfig"},{"p":"io.github.pnoker.common.config","l":"RedisTemplateConfig"},{"p":"io.github.pnoker.common.utils","l":"RedisUtil"}];updateSearchResults();

@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"io.github.pnoker.common.config","c":"OpenFeignConfig","l":"OpenFeignConfig()","u":"%3Cinit%3E()"}];updateSearchResults();

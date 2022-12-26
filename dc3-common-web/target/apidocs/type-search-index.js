@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"io.github.pnoker.common.config","l":"GlobalExceptionConfig"},{"p":"io.github.pnoker.common.utils","l":"RequestUtil"},{"p":"io.github.pnoker.common.config","l":"WebMvcConfig"}];updateSearchResults();

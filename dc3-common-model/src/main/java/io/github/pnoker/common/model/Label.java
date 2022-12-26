@@ -17,7 +17,6 @@ package io.github.pnoker.common.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.model.BaseModel;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 /**
  * 标签表
@@ -28,7 +27,6 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Label extends BaseModel {

@@ -17,7 +17,6 @@ package io.github.pnoker.common.bean.batch;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -29,7 +28,6 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class BatchDevice implements Serializable {
     private static final long serialVersionUID = 1L;
 

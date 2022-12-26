@@ -21,7 +21,6 @@ import io.github.pnoker.common.entity.Point;
 import io.github.pnoker.common.entity.PointAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -35,7 +34,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Data
 @AllArgsConstructor
-@Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DriverMetadata implements Serializable {
     private static final long serialVersionUID = 1L;

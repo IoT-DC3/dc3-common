@@ -17,8 +17,6 @@ package io.github.pnoker.common.bean.point;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -33,8 +31,6 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
-@ToString(callSuper = true)
 public class TsPointValue implements Serializable {
     private String metric;
     private Long timestamp;

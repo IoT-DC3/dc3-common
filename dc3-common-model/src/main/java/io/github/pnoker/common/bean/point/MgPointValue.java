@@ -16,9 +16,7 @@ package io.github.pnoker.common.bean.point;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -33,7 +31,8 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MgPointValue extends PointValue {
 
