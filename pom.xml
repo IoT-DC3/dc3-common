@@ -22,11 +22,12 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-parent</artifactId>
-        <version>2022.1.7</version>
+        <version>2022.1.8</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common</artifactId>
+    <version>2022.1.8</version>
     <packaging>pom</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
@@ -74,7 +75,7 @@
 
     <dependencies>
 
-        <!-- Hutool -->
+        <!-- HuTool -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
