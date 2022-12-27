@@ -67,10 +67,12 @@ public class RedisUtil {
         redisTemplate.opsForValue().set(key, value, time, unit);
     }
 
+
     /**
      * 批量添加 Key 缓存
      *
      * @param valuesMap Map String:Object
+     * @param <T>       Value Type
      */
     public <T> void setKey(Map<String, T> valuesMap) {
         redisTemplate.opsForValue().multiSet(valuesMap);
@@ -81,6 +83,7 @@ public class RedisUtil {
      *
      * @param valueMap     Map String:Object
      * @param expireMillis Map String:Long
+     * @param <T>          Value Type
      */
     public <T> void setKey(Map<String, T> valueMap, Map<String, Long> expireMillis) {
         redisTemplate.opsForValue().multiSet(valueMap);
@@ -91,7 +94,7 @@ public class RedisUtil {
      * 获取 Key 缓存
      *
      * @param key String key
-     * @param <T> T
+     * @param <T> Value Type
      * @return T
      */
     public <T> T getKey(final String key) {
@@ -103,7 +106,7 @@ public class RedisUtil {
      * 批量获取 Key 缓存值
      *
      * @param keys String key array
-     * @param <T>  T
+     * @param <T>  Value Type
      * @return T Array
      */
     public <T> List<T> getKey(List<String> keys) {

@@ -22,17 +22,19 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-common</artifactId>
-        <version>2022.1.8</version>
+        <version>2022.1.9</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common-model</artifactId>
-    <version>2022.1.8</version>
+    <version>2022.1.9</version>
     <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
-    <description>IOT DC3 平台 公共的 Model 配置。</description>
+    <description>
+        IOT DC3 平台 公共的 Model 配置。
+    </description>
 
     <developers>
         <developer>
