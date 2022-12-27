@@ -17,12 +17,16 @@ package io.github.pnoker.common.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.DriverTypeEnum;
 import io.github.pnoker.common.enums.EnableTypeEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  * 驱动表
@@ -52,8 +56,7 @@ public class Driver extends BaseModel {
             groups = {Insert.class, Update.class})
     private String serviceName;
 
-    // TODO:请使用枚举
-    private Integer typeFlag;
+    private DriverTypeEnum typeFlag;
 
     @NotBlank(message = "Service host can't be empty",
             groups = {Insert.class})

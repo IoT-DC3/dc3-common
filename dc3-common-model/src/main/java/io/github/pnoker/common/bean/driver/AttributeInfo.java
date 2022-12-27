@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.bean.driver;
 
+import io.github.pnoker.common.enums.AttributeTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -34,5 +35,5 @@ public class AttributeInfo {
     /**
      * 类型，value type，用于确定value的真实类型
      */
-    private String type;
+    private AttributeTypeEnum type;
 }

@@ -16,6 +16,7 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.AttributeTypeEnum;
 import io.github.pnoker.common.enums.EnableTypeEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
@@ -54,10 +55,9 @@ public class DriverAttribute extends BaseModel {
     private String attributeName;
 
     /**
-     * string/int/double/float/long/boolean
+     * 类型标识
      */
-    // TODO:请使用枚举
-    private Integer typeFlag;
+    private AttributeTypeEnum typeFlag;
 
     @NotNull(message = "Tenant id can't be empty",
             groups = {Insert.class, Update.class})

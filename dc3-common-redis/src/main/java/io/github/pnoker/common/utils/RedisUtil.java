@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -39,7 +40,6 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class RedisUtil {
 
-    //TODO 这个泛型不知道好使不，前检查一下 RedisTemplateConfig
     @Resource
     private RedisTemplate redisTemplate;
 
@@ -207,7 +207,11 @@ public class RedisUtil {
      * @return 剩余失效时长
      */
     public long getExpire(String key, TimeUnit unit) {
-        return redisTemplate.getExpire(key, unit);
+        Long expire = redisTemplate.getExpire(key, unit);
+        if (ObjectUtil.isNotNull(expire)) {
+            return expire;
+        }
+        return 0L;
     }
 
 }
