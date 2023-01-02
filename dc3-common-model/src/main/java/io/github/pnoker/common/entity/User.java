@@ -16,14 +16,13 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -40,18 +39,26 @@ import javax.validation.constraints.Pattern;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class User extends BaseModel {
 
-    // TODO 正则需要调整，用户名可以是手机号，邮箱，字符串
+    /**
+     * 登录名称
+     */
     @NotBlank(message = "Login name can't be empty",
             groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[a-zA-Z]\\w{2,15}$",
-            message = "Invalid login name , /^[a-zA-Z]\\w{2,15}$/",
-            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid login name",
+            groups = {Insert.class, Update.class})
     private String loginName;
 
+    /**
+     * 用户拓展ID
+     */
     @NotBlank(message = "User ext id can't be empty",
             groups = {Insert.class, Update.class})
     private String userExtId;
 
+    /**
+     * 用户密码ID
+     */
     @NotBlank(message = "User password id can't be empty",
             groups = {Insert.class, Update.class})
     private String userPasswordId;
@@ -59,5 +66,5 @@ public class User extends BaseModel {
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 }

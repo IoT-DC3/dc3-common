@@ -46,7 +46,7 @@ public class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键ID,自动生成
+     * 主键ID
      */
     @TableId(type = IdType.ASSIGN_ID)
     @NotNull(message = "Id can't be empty", groups = {Update.class})
@@ -72,8 +72,8 @@ public class BaseModel implements Serializable {
     /**
      * 逻辑删标识
      * <ol>
-     * <li>1 (true):已删除</li>
      * <li>0 (false):默认,未删除</li>
+     * <li>1 (true):已删除</li>
      * </ol>
      */
     @TableLogic

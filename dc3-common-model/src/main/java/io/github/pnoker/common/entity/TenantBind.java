@@ -36,9 +36,17 @@ import javax.validation.constraints.NotBlank;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TenantBind extends BaseModel {
 
-    @NotBlank(message = "Tenant id can't be empty", groups = {Insert.class, Update.class})
+    /**
+     * 租户ID
+     */
+    @NotBlank(message = "Tenant id can't be empty",
+            groups = {Insert.class, Update.class})
     private String tenantId;
 
-    @NotBlank(message = "User id can't be empty", groups = {Insert.class, Update.class})
+    /**
+     * 用户ID
+     */
+    @NotBlank(message = "User id can't be empty",
+            groups = {Insert.class, Update.class})
     private String userId;
 }

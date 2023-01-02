@@ -21,53 +21,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用属性类型枚举
+ * 通用读写标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum AttributeTypeEnum {
+public enum RwFlagEnum {
     /**
-     * 字符串
+     * 只读
      */
-    STRING("string", "字符串"),
+    R("r", "只读"),
 
     /**
-     * 字节
+     * 只写
      */
-    BYTE("byte", "字节"),
+    W("w", "只写"),
 
     /**
-     * 短整数
+     * 读写
      */
-    SHORT("short", "短整数"),
-
-    /**
-     * 整数
-     */
-    INT("int", "整数"),
-
-    /**
-     * 长整数
-     */
-    LONG("long", "长整数"),
-
-    /**
-     * 浮点数
-     */
-    FLOAT("float", "浮点数"),
-
-    /**
-     * 双精度浮点数
-     */
-    DOUBLE("double", "双精度浮点数"),
-
-    /**
-     * 布尔量
-     */
-    BOOLEAN("boolean", "布尔量"),
+    RW("rw", "读写"),
     ;
 
     /**
@@ -84,10 +59,10 @@ public enum AttributeTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return PointTypeEnum
+     * @return RwFlagEnum
      */
-    public static AttributeTypeEnum of(String code) {
-        Optional<AttributeTypeEnum> any = Arrays.stream(AttributeTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static RwFlagEnum of(String code) {
+        Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

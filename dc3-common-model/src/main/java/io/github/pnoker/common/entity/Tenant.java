@@ -16,9 +16,10 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
+import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -40,20 +41,20 @@ public class Tenant extends BaseModel {
 
     @NotBlank(message = "Tenant name can't be empty",
             groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[a-zA-Z]\\w{2,15}$",
-            message = "Invalid tenant name , /^[a-zA-Z]\\w{2,15}$/",
-            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
+            message = "Invalid tenant name",
+            groups = {Insert.class, Update.class})
     private String tenantName;
 
     @NotBlank(message = "Tenant code can't be empty",
             groups = {Insert.class})
-    @Pattern(regexp = "^[a-zA-Z]\\w{2,15}$",
-            message = "Invalid tenant code , /^[a-zA-Z]\\w{2,15}$/",
-            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid tenant code",
+            groups = {Insert.class, Update.class})
     private String tenantCode;
 
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 }

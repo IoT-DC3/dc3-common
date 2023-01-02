@@ -21,28 +21,53 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用累计类型枚举
+ * 通用位号类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum AccrueTypeEnum {
+public enum PointTypeFlagEnum {
     /**
-     * 无规律
+     * 字符串
      */
-    NONE("none", "无规律"),
+    STRING("string", "字符串"),
 
     /**
-     * 递增
+     * 字节
      */
-    INCREMENT("increment", "递增"),
+    BYTE("byte", "字节"),
 
     /**
-     * 递减
+     * 短整数
      */
-    DECREMENT("decrement", "递减"),
+    SHORT("short", "短整数"),
+
+    /**
+     * 整数
+     */
+    INT("int", "整数"),
+
+    /**
+     * 长整数
+     */
+    LONG("long", "长整数"),
+
+    /**
+     * 浮点数
+     */
+    FLOAT("float", "浮点数"),
+
+    /**
+     * 双精度浮点数
+     */
+    DOUBLE("double", "双精度浮点数"),
+
+    /**
+     * 布尔量
+     */
+    BOOLEAN("boolean", "布尔量"),
     ;
 
     /**
@@ -59,10 +84,10 @@ public enum AccrueTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return AccrueTypeEnum
+     * @return PointTypeFlagEnum
      */
-    public static AccrueTypeEnum of(String code) {
-        Optional<AccrueTypeEnum> any = Arrays.stream(AccrueTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static PointTypeFlagEnum of(String code) {
+        Optional<PointTypeFlagEnum> any = Arrays.stream(PointTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

@@ -22,7 +22,6 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 设备与模版继承关系表
@@ -39,10 +38,16 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class ProfileBind extends BaseModel {
 
+    /**
+     * 模版ID
+     */
     @NotBlank(message = "Profile id can't be empty",
             groups = {Insert.class, Update.class})
     private String profileId;
 
+    /**
+     * 设备ID
+     */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
     private String deviceId;

@@ -21,48 +21,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用实体类型枚举
+ * 通用累计类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum EntityTypeEnum {
+public enum AccrueFlagEnum {
     /**
-     * 系统
+     * 无规律
      */
-    SYSTEM("system", "系统"),
+    NONE("none", "无规律"),
 
     /**
-     * 用户
+     * 递增
      */
-    USER("user", "用户"),
+    INCREMENT("increment", "递增"),
 
     /**
-     * 分组
+     * 递减
      */
-    GROUP("group", "分组"),
-
-    /**
-     * 驱动
-     */
-    DRIVER("driver", "驱动"),
-
-    /**
-     * 模板
-     */
-    PROFILE("profile", "模板"),
-
-    /**
-     * 位号
-     */
-    POINT("point", "位号"),
-
-    /**
-     * 设备
-     */
-    DEVICE("device", "设备"),
+    DECREMENT("decrement", "递减"),
     ;
 
     /**
@@ -79,10 +59,10 @@ public enum EntityTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return RwTypeEnum
+     * @return AccrueFlagEnum
      */
-    public static EntityTypeEnum of(String code) {
-        Optional<EntityTypeEnum> any = Arrays.stream(EntityTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static AccrueFlagEnum of(String code) {
+        Optional<AccrueFlagEnum> any = Arrays.stream(AccrueFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

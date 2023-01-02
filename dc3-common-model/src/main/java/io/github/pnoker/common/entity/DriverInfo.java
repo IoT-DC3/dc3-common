@@ -16,7 +16,7 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -38,15 +38,22 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class DriverInfo extends BaseModel {
 
+    /**
+     * 连接配置ID
+     */
     @NotBlank(message = "Driver attribute id can't be empty",
             groups = {Insert.class, Update.class})
     private String driverAttributeId;
 
-    // TODO 这个值可以是一个空字符，也可以通过使能标识来禁用
-    @NotNull(message = "Driver attribute config value can't be empty",
-            groups = {Insert.class, Update.class})
+    /**
+     * 连接配置值
+     */
+    @NotNull(message = "Driver config value can't be empty")
     private String configValue;
 
+    /**
+     * 设备ID
+     */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
     private String deviceId;
@@ -54,7 +61,7 @@ public class DriverInfo extends BaseModel {
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID

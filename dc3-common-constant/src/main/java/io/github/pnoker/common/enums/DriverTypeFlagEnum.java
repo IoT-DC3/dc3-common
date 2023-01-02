@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动类型枚举
+ * 通用驱动类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverTypeEnum {
+public enum DriverTypeFlagEnum {
     /**
      * 协议驱动
      */
@@ -38,6 +38,11 @@ public enum DriverTypeEnum {
      * 网关驱动
      */
     GATEWAY("gateway", "网关驱动"),
+
+    /**
+     * 串联驱动
+     */
+    CONNECT("connect", "串联驱动"),
     ;
 
     /**
@@ -54,10 +59,10 @@ public enum DriverTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return DriverTypeEnum
+     * @return DriverTypeFlagEnum
      */
-    public static DriverTypeEnum of(String code) {
-        Optional<DriverTypeEnum> any = Arrays.stream(DriverTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverTypeFlagEnum of(String code) {
+        Optional<DriverTypeFlagEnum> any = Arrays.stream(DriverTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

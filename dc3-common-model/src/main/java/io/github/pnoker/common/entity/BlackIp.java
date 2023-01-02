@@ -16,13 +16,12 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -39,17 +38,20 @@ import javax.validation.constraints.Pattern;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class BlackIp extends BaseModel {
 
+    /**
+     * 黑IP
+     */
     @NotBlank(message = "Ip can't be empty",
             groups = {Insert.class})
     @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
-            message = "Invalid ip , /^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$/",
-            groups = {Insert.class})
+            message = "Invalid ip",
+            groups = {Insert.class, Update.class})
     private String ip;
 
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID

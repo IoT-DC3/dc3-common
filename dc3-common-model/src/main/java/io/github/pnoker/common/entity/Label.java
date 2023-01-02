@@ -16,13 +16,14 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
-import io.github.pnoker.common.enums.EntityTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.EntityTypeFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  * 标签表
@@ -41,6 +42,11 @@ public class Label extends BaseModel {
     /**
      * 标签名称
      */
+    @NotBlank(message = "Label name can't be empty",
+            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
+            message = "Invalid label name",
+            groups = {Insert.class, Update.class})
     private String labelName;
 
     /**
@@ -51,12 +57,12 @@ public class Label extends BaseModel {
     /**
      * 实体标识
      */
-    private EntityTypeEnum entityTypeFlag;
+    private EntityTypeFlagEnum entityTypeFlag;
 
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID

@@ -75,7 +75,7 @@ public class RegexUtil {
      * @return boolean
      */
     public static boolean isMail(String mail) {
-        String regex = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$";
+        String regex = "^[A-Za-z0-9_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$";
         return ReUtil.isMatch(regex, mail);
     }
 

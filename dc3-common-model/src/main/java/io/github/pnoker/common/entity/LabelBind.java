@@ -36,9 +36,15 @@ import javax.validation.constraints.NotBlank;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class LabelBind extends BaseModel {
 
+    /**
+     * 标签ID
+     */
     @NotBlank(message = "Label id can't be empty", groups = {Insert.class, Update.class})
     private String labelId;
 
+    /**
+     *实体ID
+     */
     @NotBlank(message = "Entity id can't be empty", groups = {Insert.class, Update.class})
     private String entityId;
 }

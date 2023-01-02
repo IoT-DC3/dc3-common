@@ -21,24 +21,29 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用结构化类型枚举
+ * 通用模板类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MultiTypeEnum {
+public enum ProfileTypeFlagEnum {
 
     /**
-     * 单点
+     * 用户创建
      */
-    SINGLE("single", "单点"),
+    USER("user", "用户创建"),
 
     /**
-     * 多点
+     * 系统创建
      */
-    MULTIPLE("multiple", "多点"),
+    SYSTEM("system", "系统创建"),
+
+    /**
+     * 驱动创建
+     */
+    DRIVER("driver", "驱动创建"),
     ;
 
     /**
@@ -55,10 +60,10 @@ public enum MultiTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return MultiTypeEnum
+     * @return ProfileTypeFlagEnum
      */
-    public static MultiTypeEnum of(String code) {
-        Optional<MultiTypeEnum> any = Arrays.stream(MultiTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ProfileTypeFlagEnum of(String code) {
+        Optional<ProfileTypeFlagEnum> any = Arrays.stream(ProfileTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用位号类型枚举
+ * 通用属性类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum PointTypeEnum {
+public enum AttributeTypeFlagEnum {
     /**
      * 字符串
      */
@@ -84,10 +84,10 @@ public enum PointTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return PointTypeEnum
+     * @return AttributeTypeFlagEnum
      */
-    public static PointTypeEnum of(String code) {
-        Optional<PointTypeEnum> any = Arrays.stream(PointTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static AttributeTypeFlagEnum of(String code) {
+        Optional<AttributeTypeFlagEnum> any = Arrays.stream(AttributeTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

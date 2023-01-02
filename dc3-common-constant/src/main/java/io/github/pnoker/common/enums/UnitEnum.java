@@ -21,24 +21,33 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用结构化类型枚举
+ * 通用单位枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MultiTypeEnum {
+public enum UnitEnum {
+    /**
+     * 无单位
+     */
+    NONE("", "无单位"),
 
     /**
-     * 单点
+     * 摄氏度
      */
-    SINGLE("single", "单点"),
+    CENTIGRADE("℃", "摄氏度"),
 
     /**
-     * 多点
+     * 克
      */
-    MULTIPLE("multiple", "多点"),
+    G("g", "克"),
+
+    /**
+     * 千克
+     */
+    KG("Kg", "千克"),
     ;
 
     /**
@@ -55,10 +64,10 @@ public enum MultiTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return MultiTypeEnum
+     * @return UnitEnum
      */
-    public static MultiTypeEnum of(String code) {
-        Optional<MultiTypeEnum> any = Arrays.stream(MultiTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static UnitEnum of(String code) {
+        Optional<UnitEnum> any = Arrays.stream(UnitEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

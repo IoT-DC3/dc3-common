@@ -45,7 +45,7 @@ public class Point extends BaseModel {
     @NotBlank(message = "Point name can't be empty",
             groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid point name,contains invalid characters or length is not in the range of 2~32",
+            message = "Invalid point name",
             groups = {Insert.class, Update.class})
     private String pointName;
 
@@ -55,19 +55,19 @@ public class Point extends BaseModel {
     @NotBlank(message = "Point code can't be empty",
             groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid point code,contains invalid characters or length is not in the range of 2~32",
+            message = "Invalid point code",
             groups = {Insert.class, Update.class})
     private String pointCode;
 
     /**
-     * 类型标识
+     * 位号类型标识
      */
-    private PointTypeEnum typeFlag;
+    private PointTypeFlagEnum pointTypeFlag;
 
     /**
      * 读写标识
      */
-    private RwTypeEnum rwFlag;
+    private RwFlagEnum rwFlag;
 
     /**
      * 基础值
@@ -82,17 +82,17 @@ public class Point extends BaseModel {
     /**
      * 累计标识
      */
-    private AccrueTypeEnum accrueFlag;
+    private AccrueFlagEnum accrueFlag;
 
     /**
      * 数据精度
      */
-    private Integer valueDecimal;
+    private Byte valueDecimal;
 
     /**
      * 单位
      */
-    private UnitTypeEnum unit;
+    private UnitEnum unit;
 
     /**
      * 模板ID
@@ -110,7 +110,7 @@ public class Point extends BaseModel {
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID
@@ -123,13 +123,13 @@ public class Point extends BaseModel {
      * 设置默认值
      */
     public void setDefault() {
-        this.typeFlag = PointTypeEnum.STRING;
-        this.rwFlag = RwTypeEnum.R;
+        this.pointTypeFlag = PointTypeFlagEnum.STRING;
+        this.rwFlag = RwFlagEnum.R;
         this.base = BigDecimal.valueOf(0);
         this.multiple = BigDecimal.valueOf(1);
-        this.accrueFlag = AccrueTypeEnum.NONE;
+        this.accrueFlag = AccrueFlagEnum.NONE;
         this.valueDecimal = 6;
-        this.unit = UnitTypeEnum.NONE;
+        this.unit = UnitEnum.NONE;
     }
 
 }

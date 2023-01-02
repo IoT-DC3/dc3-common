@@ -21,28 +21,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用读写类型枚举
+ * 通用模板共享类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum RwTypeEnum {
+public enum ProfileShareFlagEnum {
     /**
-     * 只读
+     * 公有模板(租户)
      */
-    R("r", "只读"),
+    TENANT("tenant", "公有模板(租户)"),
 
     /**
-     * 只写
+     * 私有模板(驱动)
      */
-    W("w", "只写"),
+    DRIVER("driver", "私有模板(驱动)"),
 
     /**
-     * 读写
+     * 私有模板(用户)
      */
-    RW("rw", "读写"),
+    USER("user", "私有模板(用户)"),
     ;
 
     /**
@@ -59,10 +59,10 @@ public enum RwTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return RwTypeEnum
+     * @return ProfileShareFlagEnum
      */
-    public static RwTypeEnum of(String code) {
-        Optional<RwTypeEnum> any = Arrays.stream(RwTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ProfileShareFlagEnum of(String code) {
+        Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

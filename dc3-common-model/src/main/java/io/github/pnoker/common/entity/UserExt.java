@@ -25,7 +25,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * User
+ * User Ext
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,31 +38,39 @@ import javax.validation.constraints.Pattern;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class UserExt extends BaseModel {
 
-    // TODO 正则需要调整，用户名可以是手机号，邮箱，字符串
+    /**
+     * 用户昵称
+     */
     @NotBlank(message = "Nick name can't be empty",
             groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,15}$",
-            message = "Invalid nick name , /^[a-zA-Z]\\w{2,15}$/",
-            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
+            message = "Invalid nick name",
+            groups = {Insert.class, Update.class})
     private String nickName;
 
-    // TODO 正则需要调整，用户名可以是手机号，邮箱，字符串
+    /**
+     * 用户名
+     */
     @NotBlank(message = "User name can't be empty",
             groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[a-zA-Z]\\w{2,15}$",
-            message = "Invalid user name , /^[a-zA-Z]\\w{2,15}$/",
-            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid user name",
+            groups = {Insert.class, Update.class})
     private String userName;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * 手机号
+     */
     @Pattern(regexp = "^1([3-9])\\d{9}$",
-            message = "Invalid phone , /^1([3-9])\\d{9}$/",
+            message = "Invalid phone",
             groups = {Insert.class, Update.class})
     private String phone;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
-            message = "Invalid email , /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$/",
+    /**
+     * 邮箱
+     */
+    @Pattern(regexp = "^[A-Za-z0-9_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$",
+            message = "Invalid email",
             groups = {Insert.class, Update.class})
     private String email;
 }

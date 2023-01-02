@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用使能状态类型枚举
+ * 通用使能标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum EnableTypeEnum {
+public enum EnableFlagEnum {
     /**
      * 禁用
      */
@@ -59,10 +59,10 @@ public enum EnableTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return EnableTypeEnum
+     * @return EnableFlagEnum
      */
-    public static EnableTypeEnum of(String code) {
-        Optional<EnableTypeEnum> any = Arrays.stream(EnableTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static EnableFlagEnum of(String code) {
+        Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

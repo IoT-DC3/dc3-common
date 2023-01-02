@@ -21,33 +21,48 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用单位类型枚举
+ * 通用实体类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum UnitTypeEnum {
+public enum EntityTypeFlagEnum {
     /**
-     * 无单位
+     * 系统
      */
-    NONE("", "无单位"),
+    SYSTEM("system", "系统"),
 
     /**
-     * 摄氏度
+     * 用户
      */
-    CENTIGRADE("℃", "摄氏度"),
+    USER("user", "用户"),
 
     /**
-     * 克
+     * 分组
      */
-    G("g", "克"),
+    GROUP("group", "分组"),
 
     /**
-     * 千克
+     * 驱动
      */
-    KG("Kg", "千克"),
+    DRIVER("driver", "驱动"),
+
+    /**
+     * 模板
+     */
+    PROFILE("profile", "模板"),
+
+    /**
+     * 位号
+     */
+    POINT("point", "位号"),
+
+    /**
+     * 设备
+     */
+    DEVICE("device", "设备"),
     ;
 
     /**
@@ -64,10 +79,10 @@ public enum UnitTypeEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return UnitTypeEnum
+     * @return EntityTypeFlagEnum
      */
-    public static UnitTypeEnum of(String code) {
-        Optional<UnitTypeEnum> any = Arrays.stream(UnitTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static EntityTypeFlagEnum of(String code) {
+        Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

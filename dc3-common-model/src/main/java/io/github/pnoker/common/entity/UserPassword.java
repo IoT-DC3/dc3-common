@@ -38,10 +38,13 @@ import javax.validation.constraints.Pattern;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class UserPassword extends BaseModel {
 
+    /**
+     * 登录密码
+     */
     @NotBlank(message = "Login password can't be empty",
             groups = {Insert.class, Auth.class})
     @Pattern(regexp = "^[a-zA-Z]\\w{7,15}$",
-            message = "Invalid login password , /^[a-zA-Z]\\w{7,15}$/",
+            message = "Invalid login password",
             groups = {Insert.class, Update.class})
     private String password;
 }

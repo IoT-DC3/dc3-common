@@ -16,7 +16,7 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableTypeEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -38,18 +38,29 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class PointInfo extends BaseModel {
 
+    /**
+     * 位号配置ID
+     */
     @NotBlank(message = "Point attribute id can't be empty",
             groups = {Insert.class, Update.class})
     private String pointAttributeId;
 
-    @NotNull(message = "Point attribute config value can't be empty",
-            groups = {Insert.class, Update.class})
+    /**
+     * 位号配置值
+     */
+    @NotNull(message = "Point config value can't be empty")
     private String configValue;
 
+    /**
+     * 设备ID
+     */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
     private String deviceId;
 
+    /**
+     * 位号ID
+     */
     @NotBlank(message = "Point id can't be empty",
             groups = {Insert.class, Update.class})
     private String pointId;
@@ -57,7 +68,7 @@ public class PointInfo extends BaseModel {
     /**
      * 使能标识
      */
-    private EnableTypeEnum enableFlag;
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID
