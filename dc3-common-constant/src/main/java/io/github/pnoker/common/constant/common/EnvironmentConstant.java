@@ -15,59 +15,24 @@
 package io.github.pnoker.common.constant.common;
 
 /**
- * 符号 相关常量
+ * 环境变量、配置变量 相关常量
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public class SymbolConstant {
+public class EnvironmentConstant {
 
-    private SymbolConstant() {
+    private EnvironmentConstant() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
     /**
-     * 点
+     * 服务是否开启 Https
      */
-    public static final String DOT = ".";
+    public static final String EUREKA_TLS_ENABLE = "eureka.client.tls.enabled";
 
     /**
-     * 下划线
+     * Eureka 服务注册中心 Url
      */
-    public static final String UNDERSCORE = "_";
-
-    /**
-     * 连接线
-     */
-    public static final String HYPHEN = "-";
-
-    /**
-     * 星号
-     */
-    public static final String ASTERISK = "*";
-
-    /**
-     * 井号
-     */
-    public static final String HASHTAG = "#";
-
-    /**
-     * 冒号
-     */
-    public static final String COLON = ":";
-
-    /**
-     * 双冒号
-     */
-    public static final String DOUBLE_COLON = "::";
-
-    /**
-     * 斜线
-     */
-    public static final String SLASH = "/";
-
-    /**
-     * 双斜线
-     */
-    public static final String DOUBLE_SLASH = "//";
+    public static final String EUREKA_SERVICE_URL = "eureka.client.service-url.defaultZone";
 }

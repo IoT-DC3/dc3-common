@@ -41,7 +41,7 @@ public class StrategyConstant {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 
-        public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.SEPARATOR;
+        public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.DOUBLE_COLON;
 
         public static final String REDIS = "redis";
         public static final String MONGO = "mongo";

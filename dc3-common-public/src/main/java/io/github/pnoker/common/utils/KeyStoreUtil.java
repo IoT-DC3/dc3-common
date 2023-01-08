@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 
@@ -44,12 +45,14 @@ public class KeyStoreUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    public static void importKeystore(String crtFileName, String crtNameAlias) throws Exception {
+    public static void importKeystore(String crtFileName, String crtNameAlias) {
         DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
         String[] resourcePaths = new String[]{"classpath:/ssl/", "file:./ssl/"};
         String passphrase = "changeit";
         try (InputStream inputStream = getResource(resourceLoader, resourcePaths, crtFileName).getInputStream()) {
             KeyStoreUtil.importKeystore(inputStream, crtNameAlias, passphrase);
+        } catch (Exception e) {
+            throw new SecurityException(e);
         }
     }
 

@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   io.github.pnoker.common.config.RabbitConfig
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  io.github.pnoker.common.config.ActiveRabbitProfileConfig

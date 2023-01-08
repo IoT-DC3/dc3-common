@@ -26,6 +26,9 @@ public class PrefixConstant {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
+    public static final String HTTP = "http";
+    public static final String HTTPS = "https";
+
     public static final String ADD = "add";
     public static final String DELETE = "delete";
     public static final String UPDATE = "update";
@@ -48,7 +51,7 @@ public class PrefixConstant {
     public static final String LABEL = "label";
     public static final String LABEL_BIND = "label_bind";
 
-    public static final String REAL_TIME_VALUE_KEY_PREFIX = POINT + SuffixConstant.VALUE + SymbolConstant.SEPARATOR;
-    public static final String DRIVER_STATUS_KEY_PREFIX = DRIVER + SuffixConstant.STATUS + SymbolConstant.SEPARATOR;
-    public static final String DEVICE_STATUS_KEY_PREFIX = DEVICE + SuffixConstant.STATUS + SymbolConstant.SEPARATOR;
+    public static final String REAL_TIME_VALUE_KEY_PREFIX = POINT + SuffixConstant.VALUE + SymbolConstant.DOUBLE_COLON;
+    public static final String DRIVER_STATUS_KEY_PREFIX = DRIVER + SuffixConstant.STATUS + SymbolConstant.DOUBLE_COLON;
+    public static final String DEVICE_STATUS_KEY_PREFIX = DEVICE + SuffixConstant.STATUS + SymbolConstant.DOUBLE_COLON;
 }
