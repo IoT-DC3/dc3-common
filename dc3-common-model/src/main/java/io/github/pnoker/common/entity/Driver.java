@@ -85,7 +85,7 @@ public class Driver extends BaseModel {
     @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
             message = "Invalid service host",
             groups = {Insert.class, Update.class})
-    private String serverHost;
+    private String serviceHost;
 
     /**
      * 服务端口
@@ -94,7 +94,7 @@ public class Driver extends BaseModel {
             groups = {Insert.class, Update.class})
     @Max(value = 8799, message = "Invalid server port, port range is 8600-8799",
             groups = {Insert.class, Update.class})
-    private Integer serverPort;
+    private Integer servicePort;
 
     /**
      * 使能标识

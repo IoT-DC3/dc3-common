@@ -21,20 +21,19 @@
 
     <parent>
         <groupId>io.github.pnoker</groupId>
-        <artifactId>dc3-parent</artifactId>
+        <artifactId>dc3-common</artifactId>
         <version>2022.2.3</version>
-        <relativePath/>
     </parent>
 
     <name>${project.artifactId}</name>
-    <artifactId>dc3-common</artifactId>
+    <artifactId>dc3-common-mongo</artifactId>
     <version>2022.2.3</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
     <description>
-        IOT DC3 平台 公共配置。
+        IOT DC3 平台 公共的 MySQL 配置。
     </description>
 
     <developers>
@@ -60,30 +59,27 @@
         <developerConnection>https://github.com/pnoker/iot-dc3.git</developerConnection>
     </scm>
 
-    <modules>
-        <module>dc3-common-web</module>
-        <module>dc3-common-mysql</module>
-        <module>dc3-common-mongo</module>
-        <module>dc3-common-rabbitmq</module>
-        <module>dc3-common-redis</module>
-        <module>dc3-common-feign</module>
-        <module>dc3-common-thread</module>
-        <module>dc3-common-quartz</module>
-        <module>dc3-common-log</module>
-        <module>dc3-common-public</module>
-        <module>dc3-common-exception</module>
-        <module>dc3-common-constant</module>
-        <module>dc3-common-model</module>
-    </modules>
-
     <dependencies>
 
-        <!-- HuTool -->
+        <!-- Spring MongoDB-->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

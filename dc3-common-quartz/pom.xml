@@ -26,14 +26,14 @@
     </parent>
 
     <name>${project.artifactId}</name>
-    <artifactId>dc3-common-profiles</artifactId>
+    <artifactId>dc3-common-quartz</artifactId>
     <version>2022.2.3</version>
     <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
     <description>
-        IOT DC3 平台 配置文件集合。
+        IOT DC3 平台 公共的 MySQL 配置。
     </description>
 
     <developers>
@@ -61,12 +61,10 @@
 
     <dependencies>
 
-        <!-- Spring Configuration-->
+        <!-- Spring Quartz -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <scope>compile</scope>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
 
     </dependencies>
