@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -33,13 +34,19 @@ public enum MultiTypeEnum {
     /**
      * 单点
      */
-    SINGLE("single", "单点"),
+    SINGLE(0, "single", "单点"),
 
     /**
      * 多点
      */
-    MULTIPLE("multiple", "多点"),
+    MULTIPLE(1, "multiple", "多点"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

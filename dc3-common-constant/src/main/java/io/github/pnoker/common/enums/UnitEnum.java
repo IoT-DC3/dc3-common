@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,23 +33,29 @@ public enum UnitEnum {
     /**
      * 无单位
      */
-    NONE("", "无单位"),
+    NONE(0, "", "无单位"),
 
     /**
      * 摄氏度
      */
-    CENTIGRADE("℃", "摄氏度"),
+    CENTIGRADE(1, "℃", "摄氏度"),
 
     /**
      * 克
      */
-    G("g", "克"),
+    G(2, "g", "克"),
 
     /**
      * 千克
      */
-    KG("Kg", "千克"),
+    KG(3, "Kg", "千克"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

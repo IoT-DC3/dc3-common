@@ -47,4 +47,7 @@ public class RabbitConstant {
     public static final String TOPIC_EXCHANGE_VALUE = "dc3.exchange.value";
     public static final String ROUTING_POINT_VALUE_PREFIX = "dc3.routing.value.point.";
     public static final String QUEUE_POINT_VALUE = "dc3.queue.value.point";
+
+    // Mqtt
+    public static final String TOPIC_EXCHANGE_MQTT = "dc3.exchange.mqtt";
 }

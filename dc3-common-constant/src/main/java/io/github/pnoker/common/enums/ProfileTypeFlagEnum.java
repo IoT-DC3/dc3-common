@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -33,18 +34,24 @@ public enum ProfileTypeFlagEnum {
     /**
      * 用户创建
      */
-    USER("user", "用户创建"),
+    USER(0, "user", "用户创建"),
 
     /**
      * 系统创建
      */
-    SYSTEM("system", "系统创建"),
+    SYSTEM(1, "system", "系统创建"),
 
     /**
      * 驱动创建
      */
-    DRIVER("driver", "驱动创建"),
+    DRIVER(2, "driver", "驱动创建"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

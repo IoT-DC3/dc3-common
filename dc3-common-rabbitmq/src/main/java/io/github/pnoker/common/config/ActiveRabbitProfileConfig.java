@@ -35,6 +35,6 @@ public class ActiveRabbitProfileConfig implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        environment.addActiveProfile("rabbitmq");
+        environment.addActiveProfile("rabbit");
     }
 }

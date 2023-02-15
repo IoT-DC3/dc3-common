@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.entity;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.enums.EnableFlagEnum;

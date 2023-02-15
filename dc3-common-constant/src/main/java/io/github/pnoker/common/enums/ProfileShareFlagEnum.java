@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,18 +33,24 @@ public enum ProfileShareFlagEnum {
     /**
      * 公有模板(租户)
      */
-    TENANT("tenant", "公有模板(租户)"),
+    TENANT(0, "tenant", "公有模板(租户)"),
 
     /**
      * 私有模板(驱动)
      */
-    DRIVER("driver", "私有模板(驱动)"),
+    DRIVER(1, "driver", "私有模板(驱动)"),
 
     /**
      * 私有模板(用户)
      */
-    USER("user", "私有模板(用户)"),
+    USER(2, "user", "私有模板(用户)"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

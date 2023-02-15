@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,18 +33,24 @@ public enum RwFlagEnum {
     /**
      * 只读
      */
-    R("r", "只读"),
+    R(0, "r", "只读"),
 
     /**
      * 只写
      */
-    W("w", "只写"),
+    W(1, "w", "只写"),
 
     /**
      * 读写
      */
-    RW("rw", "读写"),
+    RW(2, "rw", "读写"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

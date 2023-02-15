@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,18 +33,24 @@ public enum DriverTypeFlagEnum {
     /**
      * 协议驱动
      */
-    DRIVER("driver", "协议驱动"),
+    DRIVER(0, "driver", "协议驱动"),
 
     /**
      * 网关驱动
      */
-    GATEWAY("gateway", "网关驱动"),
+    GATEWAY(1, "gateway", "网关驱动"),
 
     /**
      * 串联驱动
      */
-    CONNECT("connect", "串联驱动"),
+    CONNECT(2, "connect", "串联驱动"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

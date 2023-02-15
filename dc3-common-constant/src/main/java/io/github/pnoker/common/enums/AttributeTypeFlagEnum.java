@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,43 +33,49 @@ public enum AttributeTypeFlagEnum {
     /**
      * 字符串
      */
-    STRING("string", "字符串"),
+    STRING(0, "string", "字符串"),
 
     /**
      * 字节
      */
-    BYTE("byte", "字节"),
+    BYTE(1, "byte", "字节"),
 
     /**
      * 短整数
      */
-    SHORT("short", "短整数"),
+    SHORT(2, "short", "短整数"),
 
     /**
      * 整数
      */
-    INT("int", "整数"),
+    INT(3, "int", "整数"),
 
     /**
      * 长整数
      */
-    LONG("long", "长整数"),
+    LONG(4, "long", "长整数"),
 
     /**
      * 浮点数
      */
-    FLOAT("float", "浮点数"),
+    FLOAT(5, "float", "浮点数"),
 
     /**
      * 双精度浮点数
      */
-    DOUBLE("double", "双精度浮点数"),
+    DOUBLE(6, "double", "双精度浮点数"),
 
     /**
      * 布尔量
      */
-    BOOLEAN("boolean", "布尔量"),
+    BOOLEAN(7, "boolean", "布尔量"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

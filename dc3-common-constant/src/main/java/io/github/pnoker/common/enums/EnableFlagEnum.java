@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,18 +33,24 @@ public enum EnableFlagEnum {
     /**
      * 禁用
      */
-    DISABLE("disable", "禁用"),
+    DISABLE(0, "disable", "禁用"),
 
     /**
      * 启用
      */
-    ENABLE("enable", "启用"),
+    ENABLE(1, "enable", "启用"),
 
     /**
      * 暂存
      */
-    TEMP("temp", "暂存"),
+    TEMP(2, "temp", "暂存"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码

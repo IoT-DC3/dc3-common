@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,18 +33,24 @@ public enum AccrueFlagEnum {
     /**
      * 无规律
      */
-    NONE("none", "无规律"),
+    NONE(0, "none", "无规律"),
 
     /**
      * 递增
      */
-    INCREMENT("increment", "递增"),
+    INCREMENT(1, "increment", "递增"),
 
     /**
      * 递减
      */
-    DECREMENT("decrement", "递减"),
+    DECREMENT(2, "decrement", "递减"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Integer index;
 
     /**
      * 编码
