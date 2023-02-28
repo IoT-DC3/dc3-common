@@ -12,24 +12,23 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.MultiTypeEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * 设备表
+ * 驱动表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -40,43 +39,61 @@ import java.util.Set;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Device extends BaseModel {
+public class Driver extends Base {
 
     /**
-     * 设备名称
+     * 驱动名称
      */
-    @NotBlank(message = "Device name can't be empty", groups = {Insert.class})
+    @NotBlank(message = "Driver name can't be empty",
+            groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid device name",
+            message = "Invalid driver name",
             groups = {Insert.class, Update.class})
-    private String deviceName;
+    private String driverName;
 
     /**
-     * 设备编号
+     * 驱动编号
      */
-    @NotBlank(message = "Device code can't be empty", groups = {Insert.class})
+    @NotBlank(message = "Driver code can't be empty",
+            groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid device code",
+            message = "Invalid driver code",
             groups = {Insert.class, Update.class})
-    private String deviceCode;
+    private String driverCode;
 
     /**
-     * 结构化标识
+     * 驱动服务名称
      */
-    private MultiTypeEnum multiFlag;
-
-    /**
-     * 驱动ID
-     */
-    @NotBlank(message = "Driver id can't be empty",
+    @NotBlank(message = "Service name can't be empty",
+            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9\\-_#@/.|]{1,31}$",
+            message = "Invalid service name",
             groups = {Insert.class, Update.class})
-    private String driverId;
+    private String serviceName;
 
     /**
-     * 分组ID
+     * 驱动类型标识
      */
-    // TODO 后期再实现分组，先放着占个坑 @NotNull(message = "group id can't be empty", groups = {Insert.class, Update.class})
-    private String groupId;
+    private DriverTypeFlagEnum driverTypeFlag;
+
+    /**
+     * 服务主机
+     */
+    @NotBlank(message = "Service host can't be empty",
+            groups = {Insert.class})
+    @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
+            message = "Invalid service host",
+            groups = {Insert.class, Update.class})
+    private String serviceHost;
+
+    /**
+     * 服务端口
+     */
+    @Min(value = 8600, message = "Invalid server port, port range is 8600-8799",
+            groups = {Insert.class, Update.class})
+    @Max(value = 8799, message = "Invalid server port, port range is 8600-8799",
+            groups = {Insert.class, Update.class})
+    private Integer servicePort;
 
     /**
      * 使能标识
@@ -90,7 +107,7 @@ public class Device extends BaseModel {
             groups = {Insert.class, Update.class})
     private String tenantId;
 
-    // TODO 提取到BO中
+    // TODO:请使用枚举,提取到BO中
     @TableField(exist = false)
-    private Set<String> profileIds = new HashSet<>(8);
+    private String status;
 }

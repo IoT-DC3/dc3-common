@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.bean.entity;
+package io.github.pnoker.common.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -42,7 +42,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseModel implements Serializable {
+public class Base implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -58,23 +58,43 @@ public class BaseModel implements Serializable {
     private String remark;
 
     /**
+     * 创建者ID
+     */
+    private String creatorId;
+
+    /**
+     * 创建者名称
+     */
+    private String creatorName;
+
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date createTime;
 
     /**
-     * 修改时间
+     * 操作者ID
+     */
+    private String operatorId;
+
+    /**
+     * 操作者名称
+     */
+    private String operatorName;
+
+    /**
+     * 操作时间
      */
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date updateTime;
 
     /**
      * 逻辑删标识
-     * <ol>
+     * <ul>
      * <li>0 (false):默认,未删除</li>
      * <li>1 (true):已删除</li>
-     * </ol>
+     * </ul>
      */
     @TableLogic
     @TableField(select = false)

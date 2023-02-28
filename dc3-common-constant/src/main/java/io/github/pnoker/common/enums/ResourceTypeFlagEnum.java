@@ -22,28 +22,49 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用读写标识枚举
+ * 通用权限类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum RwFlagEnum {
-    /**
-     * 只读
-     */
-    R((byte) 0x00, "r", "只读"),
+public enum ResourceTypeFlagEnum {
 
     /**
-     * 只写
+     * 驱动
      */
-    W((byte) 0x01, "w", "只写"),
+    DRIVER((byte) 0x00, "driver", "驱动"),
 
     /**
-     * 读写
+     * 模板
      */
-    RW((byte) 0x02, "rw", "读写"),
+    PROFILE((byte) 0x01, "profile", "模板"),
+
+    /**
+     * 位号
+     */
+    POINT((byte) 0x01, "point", "位号"),
+
+    /**
+     * 设备
+     */
+    DEVICE((byte) 0x01, "device", "设备"),
+
+    /**
+     * 数据
+     */
+    DATA((byte) 0x01, "data", "数据"),
+
+    /**
+     * 菜单
+     */
+    MENU((byte) 0x01, "menu", "菜单"),
+
+    /**
+     * 接口
+     */
+    API((byte) 0x01, "api", "接口"),
     ;
 
     /**
@@ -66,10 +87,10 @@ public enum RwFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return RwFlagEnum
+     * @return MultiTypeEnum
      */
-    public static RwFlagEnum of(String code) {
-        Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ResourceTypeFlagEnum of(String code) {
+        Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

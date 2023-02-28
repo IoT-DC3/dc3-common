@@ -12,22 +12,21 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * User
+ * 模板配置信息表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,24 +37,54 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Tenant extends BaseModel {
+public class PointAttribute extends Base {
 
-    @NotBlank(message = "Tenant name can't be empty",
-            groups = {Insert.class, Auth.class})
+    /**
+     * 显示名称
+     */
+    @NotBlank(message = "Display name can't be empty",
+            groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid tenant name",
+            message = "Invalid display name",
             groups = {Insert.class, Update.class})
-    private String tenantName;
+    private String displayName;
 
-    @NotBlank(message = "Tenant code can't be empty",
+    /**
+     * 属性名称
+     */
+    @NotBlank(message = "Attribute name can't be empty",
             groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid tenant code",
+            message = "Invalid attribute name",
             groups = {Insert.class, Update.class})
-    private String tenantCode;
+    private String attributeName;
+
+    /**
+     * 属性类型标识
+     */
+    private AttributeTypeFlagEnum attributeTypeFlag;
+
+    /**
+     * 默认值
+     */
+    private String defaultValue;
+
+    /**
+     * 驱动ID
+     */
+    @NotNull(message = "Driver id can't be empty"
+            , groups = {Insert.class, Update.class})
+    private String driverId;
 
     /**
      * 使能标识
      */
     private EnableFlagEnum enableFlag;
+
+    /**
+     * 租户ID
+     */
+    @NotBlank(message = "Tenant id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String tenantId;
 }

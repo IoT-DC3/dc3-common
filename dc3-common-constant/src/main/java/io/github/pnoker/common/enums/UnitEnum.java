@@ -33,29 +33,29 @@ public enum UnitEnum {
     /**
      * 无单位
      */
-    NONE(0, "", "无单位"),
+    NONE((byte) 0x00, "", "无单位"),
 
     /**
      * 摄氏度
      */
-    CENTIGRADE(1, "℃", "摄氏度"),
+    CENTIGRADE((byte) 0x01, "℃", "摄氏度"),
 
     /**
      * 克
      */
-    G(2, "g", "克"),
+    G((byte) 0x02, "g", "克"),
 
     /**
      * 千克
      */
-    KG(3, "Kg", "千克"),
+    KG((byte) 0x03, "Kg", "千克"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

@@ -33,24 +33,24 @@ public enum EnableFlagEnum {
     /**
      * 禁用
      */
-    DISABLE(0, "disable", "禁用"),
+    DISABLE((byte) 0x00, "disable", "禁用"),
 
     /**
      * 启用
      */
-    ENABLE(1, "enable", "启用"),
+    ENABLE((byte) 0x01, "enable", "启用"),
 
     /**
      * 暂存
      */
-    TEMP(2, "temp", "暂存"),
+    TEMP((byte) 0x02, "temp", "暂存"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

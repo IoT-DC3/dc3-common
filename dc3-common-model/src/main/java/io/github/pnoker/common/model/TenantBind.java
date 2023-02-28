@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -23,7 +22,7 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 
 /**
- * 标签关系表
+ * 租户关系表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,17 +33,19 @@ import javax.validation.constraints.NotBlank;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class LabelBind extends BaseModel {
+public class TenantBind extends Base {
 
     /**
-     * 标签ID
+     * 租户ID
      */
-    @NotBlank(message = "Label id can't be empty", groups = {Insert.class, Update.class})
-    private String labelId;
+    @NotBlank(message = "Tenant id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String tenantId;
 
     /**
-     *实体ID
+     * 用户ID
      */
-    @NotBlank(message = "Entity id can't be empty", groups = {Insert.class, Update.class})
-    private String entityId;
+    @NotBlank(message = "User id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String userId;
 }

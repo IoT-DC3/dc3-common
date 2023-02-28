@@ -12,20 +12,17 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
- * 驱动配置信息表
+ * 标签关系表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,37 +33,17 @@ import javax.validation.constraints.NotNull;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class DriverInfo extends BaseModel {
+public class LabelBind extends Base {
 
     /**
-     * 连接配置ID
+     * 标签ID
      */
-    @NotBlank(message = "Driver attribute id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String driverAttributeId;
+    @NotBlank(message = "Label id can't be empty", groups = {Insert.class, Update.class})
+    private String labelId;
 
     /**
-     * 连接配置值
+     *实体ID
      */
-    @NotNull(message = "Driver config value can't be empty")
-    private String configValue;
-
-    /**
-     * 设备ID
-     */
-    @NotBlank(message = "Device id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String deviceId;
-
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String tenantId;
+    @NotBlank(message = "Entity id can't be empty", groups = {Insert.class, Update.class})
+    private String entityId;
 }

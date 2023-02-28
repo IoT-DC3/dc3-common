@@ -12,43 +12,58 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
- * 设备与模版继承关系表
+ * User
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class ProfileBind extends BaseModel {
+public class User extends Base {
 
     /**
-     * 模版ID
+     * 登录名称
      */
-    @NotBlank(message = "Profile id can't be empty",
+    @NotBlank(message = "Login name can't be empty",
+            groups = {Insert.class, Auth.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid login name",
             groups = {Insert.class, Update.class})
-    private String profileId;
+    private String loginName;
 
     /**
-     * 设备ID
+     * 用户拓展ID
      */
-    @NotBlank(message = "Device id can't be empty",
+    @NotBlank(message = "User ext id can't be empty",
             groups = {Insert.class, Update.class})
-    private String deviceId;
+    private String userExtId;
+
+    /**
+     * 用户密码ID
+     */
+    @NotBlank(message = "User password id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String userPasswordId;
+
+    /**
+     * 使能标识
+     */
+    private EnableFlagEnum enableFlag;
 }

@@ -12,20 +12,19 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.valid.Auth;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
 
 /**
- * User
+ * 位号配置信息表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,15 +35,44 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserPassword extends BaseModel {
+public class PointInfo extends Base {
 
     /**
-     * 登录密码
+     * 位号配置ID
      */
-    @NotBlank(message = "Login password can't be empty",
-            groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[a-zA-Z]\\w{7,15}$",
-            message = "Invalid login password",
+    @NotBlank(message = "Point attribute id can't be empty",
             groups = {Insert.class, Update.class})
-    private String password;
+    private String pointAttributeId;
+
+    /**
+     * 位号配置值
+     */
+    @NotNull(message = "Point config value can't be empty")
+    private String configValue;
+
+    /**
+     * 设备ID
+     */
+    @NotBlank(message = "Device id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String deviceId;
+
+    /**
+     * 位号ID
+     */
+    @NotBlank(message = "Point id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String pointId;
+
+    /**
+     * 使能标识
+     */
+    private EnableFlagEnum enableFlag;
+
+    /**
+     * 租户ID
+     */
+    @NotBlank(message = "Tenant id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String tenantId;
 }

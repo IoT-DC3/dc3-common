@@ -12,12 +12,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -26,7 +24,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * User
+ * 分组表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,34 +35,37 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class User extends BaseModel {
+public class Group extends Base {
 
     /**
-     * 登录名称
+     * 分组名称
      */
-    @NotBlank(message = "Login name can't be empty",
-            groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid login name",
+    @NotBlank(message = "Group name can't be empty",
+            groups = {Insert.class})
+    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
+            message = "Invalid group name",
             groups = {Insert.class, Update.class})
-    private String loginName;
+    private String groupName;
 
     /**
-     * 用户拓展ID
+     * 父分组ID
      */
-    @NotBlank(message = "User ext id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String userExtId;
+    private String parentGroupId;
 
     /**
-     * 用户密码ID
+     * 分组排序位置
      */
-    @NotBlank(message = "User password id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String userPasswordId;
+    private Integer position;
 
     /**
      * 使能标识
      */
     private EnableFlagEnum enableFlag;
+
+    /**
+     * 租户ID
+     */
+    @NotBlank(message = "Tenant id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String tenantId;
 }

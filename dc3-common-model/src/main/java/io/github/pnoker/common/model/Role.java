@@ -12,18 +12,20 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
- * 租户关系表
+ * 角色表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,7 +36,34 @@ import javax.validation.constraints.NotBlank;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class TenantBind extends BaseModel {
+public class Role extends Base {
+
+    /**
+     * 角色父级ID
+     */
+    @NotBlank(message = "Role parent id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String parentRoleId;
+
+    /**
+     * 角色名称
+     */
+    @NotBlank(message = "Role name can't be empty",
+            groups = {Insert.class, Auth.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid role name",
+            groups = {Insert.class, Update.class})
+    private String roleName;
+
+    /**
+     * 角色编号
+     */
+    private String roleCode;
+
+    /**
+     * 使能标识
+     */
+    private EnableFlagEnum enableFlag;
 
     /**
      * 租户ID
@@ -42,11 +71,4 @@ public class TenantBind extends BaseModel {
     @NotBlank(message = "Tenant id can't be empty",
             groups = {Insert.class, Update.class})
     private String tenantId;
-
-    /**
-     * 用户ID
-     */
-    @NotBlank(message = "User id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String userId;
 }

@@ -33,24 +33,24 @@ public enum ProfileShareFlagEnum {
     /**
      * 公有模板(租户)
      */
-    TENANT(0, "tenant", "公有模板(租户)"),
+    TENANT((byte) 0x00, "tenant", "公有模板(租户)"),
 
     /**
      * 私有模板(驱动)
      */
-    DRIVER(1, "driver", "私有模板(驱动)"),
+    DRIVER((byte) 0x01, "driver", "私有模板(驱动)"),
 
     /**
      * 私有模板(用户)
      */
-    USER(2, "user", "私有模板(用户)"),
+    USER((byte) 0x02, "user", "私有模板(用户)"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

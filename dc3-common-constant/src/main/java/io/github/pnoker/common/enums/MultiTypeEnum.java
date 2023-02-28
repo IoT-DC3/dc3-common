@@ -34,19 +34,19 @@ public enum MultiTypeEnum {
     /**
      * 单点
      */
-    SINGLE(0, "single", "单点"),
+    SINGLE((byte) 0x00, "single", "单点"),
 
     /**
      * 多点
      */
-    MULTIPLE(1, "multiple", "多点"),
+    MULTIPLE((byte) 0x01, "multiple", "多点"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

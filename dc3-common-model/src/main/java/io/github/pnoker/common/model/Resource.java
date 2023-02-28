@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.ResourceTypeFlagEnum;
+import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -25,7 +26,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * 设备表
+ * 权限资源表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,27 +37,53 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Group extends BaseModel {
+public class Resource extends Base {
 
     /**
-     * 分组名称
+     * 权限资源父级ID
      */
-    @NotBlank(message = "Group name can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid group name",
+    @NotBlank(message = "Resource parent id can't be empty",
             groups = {Insert.class, Update.class})
-    private String groupName;
+    private String parentResourceId;
 
     /**
-     * 父分组ID
+     * 权限资源名称
      */
-    private String parentGroupId;
+    @NotBlank(message = "Role name can't be empty",
+            groups = {Insert.class, Auth.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid role name",
+            groups = {Insert.class, Update.class})
+    private String resourceName;
 
     /**
-     * 分组排序位置
+     * 权限资源编号
      */
-    private Integer position;
+    private String resourceCode;
+
+    /**
+     * 权限资源类型标识
+     */
+    private ResourceTypeFlagEnum resourceTypeFlag;
+
+    /**
+     * 权限资源范围标识，参考：ResourceScopeFlagEnum
+     * <ul>
+     *     <li>0x01：新增</li>
+     *     <li>0x02：删除</li>
+     *     <li>0x04：修改</li>
+     *     <li>0x08：查询</li>
+     * </ul>
+     * 具有多个权限范围可以累加
+     */
+    private Byte resourceScopeFlag;
+
+    /**
+     * 权限资源实体ID
+     */
+    @NotBlank(message = "Entity id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String entityId;
 
     /**
      * 使能标识

@@ -33,49 +33,49 @@ public enum AttributeTypeFlagEnum {
     /**
      * 字符串
      */
-    STRING(0, "string", "字符串"),
+    STRING((byte) 0x00, "string", "字符串"),
 
     /**
      * 字节
      */
-    BYTE(1, "byte", "字节"),
+    BYTE((byte) 0x01, "byte", "字节"),
 
     /**
      * 短整数
      */
-    SHORT(2, "short", "短整数"),
+    SHORT((byte) 0x02, "short", "短整数"),
 
     /**
      * 整数
      */
-    INT(3, "int", "整数"),
+    INT((byte) 0x03, "int", "整数"),
 
     /**
      * 长整数
      */
-    LONG(4, "long", "长整数"),
+    LONG((byte) 0x04, "long", "长整数"),
 
     /**
      * 浮点数
      */
-    FLOAT(5, "float", "浮点数"),
+    FLOAT((byte) 0x05, "float", "浮点数"),
 
     /**
      * 双精度浮点数
      */
-    DOUBLE(6, "double", "双精度浮点数"),
+    DOUBLE((byte) 0x06, "double", "双精度浮点数"),
 
     /**
      * 布尔量
      */
-    BOOLEAN(7, "boolean", "布尔量"),
+    BOOLEAN((byte) 0x07, "boolean", "布尔量"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

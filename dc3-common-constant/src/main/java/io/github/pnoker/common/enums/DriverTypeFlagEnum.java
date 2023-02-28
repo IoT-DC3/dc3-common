@@ -33,24 +33,24 @@ public enum DriverTypeFlagEnum {
     /**
      * 协议驱动
      */
-    DRIVER(0, "driver", "协议驱动"),
+    DRIVER((byte) 0x00, "driver", "协议驱动"),
 
     /**
      * 网关驱动
      */
-    GATEWAY(1, "gateway", "网关驱动"),
+    GATEWAY((byte) 0x01, "gateway", "网关驱动"),
 
     /**
      * 串联驱动
      */
-    CONNECT(2, "connect", "串联驱动"),
+    CONNECT((byte) 0x02, "connect", "串联驱动"),
     ;
 
     /**
      * 索引
      */
     @EnumValue
-    private final Integer index;
+    private final Byte index;
 
     /**
      * 编码

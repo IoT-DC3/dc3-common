@@ -12,33 +12,42 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.bean.driver;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.model.Driver;
-import io.github.pnoker.common.model.DriverAttribute;
-import io.github.pnoker.common.model.PointAttribute;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.github.pnoker.common.valid.Insert;
+import io.github.pnoker.common.valid.Update;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 /**
+ * 角色-用户关联表
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class DriverRegister implements Serializable {
-    private static final long serialVersionUID = 1L;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+public class RoleUserBind extends Base {
 
-    private String tenant;
-    private Driver driver;
-    private List<DriverAttribute> driverAttributes;
-    private List<PointAttribute> pointAttributes;
+    /**
+     * 角色ID
+     */
+    @NotBlank(message = "Role id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String roleId;
 
+    /**
+     * 用户ID
+     */
+    @NotBlank(message = "User id can't be empty",
+            groups = {Insert.class, Update.class})
+    private String userId;
 }

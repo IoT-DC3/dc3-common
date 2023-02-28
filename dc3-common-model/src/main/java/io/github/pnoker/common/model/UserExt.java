@@ -12,13 +12,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.ProfileShareFlagEnum;
-import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
+import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -27,7 +24,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * 设备变量表
+ * User Ext
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,53 +35,41 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Profile extends BaseModel {
+public class UserExt extends Base {
 
     /**
-     * 模板名称
+     * 用户昵称
      */
-    @NotBlank(message = "Profile name can't be empty",
-            groups = {Insert.class})
+    @NotBlank(message = "Nick name can't be empty",
+            groups = {Insert.class, Auth.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid profile name",
+            message = "Invalid nick name",
             groups = {Insert.class, Update.class})
-    private String profileName;
+    private String nickName;
 
     /**
-     * 模板编号
+     * 用户名
      */
-    @NotBlank(message = "Profile code can't be empty",
-            groups = {Insert.class})
+    @NotBlank(message = "User name can't be empty",
+            groups = {Insert.class, Auth.class})
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid profile code",
+            message = "Invalid user name",
             groups = {Insert.class, Update.class})
-    private String driverCode;
+    private String userName;
 
     /**
-     * 模板共享类型标识
+     * 手机号
      */
-    private ProfileShareFlagEnum profileShareFlag;
-
-    /**
-     * 模板类型标识
-     */
-    private ProfileTypeFlagEnum profileTypeFlag;
-
-    /**
-     * 分组ID
-     */
-    // TODO 后期再实现分组，先放着占个坑 @NotNull(message = "group id can't be empty", groups = {Insert.class, Update.class})
-    private String groupId;
-
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    @NotBlank(message = "Tenant id can't be empty",
+    @Pattern(regexp = "^1([3-9])\\d{9}$",
+            message = "Invalid phone",
             groups = {Insert.class, Update.class})
-    private String tenantId;
+    private String phone;
+
+    /**
+     * 邮箱
+     */
+    @Pattern(regexp = "^[A-Za-z0-9_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$",
+            message = "Invalid email",
+            groups = {Insert.class, Update.class})
+    private String email;
 }

@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
@@ -25,7 +24,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * User Ext
+ * User
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,41 +35,15 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserExt extends BaseModel {
+public class UserPassword extends Base {
 
     /**
-     * 用户昵称
+     * 登录密码
      */
-    @NotBlank(message = "Nick name can't be empty",
+    @NotBlank(message = "Login password can't be empty",
             groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid nick name",
+    @Pattern(regexp = "^[a-zA-Z]\\w{7,15}$",
+            message = "Invalid login password",
             groups = {Insert.class, Update.class})
-    private String nickName;
-
-    /**
-     * 用户名
-     */
-    @NotBlank(message = "User name can't be empty",
-            groups = {Insert.class, Auth.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid user name",
-            groups = {Insert.class, Update.class})
-    private String userName;
-
-    /**
-     * 手机号
-     */
-    @Pattern(regexp = "^1([3-9])\\d{9}$",
-            message = "Invalid phone",
-            groups = {Insert.class, Update.class})
-    private String phone;
-
-    /**
-     * 邮箱
-     */
-    @Pattern(regexp = "^[A-Za-z0-9_.-]+@[A-Za-z0-9]+\\.[A-Za-z0-9]+$",
-            message = "Invalid email",
-            groups = {Insert.class, Update.class})
-    private String email;
+    private String password;
 }

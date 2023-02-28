@@ -12,22 +12,20 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.EntityTypeFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * 模板配置信息表
+ * 标签表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,44 +36,27 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class PointAttribute extends BaseModel {
+public class Label extends Base {
 
     /**
-     * 显示名称
+     * 标签名称
      */
-    @NotBlank(message = "Display name can't be empty",
+    @NotBlank(message = "Label name can't be empty",
             groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid display name",
+            message = "Invalid label name",
             groups = {Insert.class, Update.class})
-    private String displayName;
+    private String labelName;
 
     /**
-     * 属性名称
+     * 标签颜色
      */
-    @NotBlank(message = "Attribute name can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid attribute name",
-            groups = {Insert.class, Update.class})
-    private String attributeName;
+    private String color;
 
     /**
-     * 属性类型标识
+     * 实体标识
      */
-    private AttributeTypeFlagEnum attributeTypeFlag;
-
-    /**
-     * 默认值
-     */
-    private String defaultValue;
-
-    /**
-     * 驱动ID
-     */
-    @NotNull(message = "Driver id can't be empty"
-            , groups = {Insert.class, Update.class})
-    private String driverId;
+    private EntityTypeFlagEnum entityTypeFlag;
 
     /**
      * 使能标识

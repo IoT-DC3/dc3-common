@@ -12,51 +12,42 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
-import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 /**
- * Ip 黑名单表
+ * 设备与模版继承关系表
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class BlackIp extends BaseModel {
+public class ProfileBind extends Base {
 
     /**
-     * 黑IP
+     * 模版ID
      */
-    @NotBlank(message = "Ip can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
-            message = "Invalid ip",
+    @NotBlank(message = "Profile id can't be empty",
             groups = {Insert.class, Update.class})
-    private String ip;
+    private String profileId;
 
     /**
-     * 使能标识
+     * 设备ID
      */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    @NotBlank(message = "Tenant id can't be empty",
+    @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
-    private String tenantId;
+    private String deviceId;
 }

@@ -22,28 +22,24 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用读写标识枚举
+ * 通用菜单类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum RwFlagEnum {
-    /**
-     * 只读
-     */
-    R((byte) 0x00, "r", "只读"),
+public enum MenuTypeFlagEnum {
 
     /**
-     * 只写
+     * 标题菜单
      */
-    W((byte) 0x01, "w", "只写"),
+    TITLE((byte) 0x00, "title", "标题菜单"),
 
     /**
-     * 读写
+     * 通用菜单
      */
-    RW((byte) 0x02, "rw", "读写"),
+    COMMON((byte) 0x01, "common", "通用菜单"),
     ;
 
     /**
@@ -66,10 +62,10 @@ public enum RwFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return RwFlagEnum
+     * @return MultiTypeEnum
      */
-    public static RwFlagEnum of(String code) {
-        Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MenuTypeFlagEnum of(String code) {
+        Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

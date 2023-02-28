@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.bean.entity.BaseModel;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.EntityTypeFlagEnum;
+import io.github.pnoker.common.enums.MenuTypeFlagEnum;
+import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -26,7 +26,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * 标签表
+ * 菜单表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,27 +37,40 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Label extends BaseModel {
+public class Menu extends Base {
 
     /**
-     * 标签名称
+     * 菜单父级ID
      */
-    @NotBlank(message = "Label name can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "Invalid label name",
+    @NotBlank(message = "Menu parent id can't be empty",
             groups = {Insert.class, Update.class})
-    private String labelName;
+    private String parentMenuId;
 
     /**
-     * 标签颜色
+     * 菜单类型标识
      */
-    private String color;
+    private MenuTypeFlagEnum menuTypeFlag;
 
     /**
-     * 实体标识
+     * 菜单名称
      */
-    private EntityTypeFlagEnum entityTypeFlag;
+    @NotBlank(message = "Menu name can't be empty",
+            groups = {Insert.class, Auth.class})
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
+            message = "Invalid menu name",
+            groups = {Insert.class, Update.class})
+    private String menuName;
+
+    /**
+     * 菜单编号，一般为URL的MD5编码
+     */
+    private String menuCode;
+
+    /**
+     * 菜单描述信息
+     */
+    //TODO 定义一个结构体
+    private String menuInfo;
 
     /**
      * 使能标识

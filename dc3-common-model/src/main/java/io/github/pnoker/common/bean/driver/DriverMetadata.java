@@ -15,10 +15,10 @@
 package io.github.pnoker.common.bean.driver;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.entity.Device;
-import io.github.pnoker.common.entity.DriverAttribute;
-import io.github.pnoker.common.entity.Point;
-import io.github.pnoker.common.entity.PointAttribute;
+import io.github.pnoker.common.model.Device;
+import io.github.pnoker.common.model.DriverAttribute;
+import io.github.pnoker.common.model.Point;
+import io.github.pnoker.common.model.PointAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
