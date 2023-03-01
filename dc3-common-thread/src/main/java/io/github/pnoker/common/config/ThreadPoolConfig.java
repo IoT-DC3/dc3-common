@@ -14,7 +14,7 @@
 
 package io.github.pnoker.common.config;
 
-import io.github.pnoker.common.bean.property.ThreadProperty;
+import io.github.pnoker.common.entity.property.ThreadProperty;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;

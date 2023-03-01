@@ -15,6 +15,7 @@
 package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -42,7 +43,7 @@ public class LabelBind extends Base {
     private String labelId;
 
     /**
-     *实体ID
+     * 实体ID
      */
     @NotBlank(message = "Entity id can't be empty", groups = {Insert.class, Update.class})
     private String entityId;

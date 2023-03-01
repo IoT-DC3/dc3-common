@@ -14,7 +14,7 @@
 
 package io.github.pnoker.common.utils;
 
-import io.github.pnoker.common.bean.common.TreeNode;
+import io.github.pnoker.common.entity.common.TreeNode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

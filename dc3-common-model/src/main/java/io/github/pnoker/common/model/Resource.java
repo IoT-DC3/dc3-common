@@ -15,6 +15,7 @@
 package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.ResourceTypeFlagEnum;
 import io.github.pnoker.common.valid.Auth;

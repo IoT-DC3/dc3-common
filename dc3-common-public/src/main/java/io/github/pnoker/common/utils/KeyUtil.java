@@ -14,11 +14,11 @@
 
 package io.github.pnoker.common.utils;
 
-import io.github.pnoker.common.bean.auth.Keys;
 import io.github.pnoker.common.constant.cache.TimeoutConstant;
 import io.github.pnoker.common.constant.common.AlgorithmConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.constant.common.SymbolConstant;
+import io.github.pnoker.common.entity.auth.Keys;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

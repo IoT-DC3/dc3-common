@@ -15,10 +15,10 @@
 package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
 
@@ -29,7 +29,6 @@ import javax.validation.constraints.NotBlank;
  * @since 2022.1.0
  */
 @Data
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
