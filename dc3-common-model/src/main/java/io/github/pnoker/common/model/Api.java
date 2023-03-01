@@ -14,7 +14,10 @@
 
 package io.github.pnoker.common.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.enums.ApiTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Insert;
@@ -39,6 +42,11 @@ import javax.validation.constraints.Pattern;
 public class Api extends Base {
 
     /**
+     * Api接口类型标识
+     */
+    private ApiTypeFlagEnum apiTypeFlag;
+
+    /**
      * Api接口名称
      */
     @NotBlank(message = "Api name can't be empty",
@@ -54,10 +62,10 @@ public class Api extends Base {
     private String apiCode;
 
     /**
-     * Api接口描述信息
+     * Api接口拓展信息
      */
-    //TODO 定义一个结构体
-    private String apiInfo;
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private ApiExt apiExt;
 
     /**
      * 使能标识

@@ -87,7 +87,7 @@ public enum ResourceTypeFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return MultiTypeEnum
+     * @return ResourceTypeFlagEnum
      */
     public static ResourceTypeFlagEnum of(String code) {
         Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();

@@ -29,17 +29,27 @@ import java.util.Optional;
  */
 @Getter
 @AllArgsConstructor
-public enum MenuTypeFlagEnum {
+public enum ApiTypeFlagEnum {
 
     /**
-     * 标题菜单
+     * POST
      */
-    TITLE((byte) 0x00, "title", "标题菜单"),
+    POST((byte) 0x00, "post", "POST"),
 
     /**
-     * 通用菜单
+     * DELETE
      */
-    COMMON((byte) 0x01, "common", "通用菜单"),
+    DELETE((byte) 0x01, "delete", "DELETE"),
+
+    /**
+     * PUT
+     */
+    PUT((byte) 0x02, "put", "PUT"),
+
+    /**
+     * GET
+     */
+    GET((byte) 0x03, "get", "GET"),
     ;
 
     /**
@@ -62,10 +72,10 @@ public enum MenuTypeFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return MenuTypeFlagEnum
+     * @return ApiTypeFlagEnum
      */
-    public static MenuTypeFlagEnum of(String code) {
-        Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ApiTypeFlagEnum of(String code) {
+        Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

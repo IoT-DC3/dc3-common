@@ -14,6 +14,8 @@
 
 package io.github.pnoker.common.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.MenuTypeFlagEnum;
@@ -67,10 +69,20 @@ public class Menu extends Base {
     private String menuCode;
 
     /**
-     * 菜单描述信息
+     * 菜单层级
      */
-    //TODO 定义一个结构体
-    private String menuInfo;
+    private Integer menuLevel;
+
+    /**
+     * 菜单顺序
+     */
+    private Integer menuIndex;
+
+    /**
+     * 菜单拓展信息
+     */
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private MenuExt menuExt;
 
     /**
      * 使能标识

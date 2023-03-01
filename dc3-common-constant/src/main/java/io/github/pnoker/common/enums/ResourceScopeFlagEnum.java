@@ -72,7 +72,7 @@ public enum ResourceScopeFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return MultiTypeEnum
+     * @return ResourceScopeFlagEnum
      */
     public static ResourceScopeFlagEnum of(String code) {
         Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
