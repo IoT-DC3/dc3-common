@@ -36,7 +36,6 @@ public class PrefixConstant {
     public static final String TENANT = "tenant";
     public static final String TENANT_BIND = "tenant_bind";
     public static final String BLACK_IP = "black_ip";
-    public static final String RTMP = "rtmp";
     public static final String USER = "user";
     public static final String DRIVER = "driver";
     public static final String DRIVER_ATTRIBUTE = "driver_attribute";
