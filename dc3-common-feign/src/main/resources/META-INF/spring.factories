@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.pnoker.common.config.OpenFeignConfig
-org.springframework.boot.env.EnvironmentPostProcessor=\
-  io.github.pnoker.common.config.ActiveFeignProfileConfig

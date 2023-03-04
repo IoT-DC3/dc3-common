@@ -46,5 +46,5 @@ public class UserPassword extends Base {
     @Pattern(regexp = "^[a-zA-Z]\\w{7,15}$",
             message = "Invalid login password",
             groups = {Insert.class, Update.class})
-    private String password;
+    private String loginPassword;
 }

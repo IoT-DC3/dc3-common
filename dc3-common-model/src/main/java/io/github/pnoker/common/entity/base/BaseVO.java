@@ -28,7 +28,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 基础 DO 实体类
+ * 基础 VO 实体类
  *
  * @author pnoker
  * @since 2022.1.0

@@ -14,7 +14,6 @@
 
 package io.github.pnoker.common.entity.common;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -45,9 +44,14 @@ public class Pages implements Serializable {
     private long endTime;
     private List<OrderItem> orders = new ArrayList<>(4);
 
+    /**
+     * Pages convert to Page
+     *
+     * @param <T> T
+     * @return Page<T>
+     */
     public <T> Page<T> convert() {
-        Page<T> page = new Page<>();
-        BeanUtil.copyProperties(this, page);
+        Page<T> page = buildPageByPages(this);
 
         boolean createTimeOrder = false;
         for (OrderItem order : page.orders()) {
@@ -55,9 +59,28 @@ public class Pages implements Serializable {
                 createTimeOrder = true;
             }
         }
+
+        // 默认按 create_time 倒序
         if (!createTimeOrder) {
             page.orders().add(OrderItem.desc("create_time"));
         }
+        return page;
+    }
+
+    /**
+     * Pages to Page
+     *
+     * @param pages Pages
+     * @param <T>   T
+     * @return Page<T>
+     */
+    private <T> Page<T> buildPageByPages(Pages pages) {
+        Page<T> page = new Page<>();
+
+        page.setCurrent(pages.getCurrent());
+        page.setSize(pages.getSize());
+        page.setOrders(pages.getOrders());
+
         return page;
     }
 
