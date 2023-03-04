@@ -48,7 +48,7 @@ public class Pages implements Serializable {
      * Pages convert to Page
      *
      * @param <T> T
-     * @return Page<T>
+     * @return Page
      */
     public <T> Page<T> convert() {
         Page<T> page = buildPageByPages(this);
@@ -72,7 +72,7 @@ public class Pages implements Serializable {
      *
      * @param pages Pages
      * @param <T>   T
-     * @return Page<T>
+     * @return Page
      */
     private <T> Page<T> buildPageByPages(Pages pages) {
         Page<T> page = new Page<>();

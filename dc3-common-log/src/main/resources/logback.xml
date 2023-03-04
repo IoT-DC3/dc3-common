@@ -31,10 +31,10 @@
     <logger name="DriverServiceImpl" level="WARN"/>
     <logger name="org.springframework.boot.autoconfigure.thymeleaf" level="ERROR"/>
     <logger name="org.springframework.boot.web.embedded.undertow" level="WARN"/>
+    <logger name="io.github.pnoker.center.manager.service.rabbit" level="WARN"/>
     <logger name="org.springframework.cloud.netflix.eureka" level="WARN"/>
     <logger name="org.springframework.cloud.gateway.route" level="WARN"/>
     <logger name="org.springframework.cloud.commons.util" level="ERROR"/>
-    <logger name="io.github.pnoker.center.manager.service.rabbit" level="WARN"/>
     <logger name="org.springframework.context.support" level="WARN"/>
     <logger name="org.springframework.cloud.context" level="WARN"/>
     <logger name="org.springframework.boot.actuate" level="ERROR"/>
@@ -49,6 +49,7 @@
     <logger name="com.zaxxer.hikari.pool" level="ERROR"/>
     <logger name="org.springframework.web" level="WARN"/>
     <logger name="org.mybatis.spring" level="ERROR"/>
+    <logger name="net.devh.boot.grpc" level="WARN"/>
     <logger name="org.mongodb.driver" level="WARN"/>
     <logger name="com.zaxxer.hikari" level="WARN"/>
     <logger name="org.eclipse.milo" level="ERROR"/>

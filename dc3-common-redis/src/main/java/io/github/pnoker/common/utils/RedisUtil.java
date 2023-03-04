@@ -14,7 +14,6 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -208,7 +207,7 @@ public class RedisUtil {
      */
     public long getExpire(String key, TimeUnit unit) {
         Long expire = redisTemplate.getExpire(key, unit);
-        if (ObjectUtil.isNotNull(expire)) {
+        if (null != expire) {
             return expire;
         }
         return 0L;

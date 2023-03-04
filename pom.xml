@@ -73,17 +73,8 @@
         <module>dc3-common-exception</module>
         <module>dc3-common-constant</module>
         <module>dc3-common-model</module>
+        <module>dc3-common-api</module>
     </modules>
-
-    <dependencies>
-
-        <!-- HuTool -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-
-    </dependencies>
 
     <repositories>
         <repository>
@@ -101,6 +92,17 @@
             <id>spring</id>
             <name>Aliyun Spring Repository</name>
             <url>https://maven.aliyun.com/repository/spring</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
