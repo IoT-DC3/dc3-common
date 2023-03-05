@@ -31,6 +31,8 @@ import java.util.Optional;
 public enum ResponseEnum {
 
     OK("R_200", "Success"),
+    TOKEN_INVALID("R_20301", "Token invalid"),
+    IP_INVALID("R_20302", "Ip invalid"),
     FAILURE("R_500", "Service exception"),
     NO_RESOURCE("R_404", "Resource does not exist"),
     OUT_RANGE("R_900", "Number out range"),

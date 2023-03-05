@@ -33,7 +33,7 @@ public enum UnitEnum {
     /**
      * 无单位
      */
-    NONE((byte) 0x00, "", "无单位"),
+    NULL((byte) 0x00, "", "无单位"),
 
     /**
      * 摄氏度

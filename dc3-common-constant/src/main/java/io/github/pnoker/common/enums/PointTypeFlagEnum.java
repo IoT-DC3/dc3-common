@@ -14,6 +14,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,43 +33,49 @@ public enum PointTypeFlagEnum {
     /**
      * 字符串
      */
-    STRING("string", "字符串"),
+    STRING((byte) 0x00, "string", "字符串"),
 
     /**
      * 字节
      */
-    BYTE("byte", "字节"),
+    BYTE((byte) 0x01, "byte", "字节"),
 
     /**
      * 短整数
      */
-    SHORT("short", "短整数"),
+    SHORT((byte) 0x02, "short", "短整数"),
 
     /**
      * 整数
      */
-    INT("int", "整数"),
+    INT((byte) 0x03, "int", "整数"),
 
     /**
      * 长整数
      */
-    LONG("long", "长整数"),
+    LONG((byte) 0x04, "long", "长整数"),
 
     /**
      * 浮点数
      */
-    FLOAT("float", "浮点数"),
+    FLOAT((byte) 0x05, "float", "浮点数"),
 
     /**
      * 双精度浮点数
      */
-    DOUBLE("double", "双精度浮点数"),
+    DOUBLE((byte) 0x06, "double", "双精度浮点数"),
 
     /**
      * 布尔量
      */
-    BOOLEAN("boolean", "布尔量"),
+    BOOLEAN((byte) 0x07, "boolean", "布尔量"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 编码

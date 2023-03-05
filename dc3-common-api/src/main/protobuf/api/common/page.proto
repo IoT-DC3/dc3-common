@@ -18,21 +18,13 @@ package api.common;
 
 // 配置相关
 option java_package = "io.github.pnoker.api.common";
-option java_outer_classname = "EnableFlagEnumProto";
+option java_outer_classname = "PageProto";
 option java_multiple_files = true;
 
-import "google/protobuf/descriptor.proto";
-
-// 拓展枚举参数
-extend google.protobuf.EnumValueOptions {
-  int32 index = 1000; // 索引
-  string code = 1001; // 编码
-  string name = 1002; // 名称
-}
-
-// 通用使能标识枚举
-enum EnableFlagEnum {
-  DISABLE = 0 [(index) = 0, (code) = "disable", (name) = "禁用"]; // 禁用
-  ENABLE = 1 [(index) = 1, (code) = "disable", (name) = "启用"]; // 启用
-  TEMP = 2 [(index) = 2, (code) = "disable", (name) = "暂存"]; // 暂存
+// Page DTO
+message PageDTO {
+  int64 total = 1; // 总数
+  int64 size = 2; // 每页显示条数
+  int64 current = 3; // 当前页
+  int64 pages = 4; // 当前分页总页数
 }

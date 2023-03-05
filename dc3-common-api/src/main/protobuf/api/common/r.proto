@@ -21,8 +21,8 @@ option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "RProto";
 option java_multiple_files = true;
 
-// R
-message R {
+// R DTO
+message RDTO {
   bool ok = 1; // 是否成功
   string code = 2; // 状态码
   string message = 3; // 消息

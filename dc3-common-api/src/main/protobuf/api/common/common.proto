@@ -21,14 +21,14 @@ option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "CommonProto";
 option java_multiple_files = true;
 
-// Base
-message Base {
+// Base DTO
+message BaseDTO {
   string id = 1; // 主键ID
   string remark = 2; // 描述
   string creatorId = 3; // 创建者ID
   string creatorName = 4; // 创建者名称
-  int32 createTime = 5; // 创建时间
+  int64 createTime = 5; // 创建时间
   string operatorId = 6; // 操作者ID
   string operatorName = 7; // 操作者名称
-  int32 updateTime = 8; // 操作时间
+  int64 updateTime = 8; // 操作时间
 }

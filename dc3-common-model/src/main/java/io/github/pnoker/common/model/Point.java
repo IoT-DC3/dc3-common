@@ -72,7 +72,7 @@ public class Point extends Base {
     /**
      * 基础值
      */
-    private BigDecimal base;
+    private BigDecimal baseValue;
 
     /**
      * 比例系数
@@ -125,11 +125,11 @@ public class Point extends Base {
     public void setDefault() {
         this.pointTypeFlag = PointTypeFlagEnum.STRING;
         this.rwFlag = RwFlagEnum.R;
-        this.base = BigDecimal.valueOf(0);
+        this.baseValue = BigDecimal.valueOf(0);
         this.multiple = BigDecimal.valueOf(1);
         this.accrueFlag = AccrueFlagEnum.NONE;
         this.valueDecimal = 6;
-        this.unit = UnitEnum.NONE;
+        this.unit = UnitEnum.NULL;
     }
 
 }
