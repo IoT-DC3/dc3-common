@@ -31,7 +31,7 @@ public class AuthServiceConstant {
     /**
      * 服务名
      */
-    public static final String SERVICE_NAME = "DC3-CENTER-AUTH";
+    public static final String SERVICE_NAME = "dc3-center-auth";
 
     public static final String USER_URL_PREFIX = "/auth/user";
     public static final String TENANT_URL_PREFIX = "/auth/tenant";
