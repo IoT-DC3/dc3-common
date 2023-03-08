@@ -31,7 +31,7 @@ public class ManagerServiceConstant {
     /**
      * 服务名
      */
-    public static final String SERVICE_NAME = "DC3-CENTER-MANAGER";
+    public static final String SERVICE_NAME = "dc3-center-manager";
 
     public static final String DRIVER_URL_PREFIX = "/manager/driver";
     public static final String BATCH_URL_PREFIX = "/manager/batch";

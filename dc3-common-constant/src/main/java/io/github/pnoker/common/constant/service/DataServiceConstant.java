@@ -31,7 +31,7 @@ public class DataServiceConstant {
     /**
      * 服务名
      */
-    public static final String SERVICE_NAME = "DC3-CENTER-DATA";
+    public static final String SERVICE_NAME = "dc3-center-data";
 
     public static final String VALUE_URL_PREFIX = "/data/point_value";
 }

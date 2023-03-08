@@ -31,7 +31,7 @@ public class DriverServiceConstant {
     /**
      * 服务名
      */
-    public static final String SERVICE_NAME = "DC3-DRIVER";
+    public static final String SERVICE_NAME = "dc3-driver";
 
     public static final String COMMAND_URL_PREFIX = "/driver/command";
 }
