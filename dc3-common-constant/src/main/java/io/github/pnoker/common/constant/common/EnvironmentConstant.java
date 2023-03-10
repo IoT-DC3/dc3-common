@@ -27,6 +27,26 @@ public class EnvironmentConstant {
     }
 
     /**
+     * 开发环境
+     */
+    public static final String ENV_DEV = "dev";
+
+    /**
+     * 测试环境
+     */
+    public static final String ENV_TEST = "test";
+
+    /**
+     * 预发布环境
+     */
+    public static final String ENV_PRE = "pre";
+
+    /**
+     * 生产环境
+     */
+    public static final String ENV_PRO = "pro";
+
+    /**
      * 服务是否开启 Https
      */
     public static final String EUREKA_TLS_ENABLE = "eureka.client.tls.enabled";
@@ -35,4 +55,14 @@ public class EnvironmentConstant {
      * Eureka 服务注册中心 Url
      */
     public static final String EUREKA_SERVICE_URL = "eureka.client.service-url.defaultZone";
+
+    /**
+     * 当前环境类型
+     */
+    public static final String SPRING_ENV = "spring.env";
+
+    /**
+     * 当前分组
+     */
+    public static final String SPRING_GROUP = "spring.group";
 }
