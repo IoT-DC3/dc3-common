@@ -53,12 +53,7 @@ public class Profile extends Base {
     /**
      * 模板编号
      */
-    @NotBlank(message = "Profile code can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid profile code",
-            groups = {Insert.class, Update.class})
-    private String driverCode;
+    private String profileCode;
 
     /**
      * 模板共享类型标识
@@ -84,7 +79,5 @@ public class Profile extends Base {
     /**
      * 租户ID
      */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
     private String tenantId;
 }

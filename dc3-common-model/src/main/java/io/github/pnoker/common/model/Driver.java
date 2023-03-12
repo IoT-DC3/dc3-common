@@ -55,11 +55,6 @@ public class Driver extends Base {
     /**
      * 驱动编号
      */
-    @NotBlank(message = "Driver code can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid driver code",
-            groups = {Insert.class, Update.class})
     private String driverCode;
 
     /**
@@ -104,8 +99,6 @@ public class Driver extends Base {
     /**
      * 租户ID
      */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
     private String tenantId;
 
     // TODO:请使用枚举,提取到BO中

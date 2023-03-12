@@ -52,11 +52,6 @@ public class Point extends Base {
     /**
      * 位号编号
      */
-    @NotBlank(message = "Point code can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid point code",
-            groups = {Insert.class, Update.class})
     private String pointCode;
 
     /**
@@ -115,8 +110,6 @@ public class Point extends Base {
     /**
      * 租户ID
      */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
     private String tenantId;
 
     /**

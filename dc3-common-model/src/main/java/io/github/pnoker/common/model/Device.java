@@ -54,10 +54,6 @@ public class Device extends Base {
     /**
      * 设备编号
      */
-    @NotBlank(message = "Device code can't be empty", groups = {Insert.class})
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid device code",
-            groups = {Insert.class, Update.class})
     private String deviceCode;
 
     /**
@@ -86,8 +82,6 @@ public class Device extends Base {
     /**
      * 租户ID
      */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
     private String tenantId;
 
     // TODO 提取到BO中

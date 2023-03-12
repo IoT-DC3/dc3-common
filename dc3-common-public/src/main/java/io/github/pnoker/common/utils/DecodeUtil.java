@@ -97,7 +97,7 @@ public class DecodeUtil {
      * @return Byte Array
      */
     public static byte[] encode(String content) {
-        return DecodeUtil.encode(DecodeUtil.stringToByte(content));
+        return encode(stringToByte(content));
     }
 
     /**
@@ -117,7 +117,7 @@ public class DecodeUtil {
      * @return Byte Array
      */
     public static byte[] decode(String content) {
-        return DecodeUtil.decode(DecodeUtil.stringToByte(content));
+        return decode(stringToByte(content));
     }
 
 }

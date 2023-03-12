@@ -34,22 +34,22 @@ public class RabbitConstant {
     // Event
     public static String TOPIC_EXCHANGE_EVENT = "dc3.e.event";
     public static final String ROUTING_DRIVER_EVENT_PREFIX = "dc3.r.event.driver.";
-    public static final String QUEUE_DRIVER_EVENT = "dc3.q.event.driver";
+    public static String QUEUE_DRIVER_EVENT = "dc3.q.event.driver";
     public static final String ROUTING_DEVICE_EVENT_PREFIX = "dc3.r.event.device.";
-    public static final String QUEUE_DEVICE_EVENT = "dc3.q.event.device";
+    public static String QUEUE_DEVICE_EVENT = "dc3.q.event.device";
 
     // Metadata
     public static String TOPIC_EXCHANGE_METADATA = "dc3.e.metadata";
     public static final String ROUTING_DRIVER_METADATA_PREFIX = "dc3.r.metadata.driver.";
-    public static final String QUEUE_DRIVER_METADATA_PREFIX = "dc3.q.metadata.driver.";
+    public static String QUEUE_DRIVER_METADATA_PREFIX = "dc3.q.metadata.driver.";
 
     // Value
     public static String TOPIC_EXCHANGE_VALUE = "dc3.e.value";
     public static final String ROUTING_POINT_VALUE_PREFIX = "dc3.r.value.point.";
-    public static final String QUEUE_POINT_VALUE = "dc3.q.value.point";
+    public static String QUEUE_POINT_VALUE = "dc3.q.value.point";
 
     // Mqtt
     public static String TOPIC_EXCHANGE_MQTT = "dc3.e.mqtt";
     public static final String ROUTING_MQTT_PREFIX = "dc3.r.mqtt.";
-    public static final String QUEUE_MQTT = "dc3.q.mqtt";
+    public static String QUEUE_MQTT = "dc3.q.mqtt";
 }

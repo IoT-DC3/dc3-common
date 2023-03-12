@@ -69,7 +69,5 @@ public class Role extends Base {
     /**
      * 租户ID
      */
-    @NotBlank(message = "Tenant id can't be empty",
-            groups = {Insert.class, Update.class})
     private String tenantId;
 }

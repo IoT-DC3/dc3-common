@@ -43,9 +43,14 @@ public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
 
         String tag = EnvironmentUtil.getTag(env, group);
         RabbitConstant.TOPIC_EXCHANGE_EVENT = tag + RabbitConstant.TOPIC_EXCHANGE_EVENT;
+        RabbitConstant.QUEUE_DRIVER_EVENT = tag + RabbitConstant.QUEUE_DRIVER_EVENT;
+        RabbitConstant.QUEUE_DEVICE_EVENT = tag + RabbitConstant.QUEUE_DEVICE_EVENT;
         RabbitConstant.TOPIC_EXCHANGE_METADATA = tag + RabbitConstant.TOPIC_EXCHANGE_METADATA;
+        RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX;
         RabbitConstant.TOPIC_EXCHANGE_VALUE = tag + RabbitConstant.TOPIC_EXCHANGE_VALUE;
+        RabbitConstant.QUEUE_POINT_VALUE = tag + RabbitConstant.QUEUE_POINT_VALUE;
         RabbitConstant.TOPIC_EXCHANGE_MQTT = tag + RabbitConstant.TOPIC_EXCHANGE_MQTT;
+        RabbitConstant.QUEUE_MQTT = tag + RabbitConstant.QUEUE_MQTT;
     }
 
 }
