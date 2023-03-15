@@ -70,6 +70,12 @@ public class DriverEvent implements Serializable {
     private Long originTime;
     private Long confirmTime;
 
+    public DriverEvent(String serviceName, String type) {
+        this.serviceName = serviceName;
+        this.type = type;
+        this.originTime = System.currentTimeMillis();
+    }
+
     public DriverEvent(String serviceName, String type, Object content) {
         this.serviceName = serviceName;
         this.type = type;

@@ -49,13 +49,13 @@ public class RegexUtil {
     }
 
     /**
-     * 判断字符串是否为 用户名格式（2-64）
+     * 判断字符串是否为 名称格式（2-32）
      *
      * @param name String
      * @return boolean
      */
     public static boolean isName(String name) {
-        String regex = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_]{1,63}$";
+        String regex = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$";
         return ReUtil.isMatch(regex, name);
     }
 
