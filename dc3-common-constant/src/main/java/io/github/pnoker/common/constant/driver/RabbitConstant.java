@@ -54,4 +54,5 @@ public class RabbitConstant {
     public static String TOPIC_EXCHANGE_MQTT = "dc3.e.mqtt";
     public static final String ROUTING_MQTT_PREFIX = "dc3.r.mqtt.";
     public static String QUEUE_MQTT = "dc3.q.mqtt";
+
 }

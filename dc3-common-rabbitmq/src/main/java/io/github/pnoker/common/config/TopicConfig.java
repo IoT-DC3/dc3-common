@@ -18,6 +18,7 @@ package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.utils.EnvironmentUtil;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2022.1.0
  */
 @Slf4j
+@Data
 @Configuration
 public class TopicConfig {
     @Value("${spring.env:}")

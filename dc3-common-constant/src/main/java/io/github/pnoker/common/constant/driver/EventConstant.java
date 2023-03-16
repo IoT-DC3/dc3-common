@@ -47,25 +47,10 @@ public class EventConstant {
          */
         public static final String STATUS = "driver_status";
         /**
-         * 驱动注册握手事件，该事件用于校验当前 dc3-center-manager 是否可用
-         */
-        public static final String HANDSHAKE = "driver_handshake";
-        public static final String HANDSHAKE_BACK = "driver_handshake_back";
-        /**
          * 驱动注册事件，该事件用于向 dc3-center-manager 注册驱动配置信息
          */
         public static final String REGISTER = "driver_register";
         public static final String REGISTER_BACK = "driver_register_back";
-        /**
-         * 同步驱动元数据时间，该事件用于向 dc3-center-manager 发送驱动元数据同步请求
-         */
-        public static final String METADATA_SYNC = "driver_metadata_sync";
-        public static final String METADATA_SYNC_BACK = "driver_metadata_sync_back";
-
-        /**
-         * 用于记录错误事件类型
-         */
-        public static final String ERROR = "driver_error";
 
     }
 

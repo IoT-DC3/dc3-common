@@ -36,7 +36,6 @@ public enum StatusEnum {
      * 注册相关
      */
     REGISTERING("REGISTERING", "注册中"),
-    UNREGISTERED("UNREGISTERED", "未注册"),
 
     /**
      * 运行相关
