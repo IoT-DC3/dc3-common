@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.enums.DriverEventEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,48 +29,30 @@ import java.util.Date;
  * @since 2022.1.0
  */
 @Data
-@Document
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class DriverEvent implements Serializable {
+public class DriverEventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * MongoDB Object ID
+     * 驱动ID
      */
-    @MongoId
-    private ObjectId id;
+    private String driverId;
 
     /**
      * 驱动服务名称
      */
-    private String serviceName;
+    private String driverServiceName;
 
     /**
-     * Driver Event
-     * <p>
-     * STATUS、ERROR
+     * 驱动事件类型
      */
-    private String type;
+    private DriverEventEnum driverEventType;
 
-    private Boolean confirm = false;
-    private Object content;
+    /**
+     * 事件内容，JSON String 格式
+     */
+    private String content;
 
     private Date originTime;
-    private Date confirmTime;
-
-    public DriverEvent(String serviceName, String type) {
-        this.serviceName = serviceName;
-        this.type = type;
-        this.originTime = new Date();
-    }
-
-    public DriverEvent(String serviceName, String type, Object content) {
-        this.serviceName = serviceName;
-        this.type = type;
-        this.content = content;
-        this.originTime = new Date();
-    }
-
 }

@@ -46,6 +46,7 @@ public class EventConstant {
          * 驱动状态事件，该事件用于向 dc3-center-manager 发送驱动的当前状态
          */
         public static final String STATUS = "driver_status";
+
         /**
          * 驱动注册事件，该事件用于向 dc3-center-manager 注册驱动配置信息
          */

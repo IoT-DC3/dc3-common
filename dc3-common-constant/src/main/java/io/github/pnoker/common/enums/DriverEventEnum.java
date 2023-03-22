@@ -24,28 +24,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动类型标识枚举
+ * 通用驱动事件枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverTypeFlagEnum {
+public enum DriverEventEnum {
     /**
-     * 协议驱动
+     * 注册事件
      */
-    DRIVER((byte) 0x00, "driver", "协议类型驱动"),
+    REGISTER((byte) 0x00, "register", "注册事件"),
 
     /**
-     * 网关驱动
+     * 心跳事件
      */
-    GATEWAY((byte) 0x01, "gateway", "网关类型驱动"),
+    HEARTBEAT((byte) 0x01, "heartbeat", "心跳事件"),
 
     /**
-     * 串联驱动
+     * 报警事件
      */
-    CONNECT((byte) 0x02, "connect", "串联类型驱动"),
+    ALARM((byte) 0x02, "alarm", "报警事件"),
     ;
 
     /**
@@ -68,10 +68,10 @@ public enum DriverTypeFlagEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return DriverTypeFlagEnum
+     * @return DriverEventEnum
      */
-    public static DriverTypeFlagEnum of(String code) {
-        Optional<DriverTypeFlagEnum> any = Arrays.stream(DriverTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverEventEnum of(String code) {
+        Optional<DriverEventEnum> any = Arrays.stream(DriverEventEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

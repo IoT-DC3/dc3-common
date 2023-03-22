@@ -68,6 +68,7 @@
         <module>dc3-common-mongo</module>
         <module>dc3-common-rabbitmq</module>
         <module>dc3-common-redis</module>
+        <module>dc3-common-mqtt</module>
         <module>dc3-common-thread</module>
         <module>dc3-common-quartz</module>
         <module>dc3-common-log</module>

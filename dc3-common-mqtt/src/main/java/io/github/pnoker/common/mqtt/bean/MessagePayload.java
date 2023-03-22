@@ -14,25 +14,26 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.driver;
+package io.github.pnoker.common.mqtt.bean;
 
-import lombok.AllArgsConstructor;
+import io.github.pnoker.common.utils.JsonUtil;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class DriverConfiguration implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class MessagePayload {
+    private String payload;
+    private MessageType messageType;
 
-    private String type;
-    private String command;
-    private Object content;
+    public MessagePayload() {
+        this.messageType = MessageType.DEFAULT;
+    }
+
+    public MessagePayload(Object payload, MessageType messageType) {
+        this.payload = JsonUtil.toJsonString(payload);
+        this.messageType = messageType;
+    }
 }

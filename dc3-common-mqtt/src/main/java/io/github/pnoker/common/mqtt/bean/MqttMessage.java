@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.driver;
+package io.github.pnoker.common.mqtt.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +29,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverConfiguration implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private String type;
-    private String command;
-    private Object content;
+public class MqttMessage implements Serializable {
+    private MessageHeader messageHeader;
+    private MessagePayload messagePayload;
 }
