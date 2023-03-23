@@ -39,7 +39,7 @@ public class DeviceCommandDTO implements Serializable {
     /**
      * 指令类型
      */
-    private DeviceCommandTypeEnum commandType;
+    private DeviceCommandTypeEnum type;
 
     /**
      * 指令内容
@@ -50,4 +50,85 @@ public class DeviceCommandDTO implements Serializable {
      * 创建时间
      */
     private Date createTime;
+
+    public DeviceCommandDTO(DeviceCommandTypeEnum type, String content) {
+        this.type = type;
+        this.content = content;
+        this.createTime = new Date();
+    }
+
+    /**
+     * 设备读指令
+     *
+     * @author pnoker
+     * @since 2022.1.0
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeviceRead implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * 设备ID
+         */
+        private String deviceId;
+
+        /**
+         * 位号ID
+         */
+        private String pointId;
+
+
+        /**
+         * 创建时间
+         */
+        private Date createTime;
+
+        public DeviceRead(String deviceId, String pointId) {
+            this.deviceId = deviceId;
+            this.pointId = pointId;
+            this.createTime = new Date();
+        }
+    }
+
+    /**
+     * 设备写指令
+     *
+     * @author pnoker
+     * @since 2022.1.0
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeviceWrite implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * 设备ID
+         */
+        private String deviceId;
+
+        /**
+         * 位号ID
+         */
+        private String pointId;
+
+        /**
+         * 待写入的值
+         */
+        private String value;
+
+        /**
+         * 创建时间
+         */
+        private Date createTime;
+
+        public DeviceWrite(String deviceId, String pointId, String value) {
+            this.deviceId = deviceId;
+            this.pointId = pointId;
+            this.value = value;
+            this.createTime = new Date();
+        }
+    }
 }

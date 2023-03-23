@@ -53,5 +53,5 @@ public class ScheduleConstant {
     /**
      * 驱动状态任务 Corn
      */
-    public static final String DRIVER_STATUS_CORN = "0/15 * * * * ?";
+    public static final String DRIVER_STATUS_CORN = "0/5 * * * * ?";
 }

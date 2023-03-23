@@ -51,6 +51,13 @@ enum PointTypeFlagDTOEnum {
   BOOLEAN = 7 [(index) = 7, (code) = "boolean", (name) = "布尔量"]; // 布尔量
 }
 
+// 通用驱动类型标识枚举
+enum DriverTypeFlagDTOEnum {
+  DRIVER = 0 [(index) = 0, (code) = "driver", (name) = "协议类型驱动"]; // 协议类型驱动
+  GATEWAY = 1 [(index) = 1, (code) = "gateway", (name) = "网关类型驱动"]; // 网关类型驱动
+  CONNECT = 2 [(index) = 2, (code) = "connect", (name) = "串联类型驱动"]; // 串联类型驱动
+}
+
 // 通用读写标识枚举
 enum RwFlagDTOEnum {
   R = 0 [(index) = 0, (code) = "r", (name) = "只读"]; // 只读

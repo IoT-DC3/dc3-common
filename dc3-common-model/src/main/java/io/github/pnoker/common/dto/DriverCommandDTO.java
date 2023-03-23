@@ -39,7 +39,7 @@ public class DriverCommandDTO implements Serializable {
     /**
      * 指令类型
      */
-    private DriverCommandTypeEnum commandType;
+    private DriverCommandTypeEnum type;
 
     /**
      * 指令内容

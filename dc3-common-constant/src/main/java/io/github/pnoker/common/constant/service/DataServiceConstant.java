@@ -36,4 +36,5 @@ public class DataServiceConstant {
     public static final String SERVICE_NAME = "dc3-center-data";
 
     public static final String VALUE_URL_PREFIX = "/data/point_value";
+    public static final String VALUE_COMMAND_URL_PREFIX = "/data/point_value_command";
 }

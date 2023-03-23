@@ -40,7 +40,7 @@ public class DriverMetadataDTO implements Serializable {
     /**
      * 元数据类型
      */
-    private MetadataTypeEnum metadataType;
+    private MetadataTypeEnum type;
 
     /**
      * 元数据操作类型
@@ -57,8 +57,8 @@ public class DriverMetadataDTO implements Serializable {
      */
     private Date createTime;
 
-    public DriverMetadataDTO(MetadataTypeEnum metadataType, MetadataCommandTypeEnum metadataCommandType, String content) {
-        this.metadataType = metadataType;
+    public DriverMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
+        this.type = type;
         this.metadataCommandType = metadataCommandType;
         this.content = content;
         this.createTime = new Date();

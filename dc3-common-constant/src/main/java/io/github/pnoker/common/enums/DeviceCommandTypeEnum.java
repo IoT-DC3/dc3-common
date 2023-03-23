@@ -33,14 +33,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum DeviceCommandTypeEnum {
     /**
+     * 读位号值类型指令
+     */
+    READ((byte) 0x00, "read", "读位号值类型指令"),
+
+    /**
      * 写位号值类型指令
      */
-    WRITE((byte) 0x00, "write", "写位号值类型指令"),
+    WRITE((byte) 0x01, "write", "写位号值类型指令"),
 
     /**
      * 配置设备类型指令
      */
-    CONFIG((byte) 0x01, "config", "配置设备类型指令"),
+    CONFIG((byte) 0x02, "config", "配置设备类型指令"),
     ;
 
     /**

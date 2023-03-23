@@ -17,6 +17,7 @@
 package io.github.pnoker.common.dto;
 
 import io.github.pnoker.common.enums.DeviceEventTypeEnum;
+import io.github.pnoker.common.enums.DriverStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,7 +40,7 @@ public class DeviceEventDTO implements Serializable {
     /**
      * 事件类型
      */
-    private DeviceEventTypeEnum eventType;
+    private DeviceEventTypeEnum type;
 
     /**
      * 事件内容
@@ -50,4 +51,38 @@ public class DeviceEventDTO implements Serializable {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 设备事件
+     *
+     * @author pnoker
+     * @since 2022.1.0
+     */
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DeviceStatus implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * 驱动服务名称
+         */
+        private String serviceName;
+
+        /**
+         * 驱动状态
+         */
+        private DriverStatusEnum status;
+
+        /**
+         * 创建时间
+         */
+        private Date createTime;
+
+        public DeviceStatus(String serviceName, DriverStatusEnum status) {
+            this.serviceName = serviceName;
+            this.status = status;
+            this.createTime = new Date();
+        }
+    }
 }
