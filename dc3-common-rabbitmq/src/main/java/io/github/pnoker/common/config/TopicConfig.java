@@ -17,11 +17,9 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import io.github.pnoker.common.utils.EnvironmentUtil;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,27 +31,30 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class TopicConfig {
-    @Value("${spring.env:}")
-    private String env;
 
     @Bean
     TopicExchange eventExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_EVENT, true, EnvironmentUtil.isDev(env));
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_EVENT, true, false);
     }
 
     @Bean
     TopicExchange metadataExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, EnvironmentUtil.isDev(env));
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, false);
+    }
+
+    @Bean
+    TopicExchange commandExchange() {
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_COMMAND, true, false);
     }
 
     @Bean
     TopicExchange valueExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_VALUE, true, EnvironmentUtil.isDev(env));
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_VALUE, true, false);
     }
 
     @Bean
     TopicExchange mqttExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_MQTT, true, EnvironmentUtil.isDev(env));
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_MQTT, true, false);
     }
 
 }

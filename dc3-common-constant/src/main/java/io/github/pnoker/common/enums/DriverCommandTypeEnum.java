@@ -31,21 +31,11 @@ import java.util.Optional;
  */
 @Getter
 @AllArgsConstructor
-public enum DriverEventEnum {
+public enum DriverCommandTypeEnum {
     /**
-     * 注册事件
+     * 驱动配置类型指令
      */
-    REGISTER((byte) 0x00, "register", "注册事件"),
-
-    /**
-     * 心跳事件
-     */
-    HEARTBEAT((byte) 0x01, "heartbeat", "心跳事件"),
-
-    /**
-     * 报警事件
-     */
-    ALARM((byte) 0x02, "alarm", "报警事件"),
+    CONFIG((byte) 0x00, "config", "驱动配置类型指令"),
     ;
 
     /**
@@ -68,10 +58,10 @@ public enum DriverEventEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return DriverEventEnum
+     * @return DriverCommandTypeEnum
      */
-    public static DriverEventEnum of(String code) {
-        Optional<DriverEventEnum> any = Arrays.stream(DriverEventEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverCommandTypeEnum of(String code) {
+        Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

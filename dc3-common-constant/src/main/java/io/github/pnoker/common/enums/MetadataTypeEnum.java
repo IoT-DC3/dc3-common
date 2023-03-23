@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,37 +24,58 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 设备、驱动状态枚举
+ * 通用元数据类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum StatusEnum {
+public enum MetadataTypeEnum {
+    /**
+     * 驱动类型元数据
+     */
+    DRIVER((byte) 0x00, "driver", "驱动类型元数据"),
 
     /**
-     * 注册相关
+     * 模板类型元数据
      */
-    REGISTERING("REGISTERING", "注册中"),
+    PROFILE((byte) 0x01, "profile", "模板类型元数据"),
 
     /**
-     * 运行相关
+     * 位号类型元数据
      */
-    ONLINE("ONLINE", "在线"),
-    OFFLINE("OFFLINE", "离线"),
-    MAINTAIN("MAINTAIN", "维护"),
-    FAULT("FAULT", "故障"),
+    POINT((byte) 0x02, "point", "位号类型元数据"),
+
+    /**
+     * 设备类型元数据
+     */
+    DEVICE((byte) 0x03, "device", "设备类型元数据"),
+
+    /**
+     * 驱动配置类型元数据
+     */
+    DRIVER_INFO((byte) 0x04, "driver_info", "驱动配置类型元数据"),
+
+    /**
+     * 位号配置类型元数据
+     */
+    POINT_INFO((byte) 0x05, "point_info", "位号配置类型元数据"),
     ;
 
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
-     * 状态编码
+     * 编码
      */
     private final String code;
 
     /**
-     * 状态名称
+     * 名称
      */
     private final String name;
 
@@ -61,10 +83,10 @@ public enum StatusEnum {
      * 根据 Code 获取枚举
      *
      * @param code Code
-     * @return StatusEnum
+     * @return MetadataTypeEnum
      */
-    public static StatusEnum of(String code) {
-        Optional<StatusEnum> any = Arrays.stream(StatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MetadataTypeEnum of(String code) {
+        Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 }

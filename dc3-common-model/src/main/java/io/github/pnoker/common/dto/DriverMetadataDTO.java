@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.dto;
 
-import io.github.pnoker.common.enums.DriverEventEnum;
+import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,34 +26,41 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 元数据
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverEventDTO implements Serializable {
+public class DriverMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 驱动ID
+     * 元数据类型
      */
-    private String driverId;
+    private MetadataTypeEnum metadataType;
 
     /**
-     * 驱动服务名称
+     * 元数据操作类型
      */
-    private String driverServiceName;
+    private MetadataCommandTypeEnum metadataCommandType;
 
     /**
-     * 驱动事件类型
-     */
-    private DriverEventEnum driverEventType;
-
-    /**
-     * 事件内容，JSON String 格式
+     * 元数据内容
      */
     private String content;
 
-    private Date originTime;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    public DriverMetadataDTO(MetadataTypeEnum metadataType, MetadataCommandTypeEnum metadataCommandType, String content) {
+        this.metadataType = metadataType;
+        this.metadataCommandType = metadataCommandType;
+        this.content = content;
+        this.createTime = new Date();
+    }
 }

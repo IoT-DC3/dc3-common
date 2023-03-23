@@ -45,6 +45,13 @@ public class RabbitConstant {
     public static final String ROUTING_DRIVER_METADATA_PREFIX = "dc3.r.metadata.driver.";
     public static String QUEUE_DRIVER_METADATA_PREFIX = "dc3.q.metadata.driver.";
 
+    // Command
+    public static String TOPIC_EXCHANGE_COMMAND = "dc3.e.command";
+    public static final String ROUTING_DRIVER_COMMAND_PREFIX = "dc3.r.command.driver.";
+    public static String QUEUE_DRIVER_COMMAND_PREFIX = "dc3.q.command.driver.";
+    public static final String ROUTING_DEVICE_COMMAND_PREFIX = "dc3.r.command.device.";
+    public static String QUEUE_DEVICE_COMMAND_PREFIX = "dc3.q.command.device.";
+
     // Value
     public static String TOPIC_EXCHANGE_VALUE = "dc3.e.value";
     public static final String ROUTING_POINT_VALUE_PREFIX = "dc3.r.value.point.";
