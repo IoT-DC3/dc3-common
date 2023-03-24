@@ -33,6 +33,11 @@ import org.springframework.context.annotation.Configuration;
 public class TopicConfig {
 
     @Bean
+    TopicExchange registerExchange() {
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_REGISTER, true, false);
+    }
+
+    @Bean
     TopicExchange eventExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_EVENT, true, false);
     }

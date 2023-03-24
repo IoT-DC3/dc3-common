@@ -37,4 +37,8 @@ public class DataServiceConstant {
 
     public static final String VALUE_URL_PREFIX = "/data/point_value";
     public static final String VALUE_COMMAND_URL_PREFIX = "/data/point_value_command";
+    public static final String DRIVER_STATUS_URL_PREFIX = "/data/driver/status";
+    public static final String DRIVER_EVENT_URL_PREFIX = "/data/driver/event";
+    public static final String DEVICE_STATUS_URL_PREFIX = "/data/device/status";
+    public static final String DEVICE_EVENT_URL_PREFIX = "/data/device/event";
 }

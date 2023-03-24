@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.driver;
+package io.github.pnoker.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.model.Driver;
@@ -35,7 +35,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DriverRegister implements Serializable {
+public class DriverRegisterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String tenant;

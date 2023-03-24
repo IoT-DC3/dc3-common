@@ -48,6 +48,4 @@ public class ManagerServiceConstant {
     public static final String DRIVER_INFO_URL_PREFIX = "/manager/driver_info";
     public static final String LABEL_URL_PREFIX = "/manager/label";
     public static final String DICTIONARY_URL_PREFIX = "/manager/dictionary";
-    public static final String STATUS_URL_PREFIX = "/manager/status";
-    public static final String EVENT_URL_PREFIX = "/manager/event";
 }

@@ -32,20 +32,16 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum DriverEventTypeEnum {
-    /**
-     * 注册事件
-     */
-    REGISTER((byte) 0x00, "register", "注册事件"),
 
     /**
      * 心跳事件
      */
-    HEARTBEAT((byte) 0x01, "heartbeat", "心跳事件"),
+    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
 
     /**
      * 报警事件
      */
-    ALARM((byte) 0x02, "alarm", "报警事件"),
+    ALARM((byte) 0x01, "alarm", "报警事件"),
     ;
 
     /**
