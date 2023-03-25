@@ -60,9 +60,9 @@ public enum ProfileShareFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -70,8 +70,22 @@ public enum ProfileShareFlagEnum {
      * @param code Code
      * @return ProfileShareFlagEnum
      */
-    public static ProfileShareFlagEnum of(String code) {
+    public static ProfileShareFlagEnum ofCode(String code) {
         Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return ProfileShareFlagEnum
+     */
+    public static ProfileShareFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

@@ -33,9 +33,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum MetadataTypeEnum {
     /**
-     * 驱动类型元数据
+     * 元数据
      */
-    DRIVER((byte) 0x00, "driver", "驱动类型元数据"),
+    METADATA((byte) 0x00, "metadata", "元数据"),
 
     /**
      * 模板类型元数据
@@ -75,9 +75,9 @@ public enum MetadataTypeEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -85,8 +85,22 @@ public enum MetadataTypeEnum {
      * @param code Code
      * @return MetadataTypeEnum
      */
-    public static MetadataTypeEnum of(String code) {
+    public static MetadataTypeEnum ofCode(String code) {
         Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return MetadataTypeEnum
+     */
+    public static MetadataTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

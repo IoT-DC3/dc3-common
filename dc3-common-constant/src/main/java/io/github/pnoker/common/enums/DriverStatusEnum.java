@@ -53,9 +53,9 @@ public enum DriverStatusEnum {
     private final String code;
 
     /**
-     * 状态名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -63,8 +63,22 @@ public enum DriverStatusEnum {
      * @param code Code
      * @return StatusEnum
      */
-    public static DriverStatusEnum of(String code) {
+    public static DriverStatusEnum ofCode(String code) {
         Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return DriverStatusEnum
+     */
+    public static DriverStatusEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

@@ -66,9 +66,9 @@ public enum ApiTypeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -76,8 +76,22 @@ public enum ApiTypeFlagEnum {
      * @param code Code
      * @return ApiTypeFlagEnum
      */
-    public static ApiTypeFlagEnum of(String code) {
+    public static ApiTypeFlagEnum ofCode(String code) {
         Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return ApiTypeFlagEnum
+     */
+    public static ApiTypeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

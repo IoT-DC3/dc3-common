@@ -47,9 +47,9 @@ public enum PointValueTypeEnum {
     private final String code;
 
     /**
-     * 位号数据类型名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -57,8 +57,22 @@ public enum PointValueTypeEnum {
      * @param code Code
      * @return PointValueTypeEnum
      */
-    public static PointValueTypeEnum of(String code) {
+    public static PointValueTypeEnum ofCode(String code) {
         Optional<PointValueTypeEnum> any = Arrays.stream(PointValueTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return PointValueTypeEnum
+     */
+    public static PointValueTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
+
 }

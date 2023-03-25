@@ -60,9 +60,9 @@ public enum RwFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -70,8 +70,22 @@ public enum RwFlagEnum {
      * @param code Code
      * @return RwFlagEnum
      */
-    public static RwFlagEnum of(String code) {
+    public static RwFlagEnum ofCode(String code) {
         Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return RwFlagEnum
+     */
+    public static RwFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

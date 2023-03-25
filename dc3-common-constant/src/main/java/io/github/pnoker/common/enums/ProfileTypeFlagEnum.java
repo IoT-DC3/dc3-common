@@ -61,9 +61,9 @@ public enum ProfileTypeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -71,8 +71,22 @@ public enum ProfileTypeFlagEnum {
      * @param code Code
      * @return ProfileTypeFlagEnum
      */
-    public static ProfileTypeFlagEnum of(String code) {
+    public static ProfileTypeFlagEnum ofCode(String code) {
         Optional<ProfileTypeFlagEnum> any = Arrays.stream(ProfileTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return ProfileTypeFlagEnum
+     */
+    public static ProfileTypeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

@@ -60,9 +60,9 @@ public enum DriverTypeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -70,8 +70,22 @@ public enum DriverTypeFlagEnum {
      * @param code Code
      * @return DriverTypeFlagEnum
      */
-    public static DriverTypeFlagEnum of(String code) {
+    public static DriverTypeFlagEnum ofCode(String code) {
         Optional<DriverTypeFlagEnum> any = Arrays.stream(DriverTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return DriverTypeFlagEnum
+     */
+    public static DriverTypeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

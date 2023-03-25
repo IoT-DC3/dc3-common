@@ -73,9 +73,9 @@ public enum EntityTypeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -83,8 +83,22 @@ public enum EntityTypeFlagEnum {
      * @param code Code
      * @return EntityTypeFlagEnum
      */
-    public static EntityTypeFlagEnum of(String code) {
+    public static EntityTypeFlagEnum ofCode(String code) {
         Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return EntityTypeFlagEnum
+     */
+    public static EntityTypeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

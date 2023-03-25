@@ -66,9 +66,9 @@ public enum ResourceScopeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -76,8 +76,22 @@ public enum ResourceScopeFlagEnum {
      * @param code Code
      * @return ResourceScopeFlagEnum
      */
-    public static ResourceScopeFlagEnum of(String code) {
+    public static ResourceScopeFlagEnum ofCode(String code) {
         Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return ResourceScopeFlagEnum
+     */
+    public static ResourceScopeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

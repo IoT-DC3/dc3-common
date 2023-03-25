@@ -50,9 +50,9 @@ public enum DriverCommandTypeEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -60,8 +60,22 @@ public enum DriverCommandTypeEnum {
      * @param code Code
      * @return DriverCommandTypeEnum
      */
-    public static DriverCommandTypeEnum of(String code) {
+    public static DriverCommandTypeEnum ofCode(String code) {
         Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return DriverCommandTypeEnum
+     */
+    public static DriverCommandTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

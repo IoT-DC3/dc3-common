@@ -65,9 +65,9 @@ public enum MetadataCommandTypeEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -75,8 +75,22 @@ public enum MetadataCommandTypeEnum {
      * @param code Code
      * @return MetadataCommandTypeEnum
      */
-    public static MetadataCommandTypeEnum of(String code) {
+    public static MetadataCommandTypeEnum ofCode(String code) {
         Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return MetadataCommandTypeEnum
+     */
+    public static MetadataCommandTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

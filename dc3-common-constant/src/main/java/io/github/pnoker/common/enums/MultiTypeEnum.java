@@ -56,9 +56,9 @@ public enum MultiTypeEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -66,8 +66,22 @@ public enum MultiTypeEnum {
      * @param code Code
      * @return MultiTypeEnum
      */
-    public static MultiTypeEnum of(String code) {
+    public static MultiTypeEnum ofCode(String code) {
         Optional<MultiTypeEnum> any = Arrays.stream(MultiTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return MultiTypeEnum
+     */
+    public static MultiTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

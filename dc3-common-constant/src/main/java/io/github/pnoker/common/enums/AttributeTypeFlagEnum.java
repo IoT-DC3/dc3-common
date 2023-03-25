@@ -85,9 +85,9 @@ public enum AttributeTypeFlagEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -95,8 +95,22 @@ public enum AttributeTypeFlagEnum {
      * @param code Code
      * @return AttributeTypeFlagEnum
      */
-    public static AttributeTypeFlagEnum of(String code) {
+    public static AttributeTypeFlagEnum ofCode(String code) {
         Optional<AttributeTypeFlagEnum> any = Arrays.stream(AttributeTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return AttributeTypeFlagEnum
+     */
+    public static AttributeTypeFlagEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

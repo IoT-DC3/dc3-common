@@ -55,9 +55,9 @@ public enum DeviceEventTypeEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -65,8 +65,22 @@ public enum DeviceEventTypeEnum {
      * @param code Code
      * @return DeviceEventTypeEnum
      */
-    public static DeviceEventTypeEnum of(String code) {
+    public static DeviceEventTypeEnum ofCode(String code) {
         Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return DeviceEventTypeEnum
+     */
+    public static DeviceEventTypeEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

@@ -58,6 +58,12 @@ enum DriverTypeFlagDTOEnum {
   CONNECT = 2 [(index) = 2, (code) = "connect", (name) = "串联类型驱动"]; // 串联类型驱动
 }
 
+// 通用结构化类型枚举
+enum MultiFlagDTOEnum {
+  SINGLE = 0 [(index) = 0, (code) = "single", (name) = "单点"]; // 单点
+  MULTIPLE = 1 [(index) = 1, (code) = "multiple", (name) = "多点"]; // 多点
+}
+
 // 通用读写标识枚举
 enum RwFlagDTOEnum {
   R = 0 [(index) = 0, (code) = "r", (name) = "只读"]; // 只读

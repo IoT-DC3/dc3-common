@@ -56,8 +56,22 @@ public enum ResponseEnum {
      * @param code Code
      * @return ResponseEnum
      */
-    public static ResponseEnum of(String code) {
+    public static ResponseEnum ofCode(String code) {
         Optional<ResponseEnum> any = Arrays.stream(ResponseEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return ResponseEnum
+     */
+    public static ResponseEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

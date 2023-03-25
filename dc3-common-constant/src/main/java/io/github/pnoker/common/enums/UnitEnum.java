@@ -65,9 +65,9 @@ public enum UnitEnum {
     private final String code;
 
     /**
-     * 名称
+     * 备注
      */
-    private final String name;
+    private final String remark;
 
     /**
      * 根据 Code 获取枚举
@@ -75,8 +75,22 @@ public enum UnitEnum {
      * @param code Code
      * @return UnitEnum
      */
-    public static UnitEnum of(String code) {
+    public static UnitEnum ofCode(String code) {
         Optional<UnitEnum> any = Arrays.stream(UnitEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
+    }
+
+    /**
+     * 根据 Name 获取枚举
+     *
+     * @param name Name
+     * @return UnitEnum
+     */
+    public static UnitEnum ofName(String name) {
+        try {
+            return valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }
