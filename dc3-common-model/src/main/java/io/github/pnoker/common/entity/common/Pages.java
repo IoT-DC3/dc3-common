@@ -57,7 +57,7 @@ public class Pages implements Serializable {
 
         boolean createTimeOrder = false;
         for (OrderItem order : page.orders()) {
-            if (CharSequenceUtil.isNotBlank(order.getColumn()) && order.getColumn().equals("create_time")) {
+            if (CharSequenceUtil.isNotEmpty(order.getColumn()) && order.getColumn().equals("create_time")) {
                 createTimeOrder = true;
             }
         }
