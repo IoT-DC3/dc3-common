@@ -24,12 +24,12 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-common</artifactId>
-        <version>2023.2.2</version>
+        <version>2023.2.3</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common-public</artifactId>
-    <version>2023.2.2</version>
+    <version>2023.2.3</version>
     <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
@@ -97,6 +97,12 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
+        </dependency>
+
+        <!-- Tls Cert 相关 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
         </dependency>
 
         <!-- DC3 Common Exception -->

@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.mqtt.bean;
+package io.github.pnoker.common.mqtt.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author pnoker
  * @since 2022.1.0
  */
+@Data
 @NoArgsConstructor
-public enum MessageType {
-    OPC_UA,
-    OPC_DA,
-    MODBUS,
-    PLC,
-    SERIAL,
-    SOCKET,
-    HEARTBEAT,
-    DEFAULT
+@AllArgsConstructor
+public class MqttMessage implements Serializable {
+    private MessageHeader header;
+    private MessagePayload payload;
 }

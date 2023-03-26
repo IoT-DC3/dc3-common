@@ -14,32 +14,27 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.constant.common;
+package io.github.pnoker.common.mqtt.entity;
+
+import io.github.pnoker.common.mqtt.enums.MessageTypeEnum;
+import io.github.pnoker.common.utils.JsonUtil;
+import lombok.Data;
 
 /**
- * 默认 相关常量
- *
  * @author pnoker
  * @since 2022.1.0
  */
-public class DefaultConstant {
+@Data
+public class MessagePayload {
+    private MessageTypeEnum messageTypeEnum;
+    private Object messageContent;
 
-    private DefaultConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    public MessagePayload() {
+        this.messageTypeEnum = MessageTypeEnum.COMMON;
     }
 
-    /**
-     * 默认ID：-1
-     */
-    public static final String DEFAULT_ID = "-1";
-
-    /**
-     * 默认数字：-1
-     */
-    public static final Integer DEFAULT_INT = -1;
-
-    /**
-     * 默认值：nil
-     */
-    public static final String DEFAULT_VALUE = "nil";
+    public MessagePayload(MessageTypeEnum messageTypeEnum, Object messageContent) {
+        this.messageContent = JsonUtil.toJsonString(messageContent);
+        this.messageTypeEnum = messageTypeEnum;
+    }
 }

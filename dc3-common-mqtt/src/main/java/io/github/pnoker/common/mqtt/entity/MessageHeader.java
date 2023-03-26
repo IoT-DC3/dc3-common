@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.mqtt.bean;
+package io.github.pnoker.common.mqtt.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.MessageHeaders;
 
 import java.io.Serializable;
@@ -30,10 +31,10 @@ import java.util.UUID;
  * @since 2022.1.0
  */
 @Data
+@Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageHeader implements Serializable {
-// TODO 该地方需要重新考虑设计，自己看看MQTT相关文档描述
 
     private UUID id;
     private Integer mqttId;
@@ -67,8 +68,8 @@ public class MessageHeader implements Serializable {
     private <T> T getMessageHeader(MessageHeaders messageHeaders, String key, Class<T> type) {
         try {
             return messageHeaders.get(key, type);
-        } catch (Exception ignored) {
-            // nothing to do
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         return null;
     }

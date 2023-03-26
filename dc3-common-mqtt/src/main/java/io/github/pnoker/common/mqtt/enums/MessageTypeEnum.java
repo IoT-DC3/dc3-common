@@ -14,22 +14,28 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.mqtt.bean;
+package io.github.pnoker.common.mqtt.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 
 /**
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class MqttMessage implements Serializable {
-    private MessageHeader messageHeader;
-    private MessagePayload messagePayload;
+public enum MessageTypeEnum {
+    /**
+     * 通用类型
+     */
+    COMMON,
+
+    /**
+     * 网关类型
+     */
+    GATEWAY,
+
+    /**
+     * 驱动类型
+     */
+    DRIVER
 }
