@@ -2,4 +2,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   io.github.pnoker.common.mqtt.config.MqttConfig,\
   io.github.pnoker.common.mqtt.init.MqttInitRunner
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  io.github.pnoker.common.mqtt.config.ActiveMqttProfileConfig
+  io.github.pnoker.common.mqtt.config.ActiveMqttProfileConfig,\
+  io.github.pnoker.common.mqtt.config.MqttEnvironmentConfig

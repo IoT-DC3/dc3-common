@@ -28,7 +28,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Eureka Client Config
+ * Rabbitmq Environment Config
  *
  * @author pnoker
  * @since 2022.1.0
@@ -47,12 +47,19 @@ public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
         RabbitConstant.TOPIC_EXCHANGE_EVENT = tag + RabbitConstant.TOPIC_EXCHANGE_EVENT;
         RabbitConstant.QUEUE_DRIVER_EVENT = tag + RabbitConstant.QUEUE_DRIVER_EVENT;
         RabbitConstant.QUEUE_DEVICE_EVENT = tag + RabbitConstant.QUEUE_DEVICE_EVENT;
+
         RabbitConstant.TOPIC_EXCHANGE_METADATA = tag + RabbitConstant.TOPIC_EXCHANGE_METADATA;
         RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX;
+
+        RabbitConstant.TOPIC_EXCHANGE_REGISTER = tag + RabbitConstant.TOPIC_EXCHANGE_REGISTER;
+        RabbitConstant.QUEUE_DRIVER_REGISTER = tag + RabbitConstant.QUEUE_DRIVER_REGISTER;
+
+        RabbitConstant.TOPIC_EXCHANGE_COMMAND = tag + RabbitConstant.TOPIC_EXCHANGE_COMMAND;
+        RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX;
+        RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX = tag + RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX;
+
         RabbitConstant.TOPIC_EXCHANGE_VALUE = tag + RabbitConstant.TOPIC_EXCHANGE_VALUE;
         RabbitConstant.QUEUE_POINT_VALUE = tag + RabbitConstant.QUEUE_POINT_VALUE;
-        RabbitConstant.TOPIC_EXCHANGE_MQTT = tag + RabbitConstant.TOPIC_EXCHANGE_MQTT;
-        RabbitConstant.QUEUE_MQTT = tag + RabbitConstant.QUEUE_MQTT;
     }
 
 }

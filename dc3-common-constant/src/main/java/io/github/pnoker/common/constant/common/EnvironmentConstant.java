@@ -67,4 +67,29 @@ public class EnvironmentConstant {
      * 当前分组
      */
     public static final String SPRING_GROUP = "spring.group";
+
+    /**
+     * 应用名称
+     */
+    public static final String SPRING_APPLICATION_NAME = "spring.application.name";
+
+    /**
+     * 驱动租户名称
+     */
+    public static final String DRIVER_TENANT = "driver.tenant";
+
+    /**
+     * 驱动节点名称
+     */
+    public static final String DRIVER_NODE = "driver.node";
+
+    /**
+     * 驱动 Mqtt 客户端名称
+     */
+    public static final String MQTT_CLIENT = "driver.mqtt.client";
+
+    /**
+     * 驱动 Mqtt Topic 前缀
+     */
+    public static final String MQTT_PREFIX = "driver.mqtt.topic-prefix";
 }

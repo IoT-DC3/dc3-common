@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.util.RandomUtil;
 import io.github.pnoker.common.constant.common.EnvironmentConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.constant.common.SymbolConstant;
@@ -32,6 +33,16 @@ public class EnvironmentUtil {
 
     private EnvironmentUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
+
+    /**
+     * 获取节点ID
+     *
+     * @return String Suffix
+     */
+    public static String getNodeId() {
+        String random = RandomUtil.randomString(8);
+        return random;
     }
 
     /**

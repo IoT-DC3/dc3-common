@@ -52,6 +52,9 @@ public class MqttProperties {
     @NotBlank(message = "Client name can't be empty")
     private String client;
 
+    @NotBlank(message = "Topic prefix name can't be empty")
+    private String topicPrefix;
+
     @NotNull(message = "Default topic can't be empty")
     private Topic defaultSendTopic = new Topic("dc3/d/v/dc3-driver-mqtt_default", 2);
 
@@ -70,7 +73,10 @@ public class MqttProperties {
      */
     @NoArgsConstructor
     public enum AuthTypeEnum {
-        NONE, CLIENT_ID, USERNAME, X509
+        NONE,
+        CLIENT_ID,
+        USERNAME,
+        X509,
     }
 
     @Data

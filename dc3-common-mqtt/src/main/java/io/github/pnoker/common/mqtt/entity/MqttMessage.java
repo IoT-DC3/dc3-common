@@ -31,5 +31,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class MqttMessage implements Serializable {
     private MessageHeader header;
-    private MessagePayload payload;
+    private String payload;
 }

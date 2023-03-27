@@ -16,14 +16,11 @@
 
 package io.github.pnoker.common.mqtt.handler;
 
-import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.mqtt.entity.MessageHeader;
-import io.github.pnoker.common.mqtt.entity.MessagePayload;
 import io.github.pnoker.common.mqtt.entity.MqttMessage;
-import io.github.pnoker.common.mqtt.enums.MessageTypeEnum;
 import io.github.pnoker.common.mqtt.job.MqttScheduleJob;
 import io.github.pnoker.common.mqtt.service.MqttReceiveService;
-import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -61,29 +58,15 @@ public class MqttReceiveHandler {
     @ServiceActivator(inputChannel = "mqttInboundChannel")
     public MessageHandler mqttInboundReceive() {
         return message -> {
-            if (ObjectUtil.isNull(message.getPayload())) {
-                log.error("Invalid mqtt inbound: {}", message);
+            MessageHeader messageHeader = new MessageHeader(message.getHeaders());
+            String payload = message.getPayload().toString();
+            if (CharSequenceUtil.isEmpty(payload)) {
+                log.error("Invalid mqtt inbound, From: {}, Qos: {}, Payload: null", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos());
                 return;
             }
 
-            // 处理空字段
-            // 当类型为空时，使用默认类型
-            // 当消息载荷为空时，使用其 String 内容
-            MessagePayload messagePayload = JsonUtil.parseObject(JsonUtil.toJsonString(message.getPayload()), MessagePayload.class);
-            if (ObjectUtil.isNull(messagePayload)) {
-                messagePayload = new MessagePayload(MessageTypeEnum.COMMON, message.getPayload());
-            } else {
-                if (ObjectUtil.isNull(messagePayload.getMessageContent())) {
-                    messagePayload.setMessageContent(message.getPayload());
-                }
-                if (ObjectUtil.isNull(messagePayload.getMessageTypeEnum())) {
-                    messagePayload.setMessageTypeEnum(MessageTypeEnum.COMMON);
-                }
-            }
-
-            MessageHeader messageHeader = new MessageHeader(message.getHeaders());
-            MqttMessage mqttMessage = new MqttMessage(messageHeader, messagePayload);
-            log.debug("Mqtt inbound, From: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messagePayload);
+            MqttMessage mqttMessage = new MqttMessage(messageHeader, payload);
+            log.debug("Mqtt inbound, From: {}, Qos: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos(), payload);
 
             // Judge whether to process data in batch according to the data transmission speed
             if (MqttScheduleJob.messageSpeed.get() < batchSpeed) {

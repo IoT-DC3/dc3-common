@@ -17,10 +17,9 @@
 package io.github.pnoker.common.mqtt.config;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.RandomUtil;
-import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.mqtt.property.MqttProperties;
 import io.github.pnoker.common.mqtt.utils.MqttUtil;
+import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,8 +46,6 @@ import java.util.ArrayList;
 @Configuration
 public class MqttConfig {
 
-    private static final String RANDOM_ID = SymbolConstant.UNDERSCORE + RandomUtil.randomString(8);
-
     @Resource
     private MqttProperties mqttProperties;
 
@@ -63,39 +60,45 @@ public class MqttConfig {
     }
 
     @Bean
-    public MessageProducer mqttInbound() {
+    public MqttPahoClientFactory mqttClientFactory() {
+        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
+        factory.setConnectionOptions(MqttUtil.getMqttConnectOptions(mqttProperties));
+        return factory;
+    }
+
+    @Bean
+    public MessageProducer mqttInbound(MqttPahoClientFactory mqttClientFactory) {
         if (ObjectUtil.isNull(mqttProperties.getReceiveTopics())) {
             mqttProperties.setReceiveTopics(new ArrayList<>());
         }
 
+        mqttProperties.getReceiveTopics().forEach(topic -> topic.setName(mqttProperties.getTopicPrefix() + topic.getName()));
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                mqttProperties.getClient() + RANDOM_ID + "_in",
-                mqttClientFactory(),
-                mqttProperties.getReceiveTopics().stream().map(MqttProperties.Topic::getName).toArray(String[]::new));
+                mqttProperties.getClient() + "_in",
+                mqttClientFactory,
+                mqttProperties.getReceiveTopics().stream().map(MqttProperties.Topic::getName).toArray(String[]::new)
+        );
         adapter.setQos(mqttProperties.getReceiveTopics().stream().mapToInt(MqttProperties.Topic::getQos).toArray());
         adapter.setOutputChannel(mqttInboundChannel());
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setCompletionTimeout(mqttProperties.getCompletionTimeout());
+        log.info("Set receive topics: {}", JsonUtil.toPrettyJsonString(mqttProperties.getReceiveTopics()));
         return adapter;
     }
 
     @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
-    public MessageHandler mqttOutbound() {
+    public MessageHandler mqttOutbound(MqttPahoClientFactory mqttClientFactory) {
+        mqttProperties.getDefaultSendTopic().setName(mqttProperties.getTopicPrefix() + mqttProperties.getDefaultSendTopic().getName());
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(
                 mqttProperties.getClient() + "_out",
-                mqttClientFactory());
+                mqttClientFactory
+        );
         messageHandler.setAsync(true);
         messageHandler.setDefaultQos(mqttProperties.getDefaultSendTopic().getQos());
         messageHandler.setDefaultTopic(mqttProperties.getDefaultSendTopic().getName());
+        log.info("Set default send topic: {}", JsonUtil.toPrettyJsonString(mqttProperties.getDefaultSendTopic()));
         return messageHandler;
-    }
-
-    @Bean
-    public MqttPahoClientFactory mqttClientFactory() {
-        DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
-        factory.setConnectionOptions(MqttUtil.getMqttConnectOptions(mqttProperties));
-        return factory;
     }
 
 }
