@@ -38,6 +38,11 @@ public class RabbitConstant {
     public static final String ROUTING_DRIVER_REGISTER_PREFIX = "dc3.r.register.driver.";
     public static String QUEUE_DRIVER_REGISTER = "dc3.q.register.driver";
 
+    // Sync
+    public static String TOPIC_EXCHANGE_SYNC = "dc3.e.sync";
+    public static final String ROUTING_DRIVER_SYNC_PREFIX = "dc3.r.sync.driver.";
+    public static String QUEUE_DRIVER_SYNC_PREFIX = "dc3.q.sync.driver.";
+
     // Event
     public static String TOPIC_EXCHANGE_EVENT = "dc3.e.event";
     public static final String ROUTING_DRIVER_EVENT_PREFIX = "dc3.r.event.driver.";

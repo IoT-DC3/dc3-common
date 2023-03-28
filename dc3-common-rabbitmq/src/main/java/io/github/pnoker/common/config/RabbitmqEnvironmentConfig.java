@@ -44,15 +44,19 @@ public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
         String group = environment.getProperty(EnvironmentConstant.SPRING_GROUP, String.class);
 
         String tag = EnvironmentUtil.getTag(env, group);
+
+        RabbitConstant.TOPIC_EXCHANGE_REGISTER = tag + RabbitConstant.TOPIC_EXCHANGE_REGISTER;
+        RabbitConstant.QUEUE_DRIVER_REGISTER = tag + RabbitConstant.QUEUE_DRIVER_REGISTER;
+
+        RabbitConstant.TOPIC_EXCHANGE_SYNC = tag + RabbitConstant.TOPIC_EXCHANGE_SYNC;
+        RabbitConstant.QUEUE_DRIVER_SYNC_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_SYNC_PREFIX;
+
         RabbitConstant.TOPIC_EXCHANGE_EVENT = tag + RabbitConstant.TOPIC_EXCHANGE_EVENT;
         RabbitConstant.QUEUE_DRIVER_EVENT = tag + RabbitConstant.QUEUE_DRIVER_EVENT;
         RabbitConstant.QUEUE_DEVICE_EVENT = tag + RabbitConstant.QUEUE_DEVICE_EVENT;
 
         RabbitConstant.TOPIC_EXCHANGE_METADATA = tag + RabbitConstant.TOPIC_EXCHANGE_METADATA;
         RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX;
-
-        RabbitConstant.TOPIC_EXCHANGE_REGISTER = tag + RabbitConstant.TOPIC_EXCHANGE_REGISTER;
-        RabbitConstant.QUEUE_DRIVER_REGISTER = tag + RabbitConstant.QUEUE_DRIVER_REGISTER;
 
         RabbitConstant.TOPIC_EXCHANGE_COMMAND = tag + RabbitConstant.TOPIC_EXCHANGE_COMMAND;
         RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX = tag + RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX;

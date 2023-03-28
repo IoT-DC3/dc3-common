@@ -19,6 +19,8 @@ package io.github.pnoker.common.config;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,33 +32,73 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Data
 @Configuration
-public class TopicConfig {
+public class ExchangeConfig {
 
+    /**
+     * 驱动注册相关，平台端可负载
+     *
+     * @return TopicExchange
+     */
     @Bean
     TopicExchange registerExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_REGISTER, true, false);
     }
 
+    /**
+     * 驱动同步相关，驱动端可负载
+     *
+     * @return TopicExchange
+     */
+    @Bean
+    DirectExchange syncExchange() {
+        return new DirectExchange(RabbitConstant.TOPIC_EXCHANGE_SYNC, true, false);
+    }
+
+    /**
+     * 事件相关，平台端可负载
+     *
+     * @return TopicExchange
+     */
     @Bean
     TopicExchange eventExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_EVENT, true, false);
     }
 
+    /**
+     * 元数据相关，平台端广播，驱动端订阅
+     *
+     * @return FanoutExchange
+     */
     @Bean
-    TopicExchange metadataExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, false);
+    FanoutExchange metadataExchange() {
+        return new FanoutExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, false);
     }
 
+    /**
+     * 指令相关，驱动端可负载
+     *
+     * @return TopicExchange
+     */
     @Bean
     TopicExchange commandExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_COMMAND, true, false);
     }
 
+    /**
+     * 数据相关，平台端可负载
+     *
+     * @return TopicExchange
+     */
     @Bean
     TopicExchange valueExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_VALUE, true, false);
     }
 
+    /**
+     * MQTT 相关，平台端可负载
+     *
+     * @return TopicExchange
+     */
     @Bean
     TopicExchange mqttExchange() {
         return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_MQTT, true, false);

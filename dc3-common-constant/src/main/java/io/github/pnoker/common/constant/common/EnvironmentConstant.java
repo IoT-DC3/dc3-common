@@ -69,6 +69,11 @@ public class EnvironmentConstant {
     public static final String SPRING_GROUP = "spring.group";
 
     /**
+     * 服务端口
+     */
+    public static final String SERVER_PORT = "server.port";
+
+    /**
      * 应用名称
      */
     public static final String SPRING_APPLICATION_NAME = "spring.application.name";
@@ -79,9 +84,29 @@ public class EnvironmentConstant {
     public static final String DRIVER_TENANT = "driver.tenant";
 
     /**
-     * 驱动节点名称
+     * 驱动节点
      */
     public static final String DRIVER_NODE = "driver.node";
+
+    /**
+     * 驱动服务
+     */
+    public static final String DRIVER_SERVICE = "driver.service";
+
+    /**
+     * 驱动主机
+     */
+    public static final String DRIVER_HOST = "driver.host";
+
+    /**
+     * 驱动客户端名称
+     */
+    public static final String DRIVER_CLIENT = "driver.client";
+
+    /**
+     * 驱动端口
+     */
+    public static final String DRIVER_PORT = "driver.port";
 
     /**
      * 驱动 Mqtt 客户端名称

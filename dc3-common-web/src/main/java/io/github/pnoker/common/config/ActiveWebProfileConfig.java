@@ -25,7 +25,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Active Profile Config
+ * Environment Config
  *
  * @author pnoker
  * @since 2022.1.0

@@ -53,17 +53,13 @@ public class MqttEnvironmentConfig implements EnvironmentPostProcessor {
 
         String tenant = environment.getProperty(EnvironmentConstant.DRIVER_TENANT, String.class);
         String name = environment.getProperty(EnvironmentConstant.SPRING_APPLICATION_NAME, String.class);
-        String mqttClient = StrUtil.format("{}/{}_{}", tenant, name, node);
-        String mqttPrefix = StrUtil.format("dc3/{}/{}/", tenant, name);
-        if (CharSequenceUtil.isEmpty(name)) {
-            name = StrUtil.format("{}/{}", tenant, name);
-        }
+        String client = StrUtil.format("{}/{}_{}", tenant, name, node);
+        String prefix = StrUtil.format("dc3/{}/{}/", tenant, name);
 
         Map<String, Object> propertySourceMap = new HashMap<>(2);
         propertySourceMap.put(EnvironmentConstant.DRIVER_NODE, node);
-        propertySourceMap.put(EnvironmentConstant.MQTT_CLIENT, mqttClient);
-        propertySourceMap.put(EnvironmentConstant.MQTT_PREFIX, mqttPrefix);
-        propertySourceMap.put(EnvironmentConstant.SPRING_APPLICATION_NAME, name);
+        propertySourceMap.put(EnvironmentConstant.MQTT_CLIENT, client);
+        propertySourceMap.put(EnvironmentConstant.MQTT_PREFIX, prefix);
         MutablePropertySources propertySources = environment.getPropertySources();
         propertySources.addFirst(new MapPropertySource("mqtt", propertySourceMap));
     }

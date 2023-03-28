@@ -39,6 +39,7 @@ public class DriverRegisterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String tenant;
+    private String client;
     private Driver driver;
     private List<DriverAttribute> driverAttributes;
     private List<PointAttribute> pointAttributes;
