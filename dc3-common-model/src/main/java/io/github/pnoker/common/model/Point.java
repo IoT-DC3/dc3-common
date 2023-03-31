@@ -18,7 +18,9 @@ package io.github.pnoker.common.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.entity.base.Base;
-import io.github.pnoker.common.enums.*;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.PointTypeFlagEnum;
+import io.github.pnoker.common.enums.RwFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -77,11 +79,6 @@ public class Point extends Base {
     private BigDecimal multiple;
 
     /**
-     * 累计标识
-     */
-    private AccrueFlagEnum accrueFlag;
-
-    /**
      * 数据精度
      */
     private Byte valueDecimal;
@@ -89,7 +86,7 @@ public class Point extends Base {
     /**
      * 单位
      */
-    private UnitEnum unit;
+    private String unit;
 
     /**
      * 模板ID
@@ -101,7 +98,6 @@ public class Point extends Base {
     /**
      * 分组ID
      */
-    // TODO 后期再实现分组，先放着占个坑 @NotNull(message = "group id can't be empty", groups = {Insert.class, Update.class})
     private String groupId;
 
     /**
@@ -122,9 +118,8 @@ public class Point extends Base {
         this.rwFlag = RwFlagEnum.R;
         this.baseValue = BigDecimal.valueOf(0);
         this.multiple = BigDecimal.valueOf(1);
-        this.accrueFlag = AccrueFlagEnum.NONE;
         this.valueDecimal = 6;
-        this.unit = UnitEnum.NULL;
+        this.unit = "";
     }
 
 }

@@ -77,11 +77,3 @@ enum AccrueFlagDTOEnum {
   INCREMENT = 1 [(index) = 1, (code) = "increment", (name) = "递增"]; // 递增
   DECREMENT = 2 [(index) = 2, (code) = "decrement", (name) = "递减"]; // 递减
 }
-
-// 通用单位枚举
-enum UnitDTOEnum {
-  NULL = 0 [(index) = 0, (code) = "", (name) = "无单位"]; // 无单位
-  CENTIGRADE = 1 [(index) = 1, (code) = "℃", (name) = "摄氏度"]; // 摄氏度
-  G = 2 [(index) = 2, (code) = "g", (name) = "克"]; // 克
-  KG = 3 [(index) = 3, (code) = "Kg", (name) = "千克"]; // 千克
-}

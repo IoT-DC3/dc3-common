@@ -39,7 +39,6 @@ public class BatchPoint implements Serializable {
     private Float minimum;
     private Float maximum;
     private Float multiple;
-    private Boolean accrue;
     private String format;
     private String unit;
 }

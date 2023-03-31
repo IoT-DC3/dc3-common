@@ -70,7 +70,6 @@ public class Profile extends Base {
     /**
      * 分组ID
      */
-    // TODO 后期再实现分组，先放着占个坑 @NotNull(message = "group id can't be empty", groups = {Insert.class, Update.class})
     private String groupId;
 
     /**
