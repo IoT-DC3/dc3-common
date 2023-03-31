@@ -78,7 +78,7 @@ public class Base implements Serializable {
     /**
      * 操作时间
      */
-    private Date updateTime;
+    private Date operateTime;
 
     /**
      * 逻辑删标识
