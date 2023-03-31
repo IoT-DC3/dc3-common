@@ -27,7 +27,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * User Ext
+ * User
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,7 +38,7 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class UserExt extends Base {
+public class User extends Base {
 
     /**
      * 用户昵称
