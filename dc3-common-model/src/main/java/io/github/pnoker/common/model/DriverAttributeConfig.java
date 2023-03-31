@@ -27,7 +27,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * 位号配置信息表
+ * 驱动属性配置表
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,19 +38,19 @@ import javax.validation.constraints.NotNull;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class PointInfo extends Base {
+public class DriverAttributeConfig extends Base {
 
     /**
-     * 位号配置ID
+     * 连接配置ID
      */
-    @NotBlank(message = "Point attribute id can't be empty",
+    @NotBlank(message = "Driver attribute id can't be empty",
             groups = {Insert.class, Update.class})
-    private String pointAttributeId;
+    private String driverAttributeId;
 
     /**
-     * 位号配置值
+     * 连接配置值
      */
-    @NotNull(message = "Point config value can't be empty")
+    @NotNull(message = "Driver config value can't be empty")
     private String configValue;
 
     /**
@@ -59,13 +59,6 @@ public class PointInfo extends Base {
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
     private String deviceId;
-
-    /**
-     * 位号ID
-     */
-    @NotBlank(message = "Point id can't be empty",
-            groups = {Insert.class, Update.class})
-    private String pointId;
 
     /**
      * 使能标识
