@@ -42,8 +42,8 @@ public class SuffixConstant {
     public static final String DEVICE = "_device";
     public static final String PROFILE = "_profile";
     public static final String POINT = "_point";
-    public static final String DRIVER_INFO = "_driver_info";
-    public static final String POINT_INFO = "_point_info";
+    public static final String DRIVER_ATTRIBUTE_CONFIG = "_driver_attribute_config";
+    public static final String POINT_ATTRIBUTE_CONFIG = "_point_attribute_config";
     public static final String NAME = "_name";
     public static final String PHONE = "_phone";
     public static final String EMAIL = "_email";

@@ -41,12 +41,12 @@ public class PrefixConstant {
     public static final String USER = "user";
     public static final String DRIVER = "driver";
     public static final String DRIVER_ATTRIBUTE = "driver_attribute";
-    public static final String DRIVER_INFO = "driver_info";
+    public static final String DRIVER_ATTRIBUTE_CONFIG = "driver_attribute_config";
     public static final String PROFILE = "profile";
     public static final String PROFILE_BIND = "profile_bind";
     public static final String POINT = "point";
     public static final String POINT_ATTRIBUTE = "point_attribute";
-    public static final String POINT_INFO = "point_info";
+    public static final String POINT_ATTRIBUTE_CONFIG = "point_attribute_config";
     public static final String DEVICE = "device";
     public static final String GROUP = "group";
     public static final String LABEL = "label";

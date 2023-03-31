@@ -53,14 +53,14 @@ public enum MetadataTypeEnum {
     DEVICE((byte) 0x03, "device", "设备类型元数据"),
 
     /**
-     * 驱动配置类型元数据
+     * 驱动属性配置类型元数据
      */
-    DRIVER_INFO((byte) 0x04, "driver_info", "驱动配置类型元数据"),
+    DRIVER_ATTRIBUTE_CONFIG((byte) 0x04, "driver_attribute_config", "驱动属性配置类型元数据"),
 
     /**
-     * 位号配置类型元数据
+     * 位号属性配置类型元数据
      */
-    POINT_INFO((byte) 0x05, "point_info", "位号配置类型元数据"),
+    POINT_ATTRIBUTE_CONFIG((byte) 0x05, "point_attribute_config", "位号属性配置类型元数据"),
     ;
 
     /**

@@ -95,9 +95,9 @@ public class MetadataConstant {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 
-        public static final String ADD = PrefixConstant.ADD + SuffixConstant.DRIVER_INFO;
-        public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.DRIVER_INFO;
-        public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.DRIVER_INFO;
+        public static final String ADD = PrefixConstant.ADD + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
+        public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
+        public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
     }
 
     /**
@@ -112,9 +112,9 @@ public class MetadataConstant {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 
-        public static final String ADD = PrefixConstant.ADD + SuffixConstant.POINT_INFO;
-        public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.POINT_INFO;
-        public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.POINT_INFO;
+        public static final String ADD = PrefixConstant.ADD + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
+        public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
+        public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
     }
 
 }

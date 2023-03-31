@@ -44,8 +44,8 @@ public class ManagerServiceConstant {
     public static final String GROUP_URL_PREFIX = "/manager/group";
     public static final String DEVICE_URL_PREFIX = "/manager/device";
     public static final String AUTO_URL_PREFIX = "/manager/auto";
-    public static final String POINT_INFO_URL_PREFIX = "/manager/point_info";
-    public static final String DRIVER_INFO_URL_PREFIX = "/manager/driver_info";
+    public static final String POINT_ATTRIBUTE_CONFIG_URL_PREFIX = "/manager/point_attribute_config";
+    public static final String DRIVER_ATTRIBUTE_CONFIG_URL_PREFIX = "/manager/driver_attribute_config";
     public static final String LABEL_URL_PREFIX = "/manager/label";
     public static final String DICTIONARY_URL_PREFIX = "/manager/dictionary";
 }
