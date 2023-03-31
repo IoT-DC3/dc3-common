@@ -19,6 +19,6 @@
 influx:
   url: http://${INFLUX_HOST:dc3-influx}:${INFLUX_PORT:8086}
   token: ${INFLUX_TOKEN:3ONc0LB35oR6WOYfbUfkklgDBR9VHLfAhP_jO3ZP24vjN9DVWfD3-1P2FWGR0MB3eGuA3_Palmv5TCfjjl-l-g==}
-  org: ${INFLUX_ORG:dc3}
+  organization: ${INFLUX_ORG:dc3}
   bucket: ${INFLUX_BUCKET:dc3}
 
