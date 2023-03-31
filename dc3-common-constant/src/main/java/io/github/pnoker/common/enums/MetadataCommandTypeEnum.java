@@ -46,11 +46,6 @@ public enum MetadataCommandTypeEnum {
      * 修改
      */
     UPDATE((byte) 0x02, "update", "修改"),
-
-    /**
-     * 同步
-     */
-    SYNC((byte) 0x03, "sync", "同步"),
     ;
 
     /**

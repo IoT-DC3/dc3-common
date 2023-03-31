@@ -28,7 +28,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Rabbitmq Environment Config
+ * Environment Config
  *
  * @author pnoker
  * @since 2022.1.0

@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Driver Environment Config
+ * Environment Config
  *
  * @author pnoker
  * @since 2022.1.0
@@ -56,12 +56,12 @@ public class MqttEnvironmentConfig implements EnvironmentPostProcessor {
         String client = StrUtil.format("{}/{}_{}", tenant, name, node);
         String prefix = StrUtil.format("dc3/{}/{}/", tenant, name);
 
-        Map<String, Object> propertySourceMap = new HashMap<>(2);
-        propertySourceMap.put(EnvironmentConstant.DRIVER_NODE, node);
-        propertySourceMap.put(EnvironmentConstant.MQTT_CLIENT, client);
-        propertySourceMap.put(EnvironmentConstant.MQTT_PREFIX, prefix);
+        Map<String, Object> source = new HashMap<>(2);
+        source.put(EnvironmentConstant.DRIVER_NODE, node);
+        source.put(EnvironmentConstant.MQTT_CLIENT, client);
+        source.put(EnvironmentConstant.MQTT_PREFIX, prefix);
         MutablePropertySources propertySources = environment.getPropertySources();
-        propertySources.addFirst(new MapPropertySource("mqtt", propertySourceMap));
+        propertySources.addFirst(new MapPropertySource("mqtt", source));
     }
 
 }
