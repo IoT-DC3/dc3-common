@@ -85,15 +85,6 @@ public class Driver extends Base {
     private String serviceHost;
 
     /**
-     * 服务端口
-     */
-    @Min(value = 8600, message = "Invalid server port, port range is 8600-8799",
-            groups = {Insert.class, Update.class})
-    @Max(value = 8799, message = "Invalid server port, port range is 8600-8799",
-            groups = {Insert.class, Update.class})
-    private Integer servicePort;
-
-    /**
      * 使能标识
      */
     private EnableFlagEnum enableFlag;

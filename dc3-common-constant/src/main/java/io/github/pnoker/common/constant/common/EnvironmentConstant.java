@@ -69,11 +69,6 @@ public class EnvironmentConstant {
     public static final String SPRING_GROUP = "spring.group";
 
     /**
-     * 服务端口
-     */
-    public static final String SERVER_PORT = "server.port";
-
-    /**
      * 应用名称
      */
     public static final String SPRING_APPLICATION_NAME = "spring.application.name";
