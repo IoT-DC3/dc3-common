@@ -28,7 +28,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 /**
- * User
+ * User Login
  *
  * @author pnoker
  * @since 2022.1.0
@@ -39,7 +39,7 @@ import javax.validation.constraints.Pattern;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class User extends Base {
+public class UserLogin extends Base {
 
     /**
      * 登录名称
@@ -52,11 +52,11 @@ public class User extends Base {
     private String loginName;
 
     /**
-     * 用户拓展ID
+     * 用户ID
      */
-    @NotBlank(message = "User ext id can't be empty",
+    @NotBlank(message = "User id can't be empty",
             groups = {Insert.class, Update.class})
-    private String userExtId;
+    private String userId;
 
     /**
      * 用户密码ID

@@ -57,14 +57,14 @@ public class Pages implements Serializable {
 
         boolean createTimeOrder = false;
         for (OrderItem order : page.orders()) {
-            if (CharSequenceUtil.isNotEmpty(order.getColumn()) && order.getColumn().equals("create_time")) {
+            if (CharSequenceUtil.isNotEmpty(order.getColumn()) && order.getColumn().equals("operate_time")) {
                 createTimeOrder = true;
             }
         }
 
-        // 默认按 create_time 倒序
+        // 默认按 operate_time 倒序
         if (!createTimeOrder) {
-            page.orders().add(OrderItem.desc("create_time"));
+            page.orders().add(OrderItem.desc("operate_time"));
         }
         return page;
     }
