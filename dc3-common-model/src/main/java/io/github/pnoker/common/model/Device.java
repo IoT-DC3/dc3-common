@@ -20,7 +20,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.MultiTypeEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -57,11 +56,6 @@ public class Device extends Base {
      * 设备编号
      */
     private String deviceCode;
-
-    /**
-     * 结构化标识
-     */
-    private MultiTypeEnum multiFlag;
 
     /**
      * 驱动ID
