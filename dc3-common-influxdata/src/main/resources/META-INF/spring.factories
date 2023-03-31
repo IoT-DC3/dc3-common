@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  io.github.pnoker.common.config.InfluxConfig
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  io.github.pnoker.common.config.ActiveInfluxProfileConfig
