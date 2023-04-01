@@ -33,15 +33,12 @@ public class RabbitConstant {
     // Arguments
     public static final String MESSAGE_TTL = "x-message-ttl";
 
-    // Register
-    public static String TOPIC_EXCHANGE_REGISTER = "dc3.e.register";
-    public static final String ROUTING_DRIVER_REGISTER_PREFIX = "dc3.r.register.driver.";
-    public static String QUEUE_DRIVER_REGISTER = "dc3.q.register.driver";
-
     // Sync
     public static String TOPIC_EXCHANGE_SYNC = "dc3.e.sync";
-    public static final String ROUTING_DRIVER_SYNC_PREFIX = "dc3.r.sync.driver.";
-    public static String QUEUE_DRIVER_SYNC_PREFIX = "dc3.q.sync.driver.";
+    public static final String ROUTING_SYNC_UP_PREFIX = "dc3.r.sync.up.";
+    public static String QUEUE_SYNC_UP = "dc3.q.sync.up";
+    public static final String ROUTING_SYNC_DOWN_PREFIX = "dc3.r.sync.down.";
+    public static String QUEUE_SYNC_DOWN = "dc3.q.sync.down";
 
     // Event
     public static String TOPIC_EXCHANGE_EVENT = "dc3.e.event";

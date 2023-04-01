@@ -19,7 +19,6 @@ package io.github.pnoker.common.config;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
@@ -35,23 +34,13 @@ import org.springframework.context.annotation.Configuration;
 public class ExchangeConfig {
 
     /**
-     * 驱动注册相关，平台端可负载
+     * 驱动同步相关，平台端、驱动端可负载
      *
      * @return TopicExchange
      */
     @Bean
-    TopicExchange registerExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_REGISTER, true, false);
-    }
-
-    /**
-     * 驱动同步相关，驱动端可负载
-     *
-     * @return TopicExchange
-     */
-    @Bean
-    DirectExchange syncExchange() {
-        return new DirectExchange(RabbitConstant.TOPIC_EXCHANGE_SYNC, true, false);
+    TopicExchange syncExchange() {
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_SYNC, true, false);
     }
 
     /**
