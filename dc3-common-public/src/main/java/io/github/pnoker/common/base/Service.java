@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.base;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
@@ -25,53 +24,41 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Service<T, D> {
+public interface Service<D, Q> {
     /**
      * 新增
      *
-     * @param type Object
-     * @return Object
+     * @param entityDO Entity of DO
      */
-    T add(T type);
+    void add(D entityDO);
 
     /**
      * 删除
      *
      * @param id ID
-     * @return 是否删除
      */
-    Boolean delete(String id);
+    void delete(String id);
 
     /**
      * 更新
      *
-     * @param type Object
-     * @return Object
+     * @param entityDO Entity of DO
      */
-    T update(T type);
+    void update(D entityDO);
 
     /**
      * 通过 ID 查询
      *
      * @param id ID
-     * @return Object
+     * @return Entity of DO
      */
-    T selectById(String id);
+    D selectById(String id);
 
     /**
      * 获取带分页、排序
      *
-     * @param dto Dto Object
-     * @return Page Of Object
+     * @param queryDTO Query DTO
+     * @return Entity of DO Page
      */
-    Page<T> list(D dto);
-
-    /**
-     * 统一接口 模糊查询构造器
-     *
-     * @param dto Dto Object
-     * @return QueryWrapper
-     */
-    LambdaQueryWrapper<T> fuzzyQuery(D dto);
-
+    Page<D> list(Q queryDTO);
 }

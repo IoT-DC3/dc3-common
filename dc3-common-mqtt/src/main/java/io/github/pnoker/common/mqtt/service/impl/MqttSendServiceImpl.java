@@ -16,12 +16,9 @@
 
 package io.github.pnoker.common.mqtt.service.impl;
 
-import io.github.pnoker.common.mqtt.handler.MqttSendHandler;
 import io.github.pnoker.common.mqtt.service.MqttSendService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author pnoker

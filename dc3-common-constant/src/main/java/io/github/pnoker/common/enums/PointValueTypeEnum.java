@@ -61,6 +61,7 @@ public enum PointValueTypeEnum {
         Optional<PointValueTypeEnum> any = Arrays.stream(PointValueTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
+
     /**
      * 根据 Name 获取枚举
      *

@@ -32,13 +32,14 @@ public class RabbitConstant {
 
     // Arguments
     public static final String MESSAGE_TTL = "x-message-ttl";
+    public static final String AUTO_DELETE = "x-auto-delete";
 
     // Sync
     public static String TOPIC_EXCHANGE_SYNC = "dc3.e.sync";
     public static final String ROUTING_SYNC_UP_PREFIX = "dc3.r.sync.up.";
     public static String QUEUE_SYNC_UP = "dc3.q.sync.up";
     public static final String ROUTING_SYNC_DOWN_PREFIX = "dc3.r.sync.down.";
-    public static String QUEUE_SYNC_DOWN = "dc3.q.sync.down";
+    public static String QUEUE_SYNC_DOWN_PREFIX = "dc3.q.sync.down.";
 
     // Event
     public static String TOPIC_EXCHANGE_EVENT = "dc3.e.event";

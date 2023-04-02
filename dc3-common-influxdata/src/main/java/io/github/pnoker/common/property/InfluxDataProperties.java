@@ -29,5 +29,5 @@ public class InfluxDataProperties {
     private String username;
 
     private String password;
-    
+
 }

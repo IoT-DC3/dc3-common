@@ -19,7 +19,6 @@ package io.github.pnoker.common.config;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,8 +58,8 @@ public class ExchangeConfig {
      * @return FanoutExchange
      */
     @Bean
-    FanoutExchange metadataExchange() {
-        return new FanoutExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, false);
+    TopicExchange metadataExchange() {
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_METADATA, true, false);
     }
 
     /**

@@ -48,7 +48,7 @@ public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
         // Sync
         RabbitConstant.TOPIC_EXCHANGE_SYNC = tag + RabbitConstant.TOPIC_EXCHANGE_SYNC;
         RabbitConstant.QUEUE_SYNC_UP = tag + RabbitConstant.QUEUE_SYNC_UP;
-        RabbitConstant.QUEUE_SYNC_DOWN = tag + RabbitConstant.QUEUE_SYNC_DOWN;
+        RabbitConstant.QUEUE_SYNC_DOWN_PREFIX = tag + RabbitConstant.QUEUE_SYNC_DOWN_PREFIX;
 
         // Event
         RabbitConstant.TOPIC_EXCHANGE_EVENT = tag + RabbitConstant.TOPIC_EXCHANGE_EVENT;
