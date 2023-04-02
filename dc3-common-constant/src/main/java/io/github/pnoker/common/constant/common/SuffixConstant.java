@@ -60,4 +60,7 @@ public class SuffixConstant {
 
     public static final String LIST = "_list";
     public static final String DIC = "_dic";
+
+    public static final String ROLE = "_role";
+    public static final String RESOURCE = "_resource";
 }
