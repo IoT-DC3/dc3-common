@@ -19,7 +19,7 @@ package io.github.pnoker.common.base;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
- * 基础服务类接口，业务服务接口请实现该接口
+ * 基础 Service 类接口
  *
  * @author pnoker
  * @since 2022.1.0

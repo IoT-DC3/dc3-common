@@ -17,24 +17,13 @@
 package io.github.pnoker.common.base;
 
 /**
- * DO、DTO对象相互转换接口，DTO对象请实现该接口
+ * 基础 Controller 类接口
  *
- * @param <D> DO
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Converter<D> {
-    /**
-     * DTO 转 DO
-     *
-     * @param d Do Object
-     */
-    void convertDtoToDo(D d);
-
-    /**
-     * DO 转 DTO
-     *
-     * @param d Do Object
-     */
-    void convertDoToDto(D d);
+public interface Controller {
+    default String getTenantId() {
+        return "";
+    }
 }
