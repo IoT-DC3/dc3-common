@@ -22,9 +22,11 @@ import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
+import io.github.pnoker.common.valid.Upload;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +63,7 @@ public class Device extends Base {
      * 驱动ID
      */
     @NotBlank(message = "Driver id can't be empty",
-            groups = {Insert.class, Update.class})
+            groups = {Insert.class, Update.class, Upload.class})
     private String driverId;
 
     /**
@@ -79,7 +81,8 @@ public class Device extends Base {
      */
     private String tenantId;
 
-    // TODO 提取到BO中
     @TableField(exist = false)
+    @NotNull(message = "Profile id set can't be empty",
+            groups = {Upload.class})
     private Set<String> profileIds = new HashSet<>(8);
 }

@@ -17,9 +17,19 @@
 package io.github.pnoker.common.utils;
 
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.exception.NotFoundException;
+import io.github.pnoker.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
 
 /**
  * Request 相关工具类
@@ -37,11 +47,38 @@ public class RequestUtil {
     /**
      * 从 Request 中获取指定 Key 的 Header 值
      *
-     * @param httpServletRequest HttpServletRequest
-     * @param key                String
+     * @param request HttpServletRequest
+     * @param key     String
      * @return String
      */
-    public static String getRequestHeader(HttpServletRequest httpServletRequest, String key) {
-        return httpServletRequest.getHeader(key);
+    public static String getRequestHeader(HttpServletRequest request, String key) {
+        return request.getHeader(key);
+    }
+
+    /**
+     * 返回文件
+     *
+     * @param path 文件 Path
+     * @return Resource
+     * @throws MalformedURLException MalformedURLException
+     */
+    public static ResponseEntity<Resource> responseFile(Path path) throws MalformedURLException {
+        Resource resource = new UrlResource(path.toUri());
+        if (!resource.exists()) {
+            throw new NotFoundException("File not found: " + path.getFileName());
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+
+        try {
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(resource.contentLength())
+                    .body(resource);
+        } catch (IOException e) {
+            throw new ServiceException("Error occurred while response file: {}", path.getFileName());
+        }
     }
 }
