@@ -19,21 +19,21 @@ package io.github.pnoker.common.exception;
 import cn.hutool.core.text.CharSequenceUtil;
 
 /**
- * 自定义修改异常
+ * 自定义删除异常
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public class UpdateException extends RuntimeException {
-    public UpdateException() {
+public class DeleteException extends RuntimeException {
+    public DeleteException() {
         this(null);
     }
 
-    public UpdateException(Throwable cause) {
+    public DeleteException(Throwable cause) {
         super(cause);
     }
 
-    public UpdateException(CharSequence template, Object... params) {
+    public DeleteException(CharSequence template, Object... params) {
         super(CharSequenceUtil.format(template, params));
     }
 }
