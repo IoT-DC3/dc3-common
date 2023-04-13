@@ -41,6 +41,5 @@ mybatis-plus:
   global-config:
     banner: false
     db-config:
-      table-prefix: dc3_
       logic-delete-value: 1
       logic-not-delete-value: 0

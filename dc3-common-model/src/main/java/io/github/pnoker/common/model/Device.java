@@ -17,6 +17,7 @@
 package io.github.pnoker.common.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.enums.EnableFlagEnum;
@@ -43,6 +44,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@TableName("dc3_device")
 public class Device extends Base {
 
     /**

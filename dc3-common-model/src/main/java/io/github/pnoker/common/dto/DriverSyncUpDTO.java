@@ -17,7 +17,7 @@
 package io.github.pnoker.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.model.Driver;
+import io.github.pnoker.common.model.DriverDO;
 import io.github.pnoker.common.model.DriverAttribute;
 import io.github.pnoker.common.model.PointAttribute;
 import lombok.AllArgsConstructor;
@@ -40,7 +40,7 @@ public class DriverSyncUpDTO implements Serializable {
 
     private String tenant;
     private String client;
-    private Driver driver;
+    private DriverDO entityDO;
     private List<DriverAttribute> driverAttributes;
     private List<PointAttribute> pointAttributes;
 

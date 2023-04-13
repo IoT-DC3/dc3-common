@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@TableName("dc3_menu_ext")
 public class MenuExt implements Serializable {
     private static final long serialVersionUID = 1L;
 
