@@ -40,7 +40,7 @@ public class DriverSyncUpDTO implements Serializable {
 
     private String tenant;
     private String client;
-    private DriverDO entityDO;
+    private DriverDO driver;
     private List<DriverAttribute> driverAttributes;
     private List<PointAttribute> pointAttributes;
 

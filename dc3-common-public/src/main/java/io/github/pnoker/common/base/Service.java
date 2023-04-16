@@ -24,13 +24,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Service<D, Q> {
+public interface Service<DO, Q> {
     /**
      * 新增
      *
      * @param entityDO Entity of DO
      */
-    void add(D entityDO);
+    void add(DO entityDO);
 
     /**
      * 删除
@@ -44,7 +44,7 @@ public interface Service<D, Q> {
      *
      * @param entityDO Entity of DO
      */
-    void update(D entityDO);
+    void update(DO entityDO);
 
     /**
      * 通过 ID 查询
@@ -52,7 +52,7 @@ public interface Service<D, Q> {
      * @param id ID
      * @return Entity of DO
      */
-    D selectById(String id);
+    DO selectById(String id);
 
     /**
      * 获取带分页、排序
@@ -60,5 +60,5 @@ public interface Service<D, Q> {
      * @param queryDTO Query DTO
      * @return Entity of DO Page
      */
-    Page<D> list(Q queryDTO);
+    Page<DO> list(Q queryDTO);
 }
