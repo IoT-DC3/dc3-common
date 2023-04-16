@@ -55,6 +55,12 @@
 
     <dependencies>
 
+        <!-- Annotation Api -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+
         <!-- gRpc -->
         <dependency>
             <groupId>io.grpc</groupId>
@@ -71,11 +77,6 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
         </dependency>
 
     </dependencies>
