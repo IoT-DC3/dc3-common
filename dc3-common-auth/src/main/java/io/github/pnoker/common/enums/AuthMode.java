@@ -7,12 +7,12 @@ package io.github.pnoker.common.enums;
 public enum AuthMode {
 
     /**
-     * &&
+     * 与
      */
     AND,
 
     /**
-     * ||
+     * 或
      */
     OR
 }

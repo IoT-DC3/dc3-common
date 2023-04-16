@@ -2,11 +2,13 @@ package io.github.pnoker.common.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 import io.github.pnoker.common.constant.AuthConstant;
+import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.constant.common.PrefixConstant;
 import io.github.pnoker.common.constant.common.SuffixConstant;
 import io.github.pnoker.common.constant.common.SymbolConstant;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -14,6 +16,10 @@ import java.util.concurrent.TimeUnit;
  * @since 2023.04.11
  */
 public class AuthCacheUtil {
+
+    private AuthCacheUtil() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 
     private static final RedisTemplate redisTemplate = SpringUtil.getBean(RedisTemplate.class);
 
@@ -32,31 +38,34 @@ public class AuthCacheUtil {
 
     /**
      * 获取 用户 - token 映射Key
+     *
      * @param tenantId tenantId
      * @param userName username
      * @return key
      */
-    public static String getUserTokenKey(String tenantId, String userName){
+    public static String getUserTokenKey(String tenantId, String userName) {
         return getKey(SuffixConstant.TOKEN, tenantId, userName);
     }
 
 
     /**
      * 获取Redis Token Key
+     *
      * @param token token
      * @return token key
      */
-    public static String getTokenKey(String token){
+    public static String getTokenKey(String token) {
         return AuthConstant.redis_prefix + SymbolConstant.DOUBLE_COLON + token;
     }
 
     /**
      * 获取Salt key
+     *
      * @param tenantId 租户id
      * @param userName 用户名称
      * @return Salt key
      */
-    public static String getSaltKey(String tenantId, String userName){
+    public static String getSaltKey(String tenantId, String userName) {
         return getKey(SuffixConstant.SALT, tenantId, userName);
     }
 
@@ -64,7 +73,8 @@ public class AuthCacheUtil {
      * 查询redis value
      *
      * @param key key
-     * @return value
+     * @param <T> Value Type
+     * @return Value Type
      */
     public static <T> T getValue(String key) {
         ValueOperations<String, T> operations = redisTemplate.opsForValue();
@@ -86,10 +96,11 @@ public class AuthCacheUtil {
 
     /**
      * delete by key
+     *
      * @param key key
      * @return delete flag
      */
-    public static boolean deleteByKey(String key){
+    public static boolean deleteByKey(String key) {
         return Boolean.TRUE.equals(redisTemplate.delete(key));
     }
 }

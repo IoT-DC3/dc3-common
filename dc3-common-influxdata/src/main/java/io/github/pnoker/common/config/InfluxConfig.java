@@ -51,8 +51,8 @@ public class InfluxConfig {
     /**
      * 返回influx http客户端,如果用代码的方式进行初始化,则务必查看日志保留token或设置密码
      *
-     * @return
-     * @throws IOException
+     * @return InfluxDBClient
+     * @throws IOException IOException
      */
     @Bean
     public InfluxDBClient influxDBClient() throws IOException {

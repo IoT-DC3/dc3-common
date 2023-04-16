@@ -9,6 +9,7 @@ import io.github.pnoker.common.exception.ServiceException;
 import io.github.pnoker.common.model.AuthUser;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,13 +20,14 @@ public class AuthUtil {
 
     /**
      * get salt
+     *
      * @param tenantId tenantId
      * @param userName userName
      * @return salt
      */
-    public static String getPasswordSalt(String tenantId, String userName){
+    public static String getPasswordSalt(String tenantId, String userName) {
         String saltKey = AuthCacheUtil.getSaltKey(tenantId, userName);
-        if (ObjectUtil.isNull(saltKey)){
+        if (ObjectUtil.isNull(saltKey)) {
             return null;
         }
 
@@ -34,14 +36,16 @@ public class AuthUtil {
 
     /**
      * create token and save to cache
+     *
      * @param tenantId tenantId
      * @param userName userName
+     * @param salt     salt
      * @return token
      */
-    public static String createToken(String tenantId, String userName, String salt){
+    public static String createToken(String tenantId, String userName, String salt) {
         String tokenKey = AuthCacheUtil.getUserTokenKey(tenantId, userName);
         String token = AuthCacheUtil.getValue(tokenKey);
-        if (CharSequenceUtil.isEmpty(token)){
+        if (CharSequenceUtil.isEmpty(token)) {
             token = KeyUtil.generateToken(userName, salt, tenantId);
         }
         AuthCacheUtil.setValue(tokenKey, token, TimeoutConstant.TOKEN_CACHE_TIMEOUT, TimeUnit.HOURS);
@@ -50,16 +54,17 @@ public class AuthUtil {
 
     /**
      * get login user's token
+     *
      * @return token
      */
-    public static String getLoginToken(){
+    public static String getLoginToken() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        if (ObjectUtil.isNull(requestAttributes)){
+        if (ObjectUtil.isNull(requestAttributes)) {
             throw new ServiceException("requestAttributes cannot be null!");
         }
 
         String token = requestAttributes.getRequest().getHeader(AuthConstant.header_token);
-        if (CharSequenceUtil.isBlank(token)){
+        if (CharSequenceUtil.isBlank(token)) {
             throw new ServiceException("please login first!");
         }
 
@@ -68,25 +73,27 @@ public class AuthUtil {
 
     /**
      * check login status
+     *
      * @return true if login
      */
-    public static boolean checkLogin(){
-        try{
+    public static boolean checkLogin() {
+        try {
             getLoginToken();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     /**
      * get login user id
+     *
      * @return user id
      */
-    public static String getLoginUserId(){
+    public static String getLoginUserId() {
         String token = getLoginToken();
         AuthUser authUser = getAuthUserByToken(token);
-        if (ObjectUtil.isNull(authUser)){
+        if (ObjectUtil.isNull(authUser)) {
             throw new ServiceException("please login first!");
         }
         return authUser.getUserId();
@@ -94,20 +101,22 @@ public class AuthUtil {
 
     /**
      * save token to AuthUser map into redis
-     * @param token token
+     *
+     * @param token    token
      * @param authUser AuthUser
      */
-    public static void saveTokenToAuthUserMap(String token, AuthUser authUser){
+    public static void saveTokenToAuthUserMap(String token, AuthUser authUser) {
         String tokenKey = AuthCacheUtil.getTokenKey(token);
         AuthCacheUtil.setValue(tokenKey, authUser, TimeoutConstant.TOKEN_CACHE_TIMEOUT, TimeUnit.HOURS);
     }
 
     /**
      * get AuthUser by token
+     *
      * @param token token
      * @return AuthUser
      */
-    public static AuthUser getAuthUserByToken(String token){
+    public static AuthUser getAuthUserByToken(String token) {
         String tokenKey = AuthCacheUtil.getTokenKey(token);
         return AuthCacheUtil.getValue(tokenKey);
     }
@@ -115,7 +124,7 @@ public class AuthUtil {
     /**
      * logout
      */
-    public static void logout(){
+    public static void logout() {
         String token = getLoginToken();
         AuthUser authUser = getAuthUserByToken(token);
 
