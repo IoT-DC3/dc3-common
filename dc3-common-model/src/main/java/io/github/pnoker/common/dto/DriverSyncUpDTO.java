@@ -17,8 +17,8 @@
 package io.github.pnoker.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.model.DriverDO;
 import io.github.pnoker.common.model.DriverAttribute;
+import io.github.pnoker.common.model.DriverDO;
 import io.github.pnoker.common.model.PointAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -23,14 +23,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 驱动状态枚举
+ * 设备状态枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverStatusEnum {
+public enum DeviceStatusEnum {
     ONLINE("ONLINE", "在线"),
     OFFLINE("OFFLINE", "离线"),
     MAINTAIN("MAINTAIN", "维护"),
@@ -54,8 +54,8 @@ public enum DriverStatusEnum {
      * @param code Code
      * @return StatusEnum
      */
-    public static DriverStatusEnum ofCode(String code) {
-        Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DeviceStatusEnum ofCode(String code) {
+        Optional<DeviceStatusEnum> any = Arrays.stream(DeviceStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -65,7 +65,7 @@ public enum DriverStatusEnum {
      * @param name Name
      * @return DriverStatusEnum
      */
-    public static DriverStatusEnum ofName(String name) {
+    public static DeviceStatusEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {
