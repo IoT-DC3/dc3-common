@@ -15,4 +15,9 @@ public class AuthConstant {
      * redis key prefix
      */
     public static final String redis_prefix = "token";
+
+    /**
+     * role - admin
+     */
+    public static final String role_code_admin = "admin";
 }

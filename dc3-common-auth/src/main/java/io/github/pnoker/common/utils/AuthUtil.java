@@ -6,10 +6,10 @@ import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.AuthConstant;
 import io.github.pnoker.common.constant.cache.TimeoutConstant;
 import io.github.pnoker.common.exception.ServiceException;
+import io.github.pnoker.common.exception.UnAuthorizedException;
 import io.github.pnoker.common.model.AuthUser;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -85,18 +85,22 @@ public class AuthUtil {
         }
     }
 
+    public static AuthUser getAuthUser() {
+        String token = getLoginToken();
+        AuthUser authUser = getAuthUserByToken(token);
+        if (ObjectUtil.isNull(authUser)) {
+            throw new UnAuthorizedException("please login first!");
+        }
+        return authUser;
+    }
+
     /**
      * get login user id
      *
      * @return user id
      */
     public static String getLoginUserId() {
-        String token = getLoginToken();
-        AuthUser authUser = getAuthUserByToken(token);
-        if (ObjectUtil.isNull(authUser)) {
-            throw new ServiceException("please login first!");
-        }
-        return authUser.getUserId();
+        return getAuthUser().getUserId();
     }
 
     /**
