@@ -17,7 +17,6 @@
 package io.github.pnoker.common.mqtt.config;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.StrUtil;
 import io.github.pnoker.common.constant.common.EnvironmentConstant;
 import io.github.pnoker.common.utils.EnvironmentUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +52,8 @@ public class MqttEnvironmentConfig implements EnvironmentPostProcessor {
 
         String tenant = environment.getProperty(EnvironmentConstant.DRIVER_TENANT, String.class);
         String name = environment.getProperty(EnvironmentConstant.SPRING_APPLICATION_NAME, String.class);
-        String client = StrUtil.format("{}/{}_{}", tenant, name, node);
-        String prefix = StrUtil.format("dc3/{}/{}/", tenant, name);
+        String client = CharSequenceUtil.format("{}/{}_{}", tenant, name, node);
+        String prefix = CharSequenceUtil.format("dc3/{}/{}/", tenant, name);
 
         Map<String, Object> source = new HashMap<>(2);
         source.put(EnvironmentConstant.DRIVER_NODE, node);
