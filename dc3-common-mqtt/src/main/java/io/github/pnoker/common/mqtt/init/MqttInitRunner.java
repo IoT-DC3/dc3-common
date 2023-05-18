@@ -34,7 +34,7 @@ import javax.annotation.Resource;
  */
 @Component
 @ComponentScan(basePackages = {
-        "io.github.pnoker.common.mqtt"
+        "io.github.pnoker.common.mqtt.*"
 })
 @EnableConfigurationProperties({MqttProperties.class})
 public class MqttInitRunner implements ApplicationRunner {
