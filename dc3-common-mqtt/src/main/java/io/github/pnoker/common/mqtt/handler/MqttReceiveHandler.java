@@ -58,29 +58,32 @@ public class MqttReceiveHandler {
     @ServiceActivator(inputChannel = "mqttInboundChannel")
     public MessageHandler mqttInboundReceive() {
         return message -> {
-            MessageHeader messageHeader = new MessageHeader(message.getHeaders());
-            String payload = message.getPayload().toString();
-            if (CharSequenceUtil.isEmpty(payload)) {
-                log.error("Invalid mqtt inbound, From: {}, Qos: {}, Payload: null", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos());
-                return;
+            try {
+                MessageHeader messageHeader = new MessageHeader(message.getHeaders());
+                String payload = message.getPayload().toString();
+                if (CharSequenceUtil.isEmpty(payload)) {
+                    log.error("Invalid mqtt inbound, From: {}, Qos: {}, Payload: null", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos());
+                    return;
+                }
+                MqttScheduleJob.messageCount.getAndIncrement();
+                MqttMessage mqttMessage = new MqttMessage(messageHeader, payload);
+                log.debug("Mqtt inbound, From: {}, Qos: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos(), payload);
+
+                // Judge whether to process data in batch according to the data transmission speed
+                if (MqttScheduleJob.messageSpeed.get() < batchSpeed) {
+                    threadPoolExecutor.execute(() ->
+                            // Receive single mqtt message
+                            mqttReceiveService.receiveValue(mqttMessage)
+                    );
+                } else {
+                    // Save point value to schedule
+                    MqttScheduleJob.messageLock.writeLock().lock();
+                    MqttScheduleJob.addMqttMessages(mqttMessage);
+                    MqttScheduleJob.messageLock.writeLock().unlock();
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
             }
-
-            MqttMessage mqttMessage = new MqttMessage(messageHeader, payload);
-            log.debug("Mqtt inbound, From: {}, Qos: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos(), payload);
-
-            // Judge whether to process data in batch according to the data transmission speed
-            if (MqttScheduleJob.messageSpeed.get() < batchSpeed) {
-                threadPoolExecutor.execute(() ->
-                        // Receive single mqtt message
-                        mqttReceiveService.receiveValue(mqttMessage)
-                );
-            } else {
-                // Save point value to schedule
-                MqttScheduleJob.messageLock.writeLock().lock();
-                MqttScheduleJob.addMqttMessages(mqttMessage);
-                MqttScheduleJob.messageLock.writeLock().unlock();
-            }
-
         };
     }
 }
