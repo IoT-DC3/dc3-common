@@ -28,7 +28,7 @@ driver:
     client-key-pass: dc3-client
     receive-topics:
       - qos: 1
-        name: device/+
+        name: data
     default-send-topic:
       qos: 1
       name: command
