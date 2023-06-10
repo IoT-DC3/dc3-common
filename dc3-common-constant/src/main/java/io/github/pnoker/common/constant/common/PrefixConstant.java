@@ -51,6 +51,7 @@ public class PrefixConstant {
     public static final String GROUP = "group";
     public static final String LABEL = "label";
     public static final String LABEL_BIND = "label_bind";
+    public static final String DATA_STATISTICS = "data_statistics";
 
     public static final String REAL_TIME_VALUE_KEY_PREFIX = POINT + SuffixConstant.VALUE + SymbolConstant.DOUBLE_COLON;
     public static final String DRIVER_STATUS_KEY_PREFIX = DRIVER + SuffixConstant.STATUS + SymbolConstant.DOUBLE_COLON;
