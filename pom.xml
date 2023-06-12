@@ -24,13 +24,13 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-parent</artifactId>
-        <version>2023.4.3</version>
+        <version>2023.4.4</version>
         <relativePath/>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common</artifactId>
-    <version>2023.4.3</version>
+    <version>2023.4.4</version>
     <packaging>pom</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
@@ -77,7 +77,7 @@
         <module>dc3-common-constant</module>
         <module>dc3-common-model</module>
         <module>dc3-common-api</module>
-        <module>dc3-common-influxdata</module>
+        <module>dc3-common-influx</module>
         <module>dc3-common-auth</module>
         <module>dc3-common-tdengine</module>
     </modules>

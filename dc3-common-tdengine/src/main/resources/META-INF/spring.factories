@@ -1,2 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  io.github.pnoker.common.config.ActiveTdengineProfileConfig
+  io.github.pnoker.common.config.ActiveTDEngineProfileConfig

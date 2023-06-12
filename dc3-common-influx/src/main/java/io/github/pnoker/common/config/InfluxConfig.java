@@ -22,7 +22,7 @@ import com.influxdb.client.domain.IsOnboarding;
 import com.influxdb.client.domain.OnboardingRequest;
 import com.influxdb.client.domain.OnboardingResponse;
 import com.influxdb.client.service.SetupService;
-import io.github.pnoker.common.property.InfluxDataProperties;
+import io.github.pnoker.common.property.InfluxProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -41,11 +41,11 @@ import java.time.Instant;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(InfluxDataProperties.class)
+@EnableConfigurationProperties(InfluxProperties.class)
 public class InfluxConfig {
 
     @Autowired
-    InfluxDataProperties properties;
+    InfluxProperties properties;
 
 
     /**
@@ -74,7 +74,7 @@ public class InfluxConfig {
                 onboardingRequest.setPassword(properties.getPassword());
                 Response<OnboardingResponse> onBoardingResponse = setupService.postSetup(onboardingRequest, zapTraceSpan).execute();
                 OnboardingResponse onboardingResponse = onBoardingResponse.body();
-                log.info("influxData setup:token{}", onboardingResponse.getAuth().getToken());
+                log.info("influx setup:token{}", onboardingResponse.getAuth().getToken());
                 return InfluxDBClientFactory.create(properties.getUrl(), onboardingResponse.getAuth().getToken().toCharArray(), properties.getOrganization(), properties.getBucket());
             }
         }

@@ -33,7 +33,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @Slf4j
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class ActiveTdengineProfileConfig implements EnvironmentPostProcessor {
+public class ActiveTDEngineProfileConfig implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {

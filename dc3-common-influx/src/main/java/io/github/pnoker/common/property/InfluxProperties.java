@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "influx")
-public class InfluxDataProperties {
+public class InfluxProperties {
 
     @NotNull
     private String url;
