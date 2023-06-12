@@ -79,6 +79,7 @@
         <module>dc3-common-api</module>
         <module>dc3-common-influxdata</module>
         <module>dc3-common-auth</module>
+        <module>dc3-common-tdengine</module>
     </modules>
 
     <dependencies>

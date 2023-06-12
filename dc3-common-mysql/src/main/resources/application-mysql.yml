@@ -18,16 +18,21 @@
 # 如果想要覆盖以下内容需要在dev、test、pre、pro中进行重新配置
 spring:
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://${DB_HOST:dc3-mysql}:${MYSQL_PORT:3306}/${DB_NAME:dc3}?allowPublicKeyRetrieval=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:dc3}
-    hikari:
-      pool-name: dc3-hikaricp
-      max-lifetime: 1765000
-      maximum-pool-size: 64
-      minimum-idle: 4
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      strict: true
+      datasource:
+        master:
+          type: com.zaxxer.hikari.HikariDataSource
+          url: jdbc:mysql://${DB_HOST:dc3-mysql}:${MYSQL_PORT:33306}/${DB_NAME:dc3}?allowPublicKeyRetrieval=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: ${DB_USERNAME:root}
+          password: ${DB_PASSWORD:dc3}
+          hikari:
+            pool-name: dc3-hikaricp
+            max-lifetime: 1765000
+            maximum-pool-size: 64
+            minimum-idle: 4
   sql:
     init:
       encoding: utf-8

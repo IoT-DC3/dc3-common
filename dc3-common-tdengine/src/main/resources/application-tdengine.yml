@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        taos:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.taosdata.jdbc.TSDBDriver
+          url: jdbc:TAOS://localhost:6030/dc3?charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
+          username: root
+          password: taosdata
+          hikari:
+            pool-name: dc3-hikaricp
+            max-lifetime: 1765000
+            maximum-pool-size: 64
+            minimum-idle: 4

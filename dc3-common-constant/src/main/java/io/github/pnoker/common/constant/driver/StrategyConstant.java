@@ -50,6 +50,7 @@ public class StrategyConstant {
         public static final String INFLUXDB = "influxdb";
         public static final String STRATEGY_OPENTSDB = "opentsdb";
         public static final String STRATEGY_ELASTICSEARCH = "elasticsearch";
+        public static final String TDENGINE = "tdengine";
     }
 
 }
