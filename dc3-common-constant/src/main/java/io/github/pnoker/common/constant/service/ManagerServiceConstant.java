@@ -49,4 +49,6 @@ public class ManagerServiceConstant {
     public static final String DRIVER_ATTRIBUTE_CONFIG_URL_PREFIX = "/manager/driver_attribute_config";
     public static final String LABEL_URL_PREFIX = "/manager/label";
     public static final String DICTIONARY_URL_PREFIX = "/manager/dictionary";
+    public static final String RULEENGINE_URL_PREFIX = "/manager/ruleengine";
+
 }
