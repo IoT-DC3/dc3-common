@@ -14,43 +14,45 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.bo;
 
-import io.github.pnoker.common.entity.bo.AuthInfoBO;
-import io.github.pnoker.common.utils.RequestUtil;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 基础 Controller 类接口
+ * 权限信息
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Controller {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthInfoBO {
 
     /**
-     * Get Auth Info
-     *
-     * @return Auth Info {@link AuthInfoBO}
+     * 租户 ID
      */
-    default AuthInfoBO getAuthInfo() {
-        return RequestUtil.getAuthInfo();
-    }
+    private String tenantId;
 
     /**
-     * Get Tenant Id
-     *
-     * @return Tenant ID
+     * 租户名称
      */
-    default String getTenantId() {
-        return RequestUtil.getAuthInfo().getTenantId();
-    }
+    private String tenantName;
 
     /**
-     * Get User Id
-     *
-     * @return User ID
+     * 用户 ID
      */
-    default String getUserId() {
-        return RequestUtil.getAuthInfo().getUserId();
-    }
+    private String userId;
+
+    /**
+     * 用户别名
+     */
+    private String nickName;
+
+    /**
+     * 用户名称
+     */
+    private String userName;
 }

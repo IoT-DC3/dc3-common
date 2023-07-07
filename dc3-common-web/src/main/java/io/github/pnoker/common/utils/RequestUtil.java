@@ -16,15 +16,21 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
+import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.entity.bo.AuthInfoBO;
 import io.github.pnoker.common.exception.NotFoundException;
 import io.github.pnoker.common.exception.ServiceException;
+import io.github.pnoker.common.exception.UnAuthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -44,19 +50,63 @@ public class RequestUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
+    private static final ThreadLocal<AuthInfoBO> authInfoLocal = new NamedThreadLocal<>("Request auth info");
+
     /**
      * 从 Request 中获取指定 Key 的 Header 值
      *
-     * @param request HttpServletRequest
-     * @param key     String
-     * @return String
+     * @param request {@link HttpServletRequest}
+     * @param key     Header Name
+     * @return Header Value
      */
     public static String getRequestHeader(HttpServletRequest request, String key) {
         return request.getHeader(key);
     }
 
     /**
-     * 返回文件
+     * 获取权限信息
+     *
+     * @return {@link AuthInfoBO}
+     */
+    public static AuthInfoBO getAuthInfo() {
+        AuthInfoBO entityBO = authInfoLocal.get();
+        if (ObjectUtil.isNull(entityBO)) {
+            throw new UnAuthorizedException("Unable to get auth info");
+        }
+
+        if (CharSequenceUtil.isEmpty(entityBO.getTenantId())) {
+            throw new UnAuthorizedException("Unable to get tenant id of auth info");
+        }
+
+        if (CharSequenceUtil.isEmpty(entityBO.getUserId())) {
+            throw new UnAuthorizedException("Unable to get user id of auth info");
+        }
+
+        return entityBO;
+    }
+
+    /**
+     * 设置权限信息
+     *
+     * @param entityBO {@link AuthInfoBO}
+     */
+    public static void setAuthInfo(@Nullable AuthInfoBO entityBO) {
+        if (ObjectUtil.isNull(entityBO)) {
+            resetAuthInfo();
+        } else {
+            authInfoLocal.set(entityBO);
+        }
+    }
+
+    /**
+     * 重置权限信息
+     */
+    public static void resetAuthInfo() {
+        authInfoLocal.remove();
+    }
+
+    /**
+     * 返回下载文件
      *
      * @param path 文件 Path
      * @return Resource

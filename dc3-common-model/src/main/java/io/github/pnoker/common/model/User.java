@@ -53,7 +53,7 @@ public class User extends Base {
     private String nickName;
 
     /**
-     * 用户名
+     * 用户名称
      */
     @NotBlank(message = "User name can't be empty",
             groups = {Insert.class, Auth.class})
