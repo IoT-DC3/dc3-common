@@ -53,7 +53,11 @@ public class MqttEnvironmentConfig implements EnvironmentPostProcessor {
         String tenant = environment.getProperty(EnvironmentConstant.DRIVER_TENANT, String.class);
         String name = environment.getProperty(EnvironmentConstant.SPRING_APPLICATION_NAME, String.class);
         String client = CharSequenceUtil.format("{}/{}_{}", tenant, name, node);
-        String prefix = CharSequenceUtil.format("dc3/{}/{}/", tenant, name);
+
+        String prefix = environment.getProperty(EnvironmentConstant.MQTT_PREFIX, String.class);
+        if (CharSequenceUtil.isEmpty(node)) {
+            prefix = CharSequenceUtil.format("dc3/{}/{}/", tenant, name);
+        }
 
         Map<String, Object> source = new HashMap<>(2);
         source.put(EnvironmentConstant.DRIVER_NODE, node);

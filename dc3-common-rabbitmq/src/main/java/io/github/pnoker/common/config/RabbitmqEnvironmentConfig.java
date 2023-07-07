@@ -28,7 +28,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Environment Config
+ * RabbitMQ 环境变量配置
  *
  * @author pnoker
  * @since 2022.1.0
@@ -40,6 +40,7 @@ public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+        // 此处配置用于开发环境下多人开发，通过 env 和 group 标识区分不同对 exchange，queue，topic
         String env = environment.getProperty(EnvironmentConstant.SPRING_ENV, String.class);
         String group = environment.getProperty(EnvironmentConstant.SPRING_GROUP, String.class);
 

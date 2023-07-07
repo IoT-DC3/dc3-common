@@ -26,6 +26,7 @@ driver:
     client-crt: classpath:/certs/client.crt
     client-key: classpath:/certs/client.key
     client-key-pass: dc3-client
+    topic-prefix: dc3/${driver.tenant}/${spring.application.name}/
     receive-topics:
       - qos: 1
         name: data

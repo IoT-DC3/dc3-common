@@ -36,7 +36,7 @@ public class EnvironmentUtil {
     }
 
     /**
-     * 获取节点ID
+     * 获取节点 ID
      *
      * @return String Suffix
      */

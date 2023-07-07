@@ -39,6 +39,8 @@ import java.util.ArrayList;
 
 
 /**
+ * Mqtt 配置
+ *
  * @author pnoker
  * @since 2022.1.0
  */
