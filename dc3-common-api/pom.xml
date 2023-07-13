@@ -79,6 +79,18 @@
             <artifactId>grpc-stub</artifactId>
         </dependency>
 
+        <!-- DC3 Common Model -->
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-model</artifactId>
+        </dependency>
+
+        <!-- DC3 Common Exception -->
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-exception</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

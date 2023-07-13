@@ -81,4 +81,23 @@ public class RequestConstant {
         public static final String X_AUTH_USER = "X-Auth-User";
 
     }
+
+    /**
+     * 自定义请求 Message 相关常量
+     *
+     * @author pnoker
+     * @since 2022.1.0
+     */
+    public static class Message {
+
+        private Message() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
+
+
+        /**
+         * 无效的权限请求头
+         */
+        public static final String INVALID_REQUEST = "Invalid request auth header";
+    }
 }

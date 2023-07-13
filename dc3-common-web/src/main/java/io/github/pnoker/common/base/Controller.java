@@ -42,7 +42,16 @@ public interface Controller {
      * @return Tenant ID
      */
     default String getTenantId() {
-        return RequestUtil.getAuthInfo().getTenantId();
+        return getAuthInfo().getTenantId();
+    }
+
+    /**
+     * Get Tenant Name
+     *
+     * @return Tenant Name
+     */
+    default String getTenantName() {
+        return RequestUtil.getAuthInfo().getTenantName();
     }
 
     /**
@@ -52,5 +61,23 @@ public interface Controller {
      */
     default String getUserId() {
         return RequestUtil.getAuthInfo().getUserId();
+    }
+
+    /**
+     * Get Nick Name
+     *
+     * @return Nick Name
+     */
+    default String getNickName() {
+        return RequestUtil.getAuthInfo().getNickName();
+    }
+
+    /**
+     * Get User Name
+     *
+     * @return User Name
+     */
+    default String getUserName() {
+        return RequestUtil.getAuthInfo().getUserName();
     }
 }

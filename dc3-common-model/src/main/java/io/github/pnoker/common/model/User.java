@@ -77,4 +77,14 @@ public class User extends Base {
             message = "Invalid email",
             groups = {Insert.class, Update.class})
     private String email;
+
+    /**
+     * 社交相关拓展信息
+     */
+    private String socialExt;
+
+    /**
+     * 身份相关拓展信息
+     */
+    private String identityExt;
 }
