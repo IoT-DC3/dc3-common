@@ -40,7 +40,7 @@ public class AuthCacheUtil {
      * 获取 用户 - token 映射Key
      *
      * @param tenantId tenantId
-     * @param userName username
+     * @param userName userName
      * @return key
      */
     public static String getUserTokenKey(String tenantId, String userName) {

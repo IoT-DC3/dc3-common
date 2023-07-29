@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.base;
 
-import io.github.pnoker.common.entity.bo.AuthInfoBO;
 import io.github.pnoker.common.utils.RequestUtil;
 
 /**
@@ -28,56 +27,38 @@ import io.github.pnoker.common.utils.RequestUtil;
 public interface Controller {
 
     /**
-     * Get Auth Info
-     *
-     * @return Auth Info {@link AuthInfoBO}
-     */
-    default AuthInfoBO getAuthInfo() {
-        return RequestUtil.getAuthInfo();
-    }
-
-    /**
-     * Get Tenant Id
-     *
-     * @return Tenant ID
-     */
-    default String getTenantId() {
-        return getAuthInfo().getTenantId();
-    }
-
-    /**
-     * Get Tenant Name
-     *
-     * @return Tenant Name
-     */
-    default String getTenantName() {
-        return RequestUtil.getAuthInfo().getTenantName();
-    }
-
-    /**
-     * Get User Id
+     * 获取用户ID
      *
      * @return User ID
      */
     default String getUserId() {
-        return RequestUtil.getAuthInfo().getUserId();
+        return RequestUtil.getUserHeader().getUserId();
     }
 
     /**
-     * Get Nick Name
+     * 获取用户昵称
      *
      * @return Nick Name
      */
     default String getNickName() {
-        return RequestUtil.getAuthInfo().getNickName();
+        return RequestUtil.getUserHeader().getNickName();
     }
 
     /**
-     * Get User Name
+     * 获取用户名
      *
      * @return User Name
      */
     default String getUserName() {
-        return RequestUtil.getAuthInfo().getUserName();
+        return RequestUtil.getUserHeader().getUserName();
+    }
+
+    /**
+     * 获取租户ID
+     *
+     * @return Tenant ID
+     */
+    default String getTenantId() {
+        return RequestUtil.getUserHeader().getTenantId();
     }
 }

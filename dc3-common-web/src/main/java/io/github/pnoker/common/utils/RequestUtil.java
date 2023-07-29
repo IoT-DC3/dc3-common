@@ -20,7 +20,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.bo.AuthInfoBO;
+import io.github.pnoker.common.entity.bo.RequestHeaderBO;
 import io.github.pnoker.common.exception.NotFoundException;
 import io.github.pnoker.common.exception.ServiceException;
 import io.github.pnoker.common.exception.UnAuthorizedException;
@@ -50,7 +50,7 @@ public class RequestUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    private static final ThreadLocal<AuthInfoBO> authInfoLocal = new NamedThreadLocal<>("Request auth info");
+    private static final ThreadLocal<RequestHeaderBO.UserHeader> USER_HEADER_THREAD_LOCAL = new NamedThreadLocal<>("Request auth info");
 
     /**
      * 从 Request 中获取指定 Key 的 Header 值
@@ -64,12 +64,12 @@ public class RequestUtil {
     }
 
     /**
-     * 获取权限信息
+     * 获取用户信息
      *
-     * @return {@link AuthInfoBO}
+     * @return {@link RequestHeaderBO.UserHeader}
      */
-    public static AuthInfoBO getAuthInfo() {
-        AuthInfoBO entityBO = authInfoLocal.get();
+    public static RequestHeaderBO.UserHeader getUserHeader() {
+        RequestHeaderBO.UserHeader entityBO = USER_HEADER_THREAD_LOCAL.get();
         if (ObjectUtil.isNull(entityBO)) {
             throw new UnAuthorizedException("Unable to get auth info");
         }
@@ -86,23 +86,23 @@ public class RequestUtil {
     }
 
     /**
-     * 设置权限信息
+     * 设置用户信息
      *
-     * @param entityBO {@link AuthInfoBO}
+     * @param entityBO {@link RequestHeaderBO.UserHeader}
      */
-    public static void setAuthInfo(@Nullable AuthInfoBO entityBO) {
+    public static void setUserHeader(@Nullable RequestHeaderBO.UserHeader entityBO) {
         if (ObjectUtil.isNull(entityBO)) {
-            resetAuthInfo();
+            resetUserHeader();
         } else {
-            authInfoLocal.set(entityBO);
+            USER_HEADER_THREAD_LOCAL.set(entityBO);
         }
     }
 
     /**
-     * 重置权限信息
+     * 重置用户信息
      */
-    public static void resetAuthInfo() {
-        authInfoLocal.remove();
+    public static void resetUserHeader() {
+        USER_HEADER_THREAD_LOCAL.remove();
     }
 
     /**

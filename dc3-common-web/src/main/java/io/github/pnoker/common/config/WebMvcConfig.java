@@ -16,8 +16,11 @@
 
 package io.github.pnoker.common.config;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.RequestConstant;
-import io.github.pnoker.common.entity.bo.AuthInfoBO;
+import io.github.pnoker.common.entity.bo.RequestHeaderBO;
+import io.github.pnoker.common.utils.DecodeUtil;
+import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.RequestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -53,9 +56,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-                // 配置权限信息
-                AuthInfoBO authInfo = getAuthInfo(request);
-                RequestUtil.setAuthInfo(authInfo);
+                RequestHeaderBO.UserHeader entityBO = getUserHeader(request);
+                RequestUtil.setUserHeader(entityBO);
                 return HandlerInterceptor.super.preHandle(request, response, handler);
             }
 
@@ -66,25 +68,26 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
             @Override
             public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) throws Exception {
-                // 清除权限信息
-                RequestUtil.resetAuthInfo();
+                // 清除用户信息
+                RequestUtil.resetUserHeader();
                 HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
             }
         });
     }
 
     /**
-     * 从 Request Header 中获取权限信息
+     * 从 Request Header 中获取用户信息
      *
      * @param request {@link HttpServletRequest}
-     * @return {@link AuthInfoBO}
+     * @return {@link RequestHeaderBO.UserHeader}
      */
-    private AuthInfoBO getAuthInfo(HttpServletRequest request) {
-        String tenantId = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_TENANT_ID);
-        String tenantName = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_TENANT);
-        String userId = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER_ID);
-        String nickName = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_NICK);
-        String userName = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
-        return new AuthInfoBO(tenantId, tenantName, userId, nickName, userName);
+    private RequestHeaderBO.UserHeader getUserHeader(HttpServletRequest request) {
+        String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
+        if (CharSequenceUtil.isEmpty(user)) {
+            return null;
+        }
+
+        byte[] decode = DecodeUtil.decode(user);
+        return JsonUtil.parseObject(decode, RequestHeaderBO.UserHeader.class);
     }
 }

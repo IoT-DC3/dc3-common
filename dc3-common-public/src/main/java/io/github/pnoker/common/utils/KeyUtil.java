@@ -185,15 +185,15 @@ public class KeyUtil {
     /**
      * 生成Token令牌
      *
-     * @param username 用户名称
+     * @param userName 用户名称
      * @param salt     Salt
      * @param tenantId 租户ID
      * @return Token String
      */
-    public static String generateToken(String username, String salt, String tenantId) {
+    public static String generateToken(String userName, String salt, String tenantId) {
         JwtBuilder builder = Jwts.builder()
                 .setIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .setSubject(username)
+                .setSubject(userName)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, DecodeUtil.stringToByte(salt))
                 .setExpiration(TimeUtil.expireTime(TimeoutConstant.TOKEN_CACHE_TIMEOUT, Calendar.HOUR));
@@ -203,16 +203,16 @@ public class KeyUtil {
     /**
      * 解析Token令牌
      *
-     * @param username 用户名称
+     * @param userName 用户名称
      * @param salt     Salt
      * @param token    Token
      * @param tenantId 租户ID
      * @return Claims
      */
-    public static Claims parserToken(String username, String salt, String token, String tenantId) {
+    public static Claims parserToken(String userName, String salt, String token, String tenantId) {
         return Jwts.parser()
                 .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .requireSubject(username)
+                .requireSubject(userName)
                 .setSigningKey(DecodeUtil.stringToByte(salt))
                 .parseClaimsJws(token)
                 .getBody();
