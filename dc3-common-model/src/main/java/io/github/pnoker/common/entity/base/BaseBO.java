@@ -73,5 +73,5 @@ public class BaseBO implements Serializable {
     /**
      * 操作时间
      */
-    private Date updateTime;
+    private Date operateTime;
 }

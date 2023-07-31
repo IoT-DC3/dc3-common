@@ -84,5 +84,5 @@ public class BaseVO implements Serializable {
      * 操作时间
      */
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date updateTime;
+    private Date operateTime;
 }

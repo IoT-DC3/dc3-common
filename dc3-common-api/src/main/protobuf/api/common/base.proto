@@ -32,5 +32,5 @@ message BaseDTO {
   int64 createTime = 5; // 创建时间
   string operatorId = 6; // 操作者ID
   string operatorName = 7; // 操作者名称
-  int64 updateTime = 8; // 操作时间
+  int64 operateTime = 8; // 操作时间
 }
