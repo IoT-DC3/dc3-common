@@ -26,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -49,4 +50,6 @@ public class NodeRedFlows implements Serializable {
     private String flowType;
 
     private Integer flowDisabled;
+
+    private Date operateTime;
 }
