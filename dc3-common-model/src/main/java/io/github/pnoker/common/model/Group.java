@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.entity.base.Base;
 import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.GroupTypeFlagEnum;
 import io.github.pnoker.common.valid.Insert;
 import io.github.pnoker.common.valid.Update;
 import lombok.*;
@@ -61,6 +62,11 @@ public class Group extends Base {
      * 分组排序位置
      */
     private Integer position;
+
+    /**
+     * 分组标识
+     */
+    private GroupTypeFlagEnum groupTypeFlag;
 
     /**
      * 使能标识

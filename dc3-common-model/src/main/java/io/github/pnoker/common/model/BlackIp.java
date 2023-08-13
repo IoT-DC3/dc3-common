@@ -45,11 +45,8 @@ public class BlackIp extends Base {
     /**
      * 黑IP
      */
-    @NotBlank(message = "Ip can't be empty",
-            groups = {Insert.class})
-    @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$",
-            message = "Invalid ip",
-            groups = {Insert.class, Update.class})
+    @NotBlank(message = "Ip can't be empty", groups = {Insert.class})
+    @Pattern(regexp = "^((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}$", message = "Invalid ip", groups = {Insert.class, Update.class})
     private String ip;
 
     /**
