@@ -87,12 +87,6 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
-        <!-- Tls Cert 相关 -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-        </dependency>
-
         <!-- DC3 Common Quartz -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
