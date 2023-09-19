@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.bo.RequestHeaderBO;
+import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.exception.NotFoundException;
 import io.github.pnoker.common.exception.ServiceException;
 import io.github.pnoker.common.exception.UnAuthorizedException;
@@ -50,7 +50,7 @@ public class RequestUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    private static final ThreadLocal<RequestHeaderBO.UserHeader> USER_HEADER_THREAD_LOCAL = new NamedThreadLocal<>("Request auth info");
+    private static final ThreadLocal<RequestHeader.UserHeader> USER_HEADER_THREAD_LOCAL = new NamedThreadLocal<>("Request auth info");
 
     /**
      * 从 Request 中获取指定 Key 的 Header 值
@@ -66,10 +66,10 @@ public class RequestUtil {
     /**
      * 获取用户信息
      *
-     * @return {@link RequestHeaderBO.UserHeader}
+     * @return {@link RequestHeader.UserHeader}
      */
-    public static RequestHeaderBO.UserHeader getUserHeader() {
-        RequestHeaderBO.UserHeader entityBO = USER_HEADER_THREAD_LOCAL.get();
+    public static RequestHeader.UserHeader getUserHeader() {
+        RequestHeader.UserHeader entityBO = USER_HEADER_THREAD_LOCAL.get();
         if (ObjectUtil.isNull(entityBO)) {
             throw new UnAuthorizedException("Unable to get auth info");
         }
@@ -88,9 +88,9 @@ public class RequestUtil {
     /**
      * 设置用户信息
      *
-     * @param entityBO {@link RequestHeaderBO.UserHeader}
+     * @param entityBO {@link RequestHeader.UserHeader}
      */
-    public static void setUserHeader(@Nullable RequestHeaderBO.UserHeader entityBO) {
+    public static void setUserHeader(@Nullable RequestHeader.UserHeader entityBO) {
         if (ObjectUtil.isNull(entityBO)) {
             resetUserHeader();
         } else {

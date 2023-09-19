@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,12 +77,12 @@ public class GlobalExceptionConfig {
             BindException.class,
             MethodArgumentNotValidException.class
     })
-    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public R<String> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
         HashMap<String, String> map = new HashMap<>(16);
         List<FieldError> errorList = exception.getBindingResult().getFieldErrors();
         errorList.forEach(error -> {
-            log.warn("Method Argument Not Valid Exception Handler: {}({})", error.getField(), error.getDefaultMessage());
+            log.warn("Method Argument Not Valid Exception Handler: {}: {}", error.getField(), error.getDefaultMessage());
             map.put(error.getField(), error.getDefaultMessage());
         });
         return R.fail(JsonUtil.toJsonString(map));

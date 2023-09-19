@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@
 package io.github.pnoker.common.config;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import com.github.xiaoymin.knife4j.spring.configuration.Knife4jProperties;
 import io.github.pnoker.common.constant.common.RequestConstant;
-import io.github.pnoker.common.entity.bo.RequestHeaderBO;
+import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.utils.DecodeUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.RequestUtil;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,8 +48,16 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    @Resource
+    private Knife4jProperties knife4jProperties;
+
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
+        if (knife4jProperties.isEnable()) {
+            registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
+            registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        }
+
         registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/");
     }
 
@@ -56,7 +66,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-                RequestHeaderBO.UserHeader entityBO = getUserHeader(request);
+                RequestHeader.UserHeader entityBO = getUserHeader(request);
                 RequestUtil.setUserHeader(entityBO);
                 return HandlerInterceptor.super.preHandle(request, response, handler);
             }
@@ -79,15 +89,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * 从 Request Header 中获取用户信息
      *
      * @param request {@link HttpServletRequest}
-     * @return {@link RequestHeaderBO.UserHeader}
+     * @return {@link RequestHeader.UserHeader}
      */
-    private RequestHeaderBO.UserHeader getUserHeader(HttpServletRequest request) {
+    private RequestHeader.UserHeader getUserHeader(HttpServletRequest request) {
         String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
         if (CharSequenceUtil.isEmpty(user)) {
             return null;
         }
 
         byte[] decode = DecodeUtil.decode(user);
-        return JsonUtil.parseObject(decode, RequestHeaderBO.UserHeader.class);
+        return JsonUtil.parseObject(decode, RequestHeader.UserHeader.class);
     }
 }
