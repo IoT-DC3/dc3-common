@@ -48,7 +48,7 @@ public class AuthCacheUtil {
      * @return key
      */
     private static String getKey(String suffix, String tenantId, String userName) {
-        return PrefixConstant.USER + suffix + SymbolConstant.DOUBLE_COLON + userName +
+        return PrefixConstant.USER + suffix + SymbolConstant.COLON + userName +
                 SymbolConstant.HASHTAG + tenantId;
     }
 
@@ -71,7 +71,7 @@ public class AuthCacheUtil {
      * @return token key
      */
     public static String getTokenKey(String token) {
-        return AuthConstant.redis_prefix + SymbolConstant.DOUBLE_COLON + token;
+        return AuthConstant.redis_prefix + SymbolConstant.COLON + token;
     }
 
     /**
