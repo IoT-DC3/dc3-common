@@ -18,6 +18,7 @@ package io.github.pnoker.common.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.exception.ConnectorException;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
@@ -28,8 +29,10 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyPair;
 import java.security.KeyStore;
@@ -64,7 +67,7 @@ public class X509Util {
             X509Certificate cert = loadCertificate(crtFile);
             // load client private key
             KeyPair key = loadCertificateWithPassword(keyFile, password);
-            // client key and certificates are sent to server so it can authenticate us
+            // client key and certificates are sent to server, so it can authenticate us
             KeyStore certKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());
             certKeyStore.load(null, null);
             certKeyStore.setCertificateEntry("certfile", cert);
@@ -78,7 +81,7 @@ public class X509Util {
 
             return context.getSocketFactory();
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new ConnectorException(e.getMessage());
         }
     }
 
@@ -92,11 +95,22 @@ public class X509Util {
         try {
             String classPath = "classpath:";
             if (caCrtFile.startsWith(classPath)) {
-                reader = ObjectUtil.isNotNull(password) ? new PEMReader(new InputStreamReader(X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""))), password::toCharArray)
-                        : new PEMReader(new InputStreamReader(X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""))));
+                InputStream inputStream = X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                if (ObjectUtil.isNotNull(password)) {
+                    reader = new PEMReader(inputStreamReader, password::toCharArray);
+                } else {
+                    reader = new PEMReader(inputStreamReader);
+                }
             } else {
-                reader = ObjectUtil.isNotNull(password) ? new PEMReader(new InputStreamReader(new ByteArrayInputStream(Files.readAllBytes(Paths.get(caCrtFile)))), password::toCharArray)
-                        : new PEMReader(new InputStreamReader(new ByteArrayInputStream(Files.readAllBytes(Paths.get(caCrtFile)))));
+                Path path = Paths.get(caCrtFile);
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(path));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                if (ObjectUtil.isNotNull(password)) {
+                    reader = new PEMReader(inputStreamReader, password::toCharArray);
+                } else {
+                    reader = new PEMReader(inputStreamReader);
+                }
             }
             return (T) reader.readObject();
         } finally {
