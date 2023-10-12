@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
-  ~ Copyright 2016-present the IoT DC3 original author or authors.
+  ~ Copyright 2016-present Pnoker All Rights Reserved
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
-  ~
   ~      https://www.apache.org/licenses/LICENSE-2.0
-  ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>io.github.pnoker</groupId>
-        <artifactId>dc3-parent</artifactId>
-        <version>2023.4.5.3</version>
-        <relativePath/>
+        <artifactId>dc3-common</artifactId>
+        <version>2023.4.5</version>
     </parent>
 
     <name>${project.artifactId}</name>
-    <artifactId>dc3-common</artifactId>
+    <artifactId>dc3-common-register</artifactId>
     <version>2023.4.5</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
     <description>
-        IOT DC3 平台 公共配置。
+        IOT DC3 平台 公共的注册中心配置。
     </description>
 
     <developers>
@@ -61,43 +55,6 @@
         <connection>https://github.com/pnoker/iot-dc3.git</connection>
         <developerConnection>https://github.com/pnoker/iot-dc3.git</developerConnection>
     </scm>
-
-    <modules>
-        <module>dc3-common-web</module>
-        <module>dc3-common-mysql</module>
-        <module>dc3-common-mongo</module>
-        <module>dc3-common-rabbitmq</module>
-        <module>dc3-common-redis</module>
-        <module>dc3-common-mqtt</module>
-        <module>dc3-common-register</module>
-        <module>dc3-common-thread</module>
-        <module>dc3-common-quartz</module>
-        <module>dc3-common-log</module>
-        <module>dc3-common-public</module>
-        <module>dc3-common-exception</module>
-        <module>dc3-common-constant</module>
-        <module>dc3-common-model</module>
-        <module>dc3-common-api</module>
-        <module>dc3-common-influx</module>
-        <module>dc3-common-auth</module>
-        <module>dc3-common-tdengine</module>
-    </modules>
-
-    <dependencies>
-
-        <!-- Guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
-        <!-- HuTool -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-
-    </dependencies>
 
     <profiles>
         <profile>
@@ -135,6 +92,28 @@
             </distributionManagement>
         </profile>
     </profiles>
+
+    <dependencies>
+
+        <!-- Spring Cloud Nacos Client -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- Spring Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Caffeine Cache -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+    </dependencies>
 
     <repositories>
         <repository>
