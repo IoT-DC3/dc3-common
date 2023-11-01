@@ -18,9 +18,6 @@
 # 如果想要覆盖以下内容需要在dev、test、pre、pro中进行重新配置
 spring:
   redis:
-    host: ${REDIS_HOST:dc3-redis}
-    port: ${REDIS_PORT:6379}
-    password: ${REDIS_PASSWORD:dc3}
     timeout: 15S
     lettuce:
       pool:

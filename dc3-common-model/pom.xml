@@ -87,7 +87,7 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
-        <!-- Jackson -->
+        <!-- Jackson 相关 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>

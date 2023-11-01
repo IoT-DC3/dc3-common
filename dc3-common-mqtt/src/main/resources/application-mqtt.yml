@@ -18,21 +18,11 @@
 # 如果想要覆盖以下内容需要在dev、test、pre、pro中进行重新配置
 driver:
   mqtt:
-    url: ${MQTT_BROKER_URL:ssl://dc3-rabbitmq:8883}
-    auth-type: X509
-    username: dc3
-    password: dc3
     ca-crt: classpath:/certs/ca.crt
     client-crt: classpath:/certs/client.crt
     client-key: classpath:/certs/client.key
     client-key-pass: dc3-client
     topic-prefix: dc3/${driver.tenant}/${spring.application.name}/
-    receive-topics:
-      - qos: 1
-        name: data
-    default-send-topic:
-      qos: 1
-      name: command
     keep-alive: 15
     completion-timeout: 3000
     batch:
