@@ -37,7 +37,7 @@ public interface Service<DO, Q> {
      *
      * @param id ID
      */
-    void delete(String id);
+    void delete(Long id);
 
     /**
      * 更新
@@ -52,7 +52,7 @@ public interface Service<DO, Q> {
      * @param id ID
      * @return Entity of DO
      */
-    DO selectById(String id);
+    DO selectById(Long id);
 
     /**
      * 获取带分页、排序
