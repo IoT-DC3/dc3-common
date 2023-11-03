@@ -33,6 +33,10 @@ server:
       io: 2
       worker: 20
     buffer-size: 512
+    accesslog:
+      enabled: true
+      prefix: ${spring.application.name}.
+      pattern: '%h %l %u %t "%r" %s %b %Dms'
 
 springdoc:
   swagger-ui:
