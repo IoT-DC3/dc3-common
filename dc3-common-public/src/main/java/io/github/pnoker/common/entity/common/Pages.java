@@ -17,6 +17,7 @@
 package io.github.pnoker.common.entity.common;
 
 import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 基础查询类，其中包括分页以及排序
@@ -45,45 +47,4 @@ public class Pages implements Serializable {
     private long startTime;
     private long endTime;
     private List<OrderItem> orders = new ArrayList<>(4);
-
-    /**
-     * Pages convert to Page
-     *
-     * @param <T> T
-     * @return Page
-     */
-    public <T> Page<T> convert() {
-        Page<T> page = buildPageByPages(this);
-
-        boolean createTimeOrder = false;
-        for (OrderItem order : page.orders()) {
-            if (CharSequenceUtil.isNotEmpty(order.getColumn()) && order.getColumn().equals("operate_time")) {
-                createTimeOrder = true;
-            }
-        }
-
-        // 默认按 operate_time 倒序
-        if (!createTimeOrder) {
-            page.orders().add(OrderItem.desc("operate_time"));
-        }
-        return page;
-    }
-
-    /**
-     * Pages to Page
-     *
-     * @param pages Pages
-     * @param <T>   T
-     * @return Page
-     */
-    private <T> Page<T> buildPageByPages(Pages pages) {
-        Page<T> page = new Page<>();
-
-        page.setCurrent(pages.getCurrent());
-        page.setSize(pages.getSize());
-        page.setOrders(pages.getOrders());
-
-        return page;
-    }
-
 }

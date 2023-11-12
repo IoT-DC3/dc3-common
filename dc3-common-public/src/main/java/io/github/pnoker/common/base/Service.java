@@ -24,41 +24,41 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Service<DO, Q> {
+public interface Service<B, Q> {
     /**
+     * <p>
      * 新增
+     * </p>
      *
-     * @param entityDO Entity of DO
+     * @param entityBO Entity of BO
      */
-    void add(DO entityDO);
+    void add(B entityBO);
 
     /**
+     * <p>
      * 删除
+     * </p>
      *
      * @param id ID
      */
     void delete(Long id);
 
     /**
+     * <p>
      * 更新
+     * </p>
      *
-     * @param entityDO Entity of DO
+     * @param entityBO Entity of BO
      */
-    void update(DO entityDO);
+    void update(B entityBO);
 
     /**
-     * 通过 ID 查询
-     *
-     * @param id ID
-     * @return Entity of DO
-     */
-    DO selectById(Long id);
-
-    /**
+     * <p>
      * 获取带分页、排序
+     * </p>
      *
-     * @param queryDTO Query DTO
-     * @return Entity of DO Page
+     * @param entityQuery Entity of Query
+     * @return Entity of BO Page
      */
-    Page<DO> list(Q queryDTO);
+    Page<B> list(Q entityQuery);
 }
