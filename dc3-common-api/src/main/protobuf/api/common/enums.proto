@@ -18,56 +18,56 @@ syntax = "proto3";
 
 package api.common;
 
+import "google/protobuf/descriptor.proto";
+
 // 配置相关
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "EnumsProto";
 option java_multiple_files = true;
 
-import "google/protobuf/descriptor.proto";
-
 // 拓展枚举参数
 extend google.protobuf.EnumValueOptions {
-  int32 index = 1000; // 索引
-  string code = 1001; // 编码
-  string name = 1002; // 名称
+    int32 index = 1000; // 索引
+    string code = 1001; // 编码
+    string name = 1002; // 名称
 }
 
 // 通用使能标识枚举
 enum EnableFlagDTOEnum {
-  DISABLE = 0 [(index) = 0, (code) = "disable", (name) = "禁用"]; // 禁用
-  ENABLE = 1 [(index) = 1, (code) = "enable", (name) = "启用"]; // 启用
-  TEMP = 2 [(index) = 2, (code) = "temp", (name) = "暂存"]; // 暂存
+    DISABLE = 0 [(index) = 0, (code) = "disable", (name) = "禁用"]; // 禁用
+    ENABLE = 1 [(index) = 1, (code) = "enable", (name) = "启用"]; // 启用
+    TEMP = 2 [(index) = 2, (code) = "temp", (name) = "暂存"]; // 暂存
 }
 
 // 通用位号类型标识枚举
 enum PointTypeFlagDTOEnum {
-  STRING = 0 [(index) = 0, (code) = "string", (name) = "字符串"]; // 字符串
-  BYTE = 1 [(index) = 1, (code) = "byte", (name) = "字节"]; // 字节
-  SHORT = 2 [(index) = 2, (code) = "short", (name) = "短整数"]; // 短整数
-  INT = 3 [(index) = 3, (code) = "int", (name) = "整数"]; // 整数
-  LONG = 4 [(index) = 4, (code) = "long", (name) = "长整数"]; // 长整数
-  FLOAT = 5 [(index) = 5, (code) = "float", (name) = "浮点数"]; // 浮点数
-  DOUBLE = 6 [(index) = 6, (code) = "double", (name) = "双精度浮点数"]; // 双精度浮点数
-  BOOLEAN = 7 [(index) = 7, (code) = "boolean", (name) = "布尔量"]; // 布尔量
+    STRING = 0 [(index) = 0, (code) = "string", (name) = "字符串"]; // 字符串
+    BYTE = 1 [(index) = 1, (code) = "byte", (name) = "字节"]; // 字节
+    SHORT = 2 [(index) = 2, (code) = "short", (name) = "短整数"]; // 短整数
+    INT = 3 [(index) = 3, (code) = "int", (name) = "整数"]; // 整数
+    LONG = 4 [(index) = 4, (code) = "long", (name) = "长整数"]; // 长整数
+    FLOAT = 5 [(index) = 5, (code) = "float", (name) = "浮点数"]; // 浮点数
+    DOUBLE = 6 [(index) = 6, (code) = "double", (name) = "双精度浮点数"]; // 双精度浮点数
+    BOOLEAN = 7 [(index) = 7, (code) = "boolean", (name) = "布尔量"]; // 布尔量
 }
 
 // 通用驱动类型标识枚举
 enum DriverTypeFlagDTOEnum {
-  DRIVER = 0 [(index) = 0, (code) = "driver", (name) = "协议类型驱动"]; // 协议类型驱动
-  GATEWAY = 1 [(index) = 1, (code) = "gateway", (name) = "网关类型驱动"]; // 网关类型驱动
-  CONNECT = 2 [(index) = 2, (code) = "connect", (name) = "串联类型驱动"]; // 串联类型驱动
+    DRIVER = 0 [(index) = 0, (code) = "driver", (name) = "协议类型驱动"]; // 协议类型驱动
+    GATEWAY = 1 [(index) = 1, (code) = "gateway", (name) = "网关类型驱动"]; // 网关类型驱动
+    CONNECT = 2 [(index) = 2, (code) = "connect", (name) = "串联类型驱动"]; // 串联类型驱动
 }
 
 // 通用读写标识枚举
 enum RwFlagDTOEnum {
-  R = 0 [(index) = 0, (code) = "r", (name) = "只读"]; // 只读
-  W = 1 [(index) = 1, (code) = "w", (name) = "只写"]; // 只写
-  RW = 2 [(index) = 2, (code) = "re", (name) = "读写"]; // 读写
+    R = 0 [(index) = 0, (code) = "r", (name) = "只读"]; // 只读
+    W = 1 [(index) = 1, (code) = "w", (name) = "只写"]; // 只写
+    RW = 2 [(index) = 2, (code) = "re", (name) = "读写"]; // 读写
 }
 
 // 通用累计类型枚举
 enum AccrueFlagDTOEnum {
-  NONE = 0 [(index) = 0, (code) = "none", (name) = "无规律"]; // 无规律
-  INCREMENT = 1 [(index) = 1, (code) = "increment", (name) = "递增"]; // 递增
-  DECREMENT = 2 [(index) = 2, (code) = "decrement", (name) = "递减"]; // 递减
+    NONE = 0 [(index) = 0, (code) = "none", (name) = "无规律"]; // 无规律
+    INCREMENT = 1 [(index) = 1, (code) = "increment", (name) = "递增"]; // 递增
+    DECREMENT = 2 [(index) = 2, (code) = "decrement", (name) = "递减"]; // 递减
 }

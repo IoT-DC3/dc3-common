@@ -25,7 +25,7 @@ option java_multiple_files = true;
 
 // R DTO
 message RDTO {
-  bool ok = 1; // 是否成功
-  string code = 2; // 状态码
-  string message = 3; // 消息
+    bool ok = 1; // 是否成功
+    string code = 2; // 状态码
+    string message = 3; // 消息
 }

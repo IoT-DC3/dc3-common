@@ -25,8 +25,8 @@ option java_multiple_files = true;
 
 // Page DTO
 message PageDTO {
-  int64 total = 1; // 总数
-  int64 size = 2; // 每页显示条数
-  int64 current = 3; // 当前页
-  int64 pages = 4; // 当前分页总页数
+    int64 total = 1; // 总数
+    int64 size = 2; // 每页显示条数
+    int64 current = 3; // 当前页
+    int64 pages = 4; // 当前分页总页数
 }
