@@ -43,7 +43,7 @@ public class Base implements Serializable {
      * 主键ID
      */
     @TableId(type = IdType.ASSIGN_ID)
-    private String id;
+    private Long id;
 
     /**
      * 描述
@@ -53,7 +53,7 @@ public class Base implements Serializable {
     /**
      * 创建者ID
      */
-    private String creatorId;
+    private Long creatorId;
 
     /**
      * 创建者名称
@@ -68,7 +68,7 @@ public class Base implements Serializable {
     /**
      * 操作者ID
      */
-    private String operatorId;
+    private Long operatorId;
 
     /**
      * 操作者名称

@@ -14,21 +14,26 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.exception;
+
+import cn.hutool.core.text.CharSequenceUtil;
 
 /**
- * @author linys
+ * 自定义关联异常
+ *
+ * @author pnoker
  * @since 2022.1.0
  */
-public enum AuthMode {
+public class AssociatedException extends RuntimeException {
+    public AssociatedException() {
+        this(null);
+    }
 
-    /**
-     * 与
-     */
-    AND,
+    public AssociatedException(Throwable cause) {
+        super(cause);
+    }
 
-    /**
-     * 或
-     */
-    OR
+    public AssociatedException(CharSequence template, Object... params) {
+        super(CharSequenceUtil.format(template, params));
+    }
 }

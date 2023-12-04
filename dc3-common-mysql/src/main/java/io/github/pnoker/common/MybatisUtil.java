@@ -80,6 +80,7 @@ public class MybatisUtil {
                 .enableTableFieldAnnotation()
                 .enableRemoveIsPrefix()
                 .enableFileOverride()
+                .logicDeletePropertyName("deleted")
                 .serviceBuilder()
                 .formatServiceFileName("%sManager")
                 .formatServiceImplFileName("%sManagerImpl")

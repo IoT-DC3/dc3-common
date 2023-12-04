@@ -97,5 +97,5 @@ public class Menu extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

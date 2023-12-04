@@ -38,6 +38,10 @@ public enum ResponseEnum {
     FAILURE("R500", "Service exception"),
     NO_RESOURCE("R404", "Resource does not exist"),
     OUT_RANGE("R900", "Number out range"),
+
+    ADD_SUCCESS("R20001", "Added successfully"),
+    DELETE_SUCCESS("R20002", "Deleted successfully"),
+    UPDATE_SUCCESS("R20003", "Updated successfully"),
     ;
 
     /**

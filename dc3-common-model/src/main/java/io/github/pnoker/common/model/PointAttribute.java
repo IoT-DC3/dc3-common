@@ -79,7 +79,7 @@ public class PointAttribute extends Base {
      */
     @NotNull(message = "Driver id can't be empty"
             , groups = {Insert.class, Update.class})
-    private String driverId;
+    private Long driverId;
 
     /**
      * 使能标识
@@ -89,5 +89,5 @@ public class PointAttribute extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

@@ -72,7 +72,7 @@ public class Profile extends Base {
     /**
      * 分组ID
      */
-    private String groupId;
+    private Long groupId;
 
     /**
      * 使能标识
@@ -82,5 +82,5 @@ public class Profile extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

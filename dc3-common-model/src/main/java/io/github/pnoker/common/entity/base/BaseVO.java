@@ -39,6 +39,7 @@ import java.util.Date;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseVO implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -57,7 +58,7 @@ public class BaseVO implements Serializable {
     /**
      * 创建者ID
      */
-    private String creatorId;
+    private Long creatorId;
 
     /**
      * 创建者名称
@@ -73,7 +74,7 @@ public class BaseVO implements Serializable {
     /**
      * 操作者ID
      */
-    private String operatorId;
+    private Long operatorId;
 
     /**
      * 操作者名称

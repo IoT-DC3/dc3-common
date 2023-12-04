@@ -93,6 +93,12 @@
             <artifactId>commons-io</artifactId>
         </dependency>
 
+        <!-- Swagger Annotations -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
         <!-- File Upload -->
         <dependency>
             <groupId>commons-fileupload</groupId>

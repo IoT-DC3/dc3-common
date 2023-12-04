@@ -45,12 +45,12 @@ public class TenantBind extends Base {
      */
     @NotBlank(message = "Tenant id can't be empty",
             groups = {Insert.class, Update.class})
-    private String tenantId;
+    private Long tenantId;
 
     /**
      * 用户ID
      */
     @NotBlank(message = "User id can't be empty",
             groups = {Insert.class, Update.class})
-    private String userId;
+    private Long userId;
 }

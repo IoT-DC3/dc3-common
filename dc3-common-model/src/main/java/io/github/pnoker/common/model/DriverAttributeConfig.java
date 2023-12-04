@@ -47,7 +47,7 @@ public class DriverAttributeConfig extends Base {
      */
     @NotBlank(message = "Driver attribute id can't be empty",
             groups = {Insert.class, Update.class})
-    private String driverAttributeId;
+    private Long driverAttributeId;
 
     /**
      * 连接配置值
@@ -60,7 +60,7 @@ public class DriverAttributeConfig extends Base {
      */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 使能标识
@@ -70,5 +70,5 @@ public class DriverAttributeConfig extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

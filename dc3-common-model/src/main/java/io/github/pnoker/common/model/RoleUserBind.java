@@ -52,5 +52,5 @@ public class RoleUserBind extends Base {
      */
     @NotBlank(message = "User id can't be empty",
             groups = {Insert.class, Update.class})
-    private String userId;
+    private Long userId;
 }

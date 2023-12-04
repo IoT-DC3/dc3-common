@@ -19,7 +19,7 @@ package io.github.pnoker.common.exception;
 import cn.hutool.core.text.CharSequenceUtil;
 
 /**
- * 自定义修改异常
+ * 自定义更新异常
  *
  * @author pnoker
  * @since 2022.1.0

@@ -32,16 +32,16 @@ public interface Service<B, Q> {
      *
      * @param entityBO Entity of BO
      */
-    void add(B entityBO);
+    void save(B entityBO);
 
     /**
      * <p>
      * 删除
      * </p>
      *
-     * @param id ID
+     * @param id Entity ID
      */
-    void delete(Long id);
+    void remove(Long id);
 
     /**
      * <p>
@@ -54,11 +54,21 @@ public interface Service<B, Q> {
 
     /**
      * <p>
-     * 获取带分页、排序
+     * 主键查询
+     * </p>
+     *
+     * @param id Entity ID
+     * @return Entity of BO
+     */
+    B selectById(Long id);
+
+    /**
+     * <p>
+     * 分页查询
      * </p>
      *
      * @param entityQuery Entity of Query
      * @return Entity of BO Page
      */
-    Page<B> list(Q entityQuery);
+    Page<B> selectByPage(Q entityQuery);
 }

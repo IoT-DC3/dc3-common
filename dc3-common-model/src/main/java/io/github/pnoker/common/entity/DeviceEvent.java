@@ -49,12 +49,12 @@ public class DeviceEvent implements Serializable {
     /**
      * 设备ID，同MySQl中等 设备ID 一致
      */
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 位号ID，同MySQl中等 位号ID 一致
      */
-    private String pointId;
+    private Long pointId;
 
     /**
      * Device Event
@@ -75,14 +75,14 @@ public class DeviceEvent implements Serializable {
     private Long originTime;
     private Long confirmTime;
 
-    public DeviceEvent(String deviceId, String type, Object content) {
+    public DeviceEvent(Long deviceId, String type, Object content) {
         this.deviceId = deviceId;
         this.type = type;
         this.content = content;
         this.originTime = System.currentTimeMillis();
     }
 
-    public DeviceEvent(String deviceId, String type, Object content, int timeOut, TimeUnit timeUnit) {
+    public DeviceEvent(Long deviceId, String type, Object content, int timeOut, TimeUnit timeUnit) {
         this.deviceId = deviceId;
         this.type = type;
         this.content = content;
@@ -91,7 +91,7 @@ public class DeviceEvent implements Serializable {
         this.originTime = System.currentTimeMillis();
     }
 
-    public DeviceEvent(String deviceId, String pointId, String type, Object content) {
+    public DeviceEvent(Long deviceId, Long pointId, String type, Object content) {
         this.deviceId = deviceId;
         this.pointId = pointId;
         this.type = type;
@@ -99,7 +99,7 @@ public class DeviceEvent implements Serializable {
         this.originTime = System.currentTimeMillis();
     }
 
-    public DeviceEvent(String deviceId, String pointId, String type, Object content, int timeOut, TimeUnit timeUnit) {
+    public DeviceEvent(Long deviceId, Long pointId, String type, Object content, int timeOut, TimeUnit timeUnit) {
         this.deviceId = deviceId;
         this.pointId = pointId;
         this.type = type;

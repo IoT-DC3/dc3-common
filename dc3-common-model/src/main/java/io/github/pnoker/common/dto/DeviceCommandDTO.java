@@ -72,12 +72,12 @@ public class DeviceCommandDTO implements Serializable {
         /**
          * 设备ID
          */
-        private String deviceId;
+        private Long deviceId;
 
         /**
          * 位号ID
          */
-        private String pointId;
+        private Long pointId;
 
 
         /**
@@ -85,7 +85,7 @@ public class DeviceCommandDTO implements Serializable {
          */
         private Date createTime;
 
-        public DeviceRead(String deviceId, String pointId) {
+        public DeviceRead(Long deviceId, Long pointId) {
             this.deviceId = deviceId;
             this.pointId = pointId;
             this.createTime = new Date();
@@ -107,12 +107,12 @@ public class DeviceCommandDTO implements Serializable {
         /**
          * 设备ID
          */
-        private String deviceId;
+        private Long deviceId;
 
         /**
          * 位号ID
          */
-        private String pointId;
+        private Long pointId;
 
         /**
          * 待写入的值
@@ -124,7 +124,7 @@ public class DeviceCommandDTO implements Serializable {
          */
         private Date createTime;
 
-        public DeviceWrite(String deviceId, String pointId, String value) {
+        public DeviceWrite(Long deviceId, Long pointId, String value) {
             this.deviceId = deviceId;
             this.pointId = pointId;
             this.value = value;

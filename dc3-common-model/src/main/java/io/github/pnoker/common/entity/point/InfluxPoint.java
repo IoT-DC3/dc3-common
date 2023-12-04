@@ -27,10 +27,10 @@ import java.time.Instant;
 public class InfluxPoint {
 
     @Column(tag = true)
-    private String deviceId;
+    private Long deviceId;
 
     @Column(tag = true)
-    private String pointId;
+    private Long pointId;
 
     @Column
     private String pointValue;

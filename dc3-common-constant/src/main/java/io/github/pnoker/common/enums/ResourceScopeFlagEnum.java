@@ -46,7 +46,7 @@ public enum ResourceScopeFlagEnum {
     /**
      * 位号
      */
-    UPDATE((byte) 0x04, "update", "修改"),
+    UPDATE((byte) 0x04, "update", "更新"),
 
     /**
      * 设备

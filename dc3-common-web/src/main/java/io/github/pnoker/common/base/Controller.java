@@ -31,7 +31,7 @@ public interface Controller {
      *
      * @return User ID
      */
-    default String getUserId() {
+    default Long getUserId() {
         return RequestUtil.getUserHeader().getUserId();
     }
 
@@ -58,7 +58,7 @@ public interface Controller {
      *
      * @return Tenant ID
      */
-    default String getTenantId() {
+    default Long getTenantId() {
         return RequestUtil.getUserHeader().getTenantId();
     }
 }

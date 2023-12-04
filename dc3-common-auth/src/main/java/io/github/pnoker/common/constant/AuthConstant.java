@@ -18,7 +18,7 @@ package io.github.pnoker.common.constant;
 
 /**
  * @author linys
- * @since 2023.04.09
+ * @since 2022.1.0
  */
 public class AuthConstant {
 

@@ -190,7 +190,7 @@ public class KeyUtil {
      * @param tenantId 租户ID
      * @return Token String
      */
-    public static String generateToken(String userName, String salt, String tenantId) {
+    public static String generateToken(String userName, String salt, Long tenantId) {
         JwtBuilder builder = Jwts.builder()
                 .setIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
                 .setSubject(userName)
@@ -209,7 +209,7 @@ public class KeyUtil {
      * @param tenantId 租户ID
      * @return Claims
      */
-    public static Claims parserToken(String userName, String salt, String token, String tenantId) {
+    public static Claims parserToken(String userName, String salt, String token, Long tenantId) {
         return Jwts.parser()
                 .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
                 .requireSubject(userName)

@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  * @author linys
- * @since 2023.04.16
+ * @since 2022.1.0
  */
 @Data
 public class AuthUser implements Serializable {
@@ -32,7 +32,7 @@ public class AuthUser implements Serializable {
     /**
      * Id
      */
-    private String userId;
+    private Long userId;
 
     /**
      * name
@@ -42,7 +42,7 @@ public class AuthUser implements Serializable {
     /**
      * tenant
      */
-    private String tenantId;
+    private Long tenantId;
 
     /**
      * roles

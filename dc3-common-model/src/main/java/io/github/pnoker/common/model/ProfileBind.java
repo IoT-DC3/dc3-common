@@ -45,12 +45,12 @@ public class ProfileBind extends Base {
      */
     @NotBlank(message = "Profile id can't be empty",
             groups = {Insert.class, Update.class})
-    private String profileId;
+    private Long profileId;
 
     /**
      * 设备ID
      */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
-    private String deviceId;
+    private Long deviceId;
 }

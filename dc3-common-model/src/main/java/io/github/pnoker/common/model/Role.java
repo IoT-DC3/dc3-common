@@ -73,5 +73,5 @@ public class Role extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

@@ -45,12 +45,12 @@ public class TaosPointValue {
     /**
      * 设备ID，同MySQl中等 设备ID 一致
      */
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 位号ID，同MySQl中等 位号ID 一致
      */
-    private String pointId;
+    private Long pointId;
 
     /**
      * 处理值，进行过缩放、格式化等操作

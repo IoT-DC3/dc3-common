@@ -57,7 +57,7 @@ public class RequestHeader {
         /**
          * 用户 ID
          */
-        private String userId;
+        private Long userId;
 
         /**
          * 用户别名
@@ -72,7 +72,7 @@ public class RequestHeader {
         /**
          * 租户ID
          */
-        private String tenantId;
+        private Long tenantId;
     }
 
 }

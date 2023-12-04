@@ -43,9 +43,9 @@ public enum MetadataCommandTypeEnum {
     DELETE((byte) 0x01, "delete", "删除"),
 
     /**
-     * 修改
+     * 更新
      */
-    UPDATE((byte) 0x02, "update", "修改"),
+    UPDATE((byte) 0x02, "update", "更新"),
     ;
 
     /**

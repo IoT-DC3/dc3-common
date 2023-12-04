@@ -92,7 +92,7 @@ public class DriverDO extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 
     // TODO:请使用枚举,提取到BO中
     @TableField(exist = false)

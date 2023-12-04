@@ -83,7 +83,6 @@ public class RequestConstant {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 
-
         /**
          * 无效的权限请求头
          */

@@ -76,7 +76,7 @@ public class Resource extends Base {
      * <ul>
      *     <li>0x01：新增</li>
      *     <li>0x02：删除</li>
-     *     <li>0x04：修改</li>
+     *     <li>0x04：更新</li>
      *     <li>0x08：查询</li>
      * </ul>
      * 具有多个权限范围可以累加
@@ -98,5 +98,5 @@ public class Resource extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

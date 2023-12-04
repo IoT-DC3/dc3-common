@@ -66,12 +66,12 @@ public class Device extends Base {
      */
     @NotBlank(message = "Driver id can't be empty",
             groups = {Insert.class, Update.class, Upload.class})
-    private String driverId;
+    private Long driverId;
 
     /**
      * 分组ID
      */
-    private String groupId;
+    private Long groupId;
 
     /**
      * 使能标识
@@ -81,10 +81,10 @@ public class Device extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 
     @TableField(exist = false)
     @NotNull(message = "Profile id set can't be empty",
             groups = {Upload.class})
-    private Set<String> profileIds = new HashSet<>(8);
+    private Set<Long> profileIds = new HashSet<>(8);
 }

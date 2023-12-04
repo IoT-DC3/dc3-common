@@ -40,13 +40,13 @@ public class CmdParameter {
      * 设备ID
      */
     @NotNull(message = "Device id can't be empty", groups = {Read.class, Write.class})
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 位号ID
      */
     @NotNull(message = "Point id can't be empty", groups = {Read.class, Write.class})
-    private String pointId;
+    private Long pointId;
 
     /**
      * 写入值

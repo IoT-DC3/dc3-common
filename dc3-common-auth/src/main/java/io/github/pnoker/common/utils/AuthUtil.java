@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author linys
- * @since 2023.04.08
+ * @since 2022.1.0
  */
 public class AuthUtil {
 
@@ -42,7 +42,7 @@ public class AuthUtil {
      * @param userName userName
      * @return salt
      */
-    public static String getPasswordSalt(String tenantId, String userName) {
+    public static String getPasswordSalt(Long tenantId, String userName) {
         String saltKey = AuthCacheUtil.getSaltKey(tenantId, userName);
         if (ObjectUtil.isNull(saltKey)) {
             return null;
@@ -59,7 +59,7 @@ public class AuthUtil {
      * @param salt     salt
      * @return token
      */
-    public static String createToken(String tenantId, String userName, String salt) {
+    public static String createToken(Long tenantId, String userName, String salt) {
         String tokenKey = AuthCacheUtil.getUserTokenKey(tenantId, userName);
         String token = AuthCacheUtil.getValue(tokenKey);
         if (CharSequenceUtil.isEmpty(token)) {
@@ -116,7 +116,7 @@ public class AuthUtil {
      *
      * @return user id
      */
-    public static String getLoginUserId() {
+    public static Long getLoginUserId() {
         return getAuthUser().getUserId();
     }
 

@@ -47,7 +47,7 @@ public class PointAttributeConfig extends Base {
      */
     @NotBlank(message = "Point attribute id can't be empty",
             groups = {Insert.class, Update.class})
-    private String pointAttributeId;
+    private Long pointAttributeId;
 
     /**
      * 位号配置值
@@ -60,14 +60,14 @@ public class PointAttributeConfig extends Base {
      */
     @NotBlank(message = "Device id can't be empty",
             groups = {Insert.class, Update.class})
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 位号ID
      */
     @NotBlank(message = "Point id can't be empty",
             groups = {Insert.class, Update.class})
-    private String pointId;
+    private Long pointId;
 
     /**
      * 使能标识
@@ -77,5 +77,5 @@ public class PointAttributeConfig extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 }

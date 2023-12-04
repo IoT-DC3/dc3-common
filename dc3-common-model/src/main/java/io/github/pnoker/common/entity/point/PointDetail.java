@@ -51,12 +51,12 @@ public class PointDetail {
 
     @NotNull(message = "driver id can't be empty",
             groups = {Insert.class, Update.class})
-    private String driverId;
+    private Long driverId;
 
-    private String deviceId;
-    private String pointId;
+    private Long deviceId;
+    private Long pointId;
 
-    public PointDetail(String deviceId, String pointId) {
+    public PointDetail(Long deviceId, Long pointId) {
         this.deviceId = deviceId;
         this.pointId = pointId;
     }

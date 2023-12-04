@@ -58,14 +58,14 @@ public class UserLogin extends Base {
      */
     @NotBlank(message = "User id can't be empty",
             groups = {Insert.class, Update.class})
-    private String userId;
+    private Long userId;
 
     /**
      * 用户密码ID
      */
     @NotBlank(message = "User password id can't be empty",
             groups = {Insert.class, Update.class})
-    private String userPasswordId;
+    private Long userPasswordId;
 
     /**
      * 使能标识

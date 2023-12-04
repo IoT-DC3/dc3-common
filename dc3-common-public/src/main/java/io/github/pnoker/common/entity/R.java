@@ -68,10 +68,21 @@ public class R<T> implements Serializable {
     }
 
     /**
+     * 成功 自定义 Code 和 提示信息ff
+     *
+     * @param <T>  Object
+     * @param code {@link ResponseEnum}
+     * @return Response
+     */
+    public static <T> R<T> ok(ResponseEnum code) {
+        return new R<T>().success(code.getCode(), code.getMessage());
+    }
+
+    /**
      * 成功 自定义 Code 和 提示信息
      *
      * @param <T>     Object
-     * @param code    ResponseEnum
+     * @param code    {@link ResponseEnum}
      * @param message 成功信息
      * @return Response
      */
@@ -126,8 +137,19 @@ public class R<T> implements Serializable {
     /**
      * 失败 自定义 Code 和 提示信息
      *
+     * @param <T>  Object
+     * @param code {@link ResponseEnum}
+     * @return Response
+     */
+    public static <T> R<T> fail(ResponseEnum code) {
+        return new R<T>().failure(code.getCode(), code.getMessage());
+    }
+
+    /**
+     * 失败 自定义 Code 和 提示信息
+     *
      * @param <T>     Object
-     * @param code    ResponseEnum
+     * @param code    {@link ResponseEnum}
      * @param message 失败信息
      * @return Response
      */

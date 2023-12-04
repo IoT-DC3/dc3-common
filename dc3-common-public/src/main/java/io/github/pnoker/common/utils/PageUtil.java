@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -24,10 +25,12 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.common.Pages;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * 字段名称相关工具类
+ * 分页相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -40,30 +43,36 @@ public class PageUtil {
     }
 
     /**
-     * Pages to Page
+     * 自定义 Pages 转 MyBatis Plus Page
      *
-     * @param pages Pages
+     * @param pages {@link Pages}
      * @param <T>   T
-     * @return Page
+     * @return {@link Page}
      */
     public static <T> Page<T> page(Pages pages) {
         Page<T> page = new Page<>();
         if (ObjectUtil.isNull(pages)) {
             pages = new Pages();
         }
+        if (pages.getCurrent() < 1) {
+            pages.setCurrent(1);
+        }
+        if (pages.getSize() > 100) {
+            pages.setSize(100);
+        }
+        List<OrderItem> orders = pages.getOrders();
+        if (CollUtil.isEmpty(orders)) {
+            orders = new ArrayList<>(2);
+        }
+        orders = orders.stream().filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).collect(Collectors.toList());
+        boolean match = orders.stream().anyMatch(order -> ObjectUtil.isNotNull(order) && "operate_time".equals(order.getColumn()));
+        if (!match) {
+            orders.add(OrderItem.desc("operate_time"));
+        }
 
         page.setCurrent(pages.getCurrent());
         page.setSize(pages.getSize());
-        page.setOrders(pages.getOrders());
-
-        // 添加默认的 operate_time 排序：倒序
-        Optional<OrderItem> operateTime = page.orders().stream()
-                .filter(order -> CharSequenceUtil.isNotEmpty(order.getColumn()) && order.getColumn().equals("operate_time"))
-                .findFirst();
-        if (!operateTime.isPresent()) {
-            page.orders().add(OrderItem.desc("operate_time"));
-        }
-
+        page.setOrders(orders);
         return page;
     }
 }

@@ -17,6 +17,7 @@
 package io.github.pnoker.common.entity.common;
 
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,12 +36,22 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "分页")
 public class Pages implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Schema(description = "当前分页，默认1")
     private long current = 1;
+
+    @Schema(description = "分页条数")
     private long size = 20;
+
+    @Schema(description = "开始时间戳，毫秒")
     private long startTime;
+
+    @Schema(description = "结束时间戳，毫秒")
     private long endTime;
-    private List<OrderItem> orders = new ArrayList<>(4);
+
+    @Schema(title = "排序", description = "column:需要进行排序的字段属性名, asc:是否正序排列，默认 true")
+    private List<OrderItem> orders = new ArrayList<>(2);
 }

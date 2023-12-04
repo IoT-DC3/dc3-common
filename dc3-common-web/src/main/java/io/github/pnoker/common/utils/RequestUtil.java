@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
@@ -74,11 +73,11 @@ public class RequestUtil {
             throw new UnAuthorizedException("Unable to get auth info");
         }
 
-        if (CharSequenceUtil.isEmpty(entityBO.getTenantId())) {
+        if (ObjectUtil.isNull(entityBO.getTenantId())) {
             throw new UnAuthorizedException("Unable to get tenant id of auth info");
         }
 
-        if (CharSequenceUtil.isEmpty(entityBO.getUserId())) {
+        if (ObjectUtil.isNull(entityBO.getUserId())) {
             throw new UnAuthorizedException("Unable to get user id of auth info");
         }
 

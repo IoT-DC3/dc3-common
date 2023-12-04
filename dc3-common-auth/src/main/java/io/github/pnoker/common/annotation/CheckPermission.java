@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author linys
- * @since 2023.04.08
+ * @since 2022.1.0
  * <p>
  * eg. @CheckPermission("resource code"), @CheckPermission({"resource code","resource code"})
  */

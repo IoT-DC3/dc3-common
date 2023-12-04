@@ -47,12 +47,12 @@ public class PointValue implements Serializable {
     /**
      * 设备ID，同MySQl中等 设备ID 一致
      */
-    private String deviceId;
+    private Long deviceId;
 
     /**
      * 位号ID，同MySQl中等 位号ID 一致
      */
-    private String pointId;
+    private Long pointId;
 
     /**
      * 处理值，进行过缩放、格式化等操作
@@ -74,7 +74,7 @@ public class PointValue implements Serializable {
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date createTime;
 
-    public PointValue(String deviceId, String pointId, String rawValue, String value) {
+    public PointValue(Long deviceId, Long pointId, String rawValue, String value) {
         this.deviceId = deviceId;
         this.pointId = pointId;
         this.rawValue = rawValue;

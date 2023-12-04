@@ -95,12 +95,12 @@ public class Point extends Base {
      */
     @NotBlank(message = "Profile id can't be empty",
             groups = {Insert.class, Update.class})
-    private String profileId;
+    private Long profileId;
 
     /**
      * 分组ID
      */
-    private String groupId;
+    private Long groupId;
 
     /**
      * 使能标识
@@ -110,7 +110,7 @@ public class Point extends Base {
     /**
      * 租户ID
      */
-    private String tenantId;
+    private Long tenantId;
 
     /**
      * 设置默认值

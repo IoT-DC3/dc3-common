@@ -73,7 +73,7 @@ public class DriverEventDTO implements Serializable {
         /**
          * 驱动ID
          */
-        private String driverId;
+        private Long driverId;
 
         /**
          * 驱动状态
@@ -85,7 +85,7 @@ public class DriverEventDTO implements Serializable {
          */
         private Date createTime;
 
-        public DriverStatus(String driverId, DriverStatusEnum status) {
+        public DriverStatus(Long driverId, DriverStatusEnum status) {
             this.driverId = driverId;
             this.status = status;
             this.createTime = new Date();

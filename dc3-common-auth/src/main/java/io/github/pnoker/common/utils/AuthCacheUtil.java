@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author linys
- * @since 2023.04.11
+ * @since 2022.1.0
  */
 public class AuthCacheUtil {
 
@@ -47,7 +47,7 @@ public class AuthCacheUtil {
      * @param userName 用户名称
      * @return key
      */
-    private static String getKey(String suffix, String tenantId, String userName) {
+    private static String getKey(String suffix, Long tenantId, String userName) {
         return PrefixConstant.USER + suffix + SymbolConstant.COLON + userName +
                 SymbolConstant.HASHTAG + tenantId;
     }
@@ -59,7 +59,7 @@ public class AuthCacheUtil {
      * @param userName userName
      * @return key
      */
-    public static String getUserTokenKey(String tenantId, String userName) {
+    public static String getUserTokenKey(Long tenantId, String userName) {
         return getKey(SuffixConstant.TOKEN, tenantId, userName);
     }
 
@@ -81,7 +81,7 @@ public class AuthCacheUtil {
      * @param userName 用户名称
      * @return Salt key
      */
-    public static String getSaltKey(String tenantId, String userName) {
+    public static String getSaltKey(Long tenantId, String userName) {
         return getKey(SuffixConstant.SALT, tenantId, userName);
     }
 
