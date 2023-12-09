@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.entity.point;
 
-import io.github.pnoker.common.valid.Insert;
+import io.github.pnoker.common.valid.Add;
 import io.github.pnoker.common.valid.Update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,20 +37,20 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 public class PointDetail {
 
-    @NotBlank(message = "device name can't be empty", groups = {Insert.class})
+    @NotBlank(message = "device name can't be empty", groups = {Add.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
             message = "设备名称格式无效",
-            groups = {Insert.class, Update.class})
+            groups = {Add.class, Update.class})
     private String deviceName;
 
-    @NotBlank(message = "point name can't be empty", groups = {Insert.class})
+    @NotBlank(message = "point name can't be empty", groups = {Add.class})
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
             message = "Invalid point name",
-            groups = {Insert.class, Update.class})
+            groups = {Add.class, Update.class})
     private String pointName;
 
     @NotNull(message = "driver id can't be empty",
-            groups = {Insert.class, Update.class})
+            groups = {Add.class, Update.class})
     private Long driverId;
 
     private Long deviceId;
