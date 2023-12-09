@@ -86,7 +86,7 @@ public class Resource extends Base {
     /**
      * 权限资源实体ID
      */
-    @NotBlank(message = "Entity id can't be empty",
+    @NotBlank(message = "实体ID不能为空",
             groups = {Insert.class, Update.class})
     private String entityId;
 

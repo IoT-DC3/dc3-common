@@ -58,7 +58,7 @@ public class PointAttributeConfig extends Base {
     /**
      * 设备ID
      */
-    @NotBlank(message = "Device id can't be empty",
+    @NotBlank(message = "设备ID不能为空",
             groups = {Insert.class, Update.class})
     private Long deviceId;
 

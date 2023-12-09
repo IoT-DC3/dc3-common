@@ -39,7 +39,7 @@ public class CmdParameter {
     /**
      * 设备ID
      */
-    @NotNull(message = "Device id can't be empty", groups = {Read.class, Write.class})
+    @NotNull(message = "设备ID不能为空", groups = {Read.class, Write.class})
     private Long deviceId;
 
     /**

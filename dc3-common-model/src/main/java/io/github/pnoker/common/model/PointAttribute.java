@@ -57,10 +57,10 @@ public class PointAttribute extends Base {
     /**
      * 属性名称
      */
-    @NotBlank(message = "Attribute name can't be empty",
+    @NotBlank(message = "属性名称不能为空",
             groups = {Insert.class})
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid attribute name",
+            message = "属性名称格式无效",
             groups = {Insert.class, Update.class})
     private String attributeName;
 
@@ -77,7 +77,7 @@ public class PointAttribute extends Base {
     /**
      * 驱动ID
      */
-    @NotNull(message = "Driver id can't be empty"
+    @NotNull(message = "驱动ID不能为空"
             , groups = {Insert.class, Update.class})
     private Long driverId;
 
