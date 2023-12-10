@@ -97,20 +97,6 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
 
-        <!-- Jackson 相关 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-
         <!-- DC3 Common Public -->
         <dependency>
             <groupId>io.github.pnoker</groupId>

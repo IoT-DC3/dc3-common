@@ -18,7 +18,7 @@ package io.github.pnoker.common.utils;
 
 import io.github.pnoker.api.common.BaseDTO;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.base.Base;
+import io.github.pnoker.common.base.Base;
 
 /**
  * Builder 工具类

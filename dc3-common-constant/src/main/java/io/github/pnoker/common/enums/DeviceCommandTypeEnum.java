@@ -38,14 +38,24 @@ public enum DeviceCommandTypeEnum {
     READ((byte) 0x00, "read", "读位号值类型指令"),
 
     /**
+     * 批量读位号值类型指令
+     */
+    READ_BATCH((byte) 0x01, "read_batch", "批量读位号值类型指令"),
+
+    /**
      * 写位号值类型指令
      */
-    WRITE((byte) 0x01, "write", "写位号值类型指令"),
+    WRITE((byte) 0x02, "write", "写位号值类型指令"),
+
+    /**
+     * 批量写位号值类型指令
+     */
+    WRITE_BATCH((byte) 0x03, "write_batch", "批量写位号值类型指令"),
 
     /**
      * 配置设备类型指令
      */
-    CONFIG((byte) 0x02, "config", "配置设备类型指令"),
+    CONFIG((byte) 0x04, "config", "配置设备类型指令"),
     ;
 
     /**
@@ -65,10 +75,10 @@ public enum DeviceCommandTypeEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return DeviceCommandTypeEnum
+     * @param code 编码
+     * @return {@link DeviceCommandTypeEnum}
      */
     public static DeviceCommandTypeEnum ofCode(String code) {
         Optional<DeviceCommandTypeEnum> any = Arrays.stream(DeviceCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +86,10 @@ public enum DeviceCommandTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return DeviceCommandTypeEnum
+     * @param name 枚举名称
+     * @return {@link DeviceCommandTypeEnum}
      */
     public static DeviceCommandTypeEnum ofName(String name) {
         try {

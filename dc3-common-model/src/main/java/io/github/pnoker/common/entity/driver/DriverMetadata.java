@@ -17,10 +17,10 @@
 package io.github.pnoker.common.entity.driver;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.model.Device;
-import io.github.pnoker.common.model.DriverAttribute;
-import io.github.pnoker.common.model.Point;
-import io.github.pnoker.common.model.PointAttribute;
+import io.github.pnoker.common.entity.dto.DeviceDTO;
+import io.github.pnoker.common.entity.dto.DriverAttributeDTO;
+import io.github.pnoker.common.entity.dto.PointAttributeDTO;
+import io.github.pnoker.common.entity.dto.PointDTO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -40,8 +40,8 @@ public class DriverMetadata implements Serializable {
 
     private Long driverId;
     private Long tenantId;
-    private Map<Long, DriverAttribute> driverAttributeMap;
-    private Map<Long, PointAttribute> pointAttributeMap;
+    private Map<Long, DriverAttributeDTO> driverAttributeMap;
+    private Map<Long, PointAttributeDTO> pointAttributeMap;
 
     /**
      * deviceId(driverAttribute.name,(driverInfo.value,driverAttribute.type))
@@ -56,12 +56,12 @@ public class DriverMetadata implements Serializable {
     /**
      * deviceId,device
      */
-    private Map<Long, Device> deviceMap;
+    private Map<Long, DeviceDTO> deviceMap;
 
     /**
      * profileId(pointId,point)
      */
-    private Map<Long, Map<Long, Point>> profilePointMap;
+    private Map<Long, Map<Long, PointDTO>> profilePointMap;
 
     public DriverMetadata() {
         this.driverAttributeMap = new ConcurrentHashMap<>(16);

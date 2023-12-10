@@ -14,30 +14,66 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.batch;
+package io.github.pnoker.common.base;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.Date;
 
 /**
+ * Base BO
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class BatchDevice implements Serializable {
+@SuperBuilder
+@RequiredArgsConstructor
+public class BaseBO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private Boolean multi;
+    /**
+     * 主键ID
+     */
+    private Long id;
 
     /**
-     * 仅当share为false的时候生效
+     * 描述
      */
-    private Map<String, Map<String, String>> pointConfig;
+    private String remark;
+
+    /**
+     * 创建者ID
+     */
+    private Long creatorId;
+
+    /**
+     * 创建者名称
+     */
+    private String creatorName;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 操作者ID
+     */
+    private Long operatorId;
+
+    /**
+     * 操作者名称
+     */
+    private String operatorName;
+
+    /**
+     * 操作时间
+     */
+    private Date operateTime;
 }

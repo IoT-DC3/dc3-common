@@ -77,6 +77,7 @@
         <module>dc3-common-exception</module>
         <module>dc3-common-constant</module>
         <module>dc3-common-model</module>
+        <module>dc3-common-transfer</module>
         <module>dc3-common-api</module>
         <module>dc3-common-influx</module>
         <module>dc3-common-auth</module>

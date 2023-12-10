@@ -61,10 +61,10 @@ public enum MenuTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return MenuTypeFlagEnum
+     * @param code 编码
+     * @return {@link MenuTypeFlagEnum}
      */
     public static MenuTypeFlagEnum ofCode(String code) {
         Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -72,10 +72,10 @@ public enum MenuTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return MenuTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link MenuTypeFlagEnum}
      */
     public static MenuTypeFlagEnum ofName(String name) {
         try {

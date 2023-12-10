@@ -55,10 +55,10 @@ public enum ResponseEnum {
     private final String message;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return ResponseEnum
+     * @param code 编码
+     * @return {@link ResponseEnum}
      */
     public static ResponseEnum ofCode(String code) {
         Optional<ResponseEnum> any = Arrays.stream(ResponseEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -66,10 +66,10 @@ public enum ResponseEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return ResponseEnum
+     * @param name 枚举名称
+     * @return {@link ResponseEnum}
      */
     public static ResponseEnum ofName(String name) {
         try {

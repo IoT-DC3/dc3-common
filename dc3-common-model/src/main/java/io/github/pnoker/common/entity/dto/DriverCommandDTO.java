@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.common;
+package io.github.pnoker.common.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.enums.DriverCommandTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
- * 字典表
+ * 驱动指令
  *
  * @author pnoker
  * @since 2022.1.0
@@ -32,12 +33,21 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class Dictionary {
-    private String type;
-    private String label;
-    private String value;
-    private boolean disabled;
-    private boolean expand = true;
-    private List<Dictionary> children;
+public class DriverCommandDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 指令类型
+     */
+    private DriverCommandTypeEnum type;
+
+    /**
+     * 指令内容
+     */
+    private String content;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 }

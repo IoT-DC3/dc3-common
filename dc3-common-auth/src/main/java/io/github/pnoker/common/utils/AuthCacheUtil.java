@@ -55,8 +55,8 @@ public class AuthCacheUtil {
     /**
      * 获取 用户 - token 映射Key
      *
-     * @param tenantId tenantId
-     * @param userName userName
+     * @param tenantId 租户ID
+     * @param userName 用户名
      * @return key
      */
     public static String getUserTokenKey(Long tenantId, String userName) {

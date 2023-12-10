@@ -65,10 +65,10 @@ public enum AccrueFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return AccrueFlagEnum
+     * @param code 编码
+     * @return {@link AccrueFlagEnum}
      */
     public static AccrueFlagEnum ofCode(String code) {
         Optional<AccrueFlagEnum> any = Arrays.stream(AccrueFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +76,10 @@ public enum AccrueFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return AccrueFlagEnum
+     * @param name 枚举名称
+     * @return {@link AccrueFlagEnum}
      */
     public static AccrueFlagEnum ofName(String name) {
         try {

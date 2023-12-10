@@ -78,10 +78,10 @@ public enum EntityTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return EntityTypeFlagEnum
+     * @param code 编码
+     * @return {@link EntityTypeFlagEnum}
      */
     public static EntityTypeFlagEnum ofCode(String code) {
         Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -89,10 +89,10 @@ public enum EntityTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return EntityTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link EntityTypeFlagEnum}
      */
     public static EntityTypeFlagEnum ofName(String name) {
         try {

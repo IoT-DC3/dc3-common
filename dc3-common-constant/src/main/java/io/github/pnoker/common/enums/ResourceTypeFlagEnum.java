@@ -86,10 +86,10 @@ public enum ResourceTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return ResourceTypeFlagEnum
+     * @param code 编码
+     * @return {@link ResourceTypeFlagEnum}
      */
     public static ResourceTypeFlagEnum ofCode(String code) {
         Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -97,10 +97,10 @@ public enum ResourceTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return ResourceTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link ResourceTypeFlagEnum}
      */
     public static ResourceTypeFlagEnum ofName(String name) {
         try {

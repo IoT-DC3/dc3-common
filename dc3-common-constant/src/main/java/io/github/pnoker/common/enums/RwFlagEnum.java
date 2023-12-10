@@ -65,10 +65,10 @@ public enum RwFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return RwFlagEnum
+     * @param code 编码
+     * @return {@link RwFlagEnum}
      */
     public static RwFlagEnum ofCode(String code) {
         Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +76,10 @@ public enum RwFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return RwFlagEnum
+     * @param name 枚举名称
+     * @return {@link RwFlagEnum}
      */
     public static RwFlagEnum ofName(String name) {
         try {

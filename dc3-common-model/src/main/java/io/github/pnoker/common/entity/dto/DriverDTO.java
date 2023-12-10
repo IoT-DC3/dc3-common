@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.base;
+package io.github.pnoker.common.entity.dto;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import io.github.pnoker.common.base.BaseBO;
+import io.github.pnoker.common.base.BaseDTO;
+import io.github.pnoker.common.enums.DriverTypeFlagEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
- * 基础 BO 实体类
+ * Driver BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -32,46 +32,42 @@ import java.util.Date;
 @Data
 @SuperBuilder
 @RequiredArgsConstructor
-public class BaseBO implements Serializable {
-    private static final long serialVersionUID = 1L;
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class DriverDTO extends BaseDTO {
 
     /**
-     * 主键ID
+     * 驱动名称
      */
-    private Long id;
+    private String driverName;
 
     /**
-     * 描述
+     * 驱动编号
      */
-    private String remark;
+    private String driverCode;
 
     /**
-     * 创建者ID
+     * 驱动服务名称
      */
-    private Long creatorId;
+    private String serviceName;
 
     /**
-     * 创建者名称
+     * 驱动类型标识
      */
-    private String creatorName;
+    private DriverTypeFlagEnum driverTypeFlag;
 
     /**
-     * 创建时间
+     * 服务主机
      */
-    private Date createTime;
+    private String serviceHost;
 
     /**
-     * 操作者ID
+     * 使能标识
      */
-    private Long operatorId;
+    private EnableFlagEnum enableFlag;
 
     /**
-     * 操作者名称
+     * 租户ID
      */
-    private String operatorName;
-
-    /**
-     * 操作时间
-     */
-    private Date operateTime;
+    private Long tenantId;
 }

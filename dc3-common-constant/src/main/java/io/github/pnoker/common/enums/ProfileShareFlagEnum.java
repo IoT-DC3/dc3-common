@@ -33,19 +33,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum ProfileShareFlagEnum {
     /**
-     * 公有模板(租户)
+     * 租户下共享模板
      */
-    TENANT((byte) 0x00, "tenant", "公有模板(租户)"),
+    TENANT((byte) 0x00, "tenant", "租户下共享模板"),
 
     /**
-     * 私有模板(驱动)
+     * 驱动下共享模板
      */
-    DRIVER((byte) 0x01, "driver", "私有模板(驱动)"),
+    DRIVER((byte) 0x01, "driver", "驱动下共享模板"),
 
     /**
-     * 私有模板(用户)
+     * 用户下共享模板
      */
-    USER((byte) 0x02, "user", "私有模板(用户)"),
+    USER((byte) 0x02, "user", "用户下共享模板"),
     ;
 
     /**
@@ -65,10 +65,10 @@ public enum ProfileShareFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return ProfileShareFlagEnum
+     * @param code 编码
+     * @return {@link ProfileShareFlagEnum}
      */
     public static ProfileShareFlagEnum ofCode(String code) {
         Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +76,10 @@ public enum ProfileShareFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return ProfileShareFlagEnum
+     * @param name 枚举名称
+     * @return {@link ProfileShareFlagEnum}
      */
     public static ProfileShareFlagEnum ofName(String name) {
         try {

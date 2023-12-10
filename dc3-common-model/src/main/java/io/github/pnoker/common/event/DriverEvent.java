@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.point;
+package io.github.pnoker.common.event;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
- * MongoDB 位号数据
- *
  * @author pnoker
  * @since 2022.1.0
  */
@@ -39,46 +36,44 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PointValue implements Serializable {
+public class DriverEvent implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    /**
+     * MongoDB Object ID
+     */
+    @MongoId
+    private ObjectId id;
 
     /**
-     * 设备ID，同MySQl中等 设备ID 一致
+     * 驱动服务名称
      */
-    private Long deviceId;
+    private String serviceName;
 
     /**
-     * 位号ID，同MySQl中等 位号ID 一致
+     * Driver Event
+     * <p>
+     * STATUS、ERROR
      */
-    private Long pointId;
+    private String type;
 
-    /**
-     * 处理值，进行过缩放、格式化等操作
-     */
-    private String value;
+    private Boolean confirm = false;
+    private Object content;
 
-    /**
-     * 原始值
-     */
-    private String rawValue;
-
-    private List<String> children;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date originTime;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date createTime;
+    private Date updateTime;
 
-    public PointValue(Long deviceId, Long pointId, String rawValue, String value) {
-        this.deviceId = deviceId;
-        this.pointId = pointId;
-        this.rawValue = rawValue;
-        this.value = value;
-        this.originTime = new Date();
+    public DriverEvent(String serviceName, String type) {
+        this.serviceName = serviceName;
+        this.type = type;
+        this.createTime = new Date();
     }
+
+    public DriverEvent(String serviceName, String type, Object content) {
+        this.serviceName = serviceName;
+        this.type = type;
+        this.content = content;
+        this.createTime = new Date();
+    }
+
 }

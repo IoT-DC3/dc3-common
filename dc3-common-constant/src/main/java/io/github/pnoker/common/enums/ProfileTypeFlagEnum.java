@@ -34,19 +34,19 @@ import java.util.Optional;
 public enum ProfileTypeFlagEnum {
 
     /**
-     * 用户创建
-     */
-    USER((byte) 0x00, "user", "用户创建"),
-
-    /**
      * 系统创建
      */
-    SYSTEM((byte) 0x01, "system", "系统创建"),
+    SYSTEM((byte) 0x00, "system", "系统创建"),
 
     /**
      * 驱动创建
      */
-    DRIVER((byte) 0x02, "driver", "驱动创建"),
+    DRIVER((byte) 0x01, "driver", "驱动创建"),
+
+    /**
+     * 用户创建
+     */
+    USER((byte) 0x02, "user", "用户创建"),
     ;
 
     /**
@@ -66,10 +66,10 @@ public enum ProfileTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return ProfileTypeFlagEnum
+     * @param code 编码
+     * @return {@link ProfileTypeFlagEnum}
      */
     public static ProfileTypeFlagEnum ofCode(String code) {
         Optional<ProfileTypeFlagEnum> any = Arrays.stream(ProfileTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -77,10 +77,10 @@ public enum ProfileTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return ProfileTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link ProfileTypeFlagEnum}
      */
     public static ProfileTypeFlagEnum ofName(String name) {
         try {

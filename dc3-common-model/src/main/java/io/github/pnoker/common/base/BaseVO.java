@@ -14,80 +14,84 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.base;
+package io.github.pnoker.common.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.constant.common.TimeConstant;
+import io.github.pnoker.common.valid.Update;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 基础 DO 实体类
+ * Base VO
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Base implements Serializable {
+@SuperBuilder
+@RequiredArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@Schema(title = "Base", description = "基础")
+public class BaseVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
-    @TableId(type = IdType.ASSIGN_ID)
+    @Schema(description = "主键ID")
+    @NotNull(message = "主键ID不能为空",
+            groups = {Update.class})
     private Long id;
 
     /**
      * 描述
      */
+    @Schema(description = "描述")
     private String remark;
 
     /**
      * 创建者ID
      */
+    @Schema(description = "创建者ID")
     private Long creatorId;
 
     /**
      * 创建者名称
      */
+    @Schema(description = "创建者名称")
     private String creatorName;
 
     /**
      * 创建时间
      */
+    @Schema(description = "创建时间, yyyy-MM-dd HH:mm:ss.SSS")
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date createTime;
 
     /**
      * 操作者ID
      */
+    @Schema(description = "操作者ID")
     private Long operatorId;
 
     /**
      * 操作者名称
      */
+    @Schema(description = "操作者名称")
     private String operatorName;
 
     /**
      * 操作时间
      */
+    @Schema(description = "操作时间, yyyy-MM-dd HH:mm:ss.SSS")
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
     private Date operateTime;
-
-    /**
-     * 逻辑删标识
-     * <ul>
-     * <li>0 (false):默认,未删除</li>
-     * <li>1 (true):已删除</li>
-     * </ul>
-     */
-    @TableLogic
-    @TableField(select = false)
-    private Integer deleted;
 }

@@ -61,10 +61,10 @@ public enum DriverEventTypeEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return DriverEventTypeEnum
+     * @param code 编码
+     * @return {@link DriverEventTypeEnum}
      */
     public static DriverEventTypeEnum ofCode(String code) {
         Optional<DriverEventTypeEnum> any = Arrays.stream(DriverEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -72,10 +72,10 @@ public enum DriverEventTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return DriverEventTypeEnum
+     * @param name 枚举名称
+     * @return {@link DriverEventTypeEnum}
      */
     public static DriverEventTypeEnum ofName(String name) {
         try {

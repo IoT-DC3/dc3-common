@@ -14,39 +14,31 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.point;
+package io.github.pnoker.common.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
- * OpenTSDB 位号数据
- *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TsPointValue implements Serializable {
-    private String metric;
-    private Long timestamp;
-    private Object value;
-    private Map<String, String> tags = new HashMap<>(4);
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class DriverSyncUpDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    public TsPointValue addTag(String tagName, String tagValue) {
-        this.tags.put(tagName, tagValue);
-        return this;
-    }
+    private String tenant;
+    private String client;
+    private DriverDTO driver;
+    private List<DriverAttributeDTO> driverAttributes;
+    private List<PointAttributeDTO> pointAttributes;
 
-    public TsPointValue(String metric, String value) {
-        this.metric = metric;
-        this.timestamp = System.currentTimeMillis();
-        this.value = value;
-    }
 }

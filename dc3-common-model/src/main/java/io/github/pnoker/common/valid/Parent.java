@@ -14,37 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.batch;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
+package io.github.pnoker.common.valid;
 
 /**
+ * Parent 校验分组
+ * <p>
+ * 在 {@link org.springframework.validation.annotation.Validated}
+ * 注解后添加具体校验的分组名，可实现不同场景的校验需求
+ *
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class BatchProfile implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private String name;
-    private Boolean share;
-    private Short type;
-
-    private Map<String, String> driverConfig;
-
-    private List<BatchPoint> points;
-    /**
-     * 仅当share为true的时候生效
-     */
-    private Map<String, Map<String, String>> pointConfig;
-
-    private List<BatchGroup> groups;
+public interface Parent {
 }

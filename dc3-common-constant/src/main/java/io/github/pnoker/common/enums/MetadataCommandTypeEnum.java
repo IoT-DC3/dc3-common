@@ -65,10 +65,10 @@ public enum MetadataCommandTypeEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return MetadataCommandTypeEnum
+     * @param code 编码
+     * @return {@link MetadataCommandTypeEnum}
      */
     public static MetadataCommandTypeEnum ofCode(String code) {
         Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +76,10 @@ public enum MetadataCommandTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return MetadataCommandTypeEnum
+     * @param name 枚举名称
+     * @return {@link MetadataCommandTypeEnum}
      */
     public static MetadataCommandTypeEnum ofName(String name) {
         try {

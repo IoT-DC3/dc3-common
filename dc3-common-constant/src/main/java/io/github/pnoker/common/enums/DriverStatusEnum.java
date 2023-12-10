@@ -49,10 +49,10 @@ public enum DriverStatusEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return StatusEnum
+     * @param code 编码
+     * @return {@link DriverStatusEnum}
      */
     public static DriverStatusEnum ofCode(String code) {
         Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -60,10 +60,10 @@ public enum DriverStatusEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return DriverStatusEnum
+     * @param name 枚举名称
+     * @return {@link DriverStatusEnum}
      */
     public static DriverStatusEnum ofName(String name) {
         try {

@@ -90,10 +90,10 @@ public enum AttributeTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return AttributeTypeFlagEnum
+     * @param code 编码
+     * @return {@link AttributeTypeFlagEnum}
      */
     public static AttributeTypeFlagEnum ofCode(String code) {
         Optional<AttributeTypeFlagEnum> any = Arrays.stream(AttributeTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -101,10 +101,10 @@ public enum AttributeTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return AttributeTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link AttributeTypeFlagEnum}
      */
     public static AttributeTypeFlagEnum ofName(String name) {
         try {

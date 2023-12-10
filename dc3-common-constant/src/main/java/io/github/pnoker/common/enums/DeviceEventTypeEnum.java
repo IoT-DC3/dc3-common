@@ -60,10 +60,10 @@ public enum DeviceEventTypeEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return DeviceEventTypeEnum
+     * @param code 编码
+     * @return {@link DeviceEventTypeEnum}
      */
     public static DeviceEventTypeEnum ofCode(String code) {
         Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -71,10 +71,10 @@ public enum DeviceEventTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return DeviceEventTypeEnum
+     * @param name 枚举名称
+     * @return {@link DeviceEventTypeEnum}
      */
     public static DeviceEventTypeEnum ofName(String name) {
         try {

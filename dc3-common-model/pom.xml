@@ -101,6 +101,12 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <!-- Swagger Annotations -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
         <!-- DC3 Common Exception -->
         <dependency>
             <groupId>io.github.pnoker</groupId>

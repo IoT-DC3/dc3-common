@@ -52,10 +52,10 @@ public enum PointValueTypeEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return PointValueTypeEnum
+     * @param code 编码
+     * @return {@link PointValueTypeEnum}
      */
     public static PointValueTypeEnum ofCode(String code) {
         Optional<PointValueTypeEnum> any = Arrays.stream(PointValueTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -63,10 +63,10 @@ public enum PointValueTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return PointValueTypeEnum
+     * @param name 枚举名称
+     * @return {@link PointValueTypeEnum}
      */
     public static PointValueTypeEnum ofName(String name) {
         try {

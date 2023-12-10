@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.dto;
+package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.enums.DeviceCommandTypeEnum;
 import lombok.AllArgsConstructor;

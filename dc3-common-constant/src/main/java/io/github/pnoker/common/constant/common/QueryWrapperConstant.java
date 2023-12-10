@@ -14,30 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
+package io.github.pnoker.common.constant.common;
 
 /**
- * 数据统计DTO
+ * 查询 相关常量
+ *
+ * @author pnoker
+ * @since 2022.1.0
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class DataStatisticsDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class QueryWrapperConstant {
 
-    private Long driverCount;
+    private QueryWrapperConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 
-    private Long profileCount;
+    /**
+     * LIMIT
+     */
+    public static final String LIMIT_ONE = QueryWrapperConstant.LIMIT_ONE;
 
-    private Long pointCount;
-
-    private Long deviceCount;
-
-    private Long dataCount;
 }

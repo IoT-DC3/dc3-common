@@ -14,26 +14,64 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.batch;
+package io.github.pnoker.common.base;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 /**
+ * Base DTO
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class BatchDriver implements Serializable {
+@SuperBuilder
+@RequiredArgsConstructor
+public class BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String serviceName;
+    /**
+     * 主键ID
+     */
+    private Long id;
 
-    private List<BatchProfile> profiles;
+    /**
+     * 描述
+     */
+    private String remark;
+
+    /**
+     * 创建者ID
+     */
+    private Long creatorId;
+
+    /**
+     * 创建者名称
+     */
+    private String creatorName;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 操作者ID
+     */
+    private Long operatorId;
+
+    /**
+     * 操作者名称
+     */
+    private String operatorName;
+
+    /**
+     * 操作时间
+     */
+    private Date operateTime;
 }

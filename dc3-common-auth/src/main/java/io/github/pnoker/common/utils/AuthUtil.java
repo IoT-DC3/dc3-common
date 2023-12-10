@@ -38,8 +38,8 @@ public class AuthUtil {
     /**
      * get salt
      *
-     * @param tenantId tenantId
-     * @param userName userName
+     * @param tenantId 租户ID
+     * @param userName 用户名
      * @return salt
      */
     public static String getPasswordSalt(Long tenantId, String userName) {
@@ -54,9 +54,9 @@ public class AuthUtil {
     /**
      * create token and save to cache
      *
-     * @param tenantId tenantId
-     * @param userName userName
-     * @param salt     salt
+     * @param tenantId 租户ID
+     * @param userName 用户名
+     * @param salt     盐值
      * @return token
      */
     public static String createToken(Long tenantId, String userName, String salt) {

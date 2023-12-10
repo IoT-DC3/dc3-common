@@ -14,31 +14,53 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.batch;
+package io.github.pnoker.common.entity.dto;
 
+import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
+ * 元数据
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BatchPoint implements Serializable {
+public class DriverMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String type;
-    private Short rw;
-    private Float base;
-    private Float minimum;
-    private Float maximum;
-    private Float multiple;
-    private String format;
-    private String unit;
+    /**
+     * 元数据类型
+     */
+    private MetadataTypeEnum type;
+
+    /**
+     * 元数据操作类型
+     */
+    private MetadataCommandTypeEnum metadataCommandType;
+
+    /**
+     * 元数据内容
+     */
+    private String content;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    public DriverMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
+        this.type = type;
+        this.metadataCommandType = metadataCommandType;
+        this.content = content;
+        this.createTime = new Date();
+    }
 }

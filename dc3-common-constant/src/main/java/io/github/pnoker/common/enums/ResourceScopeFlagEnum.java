@@ -71,10 +71,10 @@ public enum ResourceScopeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return ResourceScopeFlagEnum
+     * @param code 编码
+     * @return {@link ResourceScopeFlagEnum}
      */
     public static ResourceScopeFlagEnum ofCode(String code) {
         Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -82,10 +82,10 @@ public enum ResourceScopeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return ResourceScopeFlagEnum
+     * @param name 枚举名称
+     * @return {@link ResourceScopeFlagEnum}
      */
     public static ResourceScopeFlagEnum ofName(String name) {
         try {

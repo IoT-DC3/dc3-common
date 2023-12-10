@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.dto;
+package io.github.pnoker.common.entity.dto;
 
-
-import io.github.pnoker.common.model.Device;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,15 +23,20 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * 高德天气设备数据统计DTO
+ * 元数据
+ *
+ * @author pnoker
+ * @since 2022.1.0
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class WeatherDeviceStatisticsDTO implements Serializable {
+@AllArgsConstructor
+public class DriverSyncDownDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Device device;
-    private String location;
-    private String status;
-    private String lastValue;
+
+    /**
+     * 待同步数据内容
+     */
+    private String content;
+
 }

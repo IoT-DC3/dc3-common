@@ -90,10 +90,10 @@ public enum PointTypeFlagEnum {
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举编码获取枚举
      *
-     * @param code Code
-     * @return PointTypeFlagEnum
+     * @param code 编码
+     * @return {@link PointTypeFlagEnum}
      */
     public static PointTypeFlagEnum ofCode(String code) {
         Optional<PointTypeFlagEnum> any = Arrays.stream(PointTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -101,10 +101,10 @@ public enum PointTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举名称获取枚举
      *
-     * @param name Name
-     * @return PointTypeFlagEnum
+     * @param name 枚举名称
+     * @return {@link PointTypeFlagEnum}
      */
     public static PointTypeFlagEnum ofName(String name) {
         try {
