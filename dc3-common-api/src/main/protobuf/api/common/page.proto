@@ -24,7 +24,7 @@ option java_outer_classname = "PageProto";
 option java_multiple_files = true;
 
 /*Page DTO*/
-message PageDTO {
+message GrpcPageDTO {
     /*总数*/
     int64 total = 1;
 

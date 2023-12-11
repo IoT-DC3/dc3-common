@@ -41,8 +41,7 @@ public class EnvironmentUtil {
      * @return String Suffix
      */
     public static String getNodeId() {
-        String random = RandomUtil.randomString(8);
-        return random;
+        return RandomUtil.randomString(8);
     }
 
     /**

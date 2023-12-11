@@ -16,9 +16,8 @@
 
 package io.github.pnoker.common.mqtt.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -27,6 +26,7 @@ import java.io.Serializable;
  * @since 2022.1.0
  */
 @Data
+@Builder
 public class MqttMessage implements Serializable {
     private MessageHeader header;
     private String payload;

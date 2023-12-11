@@ -16,31 +16,49 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.constant.enums.AttributeTypeFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import io.github.pnoker.common.base.BaseDTO;
+import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import lombok.Data;
-
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
- * 属性配置
+ * DriverAttributeConfig BO
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@Builder
-@AllArgsConstructor
-public class AttributeInfoDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-    /**
-     * 值，string，需要通过type确定真实的数据类型
-     */
-    private String value;
+@SuperBuilder
+@RequiredArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class DriverAttributeConfigDTO extends BaseDTO {
 
     /**
-     * 类型，value type，用于确定value的真实类型
+     * 驱动属性ID
      */
-    private AttributeTypeFlagEnum type;
+    private Long driverAttributeId;
+
+    /**
+     * 驱动属性配置值
+     */
+    private String configValue;
+
+    /**
+     * 设备ID
+     */
+    private Long deviceId;
+
+    /**
+     * 使能标识
+     */
+    private EnableFlagEnum enableFlag;
+
+    /**
+     * 租户ID
+     */
+    private Long tenantId;
 }

@@ -66,7 +66,7 @@ public class MqttReceiveHandler {
                     return;
                 }
                 MqttScheduleJob.messageCount.getAndIncrement();
-                MqttMessage mqttMessage = new MqttMessage(messageHeader, payload);
+                MqttMessage mqttMessage = MqttMessage.builder().header(messageHeader).payload(payload).build();
                 log.debug("Mqtt inbound, From: {}, Qos: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos(), payload);
 
                 // Judge whether to process data in batch according to the data transmission speed
