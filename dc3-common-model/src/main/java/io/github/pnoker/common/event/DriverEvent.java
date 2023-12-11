@@ -33,8 +33,6 @@ import java.util.Date;
  */
 @Data
 @Document
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DriverEvent implements Serializable {
     private static final long serialVersionUID = 1L;

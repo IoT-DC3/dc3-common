@@ -28,14 +28,14 @@
     </parent>
 
     <name>${project.artifactId}</name>
-    <artifactId>dc3-common-public</artifactId>
+    <artifactId>dc3-common-transfer</artifactId>
     <version>2023.4.5</version>
     <packaging>jar</packaging>
 
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
     <description>
-        IOT DC3 平台 公共配置。
+        IOT DC3 平台 公共的 Transfer 配置。
     </description>
 
     <developers>
@@ -63,16 +63,16 @@
 
     <dependencies>
 
-        <!-- Spring Web -->
+        <!-- Influxdb -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
         </dependency>
 
-        <!-- Mybatis Plus Core -->
+        <!-- Spring Data MongoDB -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-core</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
         </dependency>
 
         <!-- Mybatis Plus Extension -->
@@ -81,34 +81,10 @@
             <artifactId>mybatis-plus-extension</artifactId>
         </dependency>
 
-        <!-- Caffeine Cache -->
+        <!-- Hibernate Validator -->
         <dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-        </dependency>
-
-        <!-- Apache Poi -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-        </dependency>
-
-        <!-- Jwt -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-        </dependency>
-
-        <!-- Commons IO -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-
-        <!-- File Upload -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
         <!-- Jackson 相关 -->
@@ -123,12 +99,6 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-        </dependency>
-
-        <!-- Bouncy Castle 相关 -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
         </dependency>
 
         <!-- Swagger Annotations -->

@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.driver;
+package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * 属性配置
@@ -28,9 +29,9 @@ import lombok.NoArgsConstructor;
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AttributeInfo {
+@Builder
+public class AttributeInfoDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 值，string，需要通过type确定真实的数据类型
      */

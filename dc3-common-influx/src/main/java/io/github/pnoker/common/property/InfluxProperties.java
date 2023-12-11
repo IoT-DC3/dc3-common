@@ -26,8 +26,6 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Validated
-@NoArgsConstructor
-@AllArgsConstructor
 @ConfigurationProperties(prefix = "influx")
 public class InfluxProperties {
 

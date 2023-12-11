@@ -32,8 +32,6 @@ import java.util.UUID;
  */
 @Data
 @Slf4j
-@NoArgsConstructor
-@AllArgsConstructor
 public class MessageHeader implements Serializable {
 
     private UUID id;

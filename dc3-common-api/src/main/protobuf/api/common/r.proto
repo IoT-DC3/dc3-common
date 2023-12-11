@@ -18,14 +18,19 @@ syntax = "proto3";
 
 package api.common;
 
-// 配置相关
+/*配置相关*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "RProto";
 option java_multiple_files = true;
 
-// R DTO
+/*R DTO*/
 message RDTO {
-    bool ok = 1; // 是否成功
-    string code = 2; // 状态码
-    string message = 3; // 消息
+    /*是否成功*/
+    bool ok = 1;
+
+    /*状态码*/
+    string code = 2;
+
+    /*消息*/
+    string message = 3; 
 }

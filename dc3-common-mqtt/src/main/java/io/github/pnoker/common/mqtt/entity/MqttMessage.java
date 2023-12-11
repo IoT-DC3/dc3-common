@@ -27,8 +27,6 @@ import java.io.Serializable;
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MqttMessage implements Serializable {
     private MessageHeader header;
     private String payload;

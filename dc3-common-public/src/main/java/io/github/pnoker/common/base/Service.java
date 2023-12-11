@@ -25,6 +25,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  * @since 2022.1.0
  */
 public interface Service<B, Q> {
+
     /**
      * <p>
      * 新增

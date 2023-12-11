@@ -16,27 +16,47 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
+import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 /**
+ * 元数据
+ *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class DriverSyncUpDTO implements Serializable {
+public class DriverTransferMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String tenant;
-    private String client;
-    private DriverDTO driver;
-    private List<DriverAttributeDTO> driverAttributes;
-    private List<PointAttributeDTO> pointAttributes;
+    /**
+     * 元数据类型
+     */
+    private MetadataTypeEnum type;
 
+    /**
+     * 元数据操作类型
+     */
+    private MetadataCommandTypeEnum metadataCommandType;
+
+    /**
+     * 元数据内容
+     */
+    private String content;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    public DriverTransferMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
+        this.type = type;
+        this.metadataCommandType = metadataCommandType;
+        this.content = content;
+        this.createTime = new Date();
+    }
 }
