@@ -18,13 +18,34 @@ syntax = "proto3";
 
 package api.common;
 
-import "api/common/accrue_enum.proto";
-import "api/common/driver_type_enum.proto";
-import "api/common/enable_enum.proto";
-import "api/common/point_type_enum.proto";
-import "api/common/rw_enum.proto";
-
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
-option java_outer_classname = "EnumsProto";
+option java_outer_classname = "AccrueFlagEnumProto";
 option java_multiple_files = true;
+
+/*通用累计类型枚举*/
+enum AccrueFlagDTOEnum {
+    /*字符串*/
+    STRING = 0;
+
+    /*字节*/
+    BYTE = 1;
+
+    /*短整数*/
+    SHORT = 2;
+
+    /*整数*/
+    INT = 3;
+
+    /*长整数*/
+    LONG = 4;
+
+    /*浮点数*/
+    FLOAT = 5;
+
+    /*双精度浮点数*/
+    DOUBLE = 6;
+
+    /*布尔量*/
+    BOOLEAN = 7;
+}

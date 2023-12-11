@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,29 +24,38 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用模板类型标识枚举
+ * 通用驱动事件枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum ProfileTypeFlagEnum {
+public enum DeviceCommandTypeEnum {
+    /**
+     * 读位号值类型指令
+     */
+    READ((byte) 0x00, "read", "读位号值类型指令"),
 
     /**
-     * 系统创建
+     * 批量读位号值类型指令
      */
-    SYSTEM((byte) 0x00, "system", "系统创建"),
+    READ_BATCH((byte) 0x01, "read_batch", "批量读位号值类型指令"),
 
     /**
-     * 驱动创建
+     * 写位号值类型指令
      */
-    DRIVER((byte) 0x01, "driver", "驱动创建"),
+    WRITE((byte) 0x02, "write", "写位号值类型指令"),
 
     /**
-     * 用户创建
+     * 批量写位号值类型指令
      */
-    USER((byte) 0x02, "user", "用户创建"),
+    WRITE_BATCH((byte) 0x03, "write_batch", "批量写位号值类型指令"),
+
+    /**
+     * 配置设备类型指令
+     */
+    CONFIG((byte) 0x04, "config", "配置设备类型指令"),
     ;
 
     /**
@@ -69,10 +78,10 @@ public enum ProfileTypeFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link ProfileTypeFlagEnum}
+     * @return {@link DeviceCommandTypeEnum}
      */
-    public static ProfileTypeFlagEnum ofCode(String code) {
-        Optional<ProfileTypeFlagEnum> any = Arrays.stream(ProfileTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DeviceCommandTypeEnum ofCode(String code) {
+        Optional<DeviceCommandTypeEnum> any = Arrays.stream(DeviceCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -80,9 +89,9 @@ public enum ProfileTypeFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link ProfileTypeFlagEnum}
+     * @return {@link DeviceCommandTypeEnum}
      */
-    public static ProfileTypeFlagEnum ofName(String name) {
+    public static DeviceCommandTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

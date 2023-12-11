@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,23 +24,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动事件枚举
+ * 通用模板共享类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DeviceEventTypeEnum {
+public enum ProfileShareFlagEnum {
     /**
-     * 心跳事件
+     * 租户下共享模板
      */
-    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
+    TENANT((byte) 0x00, "tenant", "租户下共享模板"),
 
     /**
-     * 报警事件
+     * 驱动下共享模板
      */
-    ALARM((byte) 0x01, "alarm", "报警事件"),
+    DRIVER((byte) 0x01, "driver", "驱动下共享模板"),
+
+    /**
+     * 用户下共享模板
+     */
+    USER((byte) 0x02, "user", "用户下共享模板"),
     ;
 
     /**
@@ -63,10 +68,10 @@ public enum DeviceEventTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DeviceEventTypeEnum}
+     * @return {@link ProfileShareFlagEnum}
      */
-    public static DeviceEventTypeEnum ofCode(String code) {
-        Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ProfileShareFlagEnum ofCode(String code) {
+        Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -74,9 +79,9 @@ public enum DeviceEventTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DeviceEventTypeEnum}
+     * @return {@link ProfileShareFlagEnum}
      */
-    public static DeviceEventTypeEnum ofName(String name) {
+    public static ProfileShareFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

@@ -20,17 +20,20 @@ package api.common;
 
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
-option java_outer_classname = "EnableFlagEnumProto";
+option java_outer_classname = "AccrueFlagEnumProto";
 option java_multiple_files = true;
 
-/*通用使能标识枚举*/
-enum EnableFlagDTOEnum {
-    /*禁用*/
-    DISABLE = 0;
+/*通用累计类型枚举*/
+enum AccrueFlagDTOEnum {
+    /*POST*/
+    POST = 0;
 
-    /*启用*/
-    ENABLE = 1;
+    /*DELETE*/
+    DELETE = 1;
 
-    /*暂存*/
-    TEMP = 2;
+    /*PUT*/
+    PUT = 2;
+
+    /*GET*/
+    GET = 3;
 }

@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.DeviceEventTypeEnum;
-import io.github.pnoker.common.enums.DriverStatusEnum;
+import io.github.pnoker.common.constant.enums.DeviceEventTypeEnum;
+import io.github.pnoker.common.constant.enums.DriverStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

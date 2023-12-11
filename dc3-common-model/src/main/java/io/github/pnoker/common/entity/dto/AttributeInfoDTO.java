@@ -16,8 +16,7 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
-import lombok.AllArgsConstructor;
+import io.github.pnoker.common.constant.enums.AttributeTypeFlagEnum;
 import lombok.Builder;
 import lombok.Data;
 

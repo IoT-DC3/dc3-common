@@ -18,48 +18,34 @@ syntax = "proto3";
 
 package api.common;
 
-import "google/protobuf/descriptor.proto";
-
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "PointTypeFlagEnumProto";
 option java_multiple_files = true;
 
-/*拓展枚举参数*/
-extend google.protobuf.EnumValueOptions {
-    /*索引*/
-    int32 index = 1000;
-
-    /*编码*/
-    string code = 2000;
-
-    /*备注*/
-    string remark = 3000;
-}
-
 /*通用位号类型标识枚举*/
 enum PointTypeFlagDTOEnum {
     /*字符串*/
-    STRING = 0 [(index) = 0, (code) = "string", (remark) = "字符串"];
+    STRING = 0;
 
     /*字节*/
-    BYTE = 1 [(index) = 1, (code) = "byte", (remark) = "字节"];
+    BYTE = 1;
 
     /*短整数*/
-    SHORT = 2 [(index) = 2, (code) = "short", (remark) = "短整数"];
+    SHORT = 2;
 
     /*整数*/
-    INT = 3 [(index) = 3, (code) = "int", (remark) = "整数"];
+    INT = 3;
 
     /*长整数*/
-    LONG = 4 [(index) = 4, (code) = "long", (remark) = "长整数"];
+    LONG = 4;
 
     /*浮点数*/
-    FLOAT = 5 [(index) = 5, (code) = "float", (remark) = "浮点数"];
+    FLOAT = 5;
 
     /*双精度浮点数*/
-    DOUBLE = 6 [(index) = 6, (code) = "double", (remark) = "双精度浮点数"];
+    DOUBLE = 6;
 
     /*布尔量*/
-    BOOLEAN = 7 [(index) = 7, (code) = "boolean", (remark) = "布尔量"];
+    BOOLEAN = 7;
 }

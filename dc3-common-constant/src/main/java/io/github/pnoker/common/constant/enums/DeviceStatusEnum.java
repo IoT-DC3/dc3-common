@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,38 +23,23 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用模板共享类型标识枚举
+ * 设备状态枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum ProfileShareFlagEnum {
-    /**
-     * 租户下共享模板
-     */
-    TENANT((byte) 0x00, "tenant", "租户下共享模板"),
-
-    /**
-     * 驱动下共享模板
-     */
-    DRIVER((byte) 0x01, "driver", "驱动下共享模板"),
-
-    /**
-     * 用户下共享模板
-     */
-    USER((byte) 0x02, "user", "用户下共享模板"),
+public enum DeviceStatusEnum {
+    ONLINE("ONLINE", "在线"),
+    OFFLINE("OFFLINE", "离线"),
+    MAINTAIN("MAINTAIN", "维护"),
+    FAULT("FAULT", "故障"),
     ;
 
-    /**
-     * 索引
-     */
-    @EnumValue
-    private final Byte index;
 
     /**
-     * 编码
+     * 状态编码
      */
     private final String code;
 
@@ -68,10 +52,10 @@ public enum ProfileShareFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link ProfileShareFlagEnum}
+     * @return {@link DeviceStatusEnum}
      */
-    public static ProfileShareFlagEnum ofCode(String code) {
-        Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DeviceStatusEnum ofCode(String code) {
+        Optional<DeviceStatusEnum> any = Arrays.stream(DeviceStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +63,9 @@ public enum ProfileShareFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link ProfileShareFlagEnum}
+     * @return {@link DriverStatusEnum}
      */
-    public static ProfileShareFlagEnum ofName(String name) {
+    public static DeviceStatusEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

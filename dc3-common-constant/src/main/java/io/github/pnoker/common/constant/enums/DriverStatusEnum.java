@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,38 +23,23 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用累计类型枚举
+ * 驱动状态枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum AccrueFlagEnum {
-    /**
-     * 无规律
-     */
-    NONE((byte) 0x00, "none", "无规律"),
-
-    /**
-     * 递增
-     */
-    INCREMENT((byte) 0x01, "increment", "递增"),
-
-    /**
-     * 递减
-     */
-    DECREMENT((byte) 0x02, "decrement", "递减"),
+public enum DriverStatusEnum {
+    ONLINE("ONLINE", "在线"),
+    OFFLINE("OFFLINE", "离线"),
+    MAINTAIN("MAINTAIN", "维护"),
+    FAULT("FAULT", "故障"),
     ;
 
-    /**
-     * 索引
-     */
-    @EnumValue
-    private final Byte index;
 
     /**
-     * 编码
+     * 状态编码
      */
     private final String code;
 
@@ -68,10 +52,10 @@ public enum AccrueFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link AccrueFlagEnum}
+     * @return {@link DriverStatusEnum}
      */
-    public static AccrueFlagEnum ofCode(String code) {
-        Optional<AccrueFlagEnum> any = Arrays.stream(AccrueFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverStatusEnum ofCode(String code) {
+        Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +63,9 @@ public enum AccrueFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link AccrueFlagEnum}
+     * @return {@link DriverStatusEnum}
      */
-    public static AccrueFlagEnum ofName(String name) {
+    public static DriverStatusEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

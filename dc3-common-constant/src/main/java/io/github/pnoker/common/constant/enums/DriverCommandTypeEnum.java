@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,43 +24,18 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用元数据类型枚举
+ * 通用驱动事件枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MetadataTypeEnum {
+public enum DriverCommandTypeEnum {
     /**
-     * 元数据
+     * 驱动配置类型指令
      */
-    METADATA((byte) 0x00, "metadata", "元数据"),
-
-    /**
-     * 模板类型元数据
-     */
-    PROFILE((byte) 0x01, "profile", "模板类型元数据"),
-
-    /**
-     * 位号类型元数据
-     */
-    POINT((byte) 0x02, "point", "位号类型元数据"),
-
-    /**
-     * 设备类型元数据
-     */
-    DEVICE((byte) 0x03, "device", "设备类型元数据"),
-
-    /**
-     * 驱动属性配置类型元数据
-     */
-    DRIVER_ATTRIBUTE_CONFIG((byte) 0x04, "driver_attribute_config", "驱动属性配置类型元数据"),
-
-    /**
-     * 位号属性配置类型元数据
-     */
-    POINT_ATTRIBUTE_CONFIG((byte) 0x05, "point_attribute_config", "位号属性配置类型元数据"),
+    CONFIG((byte) 0x00, "config", "驱动配置类型指令"),
     ;
 
     /**
@@ -83,10 +58,10 @@ public enum MetadataTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link MetadataTypeEnum}
+     * @return {@link DriverCommandTypeEnum}
      */
-    public static MetadataTypeEnum ofCode(String code) {
-        Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverCommandTypeEnum ofCode(String code) {
+        Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -94,9 +69,9 @@ public enum MetadataTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link MetadataTypeEnum}
+     * @return {@link DriverCommandTypeEnum}
      */
-    public static MetadataTypeEnum ofName(String name) {
+    public static DriverCommandTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

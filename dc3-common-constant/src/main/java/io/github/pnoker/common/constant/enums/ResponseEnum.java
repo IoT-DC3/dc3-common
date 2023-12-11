@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,60 +23,45 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用权限范围类型枚举
+ * 通用返回结果枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum ResourceScopeFlagEnum {
+public enum ResponseEnum {
 
-    /**
-     * 驱动
-     */
-    ADD((byte) 0x01, "add", "新增"),
+    OK("R200", "成功"),
+    TOKEN_INVALID("R20301", "令牌无效"),
+    IP_INVALID("R20302", "IP无效"),
+    FAILURE("R500", "服务异常"),
+    NO_RESOURCE("R404", "资源不存在"),
+    OUT_RANGE("R900", "数字超出范围"),
 
-    /**
-     * 模板
-     */
-    DELETE((byte) 0x02, "delete", "删除"),
-
-    /**
-     * 位号
-     */
-    UPDATE((byte) 0x04, "update", "更新"),
-
-    /**
-     * 设备
-     */
-    LIST((byte) 0x08, "list", "查询"),
+    ADD_SUCCESS("R20001", "添加成功"),
+    DELETE_SUCCESS("R20002", "删除成功"),
+    UPDATE_SUCCESS("R20003", "更新成功"),
     ;
 
     /**
-     * 索引
-     */
-    @EnumValue
-    private final Byte index;
-
-    /**
-     * 编码
+     * 返回结果编码
      */
     private final String code;
 
     /**
-     * 备注
+     * 返回结果信息
      */
-    private final String remark;
+    private final String message;
 
     /**
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link ResourceScopeFlagEnum}
+     * @return {@link ResponseEnum}
      */
-    public static ResourceScopeFlagEnum ofCode(String code) {
-        Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ResponseEnum ofCode(String code) {
+        Optional<ResponseEnum> any = Arrays.stream(ResponseEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -85,9 +69,9 @@ public enum ResourceScopeFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link ResourceScopeFlagEnum}
+     * @return {@link ResponseEnum}
      */
-    public static ResourceScopeFlagEnum ofName(String name) {
+    public static ResponseEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

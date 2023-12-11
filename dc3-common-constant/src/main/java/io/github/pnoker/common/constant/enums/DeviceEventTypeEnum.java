@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,28 +24,23 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用读写标识枚举
+ * 通用驱动事件枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum RwFlagEnum {
+public enum DeviceEventTypeEnum {
     /**
-     * 只读
+     * 心跳事件
      */
-    R((byte) 0x00, "r", "只读"),
+    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
 
     /**
-     * 只写
+     * 报警事件
      */
-    W((byte) 0x01, "w", "只写"),
-
-    /**
-     * 读写
-     */
-    RW((byte) 0x02, "rw", "读写"),
+    ALARM((byte) 0x01, "alarm", "报警事件"),
     ;
 
     /**
@@ -68,10 +63,10 @@ public enum RwFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link RwFlagEnum}
+     * @return {@link DeviceEventTypeEnum}
      */
-    public static RwFlagEnum ofCode(String code) {
-        Optional<RwFlagEnum> any = Arrays.stream(RwFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DeviceEventTypeEnum ofCode(String code) {
+        Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +74,9 @@ public enum RwFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link RwFlagEnum}
+     * @return {@link DeviceEventTypeEnum}
      */
-    public static RwFlagEnum ofName(String name) {
+    public static DeviceEventTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

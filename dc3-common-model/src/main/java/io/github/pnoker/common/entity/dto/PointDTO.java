@@ -17,9 +17,9 @@
 package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.base.BaseDTO;
-import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.PointTypeFlagEnum;
-import io.github.pnoker.common.enums.RwFlagEnum;
+import io.github.pnoker.common.constant.enums.EnableFlagEnum;
+import io.github.pnoker.common.constant.enums.PointTypeFlagEnum;
+import io.github.pnoker.common.constant.enums.RwFlagEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;

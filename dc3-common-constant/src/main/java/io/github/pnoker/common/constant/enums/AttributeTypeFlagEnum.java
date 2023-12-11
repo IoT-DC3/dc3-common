@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,34 +24,53 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用菜单类型枚举
+ * 通用属性类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum ApiTypeFlagEnum {
+public enum AttributeTypeFlagEnum {
+    /**
+     * 字符串
+     */
+    STRING((byte) 0x00, "string", "字符串"),
 
     /**
-     * POST
+     * 字节
      */
-    POST((byte) 0x00, "post", "POST"),
+    BYTE((byte) 0x01, "byte", "字节"),
 
     /**
-     * DELETE
+     * 短整数
      */
-    DELETE((byte) 0x01, "delete", "DELETE"),
+    SHORT((byte) 0x02, "short", "短整数"),
 
     /**
-     * PUT
+     * 整数
      */
-    PUT((byte) 0x02, "put", "PUT"),
+    INT((byte) 0x03, "int", "整数"),
 
     /**
-     * GET
+     * 长整数
      */
-    GET((byte) 0x03, "get", "GET"),
+    LONG((byte) 0x04, "long", "长整数"),
+
+    /**
+     * 浮点数
+     */
+    FLOAT((byte) 0x05, "float", "浮点数"),
+
+    /**
+     * 双精度浮点数
+     */
+    DOUBLE((byte) 0x06, "double", "双精度浮点数"),
+
+    /**
+     * 布尔量
+     */
+    BOOLEAN((byte) 0x07, "boolean", "布尔量"),
     ;
 
     /**
@@ -74,10 +93,10 @@ public enum ApiTypeFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link ApiTypeFlagEnum}
+     * @return {@link AttributeTypeFlagEnum}
      */
-    public static ApiTypeFlagEnum ofCode(String code) {
-        Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static AttributeTypeFlagEnum ofCode(String code) {
+        Optional<AttributeTypeFlagEnum> any = Arrays.stream(AttributeTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -85,9 +104,9 @@ public enum ApiTypeFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link ApiTypeFlagEnum}
+     * @return {@link AttributeTypeFlagEnum}
      */
-    public static ApiTypeFlagEnum ofName(String name) {
+    public static AttributeTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

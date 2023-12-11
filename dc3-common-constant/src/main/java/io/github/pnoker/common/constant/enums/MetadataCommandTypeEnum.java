@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,38 +24,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动事件枚举
+ * 通用元数据指令类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DeviceCommandTypeEnum {
+public enum MetadataCommandTypeEnum {
     /**
-     * 读位号值类型指令
+     * 新增
      */
-    READ((byte) 0x00, "read", "读位号值类型指令"),
+    ADD((byte) 0x00, "add", "新增"),
 
     /**
-     * 批量读位号值类型指令
+     * 删除
      */
-    READ_BATCH((byte) 0x01, "read_batch", "批量读位号值类型指令"),
+    DELETE((byte) 0x01, "delete", "删除"),
 
     /**
-     * 写位号值类型指令
+     * 更新
      */
-    WRITE((byte) 0x02, "write", "写位号值类型指令"),
-
-    /**
-     * 批量写位号值类型指令
-     */
-    WRITE_BATCH((byte) 0x03, "write_batch", "批量写位号值类型指令"),
-
-    /**
-     * 配置设备类型指令
-     */
-    CONFIG((byte) 0x04, "config", "配置设备类型指令"),
+    UPDATE((byte) 0x02, "update", "更新"),
     ;
 
     /**
@@ -78,10 +68,10 @@ public enum DeviceCommandTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DeviceCommandTypeEnum}
+     * @return {@link MetadataCommandTypeEnum}
      */
-    public static DeviceCommandTypeEnum ofCode(String code) {
-        Optional<DeviceCommandTypeEnum> any = Arrays.stream(DeviceCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MetadataCommandTypeEnum ofCode(String code) {
+        Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -89,9 +79,9 @@ public enum DeviceCommandTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DeviceCommandTypeEnum}
+     * @return {@link MetadataCommandTypeEnum}
      */
-    public static DeviceCommandTypeEnum ofName(String name) {
+    public static MetadataCommandTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

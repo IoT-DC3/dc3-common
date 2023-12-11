@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,35 +23,16 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动类型标识枚举
+ * 通用实体分组标识枚举
+ * //TODO 需要结合实际服务进行区分，例如manager、data、auth的分组逻辑是不一样的，需要区分开来
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverTypeFlagEnum {
-    /**
-     * 协议驱动
-     */
-    DRIVER((byte) 0x00, "driver", "协议类型驱动"),
-
-    /**
-     * 网关驱动
-     */
-    GATEWAY((byte) 0x01, "gateway", "网关类型驱动"),
-
-    /**
-     * 串联驱动
-     */
-    CONNECT((byte) 0x02, "connect", "串联类型驱动"),
+public enum GroupTypeFlagEnum {
     ;
-
-    /**
-     * 索引
-     */
-    @EnumValue
-    private final Byte index;
 
     /**
      * 编码
@@ -68,10 +48,10 @@ public enum DriverTypeFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DriverTypeFlagEnum}
+     * @return {@link GroupTypeFlagEnum}
      */
-    public static DriverTypeFlagEnum ofCode(String code) {
-        Optional<DriverTypeFlagEnum> any = Arrays.stream(DriverTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static GroupTypeFlagEnum ofCode(String code) {
+        Optional<GroupTypeFlagEnum> any = Arrays.stream(GroupTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +59,9 @@ public enum DriverTypeFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DriverTypeFlagEnum}
+     * @return {@link GroupTypeFlagEnum}
      */
-    public static DriverTypeFlagEnum ofName(String name) {
+    public static GroupTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

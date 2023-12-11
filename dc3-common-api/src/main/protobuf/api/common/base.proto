@@ -24,7 +24,7 @@ option java_outer_classname = "BaseProto";
 option java_multiple_files = true;
 
 /*Base DTO*/
-message BaseDTO {
+message GrpcBaseDTO {
     /*主键ID*/
     int64 id = 1;
 

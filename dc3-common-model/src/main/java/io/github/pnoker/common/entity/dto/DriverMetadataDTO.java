@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.entity.dto.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Map;

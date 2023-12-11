@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,24 +24,28 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用菜单类型枚举
+ * 通用使能标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MenuTypeFlagEnum {
+public enum EnableFlagEnum {
+    /**
+     * 禁用
+     */
+    DISABLE((byte) 0x00, "disable", "禁用"),
 
     /**
-     * 标题菜单
+     * 启用
      */
-    TITLE((byte) 0x00, "title", "标题菜单"),
+    ENABLE((byte) 0x01, "enable", "启用"),
 
     /**
-     * 通用菜单
+     * 暂存
      */
-    COMMON((byte) 0x01, "common", "通用菜单"),
+    TEMP((byte) 0x02, "temp", "暂存"),
     ;
 
     /**
@@ -64,10 +68,10 @@ public enum MenuTypeFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link MenuTypeFlagEnum}
+     * @return {@link EnableFlagEnum}
      */
-    public static MenuTypeFlagEnum ofCode(String code) {
-        Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static EnableFlagEnum ofCode(String code) {
+        Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -75,9 +79,9 @@ public enum MenuTypeFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link MenuTypeFlagEnum}
+     * @return {@link EnableFlagEnum}
      */
-    public static MenuTypeFlagEnum ofName(String name) {
+    public static EnableFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

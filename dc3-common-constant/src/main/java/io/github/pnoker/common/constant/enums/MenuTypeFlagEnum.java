@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,23 +24,34 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 设备状态枚举
+ * 通用菜单类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DeviceStatusEnum {
-    ONLINE("ONLINE", "在线"),
-    OFFLINE("OFFLINE", "离线"),
-    MAINTAIN("MAINTAIN", "维护"),
-    FAULT("FAULT", "故障"),
-    ;
-
+public enum MenuTypeFlagEnum {
 
     /**
-     * 状态编码
+     * 标题菜单
+     */
+    TITLE((byte) 0x00, "title", "标题菜单"),
+
+    /**
+     * 通用菜单
+     */
+    COMMON((byte) 0x01, "common", "通用菜单"),
+    ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
+
+    /**
+     * 编码
      */
     private final String code;
 
@@ -52,10 +64,10 @@ public enum DeviceStatusEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DeviceStatusEnum}
+     * @return {@link MenuTypeFlagEnum}
      */
-    public static DeviceStatusEnum ofCode(String code) {
-        Optional<DeviceStatusEnum> any = Arrays.stream(DeviceStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MenuTypeFlagEnum ofCode(String code) {
+        Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -63,9 +75,9 @@ public enum DeviceStatusEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DriverStatusEnum}
+     * @return {@link MenuTypeFlagEnum}
      */
-    public static DeviceStatusEnum ofName(String name) {
+    public static MenuTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

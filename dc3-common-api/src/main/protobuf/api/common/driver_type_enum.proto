@@ -18,33 +18,19 @@ syntax = "proto3";
 
 package api.common;
 
-import "google/protobuf/descriptor.proto";
-
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "DriverTypeFlagEnumProto";
 option java_multiple_files = true;
 
-/*拓展枚举参数*/
-extend google.protobuf.EnumValueOptions {
-    /*索引*/
-    int32 index = 1000;
-
-    /*编码*/
-    string code = 2000;
-
-    /*备注*/
-    string remark = 3000;
-}
-
 /*通用驱动类型标识枚举*/
 enum DriverTypeFlagDTOEnum {
     /*协议类型驱动*/
-    DRIVER = 0 [(index) = 0, (code) = "driver", (remark) = "协议类型驱动"];
+    DRIVER = 0;
 
     /*网关类型驱动*/
-    GATEWAY = 1 [(index) = 1, (code) = "gateway", (remark) = "网关类型驱动"];
+    GATEWAY = 1;
 
     /*串联类型驱动*/
-    CONNECT = 2 [(index) = 2, (code) = "connect", (remark) = "串联类型驱动"];
+    CONNECT = 2;
 }

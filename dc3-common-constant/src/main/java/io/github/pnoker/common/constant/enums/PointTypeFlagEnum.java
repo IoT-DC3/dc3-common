@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,28 +24,53 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用元数据指令类型枚举
+ * 通用位号类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MetadataCommandTypeEnum {
+public enum PointTypeFlagEnum {
     /**
-     * 新增
+     * 字符串
      */
-    ADD((byte) 0x00, "add", "新增"),
+    STRING((byte) 0x00, "string", "字符串"),
 
     /**
-     * 删除
+     * 字节
      */
-    DELETE((byte) 0x01, "delete", "删除"),
+    BYTE((byte) 0x01, "byte", "字节"),
 
     /**
-     * 更新
+     * 短整数
      */
-    UPDATE((byte) 0x02, "update", "更新"),
+    SHORT((byte) 0x02, "short", "短整数"),
+
+    /**
+     * 整数
+     */
+    INT((byte) 0x03, "int", "整数"),
+
+    /**
+     * 长整数
+     */
+    LONG((byte) 0x04, "long", "长整数"),
+
+    /**
+     * 浮点数
+     */
+    FLOAT((byte) 0x05, "float", "浮点数"),
+
+    /**
+     * 双精度浮点数
+     */
+    DOUBLE((byte) 0x06, "double", "双精度浮点数"),
+
+    /**
+     * 布尔量
+     */
+    BOOLEAN((byte) 0x07, "boolean", "布尔量"),
     ;
 
     /**
@@ -68,10 +93,10 @@ public enum MetadataCommandTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link MetadataCommandTypeEnum}
+     * @return {@link PointTypeFlagEnum}
      */
-    public static MetadataCommandTypeEnum ofCode(String code) {
-        Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static PointTypeFlagEnum ofCode(String code) {
+        Optional<PointTypeFlagEnum> any = Arrays.stream(PointTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +104,9 @@ public enum MetadataCommandTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link MetadataCommandTypeEnum}
+     * @return {@link PointTypeFlagEnum}
      */
-    public static MetadataCommandTypeEnum ofName(String name) {
+    public static PointTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

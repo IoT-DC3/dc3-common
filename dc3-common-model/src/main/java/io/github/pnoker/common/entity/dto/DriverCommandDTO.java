@@ -16,10 +16,8 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.DriverCommandTypeEnum;
-import lombok.AllArgsConstructor;
+import io.github.pnoker.common.constant.enums.DriverCommandTypeEnum;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -17,10 +17,9 @@
 package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.enums.ResponseEnum;
-import lombok.AllArgsConstructor;
+import io.github.pnoker.common.constant.enums.ResponseEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -32,16 +31,33 @@ import java.io.Serializable;
  */
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(title = "R", description = "返回")
 public class R<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 响应状态
+     */
+    @Schema(description = "响应状态")
     private boolean ok = false;
+
+    /**
+     * 响应编码
+     */
+    @Schema(description = "响应编码")
     private String code = ResponseEnum.OK.getCode();
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String message = ResponseEnum.FAILURE.getMessage();
+    /**
+     * 响应信息
+     */
+    @Schema(description = "响应信息")
+    private String message = ResponseEnum.OK.getMessage();
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * 响应数据
+     */
+    @Schema(description = "响应数据")
     private T data;
 
     /**
@@ -52,17 +68,6 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> ok() {
         return new R<T>().success();
-    }
-
-    /**
-     * 成功 自定义提示信息
-     *
-     * @param <T>     Object
-     * @param message 成功信息
-     * @return Response
-     */
-    public static <T> R<T> ok(String message) {
-        return new R<T>().success(message);
     }
 
     /**
@@ -122,17 +127,6 @@ public class R<T> implements Serializable {
     }
 
     /**
-     * 失败 自定义提示信息
-     *
-     * @param <T>     Object
-     * @param message 失败信息
-     * @return Response
-     */
-    public static <T> R<T> fail(String message) {
-        return new R<T>().failure(message);
-    }
-
-    /**
      * 失败 自定义 Code 和 提示信息
      *
      * @param <T>  Object
@@ -176,6 +170,12 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> fail(T data, String message) {
         return new R<T>(data).failure(message);
+    }
+
+    /**
+     * 构造函数
+     */
+    private R() {
     }
 
     /**

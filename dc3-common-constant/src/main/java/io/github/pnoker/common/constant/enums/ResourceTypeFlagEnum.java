@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,18 +24,49 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动事件枚举
+ * 通用权限类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverCommandTypeEnum {
+public enum ResourceTypeFlagEnum {
+
     /**
-     * 驱动配置类型指令
+     * 驱动
      */
-    CONFIG((byte) 0x00, "config", "驱动配置类型指令"),
+    DRIVER((byte) 0x00, "driver", "驱动"),
+
+    /**
+     * 模板
+     */
+    PROFILE((byte) 0x01, "profile", "模板"),
+
+    /**
+     * 位号
+     */
+    POINT((byte) 0x01, "point", "位号"),
+
+    /**
+     * 设备
+     */
+    DEVICE((byte) 0x01, "device", "设备"),
+
+    /**
+     * 数据
+     */
+    DATA((byte) 0x01, "data", "数据"),
+
+    /**
+     * 菜单
+     */
+    MENU((byte) 0x01, "menu", "菜单"),
+
+    /**
+     * 接口
+     */
+    API((byte) 0x01, "api", "接口"),
     ;
 
     /**
@@ -58,10 +89,10 @@ public enum DriverCommandTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DriverCommandTypeEnum}
+     * @return {@link ResourceTypeFlagEnum}
      */
-    public static DriverCommandTypeEnum ofCode(String code) {
-        Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ResourceTypeFlagEnum ofCode(String code) {
+        Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -69,9 +100,9 @@ public enum DriverCommandTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DriverCommandTypeEnum}
+     * @return {@link ResourceTypeFlagEnum}
      */
-    public static DriverCommandTypeEnum ofName(String name) {
+    public static ResourceTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

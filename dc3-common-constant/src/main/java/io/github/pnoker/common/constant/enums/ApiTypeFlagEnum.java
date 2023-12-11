@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,24 +24,34 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用驱动事件枚举
+ * 通用菜单类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverEventTypeEnum {
+public enum ApiTypeFlagEnum {
 
     /**
-     * 心跳事件
+     * POST
      */
-    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
+    POST((byte) 0x00, "post", "POST"),
 
     /**
-     * 报警事件
+     * DELETE
      */
-    ALARM((byte) 0x01, "alarm", "报警事件"),
+    DELETE((byte) 0x01, "delete", "DELETE"),
+
+    /**
+     * PUT
+     */
+    PUT((byte) 0x02, "put", "PUT"),
+
+    /**
+     * GET
+     */
+    GET((byte) 0x03, "get", "GET"),
     ;
 
     /**
@@ -64,10 +74,10 @@ public enum DriverEventTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DriverEventTypeEnum}
+     * @return {@link ApiTypeFlagEnum}
      */
-    public static DriverEventTypeEnum ofCode(String code) {
-        Optional<DriverEventTypeEnum> any = Arrays.stream(DriverEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ApiTypeFlagEnum ofCode(String code) {
+        Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -75,9 +85,9 @@ public enum DriverEventTypeEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DriverEventTypeEnum}
+     * @return {@link ApiTypeFlagEnum}
      */
-    public static DriverEventTypeEnum ofName(String name) {
+    public static ApiTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

@@ -100,8 +100,8 @@
 
     </dependencies>
 
-    <profileBOS>
-        <profileBO>
+    <profiles>
+        <profile>
             <id>deploy</id>
             <build>
                 <plugins>
@@ -134,8 +134,8 @@
                     <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
-        </profileBO>
-    </profileBOS>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>

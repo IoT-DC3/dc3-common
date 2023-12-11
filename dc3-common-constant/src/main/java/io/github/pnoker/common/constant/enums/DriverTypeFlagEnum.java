@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,23 +24,38 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 驱动状态枚举
+ * 通用驱动类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum DriverStatusEnum {
-    ONLINE("ONLINE", "在线"),
-    OFFLINE("OFFLINE", "离线"),
-    MAINTAIN("MAINTAIN", "维护"),
-    FAULT("FAULT", "故障"),
-    ;
-
+public enum DriverTypeFlagEnum {
+    /**
+     * 协议驱动
+     */
+    DRIVER((byte) 0x00, "driver", "协议类型驱动"),
 
     /**
-     * 状态编码
+     * 网关驱动
+     */
+    GATEWAY((byte) 0x01, "gateway", "网关类型驱动"),
+
+    /**
+     * 串联驱动
+     */
+    CONNECT((byte) 0x02, "connect", "串联类型驱动"),
+    ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
+
+    /**
+     * 编码
      */
     private final String code;
 
@@ -52,10 +68,10 @@ public enum DriverStatusEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link DriverStatusEnum}
+     * @return {@link DriverTypeFlagEnum}
      */
-    public static DriverStatusEnum ofCode(String code) {
-        Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static DriverTypeFlagEnum ofCode(String code) {
+        Optional<DriverTypeFlagEnum> any = Arrays.stream(DriverTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -63,9 +79,9 @@ public enum DriverStatusEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link DriverStatusEnum}
+     * @return {@link DriverTypeFlagEnum}
      */
-    public static DriverStatusEnum ofName(String name) {
+    public static DriverTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

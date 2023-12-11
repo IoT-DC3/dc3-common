@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,45 +24,55 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用返回结果枚举
+ * 通用模板类型标识枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum ResponseEnum {
+public enum ProfileTypeFlagEnum {
 
-    OK("R200", "Success"),
-    TOKEN_INVALID("R20301", "Token invalid"),
-    IP_INVALID("R20302", "Ip invalid"),
-    FAILURE("R500", "Service exception"),
-    NO_RESOURCE("R404", "Resource does not exist"),
-    OUT_RANGE("R900", "Number out range"),
+    /**
+     * 系统创建
+     */
+    SYSTEM((byte) 0x00, "system", "系统创建"),
 
-    ADD_SUCCESS("R20001", "Added successfully"),
-    DELETE_SUCCESS("R20002", "Deleted successfully"),
-    UPDATE_SUCCESS("R20003", "Updated successfully"),
+    /**
+     * 驱动创建
+     */
+    DRIVER((byte) 0x01, "driver", "驱动创建"),
+
+    /**
+     * 用户创建
+     */
+    USER((byte) 0x02, "user", "用户创建"),
     ;
 
     /**
-     * 返回结果编码
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
+
+    /**
+     * 编码
      */
     private final String code;
 
     /**
-     * 返回结果信息
+     * 备注
      */
-    private final String message;
+    private final String remark;
 
     /**
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link ResponseEnum}
+     * @return {@link ProfileTypeFlagEnum}
      */
-    public static ResponseEnum ofCode(String code) {
-        Optional<ResponseEnum> any = Arrays.stream(ResponseEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ProfileTypeFlagEnum ofCode(String code) {
+        Optional<ProfileTypeFlagEnum> any = Arrays.stream(ProfileTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -69,9 +80,9 @@ public enum ResponseEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link ResponseEnum}
+     * @return {@link ProfileTypeFlagEnum}
      */
-    public static ResponseEnum ofName(String name) {
+    public static ProfileTypeFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

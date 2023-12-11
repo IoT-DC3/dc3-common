@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.enums;
+package io.github.pnoker.common.constant.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
@@ -24,28 +24,43 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用使能标识枚举
+ * 通用元数据类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum EnableFlagEnum {
+public enum MetadataTypeEnum {
     /**
-     * 禁用
+     * 元数据
      */
-    DISABLE((byte) 0x00, "disable", "禁用"),
+    METADATA((byte) 0x00, "metadata", "元数据"),
 
     /**
-     * 启用
+     * 模板类型元数据
      */
-    ENABLE((byte) 0x01, "enable", "启用"),
+    PROFILE((byte) 0x01, "profile", "模板类型元数据"),
 
     /**
-     * 暂存
+     * 位号类型元数据
      */
-    TEMP((byte) 0x02, "temp", "暂存"),
+    POINT((byte) 0x02, "point", "位号类型元数据"),
+
+    /**
+     * 设备类型元数据
+     */
+    DEVICE((byte) 0x03, "device", "设备类型元数据"),
+
+    /**
+     * 驱动属性配置类型元数据
+     */
+    DRIVER_ATTRIBUTE_CONFIG((byte) 0x04, "driver_attribute_config", "驱动属性配置类型元数据"),
+
+    /**
+     * 位号属性配置类型元数据
+     */
+    POINT_ATTRIBUTE_CONFIG((byte) 0x05, "point_attribute_config", "位号属性配置类型元数据"),
     ;
 
     /**
@@ -68,10 +83,10 @@ public enum EnableFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link EnableFlagEnum}
+     * @return {@link MetadataTypeEnum}
      */
-    public static EnableFlagEnum ofCode(String code) {
-        Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MetadataTypeEnum ofCode(String code) {
+        Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,9 +94,9 @@ public enum EnableFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link EnableFlagEnum}
+     * @return {@link MetadataTypeEnum}
      */
-    public static EnableFlagEnum ofName(String name) {
+    public static MetadataTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

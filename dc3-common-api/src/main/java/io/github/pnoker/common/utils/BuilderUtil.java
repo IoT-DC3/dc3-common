@@ -16,9 +16,9 @@
 
 package io.github.pnoker.common.utils;
 
-import io.github.pnoker.api.common.BaseDTO;
+import io.github.pnoker.api.common.GrpcBaseDTO;
+import io.github.pnoker.common.base.BaseBO;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.base.Base;
 
 /**
  * Builder 工具类
@@ -32,16 +32,16 @@ public class BuilderUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    public static BaseDTO buildBaseDTOByDO(Base entityDO) {
-        BaseDTO.Builder builder = BaseDTO.newBuilder();
-        builder.setId(entityDO.getId());
-        builder.setRemark(entityDO.getRemark());
-        builder.setCreatorId(entityDO.getCreatorId());
-        builder.setCreatorName(entityDO.getCreatorName());
-        builder.setCreateTime(entityDO.getCreateTime().getTime());
-        builder.setOperatorId(entityDO.getOperatorId());
-        builder.setOperatorName(entityDO.getOperatorName());
-        builder.setOperateTime(entityDO.getOperateTime().getTime());
+    public static GrpcBaseDTO buildBaseDTOByDO(BaseBO entityBO) {
+        GrpcBaseDTO.Builder builder = GrpcBaseDTO.newBuilder();
+        builder.setId(entityBO.getId());
+        builder.setRemark(entityBO.getRemark());
+        builder.setCreatorId(entityBO.getCreatorId());
+        builder.setCreatorName(entityBO.getCreatorName());
+        builder.setCreateTime(entityBO.getCreateTime().getTime());
+        builder.setOperatorId(entityBO.getOperatorId());
+        builder.setOperatorName(entityBO.getOperatorName());
+        builder.setOperateTime(entityBO.getOperateTime().getTime());
         return builder.build();
     }
 }

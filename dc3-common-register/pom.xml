@@ -56,8 +56,8 @@
         <developerConnection>https://github.com/pnoker/iot-dc3.git</developerConnection>
     </scm>
 
-    <profileBOS>
-        <profileBO>
+    <profiles>
+        <profile>
             <id>deploy</id>
             <build>
                 <plugins>
@@ -90,8 +90,8 @@
                     <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
             </distributionManagement>
-        </profileBO>
-    </profileBOS>
+        </profile>
+    </profiles>
 
     <dependencies>
 
