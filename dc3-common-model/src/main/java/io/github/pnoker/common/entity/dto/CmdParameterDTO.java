@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.driver;
+package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.valid.Read;
 import io.github.pnoker.common.valid.Write;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 指令参数
@@ -32,9 +32,9 @@ import javax.validation.constraints.NotNull;
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CmdParameter {
+@Builder
+public class CmdParameterDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * 设备ID

@@ -16,51 +16,55 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
-import io.github.pnoker.common.enums.MetadataTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.github.pnoker.common.entity.dto.*;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 元数据
+ * 驱动元数据
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class DriverMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 元数据类型
-     */
-    private MetadataTypeEnum type;
+    private Long driverId;
+    private Long tenantId;
+    private Map<Long, DriverAttributeDTO> driverAttributeMap;
+    private Map<Long, PointAttributeDTO> pointAttributeMap;
 
     /**
-     * 元数据操作类型
+     * deviceId(driverAttribute.name,(driverInfo.value,driverAttribute.type))
      */
-    private MetadataCommandTypeEnum metadataCommandType;
+    private Map<Long, Map<String, AttributeInfoDTO>> driverInfoMap;
 
     /**
-     * 元数据内容
+     * deviceId(pointId(pointAttribute.name,(pointInfo.value,pointAttribute.type)))
      */
-    private String content;
+    private Map<Long, Map<Long, Map<String, AttributeInfoDTO>>> pointInfoMap;
 
     /**
-     * 创建时间
+     * deviceId,device
      */
-    private Date createTime;
+    private Map<Long, DeviceDTO> deviceMap;
 
-    public DriverMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
-        this.type = type;
-        this.metadataCommandType = metadataCommandType;
-        this.content = content;
-        this.createTime = new Date();
+    /**
+     * profileId(pointId,point)
+     */
+    private Map<Long, Map<Long, PointDTO>> profilePointMap;
+
+    public DriverMetadataDTO() {
+        this.driverAttributeMap = new ConcurrentHashMap<>(16);
+        this.pointAttributeMap = new ConcurrentHashMap<>(16);
+        this.deviceMap = new ConcurrentHashMap<>(16);
+        this.driverInfoMap = new ConcurrentHashMap<>(16);
+        this.pointInfoMap = new ConcurrentHashMap<>(16);
+        this.profilePointMap = new ConcurrentHashMap<>(16);
     }
 }

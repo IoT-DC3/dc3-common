@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      https:www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,34 +18,33 @@ syntax = "proto3";
 
 package api.common;
 
+import "google/protobuf/descriptor.proto";
+
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
-option java_outer_classname = "BaseProto";
+option java_outer_classname = "EnableFlagEnumProto";
 option java_multiple_files = true;
 
-/*Base DTO*/
-message BaseDTO {
-    /*主键ID*/
-    int64 id = 1;
+/*拓展枚举参数*/
+extend google.protobuf.EnumValueOptions {
+    /*索引*/
+    int32 index = 1000;
 
-    /*描述*/
-    string remark = 2;
+    /*编码*/
+    string code = 2000;
 
-    /*创建者ID*/
-    int64 creator_id = 3;
+    /*备注*/
+    string remark = 3000;
+}
 
-    /*创建者名称*/
-    string creator_name = 4;
+/*通用使能标识枚举*/
+enum EnableFlagDTOEnum {
+    /*禁用*/
+    DISABLE = 0 [(index) = 0, (code) = "disable", (remark) = "禁用"];
 
-    /*创建时间*/
-    int64 create_time = 5;
+    /*启用*/
+    ENABLE = 1 [(index) = 1, (code) = "enable", (remark) = "启用"];
 
-    /*操作者ID*/
-    int64 operator_id = 6;
-
-    /*操作者名称*/
-    string operator_name = 7;
-
-    /*操作时间*/
-    int64 operate_time = 8;
+    /*暂存*/
+    TEMP = 2 [(index) = 2, (code) = "temp", (remark) = "暂存"];
 }

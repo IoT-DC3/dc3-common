@@ -32,8 +32,6 @@ import java.util.Date;
  * @since 2022.1.0
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DriverEventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

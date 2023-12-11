@@ -27,15 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 基础查询类，其中包括分页以及排序
+ * 分页
  *
  * @author pnoker
  * @since 2022.1.0
  */
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "分页")
 public class Pages implements Serializable {
     private static final long serialVersionUID = 1L;
