@@ -22,6 +22,7 @@ import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,7 +35,7 @@ import java.util.List;
  * @since 2022.1.0
  */
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 public class PointValueDTO implements Serializable {
     private static final long serialVersionUID = 1L;

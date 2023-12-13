@@ -16,15 +16,12 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.base.BaseBO;
 import io.github.pnoker.common.base.BaseDTO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.constant.enums.ProfileShareFlagEnum;
 import io.github.pnoker.common.constant.enums.ProfileTypeFlagEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -35,8 +32,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class ProfileDTO extends BaseDTO {
 

@@ -71,6 +71,17 @@ public class R<T> implements Serializable {
     }
 
     /**
+     * 成功 自定义提示信息
+     *
+     * @param <T>     Object
+     * @param message 成功信息
+     * @return Response
+     */
+    public static <T> R<T> ok(String message) {
+        return new R<T>().success(message);
+    }
+
+    /**
      * 成功 自定义 Code 和 提示信息ff
      *
      * @param <T>  Object
@@ -124,6 +135,17 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> fail() {
         return new R<T>().failure();
+    }
+
+    /**
+     * 失败 自定义提示信息
+     *
+     * @param <T>     Object
+     * @param message 失败信息
+     * @return Response
+     */
+    public static <T> R<T> fail(String message) {
+        return new R<T>().failure(message);
     }
 
     /**

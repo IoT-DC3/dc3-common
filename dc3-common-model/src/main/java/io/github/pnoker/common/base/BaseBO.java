@@ -17,9 +17,7 @@
 package io.github.pnoker.common.base;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -33,7 +31,7 @@ import java.util.Date;
  */
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class BaseBO implements Serializable {
     private static final long serialVersionUID = 1L;
 

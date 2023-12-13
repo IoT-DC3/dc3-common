@@ -20,6 +20,7 @@ import io.github.pnoker.common.valid.Read;
 import io.github.pnoker.common.valid.Write;
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,7 +33,7 @@ import java.io.Serializable;
  * @since 2022.1.0
  */
 @Data
-@Builder
+@SuperBuilder
 public class CmdParameterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

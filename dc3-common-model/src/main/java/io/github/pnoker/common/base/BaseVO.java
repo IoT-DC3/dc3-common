@@ -22,7 +22,7 @@ import io.github.pnoker.common.constant.common.TimeConstant;
 import io.github.pnoker.common.valid.Update;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
@@ -37,7 +37,7 @@ import java.util.Date;
  */
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Schema(title = "Base", description = "基础")
 public class BaseVO implements Serializable {

@@ -32,5 +32,5 @@ message GrpcRDTO {
     string code = 2;
 
     /*消息*/
-    string message = 3; 
+    string message = 3;
 }

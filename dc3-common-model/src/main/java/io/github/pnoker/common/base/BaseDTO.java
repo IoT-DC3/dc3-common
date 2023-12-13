@@ -17,7 +17,7 @@
 package io.github.pnoker.common.base;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -31,7 +31,7 @@ import java.util.Date;
  */
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

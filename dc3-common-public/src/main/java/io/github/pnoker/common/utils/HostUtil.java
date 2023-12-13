@@ -69,7 +69,7 @@ public class HostUtil {
      * @return the addresses and hostnames that were resolved from {@code address}.
      */
     public static Set<String> getHostNames(String address, boolean includeLoopback) {
-        Set<String> hostNames = new HashSet<>(16);
+        Set<String> hostNames = new HashSet<>(4);
 
         try {
             InetAddress inetAddress = InetAddress.getByName(address);

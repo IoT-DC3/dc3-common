@@ -18,10 +18,9 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.base.BaseDTO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
@@ -35,8 +34,6 @@ import java.util.Set;
  */
 @Data
 @SuperBuilder
-@RequiredArgsConstructor
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class DeviceDTO extends BaseDTO {
 
@@ -71,5 +68,6 @@ public class DeviceDTO extends BaseDTO {
     private Long tenantId;
 
     // 附加
-    private Set<Long> profileIds = new HashSet<>(8);
+    @Builder.Default
+    private Set<Long> profileIds = new HashSet<>(4);
 }
