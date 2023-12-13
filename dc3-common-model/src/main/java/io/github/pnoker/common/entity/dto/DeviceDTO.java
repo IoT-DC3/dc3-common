@@ -21,6 +21,7 @@ import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
@@ -34,6 +35,7 @@ import java.util.Set;
  */
 @Data
 @SuperBuilder
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class DeviceDTO extends BaseDTO {
 

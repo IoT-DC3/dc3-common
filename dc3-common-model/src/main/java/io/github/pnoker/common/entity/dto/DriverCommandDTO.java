@@ -18,6 +18,8 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.DriverCommandTypeEnum;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +31,8 @@ import java.util.Date;
  * @since 2022.1.0
  */
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public class DriverCommandDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

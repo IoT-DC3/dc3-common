@@ -20,7 +20,7 @@ import io.github.pnoker.common.base.BaseDTO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -31,6 +31,7 @@ import lombok.experimental.SuperBuilder;
  */
 @Data
 @SuperBuilder
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PointAttributeConfigDTO extends BaseDTO {
 

@@ -18,8 +18,8 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.valid.Read;
 import io.github.pnoker.common.valid.Write;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
@@ -34,6 +34,7 @@ import java.io.Serializable;
  */
 @Data
 @SuperBuilder
+@NoArgsConstructor
 public class CmdParameterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -20,6 +20,7 @@ import io.github.pnoker.common.constant.enums.DeviceCommandTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -31,6 +32,8 @@ import java.util.Date;
  * @since 2022.1.0
  */
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public class DeviceCommandDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

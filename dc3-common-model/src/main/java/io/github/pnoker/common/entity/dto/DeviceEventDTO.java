@@ -21,6 +21,7 @@ import io.github.pnoker.common.constant.enums.DriverStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -32,6 +33,8 @@ import java.util.Date;
  * @since 2022.1.0
  */
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public class DeviceEventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

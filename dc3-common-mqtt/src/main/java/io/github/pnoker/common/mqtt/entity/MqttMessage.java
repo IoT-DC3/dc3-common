@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.mqtt.entity;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
