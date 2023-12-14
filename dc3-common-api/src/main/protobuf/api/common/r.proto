@@ -21,6 +21,7 @@ package api.common;
 /*配置相关*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "RProto";
+option objc_class_prefix = "Common";
 option java_multiple_files = true;
 
 /*R DTO*/
