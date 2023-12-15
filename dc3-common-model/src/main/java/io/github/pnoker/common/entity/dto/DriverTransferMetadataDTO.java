@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -55,12 +56,12 @@ public class DriverTransferMetadataDTO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     public DriverTransferMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
         this.type = type;
         this.metadataCommandType = metadataCommandType;
         this.content = content;
-        this.createTime = new Date();
+        this.createTime = LocalDateTime.now();
     }
 }

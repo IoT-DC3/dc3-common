@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -51,7 +52,7 @@ public class DeviceEventDTO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 设备事件
@@ -78,12 +79,12 @@ public class DeviceEventDTO implements Serializable {
         /**
          * 创建时间
          */
-        private Date createTime;
+        private LocalDateTime createTime;
 
         public DeviceStatus(String serviceName, DriverStatusEnum status) {
             this.serviceName = serviceName;
             this.status = status;
-            this.createTime = new Date();
+            this.createTime = LocalDateTime.now();
         }
     }
 }

@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -59,7 +60,7 @@ public class Base implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 操作者ID
@@ -74,7 +75,7 @@ public class Base implements Serializable {
     /**
      * 操作时间
      */
-    private Date operateTime;
+    private LocalDateTime operateTime;
 
     /**
      * 逻辑删标识

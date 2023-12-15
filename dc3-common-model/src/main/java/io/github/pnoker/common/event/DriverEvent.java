@@ -23,6 +23,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -56,20 +57,20 @@ public class DriverEvent implements Serializable {
     private Boolean confirm = false;
     private Object content;
 
-    private Date createTime;
-    private Date updateTime;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
     public DriverEvent(String serviceName, String type) {
         this.serviceName = serviceName;
         this.type = type;
-        this.createTime = new Date();
+        this.createTime = LocalDateTime.now();
     }
 
     public DriverEvent(String serviceName, String type, Object content) {
         this.serviceName = serviceName;
         this.type = type;
         this.content = content;
-        this.createTime = new Date();
+        this.createTime = LocalDateTime.now();
     }
 
 }

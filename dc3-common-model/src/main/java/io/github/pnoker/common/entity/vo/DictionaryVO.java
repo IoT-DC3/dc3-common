@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 /**
- * Base BO
+ * Dictionary BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -33,46 +33,43 @@ import java.util.Date;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class BaseBO implements Serializable {
-    private static final long serialVersionUID = 1L;
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@Schema(title = "Dictionary", description = "字典")
+public class DictionaryVO {
 
     /**
-     * 主键ID
+     * 字典类型
      */
-    private Long id;
+    @Schema(description = "字典类型")
+    private String type;
 
     /**
-     * 描述
+     * 字典标签名称
      */
-    private String remark;
+    @Schema(description = "字典标签名称")
+    private String label;
 
     /**
-     * 创建者ID
+     * 字典标签值
      */
-    private Long creatorId;
+    @Schema(description = "字典标签值")
+    private String value;
 
     /**
-     * 创建者名称
+     * 是否禁用
      */
-    private String creatorName;
+    @Schema(description = "是否禁用")
+    private boolean disabled;
 
     /**
-     * 创建时间
+     * 是否展开
      */
-    private LocalDateTime createTime;
+    @Schema(description = "是否展开")
+    private boolean expand;
 
     /**
-     * 操作者ID
+     * 子节点
      */
-    private Long operatorId;
-
-    /**
-     * 操作者名称
-     */
-    private String operatorName;
-
-    /**
-     * 操作时间
-     */
-    private LocalDateTime operateTime;
+    @Schema(description = "子节点")
+    private List<DictionaryVO> children;
 }

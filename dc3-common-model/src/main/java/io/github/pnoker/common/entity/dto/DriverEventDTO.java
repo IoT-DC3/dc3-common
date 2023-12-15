@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -51,12 +52,12 @@ public class DriverEventDTO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     public DriverEventDTO(DriverEventTypeEnum type, String content) {
         this.type = type;
         this.content = content;
-        this.createTime = new Date();
+        this.createTime = LocalDateTime.now();
     }
 
     /**
@@ -84,12 +85,12 @@ public class DriverEventDTO implements Serializable {
         /**
          * 创建时间
          */
-        private Date createTime;
+        private LocalDateTime createTime;
 
         public DriverStatus(Long driverId, DriverStatusEnum status) {
             this.driverId = driverId;
             this.status = status;
-            this.createTime = new Date();
+            this.createTime = LocalDateTime.now();
         }
     }
 }

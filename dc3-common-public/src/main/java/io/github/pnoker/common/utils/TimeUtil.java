@@ -45,6 +45,16 @@ public class TimeUtil {
     }
 
     /**
+     * 获取微秒
+     *
+     * @param date {@link Date}
+     * @return 微秒
+     */
+    public static long milliSeconds(Date date) {
+        return date.getTime();
+    }
+
+    /**
      * 推迟时间 HOUR/MINUTE/...
      *
      * @param amount Integer
@@ -61,7 +71,7 @@ public class TimeUtil {
     /**
      * 使用 yyyy-MM-dd HH:mm:ss 格式化时间
      *
-     * @param date Date
+     * @param date {@link Date}
      * @return String
      */
     public static String defaultFormat(Date date) {
@@ -71,7 +81,7 @@ public class TimeUtil {
     /**
      * 使用 yyyy-MM-dd HH:mm:ss.SSS 格式化时间
      *
-     * @param date Date
+     * @param date {@link Date}
      * @return String
      */
     public static String completeFormat(Date date) {
@@ -81,7 +91,7 @@ public class TimeUtil {
     /**
      * 将时间字符串 yyyy-MM-dd HH:mm:ss 转为时间类型
      *
-     * @param dateString Date String
+     * @param dateString yyyy-MM-dd HH:mm:ss
      * @return Date
      */
     public static Date defaultDate(String dateString) {
@@ -95,7 +105,7 @@ public class TimeUtil {
     /**
      * 将时间字符串 yyyy-MM-dd HH:mm:ss.SSS 转为时间类型
      *
-     * @param dateString Date String
+     * @param dateString yyyy-MM-dd HH:mm:ss.SSS
      * @return Date
      */
     public static Date completeDate(String dateString) {
@@ -104,6 +114,14 @@ public class TimeUtil {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    /**
+     * 删除此线程局部变量的当前线程值
+     */
+    public static void clean() {
+        DEFAULT_DATE_FORMAT_THREAD_LOCAL.remove();
+        COMPLETE_DATE_FORMAT_THREAD_LOCAL.remove();
     }
 
 }

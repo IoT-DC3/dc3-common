@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -58,7 +59,7 @@ public class BaseDTO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 操作者ID
@@ -73,5 +74,5 @@ public class BaseDTO implements Serializable {
     /**
      * 操作时间
      */
-    private Date operateTime;
+    private LocalDateTime operateTime;
 }

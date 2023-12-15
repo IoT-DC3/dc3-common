@@ -27,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Base VO
@@ -73,8 +73,8 @@ public class BaseVO implements Serializable {
      * 创建时间
      */
     @Schema(description = "创建时间, yyyy-MM-dd HH:mm:ss.SSS")
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date createTime;
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    private LocalDateTime createTime;
 
     /**
      * 操作者ID
@@ -92,6 +92,6 @@ public class BaseVO implements Serializable {
      * 操作时间
      */
     @Schema(description = "操作时间, yyyy-MM-dd HH:mm:ss.SSS")
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date operateTime;
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    private LocalDateTime operateTime;
 }

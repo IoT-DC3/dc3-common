@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -50,12 +51,12 @@ public class DeviceCommandDTO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     public DeviceCommandDTO(DeviceCommandTypeEnum type, String content) {
         this.type = type;
         this.content = content;
-        this.createTime = new Date();
+        this.createTime = LocalDateTime.now();
     }
 
     /**
@@ -84,12 +85,12 @@ public class DeviceCommandDTO implements Serializable {
         /**
          * 创建时间
          */
-        private Date createTime;
+        private LocalDateTime createTime;
 
         public DeviceRead(Long deviceId, Long pointId) {
             this.deviceId = deviceId;
             this.pointId = pointId;
-            this.createTime = new Date();
+            this.createTime = LocalDateTime.now();
         }
     }
 
@@ -123,13 +124,13 @@ public class DeviceCommandDTO implements Serializable {
         /**
          * 创建时间
          */
-        private Date createTime;
+        private LocalDateTime createTime;
 
         public DeviceWrite(Long deviceId, Long pointId, String value) {
             this.deviceId = deviceId;
             this.pointId = pointId;
             this.value = value;
-            this.createTime = new Date();
+            this.createTime = LocalDateTime.now();
         }
     }
 }

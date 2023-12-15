@@ -16,6 +16,8 @@
 
 package io.github.pnoker.common.constant.common;
 
+import java.time.ZoneId;
+
 /**
  * 时间 相关常量
  *
@@ -29,9 +31,14 @@ public class TimeConstant {
     }
 
     /**
-     * 时区
+     * 时区，默认为 Asia/Shanghai
      */
-    public static final String TIMEZONE = "GMT+8";
+    public static final String DEFAULT_TIMEZONE = "Asia/Shanghai";
+
+    /**
+     * 时区ID，默认为 Asia/Shanghai
+     */
+    public static final ZoneId DEFAULT_ZONEID = ZoneId.of(DEFAULT_TIMEZONE);
 
     /**
      * 时间格式化

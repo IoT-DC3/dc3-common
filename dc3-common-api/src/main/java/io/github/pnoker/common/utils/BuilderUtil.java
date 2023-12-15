@@ -19,6 +19,7 @@ package io.github.pnoker.common.utils;
 import io.github.pnoker.api.common.GrpcBaseDTO;
 import io.github.pnoker.common.base.BaseBO;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.constant.common.TimeConstant;
 
 /**
  * Builder 工具类
@@ -38,10 +39,10 @@ public class BuilderUtil {
         builder.setRemark(entityBO.getRemark());
         builder.setCreatorId(entityBO.getCreatorId());
         builder.setCreatorName(entityBO.getCreatorName());
-        builder.setCreateTime(entityBO.getCreateTime().getTime());
+        builder.setCreateTime(entityBO.getCreateTime().atZone(TimeConstant.DEFAULT_ZONEID).toInstant().toEpochMilli());
         builder.setOperatorId(entityBO.getOperatorId());
         builder.setOperatorName(entityBO.getOperatorName());
-        builder.setOperateTime(entityBO.getOperateTime().getTime());
+        builder.setOperateTime(entityBO.getOperateTime().atZone(TimeConstant.DEFAULT_ZONEID).toInstant().toEpochMilli());
         return builder.build();
     }
 }

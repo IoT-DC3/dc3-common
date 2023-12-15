@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.bo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 /**
- * Base BO
+ * Dictionary BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -33,46 +31,35 @@ import java.util.Date;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class BaseBO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class DictionaryBO {
 
     /**
-     * 主键ID
+     * 字典类型
      */
-    private Long id;
+    private String type;
 
     /**
-     * 描述
+     * 字典标签名称
      */
-    private String remark;
+    private String label;
 
     /**
-     * 创建者ID
+     * 字典标签值
      */
-    private Long creatorId;
+    private Long value;
 
     /**
-     * 创建者名称
+     * 是否禁用
      */
-    private String creatorName;
+    private boolean disabled;
 
     /**
-     * 创建时间
+     * 是否展开
      */
-    private LocalDateTime createTime;
+    private boolean expand;
 
     /**
-     * 操作者ID
+     * 子节点
      */
-    private Long operatorId;
-
-    /**
-     * 操作者名称
-     */
-    private String operatorName;
-
-    /**
-     * 操作时间
-     */
-    private LocalDateTime operateTime;
+    private List<DictionaryBO> children;
 }
