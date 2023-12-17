@@ -16,7 +16,8 @@
 
 package io.github.pnoker.common.mqtt.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -25,7 +26,8 @@ import java.io.Serializable;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 public class MqttMessage implements Serializable {
     private MessageHeader header;

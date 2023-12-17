@@ -18,8 +18,9 @@ package io.github.pnoker.common.entity.common;
 
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Request Header
@@ -27,14 +28,16 @@ import lombok.NoArgsConstructor;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 public class RequestHeader {
 
     private RequestHeader() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class TokenHeader {
@@ -49,7 +52,8 @@ public class RequestHeader {
         private String token;
     }
 
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class UserHeader {

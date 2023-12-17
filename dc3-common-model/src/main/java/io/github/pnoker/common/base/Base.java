@@ -20,7 +20,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -31,7 +32,8 @@ import java.time.LocalDateTime;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 public class Base implements Serializable {
     private static final long serialVersionUID = 1L;
 

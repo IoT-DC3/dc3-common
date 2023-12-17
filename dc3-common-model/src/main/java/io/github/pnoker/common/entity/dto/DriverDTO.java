@@ -19,9 +19,9 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.base.BaseDTO;
 import io.github.pnoker.common.constant.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -30,10 +30,10 @@ import lombok.experimental.SuperBuilder;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class DriverDTO extends BaseDTO {
 
     /**

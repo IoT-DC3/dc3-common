@@ -19,8 +19,9 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.constant.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.constant.enums.DriverStatusEnum;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -32,7 +33,8 @@ import java.time.LocalDateTime;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class DriverEventDTO implements Serializable {
@@ -65,7 +67,8 @@ public class DriverEventDTO implements Serializable {
      * @author pnoker
      * @since 2022.1.0
      */
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DriverStatus implements Serializable {

@@ -17,7 +17,8 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +29,8 @@ import org.springframework.context.annotation.Configuration;
  * @since 2022.1.0
  */
 @Slf4j
-@Data
+@Getter
+@Setter
 @Configuration
 public class ExchangeConfig {
 

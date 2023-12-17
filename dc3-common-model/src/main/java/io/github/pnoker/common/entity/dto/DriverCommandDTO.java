@@ -17,8 +17,9 @@
 package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.DriverCommandTypeEnum;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -30,7 +31,8 @@ import java.time.LocalDateTime;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class DriverCommandDTO implements Serializable {

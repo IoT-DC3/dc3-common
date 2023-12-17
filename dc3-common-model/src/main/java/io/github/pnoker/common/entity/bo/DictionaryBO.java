@@ -16,8 +16,9 @@
 
 package io.github.pnoker.common.entity.bo;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -28,7 +29,8 @@ import java.util.List;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class DictionaryBO {

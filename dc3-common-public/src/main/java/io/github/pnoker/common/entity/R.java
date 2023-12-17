@@ -19,7 +19,8 @@ package io.github.pnoker.common.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.constant.enums.ResponseEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -30,7 +31,8 @@ import java.io.Serializable;
  * @since 2022.1.0
  */
 
-@Data
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Schema(title = "R", description = "返回")
 public class R<T> implements Serializable {

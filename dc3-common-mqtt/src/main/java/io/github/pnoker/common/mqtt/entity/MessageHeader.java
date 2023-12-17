@@ -16,7 +16,8 @@
 
 package io.github.pnoker.common.mqtt.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.MessageHeaders;
 
@@ -28,7 +29,8 @@ import java.util.UUID;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @Slf4j
 public class MessageHeader implements Serializable {
 

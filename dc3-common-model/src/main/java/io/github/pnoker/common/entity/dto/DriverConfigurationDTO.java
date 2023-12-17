@@ -16,8 +16,9 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -26,7 +27,8 @@ import java.io.Serializable;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class DriverConfigurationDTO implements Serializable {

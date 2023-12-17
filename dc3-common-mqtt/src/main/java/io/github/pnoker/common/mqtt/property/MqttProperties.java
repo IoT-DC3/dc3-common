@@ -17,8 +17,9 @@
 package io.github.pnoker.common.mqtt.property;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,7 +30,8 @@ import java.util.List;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @Validated
 @ConfigurationProperties(prefix = "driver.mqtt")
 public class MqttProperties {
@@ -77,7 +79,8 @@ public class MqttProperties {
         X509,
     }
 
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Topic {

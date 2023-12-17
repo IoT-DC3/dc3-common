@@ -18,8 +18,9 @@ package io.github.pnoker.common.entity.auth;
 
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Aes/Rsa 加密密钥
@@ -36,7 +37,8 @@ public class Keys {
     /**
      * Aes 密钥
      */
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Aes {
@@ -46,7 +48,8 @@ public class Keys {
     /**
      * RSA 密钥对
      */
-    @Data
+    @Getter
+    @Setter
     @NoArgsConstructor
     @AllArgsConstructor
     public static class Rsa {

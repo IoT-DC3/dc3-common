@@ -16,7 +16,8 @@
 
 package io.github.pnoker.common.entity.common;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ import java.util.List;
  * @since 2022.1.0
  */
 
-@Data
+@Getter
+@Setter
 public class TreeNode implements Serializable {
     private static final long serialVersionUID = 1L;
 

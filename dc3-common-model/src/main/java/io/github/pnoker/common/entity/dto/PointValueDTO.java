@@ -20,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -34,10 +35,12 @@ import java.util.List;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PointValueDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -65,11 +68,9 @@ public class PointValueDTO implements Serializable {
 
     private List<String> children;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
     private LocalDateTime originTime;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
     private LocalDateTime createTime;
 

@@ -17,7 +17,8 @@
 package io.github.pnoker.common.event;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,7 +31,8 @@ import java.util.concurrent.TimeUnit;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @Document
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class DeviceEvent implements Serializable {

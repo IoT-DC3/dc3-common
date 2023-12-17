@@ -21,8 +21,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import io.github.pnoker.common.valid.Update;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,8 @@ import java.time.LocalDateTime;
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
