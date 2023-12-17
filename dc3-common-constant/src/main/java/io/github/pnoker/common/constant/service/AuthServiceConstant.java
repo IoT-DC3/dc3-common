@@ -38,6 +38,6 @@ public class AuthServiceConstant {
     public static final String USER_URL_PREFIX = "/auth/user";
     public static final String TENANT_URL_PREFIX = "/auth/tenant";
     public static final String TOKEN_URL_PREFIX = "/auth/token";
-    public static final String BLACK_IP_URL_PREFIX = "/auth/black_ip";
+    public static final String LIMITED_IP_URL_PREFIX = "/auth/limited_ip";
     public static final String DICTIONARY_URL_PREFIX = "/auth/dictionary";
 }
