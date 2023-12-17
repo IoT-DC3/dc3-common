@@ -86,8 +86,6 @@ public class MybatisUtil {
                 .formatServiceImplFileName("%sManagerImpl")
                 .enableFileOverride()
                 .mapperBuilder()
-                .enableBaseColumnList()
-                .enableBaseResultMap()
                 .enableFileOverride();
     }
 
