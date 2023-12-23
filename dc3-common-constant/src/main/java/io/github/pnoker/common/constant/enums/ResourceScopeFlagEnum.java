@@ -34,24 +34,24 @@ import java.util.Optional;
 public enum ResourceScopeFlagEnum {
 
     /**
-     * 驱动
+     * 新增
      */
-    ADD((byte) 0x01, "add", "新增"),
+    ADD((byte) 0x00, "add", "新增"),
 
     /**
-     * 模板
+     * 删除
      */
-    DELETE((byte) 0x02, "delete", "删除"),
+    DELETE((byte) 0x01, "delete", "删除"),
 
     /**
-     * 位号
+     * 更新
      */
-    UPDATE((byte) 0x04, "update", "更新"),
+    UPDATE((byte) 0x02, "update", "更新"),
 
     /**
-     * 设备
+     * 查询
      */
-    LIST((byte) 0x08, "list", "查询"),
+    LIST((byte) 0x03, "list", "查询"),
     ;
 
     /**

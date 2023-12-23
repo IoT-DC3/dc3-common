@@ -50,7 +50,7 @@ public enum AlarmLevelFlagEnum {
     /**
      * P3
      */
-    P3((byte) 0x02, "p3", "P3"),
+    P3((byte) 0x03, "p3", "P3"),
     ;
 
     /**

@@ -24,38 +24,53 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用报警等级类型枚举
+ * 通用失效类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MenuLevelFlagEnum {
+public enum ExpireFlagEnum {
     /**
-     * 根菜单
+     * 永久
      */
-    ROOT((byte) 0x00, "root", "根菜单"),
+    PERMANENT((byte) 0x00, "permanent", "永久"),
 
     /**
-     * 一级子菜单
+     * 一天
      */
-    C1((byte) 0x01, "c1", "一级子菜单"),
+    ONE_DAY((byte) 0x01, "one_day", "一天"),
 
     /**
-     * 二级子菜单
+     * 一周
      */
-    C2((byte) 0x02, "c2", "二级子菜单"),
+    ONE_WEEK((byte) 0x02, "one_week", "一周"),
 
     /**
-     * 三级子菜单
+     * 一月
      */
-    C3((byte) 0x03, "c3", "三级子菜单"),
+    ONE_MONTH((byte) 0x03, "one_month", "一月"),
 
     /**
-     * 四级子菜单
+     * 三月
      */
-    C4((byte) 0x04, "c4", "四级子菜单"),
+    THREE_MONTHS((byte) 0x04, "three_months", "三月"),
+
+    /**
+     * 半年
+     */
+    HALF_YEAR((byte) 0x05, "half_year", "半年"),
+
+    /**
+     * 一年
+     */
+    ONE_YEAR((byte) 0x06, "one_year", "一年"),
+
+    /**
+     * 自定义
+     */
+    CUSTOM((byte) 0x07, "custom", "自定义"),
     ;
 
     /**
@@ -78,10 +93,10 @@ public enum MenuLevelFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link MenuLevelFlagEnum}
+     * @return {@link ExpireFlagEnum}
      */
-    public static MenuLevelFlagEnum ofCode(String code) {
-        Optional<MenuLevelFlagEnum> any = Arrays.stream(MenuLevelFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static ExpireFlagEnum ofCode(String code) {
+        Optional<ExpireFlagEnum> any = Arrays.stream(ExpireFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -89,9 +104,9 @@ public enum MenuLevelFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link MenuLevelFlagEnum}
+     * @return {@link ExpireFlagEnum}
      */
-    public static MenuLevelFlagEnum ofName(String name) {
+    public static ExpireFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

@@ -46,27 +46,27 @@ public enum ResourceTypeFlagEnum {
     /**
      * 位号
      */
-    POINT((byte) 0x01, "point", "位号"),
+    POINT((byte) 0x02, "point", "位号"),
 
     /**
      * 设备
      */
-    DEVICE((byte) 0x01, "device", "设备"),
+    DEVICE((byte) 0x03, "device", "设备"),
 
     /**
      * 数据
      */
-    DATA((byte) 0x01, "data", "数据"),
+    DATA((byte) 0x04, "data", "数据"),
 
     /**
      * 菜单
      */
-    MENU((byte) 0x01, "menu", "菜单"),
+    MENU((byte) 0x05, "menu", "菜单"),
 
     /**
      * 接口
      */
-    API((byte) 0x01, "api", "接口"),
+    API((byte) 0x06, "api", "接口"),
     ;
 
     /**
