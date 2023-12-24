@@ -14,49 +14,39 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.entity.ext;
 
-import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
- * DriverAttributeConfig BO
+ * Json Ext
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
-public class DriverAttributeConfigDTO extends BaseDTO {
+@AllArgsConstructor
+public class JsonExt implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
-     * 驱动属性ID
+     * 类型，用于解析Json字符串
      */
-    private Long driverAttributeId;
+    private String type;
 
     /**
-     * 驱动属性配置值
+     * 内容，Json字符串
      */
-    private String configValue;
+    private Object content;
 
     /**
-     * 设备ID
+     * 版本，用于乐观锁
      */
-    private Long deviceId;
+    private Long version;
 
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    private Long tenantId;
 }

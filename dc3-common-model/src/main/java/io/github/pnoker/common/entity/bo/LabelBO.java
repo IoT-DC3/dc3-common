@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.entity.bo;
 
-import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import lombok.Builder;
+import io.github.pnoker.common.constant.enums.EntityTypeFlagEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
- * Device BO
+ * Label BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,27 +34,22 @@ import java.util.Set;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class DeviceDTO extends BaseDTO {
+public class LabelBO extends BaseBO {
 
     /**
-     * 设备名称
+     * 标签名称
      */
-    private String deviceName;
+    private String labelName;
 
     /**
-     * 设备编号
+     * 标签颜色
      */
-    private String deviceCode;
+    private String color;
 
     /**
-     * 驱动ID
+     * 实体标识
      */
-    private Long driverId;
-
-    /**
-     * 分组ID
-     */
-    private Long groupId;
+    private EntityTypeFlagEnum entityTypeFlag;
 
     /**
      * 使能标识
@@ -68,8 +60,4 @@ public class DeviceDTO extends BaseDTO {
      * 租户ID
      */
     private Long tenantId;
-
-    // 附加
-    @Builder.Default
-    private Set<Long> profileIds = new HashSet<>(4);
 }

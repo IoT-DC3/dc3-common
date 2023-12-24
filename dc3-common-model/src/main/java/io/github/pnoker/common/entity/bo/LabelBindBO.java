@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.bo;
 
+import io.github.pnoker.common.constant.enums.EntityTypeFlagEnum;
+import io.github.pnoker.common.entity.base.BaseBO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
- * Base BO
+ * LabelBind BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,46 +33,25 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class BaseBO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class LabelBindBO extends BaseBO {
 
     /**
-     * 主键ID
+     * 实体类型标识
      */
-    private Long id;
+    private EntityTypeFlagEnum entityTypeFlag;
 
     /**
-     * 描述
+     * 标签ID
      */
-    private String remark;
+    private String labelId;
 
     /**
-     * 创建者ID
+     * 实体ID
      */
-    private Long creatorId;
+    private String entityId;
 
     /**
-     * 创建者名称
+     * 租户ID
      */
-    private String creatorName;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 操作者ID
-     */
-    private Long operatorId;
-
-    /**
-     * 操作者名称
-     */
-    private String operatorName;
-
-    /**
-     * 操作时间
-     */
-    private LocalDateTime operateTime;
+    private Long tenantId;
 }

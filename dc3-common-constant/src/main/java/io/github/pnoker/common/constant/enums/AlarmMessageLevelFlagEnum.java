@@ -31,7 +31,7 @@ import java.util.Optional;
  */
 @Getter
 @AllArgsConstructor
-public enum AlarmMessageProfileLevelFlagEnum {
+public enum AlarmMessageLevelFlagEnum {
     /**
      * P0
      */
@@ -73,10 +73,10 @@ public enum AlarmMessageProfileLevelFlagEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link AlarmMessageProfileLevelFlagEnum}
+     * @return {@link AlarmMessageLevelFlagEnum}
      */
-    public static AlarmMessageProfileLevelFlagEnum ofCode(String code) {
-        Optional<AlarmMessageProfileLevelFlagEnum> any = Arrays.stream(AlarmMessageProfileLevelFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static AlarmMessageLevelFlagEnum ofCode(String code) {
+        Optional<AlarmMessageLevelFlagEnum> any = Arrays.stream(AlarmMessageLevelFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -84,9 +84,9 @@ public enum AlarmMessageProfileLevelFlagEnum {
      * 根据枚举名称获取枚举
      *
      * @param name 枚举名称
-     * @return {@link AlarmMessageProfileLevelFlagEnum}
+     * @return {@link AlarmMessageLevelFlagEnum}
      */
-    public static AlarmMessageProfileLevelFlagEnum ofName(String name) {
+    public static AlarmMessageLevelFlagEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

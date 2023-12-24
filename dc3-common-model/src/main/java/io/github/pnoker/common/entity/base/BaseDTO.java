@@ -14,33 +14,34 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.base;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 基础 DO 实体类
+ * Base DTO
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @Setter
-public class Base implements Serializable {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
-    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
@@ -77,15 +78,4 @@ public class Base implements Serializable {
      * 操作时间
      */
     private LocalDateTime operateTime;
-
-    /**
-     * 逻辑删标识
-     * <ul>
-     * <li>0 (false):默认,未删除</li>
-     * <li>1 (true):已删除</li>
-     * </ul>
-     */
-    @TableLogic
-    @TableField(select = false)
-    private Integer deleted;
 }

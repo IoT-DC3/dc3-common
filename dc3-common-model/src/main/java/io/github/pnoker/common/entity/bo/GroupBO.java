@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base;
+package io.github.pnoker.common.entity.bo;
 
+import io.github.pnoker.common.entity.base.BaseBO;
+import io.github.pnoker.common.constant.enums.EnableFlagEnum;
+import io.github.pnoker.common.constant.enums.GroupTypeFlagEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
- * Base DTO
+ * Group BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,46 +34,35 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class BaseDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class GroupBO extends BaseBO {
 
     /**
-     * 主键ID
+     * 分组名称
      */
-    private Long id;
+    private String groupName;
 
     /**
-     * 描述
+     * 父分组ID
      */
-    private String remark;
+    private String parentGroupId;
 
     /**
-     * 创建者ID
+     * 分组排序位置
      */
-    private Long creatorId;
+    private Integer position;
 
     /**
-     * 创建者名称
+     * 分组标识
      */
-    private String creatorName;
+    private GroupTypeFlagEnum groupTypeFlag;
 
     /**
-     * 创建时间
+     * 使能标识
      */
-    private LocalDateTime createTime;
+    private EnableFlagEnum enableFlag;
 
     /**
-     * 操作者ID
+     * 租户ID
      */
-    private Long operatorId;
-
-    /**
-     * 操作者名称
-     */
-    private String operatorName;
-
-    /**
-     * 操作时间
-     */
-    private LocalDateTime operateTime;
+    private Long tenantId;
 }

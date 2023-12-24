@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.entity.vo;
 
-import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.entity.base.BaseVO;
+import io.github.pnoker.common.valid.Add;
+import io.github.pnoker.common.valid.Update;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
 /**
- * Device BO
+ * LabelBind VO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,39 +38,23 @@ import java.util.Set;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class DeviceDTO extends BaseDTO {
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@Schema(title = "LabelBind", description = "标签绑定")
+public class LabelBindVO extends BaseVO {
 
     /**
-     * 设备名称
+     * 标签ID
      */
-    private String deviceName;
+    @Schema(description = "标签ID")
+    @NotBlank(message = "标签ID不能为空",
+            groups = {Add.class, Update.class})
+    private String labelId;
 
     /**
-     * 设备编号
+     * 实体ID
      */
-    private String deviceCode;
-
-    /**
-     * 驱动ID
-     */
-    private Long driverId;
-
-    /**
-     * 分组ID
-     */
-    private Long groupId;
-
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    private Long tenantId;
-
-    // 附加
-    @Builder.Default
-    private Set<Long> profileIds = new HashSet<>(4);
+    @Schema(description = "实体ID")
+    @NotBlank(message = "实体ID不能为空",
+            groups = {Add.class, Update.class})
+    private String entityId;
 }

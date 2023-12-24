@@ -16,10 +16,7 @@
 
 package io.github.pnoker.common.entity.bo;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.util.List;
 
@@ -31,8 +28,9 @@ import java.util.List;
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DictionaryBO {
 
     /**
@@ -48,7 +46,7 @@ public class DictionaryBO {
     /**
      * 字典标签值
      */
-    private Long value;
+    private Object value;
 
     /**
      * 是否禁用

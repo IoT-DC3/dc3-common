@@ -26,7 +26,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 /**
- * Dictionary BO
+ * Dictionary VO
  *
  * @author pnoker
  * @since 2022.1.0
