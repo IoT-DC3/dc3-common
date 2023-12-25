@@ -63,12 +63,6 @@
 
     <dependencies>
 
-        <!-- Influxdb -->
-        <dependency>
-            <groupId>com.influxdb</groupId>
-            <artifactId>influxdb-client-java</artifactId>
-        </dependency>
-
         <!-- Spring Data MongoDB -->
         <dependency>
             <groupId>org.springframework.data</groupId>

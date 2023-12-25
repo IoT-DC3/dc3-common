@@ -19,7 +19,6 @@ package io.github.pnoker.common.entity.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -33,7 +32,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Getter
 @Setter
-@SuperBuilder
 @AllArgsConstructor
 public class DriverMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -16,12 +16,9 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.github.pnoker.common.entity.base.BaseDTO;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
@@ -37,6 +34,7 @@ import java.util.Set;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DeviceDTO extends BaseDTO {
 
     /**

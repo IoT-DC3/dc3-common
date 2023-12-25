@@ -16,9 +16,10 @@
 
 package io.github.pnoker.common.entity.bo;
 
-import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.constant.enums.GroupTypeFlagEnum;
+import io.github.pnoker.common.entity.base.BaseBO;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,6 +35,7 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GroupBO extends BaseBO {
 
     /**

@@ -18,6 +18,7 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.MetadataCommandTypeEnum;
 import io.github.pnoker.common.constant.enums.MetadataTypeEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +37,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DriverTransferMetadataDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 

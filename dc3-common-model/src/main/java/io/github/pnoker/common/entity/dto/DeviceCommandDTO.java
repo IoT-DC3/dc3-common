@@ -36,6 +36,7 @@ import java.time.LocalDateTime;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DeviceCommandDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
