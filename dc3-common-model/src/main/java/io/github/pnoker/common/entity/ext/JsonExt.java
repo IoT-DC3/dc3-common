@@ -53,4 +53,9 @@ public class JsonExt implements Serializable {
      */
     private Long version;
 
+    /**
+     * 描述
+     */
+    private String remark;
+
 }

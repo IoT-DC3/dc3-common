@@ -63,13 +63,14 @@ public class DriverEventDTO implements Serializable {
     }
 
     /**
-     * 驱动事件
+     * 驱动状态
      *
      * @author pnoker
      * @since 2022.1.0
      */
     @Getter
     @Setter
+    @SuperBuilder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DriverStatus implements Serializable {
