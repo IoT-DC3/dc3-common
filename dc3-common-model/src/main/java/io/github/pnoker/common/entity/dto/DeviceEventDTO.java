@@ -26,6 +26,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 设备事件
@@ -56,6 +57,12 @@ public class DeviceEventDTO implements Serializable {
      */
     private LocalDateTime createTime;
 
+    public DeviceEventDTO(DeviceEventTypeEnum type, String content) {
+        this.type = type;
+        this.content = content;
+        this.createTime = LocalDateTime.now();
+    }
+
     /**
      * 设备状态
      *
@@ -81,6 +88,16 @@ public class DeviceEventDTO implements Serializable {
         private DeviceStatusEnum status;
 
         /**
+         * 设备状态失效时间
+         */
+        private int timeOut = 15;
+
+        /**
+         * 设备状态失效时间单位
+         */
+        private TimeUnit timeUnit = TimeUnit.MINUTES;
+
+        /**
          * 创建时间
          */
         private LocalDateTime createTime;
@@ -88,6 +105,14 @@ public class DeviceEventDTO implements Serializable {
         public DeviceStatus(Long deviceId, DeviceStatusEnum status) {
             this.deviceId = deviceId;
             this.status = status;
+            this.createTime = LocalDateTime.now();
+        }
+
+        public DeviceStatus(Long deviceId, DeviceStatusEnum status, int timeOut, TimeUnit timeUnit) {
+            this.deviceId = deviceId;
+            this.status = status;
+            this.timeOut = timeOut;
+            this.timeUnit = timeUnit;
             this.createTime = LocalDateTime.now();
         }
     }
