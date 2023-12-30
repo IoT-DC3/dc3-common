@@ -16,10 +16,7 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -46,12 +43,13 @@ public class JsonExt implements Serializable {
     /**
      * 内容，Json字符串
      */
-    private Object content;
+    private String content;
 
     /**
      * 版本，用于乐观锁
      */
-    private Long version;
+    @Builder.Default
+    private Long version = 1L;
 
     /**
      * 描述

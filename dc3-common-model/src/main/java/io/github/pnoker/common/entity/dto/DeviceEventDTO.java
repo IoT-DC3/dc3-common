@@ -18,10 +18,7 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.DeviceEventTypeEnum;
 import io.github.pnoker.common.constant.enums.DeviceStatusEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
@@ -90,11 +87,13 @@ public class DeviceEventDTO implements Serializable {
         /**
          * 设备状态失效时间
          */
+        @Builder.Default
         private int timeOut = 15;
 
         /**
          * 设备状态失效时间单位
          */
+        @Builder.Default
         private TimeUnit timeUnit = TimeUnit.MINUTES;
 
         /**

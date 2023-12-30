@@ -21,12 +21,12 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-common</artifactId>
-        <version>2023.4.5</version>
+        <version>2024.1.0</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common-api</artifactId>
-    <version>2023.4.5</version>
+    <version>2024.1.0</version>
     <packaging>jar</packaging>
 
     <description>IOT DC3 平台 Api 通用 gRpc Proto。</description>
@@ -56,12 +56,6 @@
 
     <dependencies>
 
-        <!-- Annotation Api -->
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-        </dependency>
-
         <!-- gRpc -->
         <dependency>
             <groupId>io.grpc</groupId>
@@ -80,16 +74,14 @@
             <artifactId>grpc-stub</artifactId>
         </dependency>
 
-        <!-- DC3 Common Model -->
-        <dependency>
-            <groupId>io.github.pnoker</groupId>
-            <artifactId>dc3-common-model</artifactId>
-        </dependency>
-
-        <!-- DC3 Common Exception -->
+        <!-- DC3 Common -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-model</artifactId>
         </dependency>
 
     </dependencies>

@@ -17,6 +17,7 @@
 package io.github.pnoker.common.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.pnoker.common.constant.enums.EntityTypeFlagEnum;
 import io.github.pnoker.common.entity.base.BaseVO;
 import io.github.pnoker.common.valid.Add;
 import io.github.pnoker.common.valid.Update;
@@ -28,6 +29,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * LabelBind VO
@@ -43,6 +45,14 @@ import javax.validation.constraints.NotBlank;
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Schema(title = "LabelBind", description = "标签绑定")
 public class LabelBindVO extends BaseVO {
+
+    /**
+     * 实体类型标识
+     */
+    @Schema(description = "实体类型标识")
+    @NotNull(message = "实体类型标识不能为空",
+            groups = {Add.class, Update.class})
+    private EntityTypeFlagEnum entityTypeFlag;
 
     /**
      * 标签ID
