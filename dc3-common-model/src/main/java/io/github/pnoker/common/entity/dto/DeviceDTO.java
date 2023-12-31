@@ -67,7 +67,7 @@ public class DeviceDTO extends BaseDTO {
      */
     private Long tenantId;
 
-    // 附加
+    // 附加字段
     @Builder.Default
     private Set<Long> profileIds = new HashSet<>(4);
 }

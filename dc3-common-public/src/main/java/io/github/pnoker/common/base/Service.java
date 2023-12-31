@@ -17,6 +17,7 @@
 package io.github.pnoker.common.base;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.github.pnoker.common.utils.UserHeaderUtil;
 
 /**
  * 基础 Service 类接口
@@ -63,6 +64,8 @@ public interface Service<B, Q> {
      */
     B selectById(Long id);
 
+    // 默认方法
+
     /**
      * <p>
      * 分页查询
@@ -72,4 +75,40 @@ public interface Service<B, Q> {
      * @return Entity of BO Page
      */
     Page<B> selectByPage(Q entityQuery);
+
+    /**
+     * 获取用户ID
+     *
+     * @return User ID
+     */
+    default Long getUserId() {
+        return UserHeaderUtil.getUserHeader().getUserId();
+    }
+
+    /**
+     * 获取用户昵称
+     *
+     * @return Nick Name
+     */
+    default String getNickName() {
+        return UserHeaderUtil.getUserHeader().getNickName();
+    }
+
+    /**
+     * 获取用户名
+     *
+     * @return User Name
+     */
+    default String getUserName() {
+        return UserHeaderUtil.getUserHeader().getUserName();
+    }
+
+    /**
+     * 获取租户ID
+     *
+     * @return Tenant ID
+     */
+    default Long getTenantId() {
+        return UserHeaderUtil.getUserHeader().getTenantId();
+    }
 }

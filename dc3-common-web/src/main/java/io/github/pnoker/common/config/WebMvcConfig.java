@@ -22,7 +22,8 @@ import io.github.pnoker.common.constant.common.RequestConstant;
 import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.utils.DecodeUtil;
 import io.github.pnoker.common.utils.JsonUtil;
-import io.github.pnoker.common.utils.RequestUtil;
+import io.github.pnoker.common.utils.RequestHeaderUtil;
+import io.github.pnoker.common.utils.UserHeaderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
@@ -67,7 +68,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
             @Override
             public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
                 RequestHeader.UserHeader entityBO = getUserHeader(request);
-                RequestUtil.setUserHeader(entityBO);
+                UserHeaderUtil.setUserHeader(entityBO);
                 return HandlerInterceptor.super.preHandle(request, response, handler);
             }
 
@@ -79,7 +80,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
             @Override
             public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) throws Exception {
                 // 清除用户信息
-                RequestUtil.resetUserHeader();
+                UserHeaderUtil.removeUserHeader();
                 HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
             }
         });
@@ -92,7 +93,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * @return {@link RequestHeader.UserHeader}
      */
     private RequestHeader.UserHeader getUserHeader(HttpServletRequest request) {
-        String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
+        String user = RequestHeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
         if (CharSequenceUtil.isEmpty(user)) {
             return null;
         }

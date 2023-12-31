@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.base;
 
-import io.github.pnoker.common.utils.RequestUtil;
+import io.github.pnoker.common.utils.UserHeaderUtil;
 
 /**
  * 基础 Controller 类接口
@@ -26,13 +26,15 @@ import io.github.pnoker.common.utils.RequestUtil;
  */
 public interface Controller {
 
+    // 默认方法
+
     /**
      * 获取用户ID
      *
      * @return User ID
      */
     default Long getUserId() {
-        return RequestUtil.getUserHeader().getUserId();
+        return UserHeaderUtil.getUserHeader().getUserId();
     }
 
     /**
@@ -41,7 +43,7 @@ public interface Controller {
      * @return Nick Name
      */
     default String getNickName() {
-        return RequestUtil.getUserHeader().getNickName();
+        return UserHeaderUtil.getUserHeader().getNickName();
     }
 
     /**
@@ -50,7 +52,7 @@ public interface Controller {
      * @return User Name
      */
     default String getUserName() {
-        return RequestUtil.getUserHeader().getUserName();
+        return UserHeaderUtil.getUserHeader().getUserName();
     }
 
     /**
@@ -59,6 +61,6 @@ public interface Controller {
      * @return Tenant ID
      */
     default Long getTenantId() {
-        return RequestUtil.getUserHeader().getTenantId();
+        return UserHeaderUtil.getUserHeader().getTenantId();
     }
 }
