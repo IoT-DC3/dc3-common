@@ -31,6 +31,6 @@ public class QueryWrapperConstant {
     /**
      * LIMIT
      */
-    public static final String LIMIT_ONE = QueryWrapperConstant.LIMIT_ONE;
+    public static final String LIMIT_ONE = "LIMIT 1";
 
 }

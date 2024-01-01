@@ -19,10 +19,7 @@ package io.github.pnoker.common.utils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.exception.JsonException;
@@ -48,6 +45,8 @@ public final class JsonUtil {
     }
 
     private static final ObjectMapper OBJECT_MAPPER = JsonMapper.builder()
+            .findAndAddModules()
+            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
             .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
             .serializationInclusion(JsonInclude.Include.NON_NULL).build();

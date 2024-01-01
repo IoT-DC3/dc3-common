@@ -18,7 +18,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        ip: ${NODE_HOST:}
+        ip: ${NODE_HOST:${spring.application.name}}
         watch-delay: 5000
 
 management:
