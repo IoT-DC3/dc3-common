@@ -39,12 +39,16 @@ server:
       pattern: '%h %l %u %t "%r" %s %b %Dms'
 
 springdoc:
-  swagger-ui:
-    enabled: true
+  default-flat-param-object: false
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
 
 knife4j:
   enable: true
   setting:
+    swagger-model-name: 数据模型
+    enable-version: false
     enable-swagger-models: true
     enable-footer-custom: true
     footer-custom-content: Apache License 2.0 | Copyright 2016-present the IoT DC3 original author or authors.
