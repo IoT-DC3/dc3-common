@@ -20,6 +20,7 @@ import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.constant.enums.ProfileShareFlagEnum;
 import io.github.pnoker.common.constant.enums.ProfileTypeFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.ext.ProfileExt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -65,6 +66,11 @@ public class ProfileDTO extends BaseDTO {
     private Long groupId;
 
     /**
+     * 模板拓展信息
+     */
+    private ProfileExt profileExt;
+
+    /**
      * 使能标识
      */
     private EnableFlagEnum enableFlag;
@@ -73,4 +79,14 @@ public class ProfileDTO extends BaseDTO {
      * 租户ID
      */
     private Long tenantId;
+
+    /**
+     * 签名
+     */
+    private String signature;
+
+    /**
+     * 版本
+     */
+    private Integer version;
 }

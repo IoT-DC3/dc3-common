@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.entity.ext;
 
-import io.github.pnoker.common.constant.enums.AttributeTypeFlagEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
-
 /**
- * 属性配置
+ * Driver Attribute Ext
+ * <p>
+ * 驱动属性相关拓展信息
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,15 +36,24 @@ import java.io.Serializable;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttributeInfoDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-    /**
-     * 值，string，需要通过type确定真实的数据类型
-     */
-    private String value;
+@Schema(description = "驱动属性相关拓展")
+public class DriverAttributeExt extends BaseExt {
 
     /**
-     * 类型，value type，用于确定value的真实类型
+     * 拓展内容
+     * <p>
+     * 拓展内容可以通过 Type 和 Version 进行区分
      */
-    private AttributeTypeFlagEnum type;
+    @Schema(description = "类型")
+    private Content content;
+
+    @Getter
+    @Setter
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Schema(description = "内容")
+    public static class Content {
+        private String keep;
+    }
 }

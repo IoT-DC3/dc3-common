@@ -22,7 +22,6 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.exception.UnAuthorizedException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.lang.Nullable;
 
 /**
  * 用户请求头 相关工具类
@@ -47,15 +46,15 @@ public class UserHeaderUtil {
     public static RequestHeader.UserHeader getUserHeader() {
         RequestHeader.UserHeader entityBO = USER_HEADER_THREAD_LOCAL.get();
         if (ObjectUtil.isNull(entityBO)) {
-            throw new UnAuthorizedException("Unable to get auth info");
+            throw new UnAuthorizedException("Unable to get user header");
         }
 
         if (ObjectUtil.isNull(entityBO.getTenantId())) {
-            throw new UnAuthorizedException("Unable to get tenant id of auth info");
+            throw new UnAuthorizedException("Unable to get tenant id of user header");
         }
 
         if (ObjectUtil.isNull(entityBO.getUserId())) {
-            throw new UnAuthorizedException("Unable to get user id of auth info");
+            throw new UnAuthorizedException("Unable to get user id of user header");
         }
 
         return entityBO;
@@ -66,8 +65,8 @@ public class UserHeaderUtil {
      *
      * @param entityBO {@link RequestHeader.UserHeader}
      */
-    public static void setUserHeader(@Nullable RequestHeader.UserHeader entityBO) {
-        if (ObjectUtil.isNull(entityBO)) {
+    public static void setUserHeader(RequestHeader.UserHeader entityBO) {
+        if (ObjectUtil.isNull(entityBO) || ObjectUtil.isNull(entityBO.getTenantId()) || ObjectUtil.isNull(entityBO.getUserId())) {
             removeUserHeader();
         } else {
             USER_HEADER_THREAD_LOCAL.set(entityBO);

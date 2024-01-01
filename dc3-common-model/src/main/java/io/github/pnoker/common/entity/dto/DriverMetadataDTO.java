@@ -44,12 +44,12 @@ public class DriverMetadataDTO implements Serializable {
     /**
      * deviceId(driverAttribute.name,(driverInfo.value,driverAttribute.type))
      */
-    private Map<Long, Map<String, AttributeInfoDTO>> driverInfoMap;
+    private Map<Long, Map<String, AttributeConfigDTO>> driverInfoMap;
 
     /**
      * deviceId(pointId(pointAttribute.name,(pointInfo.value,pointAttribute.type)))
      */
-    private Map<Long, Map<Long, Map<String, AttributeInfoDTO>>> pointInfoMap;
+    private Map<Long, Map<Long, Map<String, AttributeConfigDTO>>> pointInfoMap;
 
     /**
      * deviceId,device

@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.constant.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.ext.DriverExt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,14 +55,19 @@ public class DriverDTO extends BaseDTO {
     private String serviceName;
 
     /**
+     * 服务主机
+     */
+    private String serviceHost;
+
+    /**
      * 驱动类型标识
      */
     private DriverTypeFlagEnum driverTypeFlag;
 
     /**
-     * 服务主机
+     * 驱动拓展信息
      */
-    private String serviceHost;
+    private DriverExt driverExt;
 
     /**
      * 使能标识

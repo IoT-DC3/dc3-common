@@ -18,6 +18,7 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.ext.DeviceExt;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -58,6 +59,11 @@ public class DeviceDTO extends BaseDTO {
     private Long groupId;
 
     /**
+     * 设备拓展信息
+     */
+    private DeviceExt deviceExt;
+
+    /**
      * 使能标识
      */
     private EnableFlagEnum enableFlag;
@@ -67,7 +73,21 @@ public class DeviceDTO extends BaseDTO {
      */
     private Long tenantId;
 
+    /**
+     * 签名
+     */
+    private String signature;
+
+    /**
+     * 版本
+     */
+    private Integer version;
+
     // 附加字段
+
+    /**
+     * 模版ID集
+     */
     @Builder.Default
     private Set<Long> profileIds = new HashSet<>(4);
 }

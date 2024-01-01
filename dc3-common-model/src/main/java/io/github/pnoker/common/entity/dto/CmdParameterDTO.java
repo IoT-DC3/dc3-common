@@ -16,16 +16,12 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.valid.Read;
-import io.github.pnoker.common.valid.Write;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -45,21 +41,15 @@ public class CmdParameterDTO implements Serializable {
     /**
      * 设备ID
      */
-    @NotNull(message = "设备ID不能为空",
-            groups = {Read.class, Write.class})
     private Long deviceId;
 
     /**
      * 位号ID
      */
-    @NotNull(message = "位号ID不能为空",
-            groups = {Read.class, Write.class})
     private Long pointId;
 
     /**
      * 写入值
      */
-    @NotBlank(message = "Value can't be empty",
-            groups = {Write.class})
     private String value;
 }

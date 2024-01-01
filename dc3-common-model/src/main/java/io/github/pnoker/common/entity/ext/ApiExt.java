@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.entity.ext;
 
-import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import io.github.pnoker.common.entity.base.BaseDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 /**
- * DriverAttributeConfig BO
+ * Api Ext
+ * <p>
+ * 接口相关拓展信息
  *
  * @author pnoker
  * @since 2022.1.0
@@ -35,40 +36,40 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverAttributeConfigDTO extends BaseDTO {
+@Schema(description = "接口相关拓展")
+public class ApiExt extends BaseExt {
 
     /**
-     * 驱动属性ID
+     * 拓展内容
+     * <p>
+     * 拓展内容可以通过 Type 和 Version 进行区分
      */
-    private Long driverAttributeId;
+    @Schema(description = "类型")
+    private Content content;
 
-    /**
-     * 驱动属性配置值
-     */
-    private String configValue;
+    @Getter
+    @Setter
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Schema(description = "内容")
+    public static class Content {
+        /**
+         * 标题
+         */
+        @Schema(description = "标题")
+        private String title;
 
-    /**
-     * 设备ID
-     */
-    private Long deviceId;
+        /**
+         * 链接
+         */
+        @Schema(description = "链接")
+        private String url;
 
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    private Long tenantId;
-
-    /**
-     * 签名
-     */
-    private String signature;
-
-    /**
-     * 版本
-     */
-    private Integer version;
+        /**
+         * 描述
+         */
+        @Schema(description = "描述")
+        private String remark;
+    }
 }

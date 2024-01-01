@@ -17,17 +17,16 @@
 package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.AttributeTypeFlagEnum;
-import io.github.pnoker.common.constant.enums.EnableFlagEnum;
-import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.DriverAttributeExt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 /**
- * DriverAttribute BO
+ * 属性配置
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,55 +36,16 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverAttributeDTO extends BaseDTO {
+public class AttributeConfigDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
-     * 显示名称
+     * 值，string，需要通过type确定真实的数据类型
      */
-    private String displayName;
+    private String value;
 
     /**
-     * 属性名称
+     * 类型，value type，用于确定value的真实类型
      */
-    private String attributeName;
-
-    /**
-     * 属性类型标识
-     */
-    private AttributeTypeFlagEnum attributeTypeFlag;
-
-    /**
-     * 默认值
-     */
-    private String defaultValue;
-
-    /**
-     * 驱动ID
-     */
-    private Long driverId;
-
-    /**
-     * 驱动属性拓展信息
-     */
-    private DriverAttributeExt attributeExt;
-
-    /**
-     * 使能标识
-     */
-    private EnableFlagEnum enableFlag;
-
-    /**
-     * 租户ID
-     */
-    private Long tenantId;
-
-    /**
-     * 签名
-     */
-    private String signature;
-
-    /**
-     * 版本
-     */
-    private Integer version;
+    private AttributeTypeFlagEnum type;
 }

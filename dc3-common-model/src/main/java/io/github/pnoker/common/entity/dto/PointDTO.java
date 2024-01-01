@@ -87,6 +87,16 @@ public class PointDTO extends BaseDTO {
     private Long profileId;
 
     /**
+     * 报警通知模板ID
+     */
+    private Long alarmNotifyProfileId;
+
+    /**
+     * 报警信息模板ID
+     */
+    private Long alarmMessageProfileId;
+
+    /**
      * 分组ID
      */
     private Long groupId;
@@ -102,15 +112,13 @@ public class PointDTO extends BaseDTO {
     private Long tenantId;
 
     /**
-     * 设置默认值
+     * 签名
      */
-    public void setDefault() {
-        this.pointTypeFlag = PointTypeFlagEnum.STRING;
-        this.rwFlag = RwFlagEnum.R;
-        this.baseValue = BigDecimal.valueOf(0);
-        this.multiple = BigDecimal.valueOf(1);
-        this.valueDecimal = 6;
-        this.unit = "";
-    }
+    private String signature;
+
+    /**
+     * 版本
+     */
+    private Integer version;
 
 }

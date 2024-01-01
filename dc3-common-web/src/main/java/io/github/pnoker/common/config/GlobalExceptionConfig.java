@@ -79,7 +79,7 @@ public class GlobalExceptionConfig {
     })
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public R<String> methodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        HashMap<String, String> map = new HashMap<>(16);
+        HashMap<String, String> map = new HashMap<>(4);
         List<FieldError> errorList = exception.getBindingResult().getFieldErrors();
         errorList.forEach(error -> {
             log.warn("Method Argument Not Valid Exception Handler: {}: {}", error.getField(), error.getDefaultMessage());
