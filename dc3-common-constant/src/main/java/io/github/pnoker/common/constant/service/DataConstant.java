@@ -19,25 +19,26 @@ package io.github.pnoker.common.constant.service;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 
 /**
- * 权限服务 相关常量
+ * 数据服务 相关常量
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public class AuthServiceConstant {
+public class DataConstant {
 
-    private AuthServiceConstant() {
+    private DataConstant() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
     /**
      * 服务名
      */
-    public static final String SERVICE_NAME = "dc3-center-auth";
+    public static final String SERVICE_NAME = "dc3-center-data";
 
-    public static final String USER_URL_PREFIX = "/auth/user";
-    public static final String TENANT_URL_PREFIX = "/auth/tenant";
-    public static final String TOKEN_URL_PREFIX = "/auth/token";
-    public static final String LIMITED_IP_URL_PREFIX = "/auth/limited_ip";
-    public static final String DICTIONARY_URL_PREFIX = "/auth/dictionary";
+    public static final String VALUE_URL_PREFIX = "/point_value";
+    public static final String VALUE_COMMAND_URL_PREFIX = "/point_value_command";
+    public static final String DRIVER_STATUS_URL_PREFIX = "/driver/status";
+    public static final String DRIVER_EVENT_URL_PREFIX = "/driver/event";
+    public static final String DEVICE_STATUS_URL_PREFIX = "/device/status";
+    public static final String DEVICE_EVENT_URL_PREFIX = "/device/event";
 }

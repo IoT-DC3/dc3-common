@@ -22,7 +22,7 @@ import io.github.pnoker.common.constant.common.RequestConstant;
 import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.utils.DecodeUtil;
 import io.github.pnoker.common.utils.JsonUtil;
-import io.github.pnoker.common.utils.RequestHeaderUtil;
+import io.github.pnoker.common.utils.HeaderUtil;
 import io.github.pnoker.common.utils.UserHeaderUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
@@ -84,7 +84,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
             private void setUserHeader(HttpServletRequest request) {
                 try {
-                    String user = RequestHeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
+                    String user = HeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
                     if (CharSequenceUtil.isEmpty(user)) {
                         return;
                     }

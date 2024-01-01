@@ -45,6 +45,6 @@ springdoc:
 knife4j:
   enable: true
   setting:
-    enable-swagger-models: false
+    enable-swagger-models: true
     enable-footer-custom: true
     footer-custom-content: Apache License 2.0 | Copyright 2016-present the IoT DC3 original author or authors.

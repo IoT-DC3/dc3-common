@@ -28,9 +28,9 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2022.1.0
  */
 @Slf4j
-public class RequestHeaderUtil {
+public class HeaderUtil {
 
-    private RequestHeaderUtil() {
+    private HeaderUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
