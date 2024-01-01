@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 /**
  * Driver Ext
@@ -33,7 +32,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "驱动相关拓展")
@@ -49,7 +47,6 @@ public class DriverExt extends BaseExt {
 
     @Getter
     @Setter
-    @SuperBuilder
     @NoArgsConstructor
     @AllArgsConstructor
     @Schema(description = "内容")

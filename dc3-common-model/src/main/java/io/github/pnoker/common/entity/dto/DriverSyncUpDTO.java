@@ -16,11 +16,7 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -31,7 +27,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverSyncUpDTO implements Serializable {

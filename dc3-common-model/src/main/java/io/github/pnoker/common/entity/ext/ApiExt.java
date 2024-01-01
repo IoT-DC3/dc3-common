@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 /**
  * Api Ext
@@ -33,7 +32,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "接口相关拓展")
@@ -49,7 +47,6 @@ public class ApiExt extends BaseExt {
 
     @Getter
     @Setter
-    @SuperBuilder
     @NoArgsConstructor
     @AllArgsConstructor
     @Schema(description = "内容")

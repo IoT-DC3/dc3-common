@@ -19,7 +19,6 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.constant.enums.DeviceEventTypeEnum;
 import io.github.pnoker.common.constant.enums.DeviceStatusEnum;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -33,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceEventDTO implements Serializable {
@@ -68,7 +67,7 @@ public class DeviceEventDTO implements Serializable {
      */
     @Getter
     @Setter
-    @SuperBuilder
+    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DeviceStatus implements Serializable {
