@@ -1,0 +1,65 @@
+{
+  "properties": [
+    {
+      "name": "driver.name",
+      "type": "java.lang.String",
+      "description": "Driver name."
+    },
+    {
+      "name": "driver.code",
+      "type": "java.lang.String",
+      "description": "Driver code."
+    },
+    ,
+    {
+      "name": "driver.type",
+      "type": "io.github.pnoker.common.constant.enums.DriverTypeFlagEnum",
+      "description": "Driver type."
+    },
+    {
+      "name": "driver.tenant",
+      "type": "java.lang.String",
+      "description": "Driver tenant."
+    },
+    {
+      "name": "driver.remark",
+      "type": "java.lang.String",
+      "description": "Driver remark."
+    },
+    {
+      "name": "driver.schedule.read.enable",
+      "type": "java.lang.Boolean",
+      "description": "Driver read schedule status."
+    },
+    {
+      "name": "driver.schedule.read.corn",
+      "type": "java.lang.String",
+      "description": "Driver read schedule corn."
+    },
+    {
+      "name": "driver.schedule.custom.enable",
+      "type": "java.lang.Boolean",
+      "description": "Driver custom schedule status."
+    },
+    {
+      "name": "driver.schedule.custom.corn",
+      "type": "java.lang.String",
+      "description": "Driver custom schedule corn."
+    },
+    {
+      "name": "driver.custom",
+      "type": "java.lang.String",
+      "description": "Driver custom config."
+    },
+    {
+      "name": "driver.driver-attribute",
+      "type": "java.util.List<io.github.pnoker.center.manager.entity.bo.DriverAttribute>",
+      "description": "Driver attribute list<p/><p>- display-name: attribute display name<p>- attribute-name: attribute name<p>- attribute-type-flag: string/int/double/float/long/boolean<p>- default-value: default value<p>- remark: description."
+    },
+    {
+      "name": "driver.point-attribute",
+      "type": "java.util.List<io.github.pnoker.center.manager.entity.bo.PointAttribute>",
+      "description": "Device point attribute list<p/><p>- display-name: attribute display name<p>- attribute-name: attribute name<p>- attribute-type-flag: string/int/double/float/long/boolean<p>- default-value: default value<p>- remark: description."
+    }
+  ]
+}

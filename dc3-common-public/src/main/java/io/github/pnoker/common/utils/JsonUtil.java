@@ -46,7 +46,8 @@ public final class JsonUtil {
 
     private static final ObjectMapper OBJECT_MAPPER = JsonMapper.builder()
             .findAndAddModules()
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
+            .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
             .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
             .serializationInclusion(JsonInclude.Include.NON_NULL).build();
