@@ -14,38 +14,15 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.property;
-
-import lombok.Getter;
-import lombok.Setter;
+package io.github.pnoker.common.service;
 
 /**
- * 通用线程池属性
- *
  * @author pnoker
  * @since 2022.1.0
  */
-@Setter
-@Getter
-public class ThreadProperty {
-
+public interface MqttScheduleService {
     /**
-     * 线程名称前缀
+     * 初始化调度任务
      */
-    private String prefix;
-
-    /**
-     * 线程池核心线程数量
-     */
-    private int corePoolSize;
-
-    /**
-     * 线程池线程最大数量
-     */
-    private int maximumPoolSize;
-
-    /**
-     * 空闲线程等待时间
-     */
-    private int keepAliveTime;
+    void initial();
 }

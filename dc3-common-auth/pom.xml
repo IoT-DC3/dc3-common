@@ -81,13 +81,11 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
 
-        <!-- DC3 Public -->
+        <!-- DC3 Public 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-public</artifactId>
         </dependency>
-
-        <!-- DC3 Common Redis -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-redis</artifactId>

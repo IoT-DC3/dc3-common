@@ -141,7 +141,11 @@
             <artifactId>swagger-annotations</artifactId>
         </dependency>
 
-        <!-- DC3 Common Exception -->
+        <!-- DC3 Common 相关 -->
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-constant</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-exception</artifactId>

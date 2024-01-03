@@ -7,7 +7,7 @@
     },
     {
       "name": "driver.mqtt.auth-type",
-      "type": "io.github.pnoker.common.mqtt.property.MqttProperties.AuthTypeEnum",
+      "type": "io.github.pnoker.common.property.MqttProperties.AuthTypeEnum",
       "description": "mqtt auth type."
     },
     {
@@ -52,7 +52,7 @@
     },
     {
       "name": "driver.mqtt.default-send-topic",
-      "type": "io.github.pnoker.common.mqtt.property.MqttProperties.Topic",
+      "type": "io.github.pnoker.common.property.MqttProperties.Topic",
       "description": "Driver default sent topic for mqtt server."
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "name": "driver.mqtt.receive-topics",
-      "type": "java.util.List<io.github.pnoker.common.mqtt.property.MqttProperties.Topic>",
+      "type": "java.util.List<io.github.pnoker.common.property.MqttProperties.Topic>",
       "description": "Driver receive topics(string list) for mqtt server."
     },
     {

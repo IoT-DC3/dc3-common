@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.pnoker.driver.sdk.init.DriverInitRunner,\
-  io.github.pnoker.driver.sdk.config.DriverTopicConfig
+  io.github.pnoker.common.init.DriverInitRunner,\
+  io.github.pnoker.common.config.DriverTopicConfig
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  io.github.pnoker.driver.sdk.config.ActiveDriverProfileConfig,\
-  io.github.pnoker.driver.sdk.config.DriverEnvironmentConfig
+  io.github.pnoker.common.config.ActiveDriverProfileConfig,\
+  io.github.pnoker.common.config.DriverEnvironmentConfig

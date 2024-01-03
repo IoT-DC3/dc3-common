@@ -69,13 +69,11 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
-        <!-- DC3 Common Constant -->
+        <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-constant</artifactId>
         </dependency>
-
-        <!-- DC3 Common Public -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-public</artifactId>

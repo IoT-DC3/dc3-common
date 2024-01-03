@@ -16,36 +16,43 @@
 
 package io.github.pnoker.common.entity.property;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 通用线程池属性
+ * 驱动配置文件 driver.schedule 字段内容
  *
  * @author pnoker
  * @since 2022.1.0
  */
-@Setter
 @Getter
-public class ThreadProperty {
+@Setter
+public class ScheduleProperty {
 
     /**
-     * 线程名称前缀
+     * 读任务配置
      */
-    private String prefix;
+    private ScheduleConfig read;
 
     /**
-     * 线程池核心线程数量
+     * 自定义任务配置
      */
-    private int corePoolSize;
+    private ScheduleConfig custom;
 
     /**
-     * 线程池线程最大数量
+     * 驱动调度任务配置
+     *
+     * @author pnoker
+     * @since 2022.1.0
      */
-    private int maximumPoolSize;
-
-    /**
-     * 空闲线程等待时间
-     */
-    private int keepAliveTime;
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ScheduleConfig {
+        private Boolean enable = false;
+        private String corn = "* */15 * * * ?";
+    }
 }

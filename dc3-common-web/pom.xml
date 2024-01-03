@@ -97,16 +97,14 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
 
-        <!-- DC3 Common Public -->
-        <dependency>
-            <groupId>io.github.pnoker</groupId>
-            <artifactId>dc3-common-public</artifactId>
-        </dependency>
-
-        <!-- DC3 Common Exception -->
+        <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-public</artifactId>
         </dependency>
 
     </dependencies>

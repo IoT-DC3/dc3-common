@@ -14,38 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.property;
+package io.github.pnoker.common.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
- * 通用线程池属性
- *
  * @author pnoker
  * @since 2022.1.0
  */
-@Setter
 @Getter
-public class ThreadProperty {
-
-    /**
-     * 线程名称前缀
-     */
-    private String prefix;
-
-    /**
-     * 线程池核心线程数量
-     */
-    private int corePoolSize;
-
-    /**
-     * 线程池线程最大数量
-     */
-    private int maximumPoolSize;
-
-    /**
-     * 空闲线程等待时间
-     */
-    private int keepAliveTime;
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class MqttMessage implements Serializable {
+    private MessageHeader header;
+    private String payload;
 }

@@ -87,16 +87,14 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
-        <!-- DC3 Common Quartz -->
-        <dependency>
-            <groupId>io.github.pnoker</groupId>
-            <artifactId>dc3-common-quartz</artifactId>
-        </dependency>
-
-        <!-- DC3 Common Public -->
+        <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-public</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-quartz</artifactId>
         </dependency>
 
     </dependencies>

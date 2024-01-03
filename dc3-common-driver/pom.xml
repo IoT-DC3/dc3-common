@@ -60,7 +60,13 @@
 
     <dependencies>
 
-        <!-- DC3 Common -->
+        <!-- DC3 Api 相关 -->
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-api-driver</artifactId>
+        </dependency>
+
+        <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-constant</artifactId>
