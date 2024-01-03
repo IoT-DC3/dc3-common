@@ -20,6 +20,7 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,13 +40,24 @@ public class LocalDateTimeUtil {
     }
 
     /**
-     * 获取微秒
+     * 获取毫秒
      *
      * @param localDateTime {@link LocalDateTime}
-     * @return 微秒
+     * @return 毫秒
      */
     public static long milliSeconds(LocalDateTime localDateTime) {
         return localDateTime.atZone(TimeConstant.DEFAULT_ZONEID).toInstant().toEpochMilli();
+    }
+
+    /**
+     * 获取 LocalDateTime
+     *
+     * @param milliSeconds 毫秒
+     * @return LocalDateTime {@link LocalDateTime}
+     */
+    public static LocalDateTime localDateTime(long milliSeconds) {
+        Instant instant = Instant.ofEpochMilli(milliSeconds);
+        return LocalDateTime.ofInstant(instant, TimeConstant.DEFAULT_ZONEID);
     }
 
     /**

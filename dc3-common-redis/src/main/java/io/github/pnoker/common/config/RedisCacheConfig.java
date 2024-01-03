@@ -17,8 +17,13 @@
 package io.github.pnoker.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -96,10 +101,17 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(factory);
 
         // Json 序列化配置
+        JsonMapper jsonMapper = JsonMapper.builder()
+                .findAndAddModules()
+                .visibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
+                .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL)
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
+                .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
+                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
+                .serializationInclusion(JsonInclude.Include.NON_NULL).build();
         Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        serializer.setObjectMapper(new ObjectMapper()
-                .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
-                .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL));
+        serializer.setObjectMapper(jsonMapper);
 
         // 配置 Key & Value 序列化
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()

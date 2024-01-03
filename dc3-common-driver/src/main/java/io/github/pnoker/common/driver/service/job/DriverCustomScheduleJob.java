@@ -14,36 +14,32 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.init;
+package io.github.pnoker.common.driver.service.job;
 
-import io.github.pnoker.common.entity.property.MqttProperties;
-import io.github.pnoker.common.mqtt.service.MqttScheduleService;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
+import io.github.pnoker.common.driver.service.DriverCustomService;
+import lombok.extern.slf4j.Slf4j;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 /**
- * Mqtt Initial
+ * 自定义调度任务
  *
  * @author pnoker
  * @since 2022.1.0
  */
+@Slf4j
 @Component
-@ComponentScan(basePackages = {
-        "io.github.pnoker.common.mqtt.*"
-})
-@EnableConfigurationProperties({MqttProperties.class})
-public class MqttInitRunner implements ApplicationRunner {
+public class DriverCustomScheduleJob extends QuartzJobBean {
 
     @Resource
-    private MqttScheduleService mqttScheduleService;
+    private DriverCustomService driverCustomService;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        mqttScheduleService.initial();
+    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        driverCustomService.schedule();
     }
 }

@@ -16,10 +16,10 @@
 
 package io.github.pnoker.common.init;
 
+import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.driver.service.DriverScheduleService;
+import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.property.DriverProperty;
-import io.github.pnoker.common.service.DriverCustomService;
-import io.github.pnoker.common.service.DriverScheduleService;
-import io.github.pnoker.common.service.DriverSyncService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -29,14 +29,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * Driver SDK Initial
+ * Driver Initial
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Component
 @ComponentScan(basePackages = {
-        "io.github.pnoker.driver.sdk"
+        "io.github.pnoker.common.driver.*"
 })
 @EnableConfigurationProperties({DriverProperty.class})
 public class DriverInitRunner implements ApplicationRunner {

@@ -79,7 +79,7 @@ public class DecodeUtil {
      * @return MD5 字符串
      */
     public static String md5(String content, String salt) {
-        return md5(md5(content) + salt);
+        return md5(content + salt);
     }
 
     /**

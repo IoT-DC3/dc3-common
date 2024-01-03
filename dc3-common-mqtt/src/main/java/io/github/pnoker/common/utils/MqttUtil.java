@@ -18,7 +18,7 @@ package io.github.pnoker.common.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.property.MqttProperties;
+import io.github.pnoker.common.entity.property.MqttProperties;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 
 /**

@@ -17,7 +17,7 @@
 package io.github.pnoker.common.config;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.property.MqttProperties;
+import io.github.pnoker.common.entity.property.MqttProperties;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.MqttUtil;
 import lombok.extern.slf4j.Slf4j;

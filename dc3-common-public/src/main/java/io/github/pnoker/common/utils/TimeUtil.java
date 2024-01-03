@@ -45,13 +45,23 @@ public class TimeUtil {
     }
 
     /**
-     * 获取微秒
+     * 获取毫秒
      *
      * @param date {@link Date}
-     * @return 微秒
+     * @return 毫秒
      */
     public static long milliSeconds(Date date) {
         return date.getTime();
+    }
+
+    /**
+     * 获取 Date
+     *
+     * @param milliSeconds 毫秒
+     * @return Date {@link Date}
+     */
+    public static Date localDateTime(long milliSeconds) {
+        return new Date(milliSeconds);
     }
 
     /**
