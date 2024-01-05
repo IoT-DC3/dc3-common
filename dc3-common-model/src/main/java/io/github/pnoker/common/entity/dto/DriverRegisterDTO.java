@@ -30,7 +30,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverSyncUpDTO implements Serializable {
+public class DriverRegisterDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String tenant;

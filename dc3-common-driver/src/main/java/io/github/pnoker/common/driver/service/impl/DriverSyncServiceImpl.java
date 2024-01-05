@@ -26,7 +26,7 @@ import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverDTO;
 import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
 import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
-import io.github.pnoker.common.entity.dto.DriverSyncUpDTO;
+import io.github.pnoker.common.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.utils.JsonUtil;
@@ -64,7 +64,7 @@ public class DriverSyncServiceImpl implements DriverSyncService {
     @Override
     public void up() {
         try {
-            DriverSyncUpDTO entityDTO = buildRegisterDTOByProperty();
+            DriverRegisterDTO entityDTO = buildRegisterDTOByProperty();
             log.info("The driver {} is initializing", entityDTO.getClient());
             log.debug("The driver {} initialization information is: {}", driverProperty.getService(), JsonUtil.toPrettyJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
@@ -113,14 +113,14 @@ public class DriverSyncServiceImpl implements DriverSyncService {
      *
      * @return DriverRegisterDTO
      */
-    private DriverSyncUpDTO buildRegisterDTOByProperty() {
-        DriverSyncUpDTO driverSyncUpDTO = new DriverSyncUpDTO();
-        driverSyncUpDTO.setDriver(buildDriverByProperty());
-        driverSyncUpDTO.setTenant(driverProperty.getTenant());
-        driverSyncUpDTO.setClient(driverProperty.getClient());
-        driverSyncUpDTO.setDriverAttributes(driverProperty.getDriverAttribute());
-        driverSyncUpDTO.setPointAttributes(driverProperty.getPointAttribute());
-        return driverSyncUpDTO;
+    private DriverRegisterDTO buildRegisterDTOByProperty() {
+        DriverRegisterDTO driverRegisterDTO = new DriverRegisterDTO();
+        driverRegisterDTO.setDriver(buildDriverByProperty());
+        driverRegisterDTO.setTenant(driverProperty.getTenant());
+        driverRegisterDTO.setClient(driverProperty.getClient());
+        driverRegisterDTO.setDriverAttributes(driverProperty.getDriverAttribute());
+        driverRegisterDTO.setPointAttributes(driverProperty.getPointAttribute());
+        return driverRegisterDTO;
     }
 
     /**
