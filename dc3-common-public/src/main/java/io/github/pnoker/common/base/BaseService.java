@@ -16,17 +16,65 @@
 
 package io.github.pnoker.common.base;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.utils.UserHeaderUtil;
 
 /**
- * 基础 Controller 类接口
+ * 基础 Service 类接口
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface Controller {
+public interface BaseService<B, Q> {
+
+    /**
+     * <p>
+     * 新增
+     * </p>
+     *
+     * @param entityBO Entity of BO
+     */
+    void save(B entityBO);
+
+    /**
+     * <p>
+     * 删除
+     * </p>
+     *
+     * @param id Entity ID
+     */
+    void remove(Long id);
+
+    /**
+     * <p>
+     * 更新
+     * </p>
+     *
+     * @param entityBO Entity of BO
+     */
+    void update(B entityBO);
+
+    /**
+     * <p>
+     * 主键查询
+     * </p>
+     *
+     * @param id Entity ID
+     * @return Entity of BO
+     */
+    B selectById(Long id);
 
     // 默认方法
+
+    /**
+     * <p>
+     * 分页查询
+     * </p>
+     *
+     * @param entityQuery Entity of Query
+     * @return Entity of BO Page
+     */
+    Page<B> selectByPage(Q entityQuery);
 
     /**
      * 获取用户ID
