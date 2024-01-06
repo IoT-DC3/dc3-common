@@ -71,7 +71,7 @@ public class PoiUtil {
      * @param sheet     Sheet
      * @param rowIndex  Row Index
      * @param cellIndex Cell Index
-     * @return String Value
+     * @return R of String Value
      */
     public static String getCellStringValue(Sheet sheet, int rowIndex, int cellIndex) {
         Row driverAttributesRow = sheet.getRow(rowIndex);

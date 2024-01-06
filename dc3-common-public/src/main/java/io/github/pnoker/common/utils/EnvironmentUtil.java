@@ -38,7 +38,7 @@ public class EnvironmentUtil {
     /**
      * 获取节点 ID
      *
-     * @return String Suffix
+     * @return R of String Suffix
      */
     public static String getNodeId() {
         return RandomUtil.randomString(8).toLowerCase();
@@ -50,7 +50,7 @@ public class EnvironmentUtil {
      *
      * @param env   环境类型
      * @param group 分组
-     * @return String Tag
+     * @return R of String Tag
      */
     public static String getTag(String env, String group) {
         String exchangeTag = "";

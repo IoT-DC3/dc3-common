@@ -56,7 +56,7 @@ public interface DriverCommandService {
     /**
      * 指令写取位号值
      *
-     * @param commandDTO {@link  DeviceCommandDTO}
+     * @param commandDTO {@link DeviceCommandDTO}
      */
     void write(DeviceCommandDTO commandDTO);
 

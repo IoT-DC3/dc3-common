@@ -43,17 +43,17 @@ public class PointValueDTO implements Serializable {
     private String id;
 
     /**
-     * 设备ID，同MySQl中等 设备ID 一致
+     * 设备ID
      */
     private Long deviceId;
 
     /**
-     * 位号ID，同MySQl中等 位号ID 一致
+     * 位号ID
      */
     private Long pointId;
 
     /**
-     * 处理值，进行过缩放、格式化等操作
+     * 处理值
      */
     private String value;
 
@@ -64,10 +64,14 @@ public class PointValueDTO implements Serializable {
 
     private List<String> children;
 
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    /**
+     * 原始时间
+     */
     private LocalDateTime originTime;
 
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
 
     public PointValueDTO(Long deviceId, Long pointId, String rawValue, String value) {

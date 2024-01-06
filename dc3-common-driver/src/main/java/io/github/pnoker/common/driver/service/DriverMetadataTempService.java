@@ -32,35 +32,35 @@ public interface DriverMetadataTempService {
     void upsertProfile(ProfileDTO profile);
 
     /**
-     * 删除 DeviceDriver 中模板
+     * 删除驱动原数据中模板
      *
      * @param id ID
      */
     void deleteProfile(Long id);
 
     /**
-     * 向 DeviceDriver 中添加设备
+     * 向驱动原数据中添加设备
      *
      * @param device Device
      */
     void upsertDevice(DeviceDTO device);
 
     /**
-     * 删除 DeviceDriver 中设备
+     * 删除驱动原数据中设备
      *
      * @param id ID
      */
     void deleteDevice(Long id);
 
     /**
-     * 向 DeviceDriver 中添加位号
+     * 向驱动原数据中添加位号
      *
      * @param point Point
      */
     void upsertPoint(PointDTO point);
 
     /**
-     * 删除 DeviceDriver 中位号
+     * 删除驱动原数据中位号
      *
      * @param profileId 模板ID
      * @param id        ID
@@ -68,14 +68,14 @@ public interface DriverMetadataTempService {
     void deletePoint(Long profileId, Long id);
 
     /**
-     * 向 DeviceDriver 中添加驱动配置信息
+     * 向驱动原数据中添加驱动配置信息
      *
      * @param driverAttributeConfig DriverInfo
      */
     void upsertDriverInfo(DriverAttributeConfigDTO driverAttributeConfig);
 
     /**
-     * 删除 DeviceDriver 中添加驱动配置信息
+     * 删除驱动原数据中添加驱动配置信息
      *
      * @param deviceId    设备ID
      * @param attributeId Attribute ID
@@ -83,14 +83,14 @@ public interface DriverMetadataTempService {
     void deleteDriverInfo(Long deviceId, Long attributeId);
 
     /**
-     * 向 DeviceDriver 中添加位号配置信息
+     * 向驱动原数据中添加位号配置信息
      *
      * @param pointAttributeConfig PointInfo
      */
     void upsertPointInfo(PointAttributeConfigDTO pointAttributeConfig);
 
     /**
-     * 删除 DeviceDriver 中添加位号配置信息
+     * 删除驱动原数据中添加位号配置信息
      *
      * @param deviceId    设备ID
      * @param pointId     位号ID

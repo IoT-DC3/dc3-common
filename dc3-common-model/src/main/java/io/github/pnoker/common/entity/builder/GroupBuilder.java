@@ -39,6 +39,7 @@ public interface GroupBuilder {
      * @param entityVO EntityVO
      * @return EntityBO
      */
+    @Mapping(target = "tenantId", ignore = true)
     GroupBO buildBOByVO(GroupVO entityVO);
 
     /**

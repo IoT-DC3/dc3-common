@@ -39,7 +39,7 @@ public class HostUtil {
     /**
      * 获取当前主机的 Local Host
      *
-     * @return String
+     * @return R of String
      */
     public static String localHost() {
         try {

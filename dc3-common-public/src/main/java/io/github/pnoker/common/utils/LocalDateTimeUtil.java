@@ -76,7 +76,7 @@ public class LocalDateTimeUtil {
      * 使用 yyyy-MM-dd HH:mm:ss 格式化时间
      *
      * @param localDateTime {@link LocalDateTime}
-     * @return String
+     * @return R of String
      */
     public static String defaultFormat(LocalDateTime localDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.DEFAULT_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
@@ -87,7 +87,7 @@ public class LocalDateTimeUtil {
      * 使用 yyyy-MM-dd HH:mm:ss.SSS 格式化时间
      *
      * @param localDateTime {@link LocalDateTime}
-     * @return String
+     * @return R of String
      */
     public static String completeFormat(LocalDateTime localDateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.COMPLETE_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);

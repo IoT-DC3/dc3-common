@@ -49,15 +49,39 @@ public class UserHeaderUtil {
             throw new UnAuthorizedException("Unable to get user header");
         }
 
-        if (ObjectUtil.isNull(entityBO.getTenantId())) {
+        return entityBO;
+    }
+
+    /**
+     * 获取用户请求头的租户ID
+     *
+     * @return 租户ID
+     */
+    public static Long getTenantId() {
+        RequestHeader.UserHeader entityBO = getUserHeader();
+
+        Long tenantId = entityBO.getTenantId();
+        if (ObjectUtil.isNull(tenantId)) {
             throw new UnAuthorizedException("Unable to get tenant id of user header");
         }
 
-        if (ObjectUtil.isNull(entityBO.getUserId())) {
+        return tenantId;
+    }
+
+    /**
+     * 获取用户请求头的用户ID
+     *
+     * @return 用户ID
+     */
+    public static Long getUserId() {
+        RequestHeader.UserHeader entityBO = getUserHeader();
+
+        Long userId = entityBO.getUserId();
+        if (ObjectUtil.isNull(userId)) {
             throw new UnAuthorizedException("Unable to get user id of user header");
         }
 
-        return entityBO;
+        return userId;
     }
 
     /**

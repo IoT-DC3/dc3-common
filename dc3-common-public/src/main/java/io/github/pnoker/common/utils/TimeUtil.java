@@ -82,7 +82,7 @@ public class TimeUtil {
      * 使用 yyyy-MM-dd HH:mm:ss 格式化时间
      *
      * @param date {@link Date}
-     * @return String
+     * @return R of String
      */
     public static String defaultFormat(Date date) {
         return DEFAULT_DATE_FORMAT_THREAD_LOCAL.get().format(date);
@@ -92,7 +92,7 @@ public class TimeUtil {
      * 使用 yyyy-MM-dd HH:mm:ss.SSS 格式化时间
      *
      * @param date {@link Date}
-     * @return String
+     * @return R of String
      */
     public static String completeFormat(Date date) {
         return COMPLETE_DATE_FORMAT_THREAD_LOCAL.get().format(date);

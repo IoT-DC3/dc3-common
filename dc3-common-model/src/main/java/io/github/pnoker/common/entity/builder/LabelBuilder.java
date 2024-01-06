@@ -39,6 +39,7 @@ public interface LabelBuilder {
      * @param entityVO EntityVO
      * @return EntityBO
      */
+    @Mapping(target = "tenantId", ignore = true)
     LabelBO buildBOByVO(LabelVO entityVO);
 
     /**

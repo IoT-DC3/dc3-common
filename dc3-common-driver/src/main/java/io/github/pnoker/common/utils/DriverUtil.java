@@ -88,7 +88,7 @@ public class DriverUtil {
      * 将 BCD byte[] 转成十进制字符串
      *
      * @param bytes Byte Array
-     * @return String
+     * @return R of String
      */
     public static String bcdBytesToString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
@@ -144,7 +144,7 @@ public class DriverUtil {
      * 将byte[]转成十六进制字符串
      *
      * @param bytes Byte Array
-     * @return String
+     * @return R of String
      */
     public static String bytesToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
@@ -203,7 +203,7 @@ public class DriverUtil {
      * 将byte[]转成Ascii码
      *
      * @param bytes Byte Array
-     * @return String
+     * @return R of String
      */
     public static String bytesToAscii(byte[] bytes) {
         return new String(bytes, StandardCharsets.ISO_8859_1);

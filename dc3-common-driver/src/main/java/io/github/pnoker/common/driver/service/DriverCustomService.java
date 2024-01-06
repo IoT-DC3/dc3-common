@@ -46,7 +46,7 @@ public interface DriverCustomService {
      * @param pointInfo  Point Attribute Info
      * @param device     Device
      * @param point      Point
-     * @return String Value
+     * @return R of String Value
      */
     String read(Map<String, AttributeConfigDTO> driverInfo, Map<String, AttributeConfigDTO> pointInfo, DeviceDTO device, PointDTO point);
 
