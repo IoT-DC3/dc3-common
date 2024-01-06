@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service.job;
+package io.github.pnoker.common.driver.schedule;
 
-import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.driver.biz.DriverCustomService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

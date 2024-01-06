@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service;
+package io.github.pnoker.common.driver.biz;
 
 import io.github.pnoker.common.entity.dto.*;
 

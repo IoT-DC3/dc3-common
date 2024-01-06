@@ -14,27 +14,18 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service;
-
-import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
+package io.github.pnoker.common.driver.biz;
 
 /**
- * 驱动同步相关接口
+ * Driver Schedule Service
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface DriverSyncService {
+public interface DriverScheduleService {
 
     /**
-     * 同步驱动信息到平台端
+     * 驱动定时任务初始化
      */
-    void up();
-
-    /**
-     * 同步平台端信息到驱动
-     *
-     * @param entityDTO DriverSyncDTO
-     */
-    void down(DriverSyncDownDTO entityDTO);
+    void initial();
 }

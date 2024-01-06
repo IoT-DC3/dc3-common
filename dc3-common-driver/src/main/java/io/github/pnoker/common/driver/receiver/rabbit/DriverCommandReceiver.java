@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service.rabbit;
+package io.github.pnoker.common.driver.receiver.rabbit;
 
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.entity.dto.DriverCommandDTO;
