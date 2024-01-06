@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.biz.impl;
+package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.entity.property.ScheduleProperty;
-import io.github.pnoker.common.driver.biz.DriverScheduleService;
+import io.github.pnoker.common.driver.service.DriverScheduleService;
 import io.github.pnoker.common.driver.schedule.DriverCustomScheduleJob;
 import io.github.pnoker.common.driver.schedule.DriverReadScheduleJob;
 import io.github.pnoker.common.driver.schedule.DriverStatusScheduleJob;

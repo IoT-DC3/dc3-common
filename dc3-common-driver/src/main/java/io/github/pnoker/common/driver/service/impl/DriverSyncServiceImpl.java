@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.biz.impl;
+package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.thread.ThreadUtil;
@@ -22,13 +22,13 @@ import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.DriverContext;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.constant.enums.DriverStatusEnum;
-import io.github.pnoker.common.driver.biz.DriverSyncService;
+import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverDTO;
 import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
 import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.entity.property.DriverProperty;
-import io.github.pnoker.common.driver.biz.DriverSenderService;
+import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

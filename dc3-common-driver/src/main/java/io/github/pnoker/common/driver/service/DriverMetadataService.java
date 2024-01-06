@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.biz;
+package io.github.pnoker.common.driver.service;
 
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
 

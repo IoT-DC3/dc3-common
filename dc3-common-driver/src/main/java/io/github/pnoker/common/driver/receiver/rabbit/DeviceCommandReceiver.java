@@ -20,7 +20,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
-import io.github.pnoker.common.driver.biz.DriverCommandService;
+import io.github.pnoker.common.driver.service.DriverCommandService;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;

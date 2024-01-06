@@ -16,9 +16,9 @@
 
 package io.github.pnoker.common.init;
 
-import io.github.pnoker.common.driver.biz.DriverCustomService;
-import io.github.pnoker.common.driver.biz.DriverScheduleService;
-import io.github.pnoker.common.driver.biz.DriverSyncService;
+import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.driver.service.DriverScheduleService;
+import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

@@ -19,7 +19,7 @@ package io.github.pnoker.common.driver.schedule;
 import io.github.pnoker.common.DriverContext;
 import io.github.pnoker.common.constant.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
-import io.github.pnoker.common.driver.biz.DriverSenderService;
+import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;

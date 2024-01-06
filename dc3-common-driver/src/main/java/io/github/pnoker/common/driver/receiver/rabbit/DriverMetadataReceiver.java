@@ -19,7 +19,7 @@ package io.github.pnoker.common.driver.receiver.rabbit;
 import cn.hutool.core.util.ObjectUtil;
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
-import io.github.pnoker.common.driver.biz.DriverMetadataService;
+import io.github.pnoker.common.driver.service.DriverMetadataService;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;

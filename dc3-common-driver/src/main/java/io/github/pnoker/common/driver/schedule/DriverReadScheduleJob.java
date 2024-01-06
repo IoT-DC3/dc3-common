@@ -22,7 +22,7 @@ import io.github.pnoker.common.DriverContext;
 import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.PointDTO;
-import io.github.pnoker.common.driver.biz.DriverCommandService;
+import io.github.pnoker.common.driver.service.DriverCommandService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
