@@ -18,7 +18,7 @@ package io.github.pnoker.common.driver.schedule;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.DriverContext;
+import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.service.DriverCommandService;
 import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;

@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.config;
 
-import io.github.pnoker.common.DriverContext;
+import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import lombok.extern.slf4j.Slf4j;
