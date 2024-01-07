@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -34,38 +35,44 @@ public enum EntityTypeFlagEnum {
     /**
      * 系统
      */
-    SYSTEM("system", "系统"),
+    SYSTEM((byte) 0x00, "system", "系统"),
 
     /**
      * 用户
      */
-    USER("user", "用户"),
+    USER((byte) 0x01, "user", "用户"),
 
     /**
      * 分组
      */
-    GROUP("group", "分组"),
+    GROUP((byte) 0x02, "group", "分组"),
 
     /**
      * 驱动
      */
-    DRIVER("driver", "驱动"),
+    DRIVER((byte) 0x03, "driver", "驱动"),
 
     /**
      * 模板
      */
-    PROFILE("profile", "模板"),
+    PROFILE((byte) 0x04, "profile", "模板"),
 
     /**
      * 位号
      */
-    POINT("point", "位号"),
+    POINT((byte) 0x05, "point", "位号"),
 
     /**
      * 设备
      */
-    DEVICE("device", "设备"),
+    DEVICE((byte) 0x06, "device", "设备"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 编码
@@ -76,6 +83,17 @@ public enum EntityTypeFlagEnum {
      * 备注
      */
     private final String remark;
+
+    /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link EntityTypeFlagEnum}
+     */
+    public static EntityTypeFlagEnum ofIndex(Byte index) {
+        Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
 
     /**
      * 根据枚举编码获取枚举

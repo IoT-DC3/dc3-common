@@ -55,6 +55,17 @@ public enum DriverCommandTypeEnum {
     private final String remark;
 
     /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link DriverCommandTypeEnum}
+     */
+    public static DriverCommandTypeEnum ofIndex(Byte index) {
+        Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
      * 根据枚举编码获取枚举
      *
      * @param code 编码

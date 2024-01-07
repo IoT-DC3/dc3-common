@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -24,7 +25,6 @@ import java.util.Optional;
 
 /**
  * 通用实体分组标识枚举
- * //TODO 需要结合实际服务进行区分，例如manager、data、auth的分组逻辑是不一样的，需要区分开来
  *
  * @author pnoker
  * @since 2022.1.0
@@ -35,6 +35,12 @@ public enum GroupTypeFlagEnum {
     ;
 
     /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
+
+    /**
      * 编码
      */
     private final String code;
@@ -43,6 +49,17 @@ public enum GroupTypeFlagEnum {
      * 备注
      */
     private final String remark;
+
+    /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link GroupTypeFlagEnum}
+     */
+    public static GroupTypeFlagEnum ofIndex(Byte index) {
+        Optional<GroupTypeFlagEnum> any = Arrays.stream(GroupTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
 
     /**
      * 根据枚举编码获取枚举

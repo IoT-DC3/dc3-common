@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.config;
 
-import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
+import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
@@ -48,26 +48,31 @@ public class DriverTopicConfig {
     private DriverContext driverContext;
 
     @Resource
-    private TopicExchange syncExchange;
+    private TopicExchange registerExchange;
     @Resource
     private TopicExchange metadataExchange;
     @Resource
     private TopicExchange commandExchange;
 
+    /**
+     * 该 Queue 用于接收来自管理端下行的注册数据
+     *
+     * @return Queue
+     */
     @Bean
-    Queue syncDownQueue() {
+    Queue driverRegisterQueue() {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒：30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_SYNC_DOWN_PREFIX + driverProperty.getClient(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_REGISTER_DOWN_PREFIX + driverProperty.getClient(), false, false, true, arguments);
     }
 
     @Bean
-    Binding driverSyncBinding(Queue syncDownQueue) {
+    Binding driverRegisterBinding(Queue driverRegisterQueue) {
         Binding binding = BindingBuilder
-                .bind(syncDownQueue)
-                .to(syncExchange)
-                .with(RabbitConstant.ROUTING_SYNC_DOWN_PREFIX + driverProperty.getClient());
+                .bind(driverRegisterQueue)
+                .to(registerExchange)
+                .with(RabbitConstant.ROUTING_REGISTER_DOWN_PREFIX + driverProperty.getClient());
         binding.addArgument(RabbitConstant.AUTO_DELETE, true);
         return binding;
     }

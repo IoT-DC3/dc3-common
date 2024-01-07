@@ -65,6 +65,17 @@ public enum EnableFlagEnum {
     private final String remark;
 
     /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link EnableFlagEnum}
+     */
+    public static EnableFlagEnum ofIndex(Byte index) {
+        Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
      * 根据枚举编码获取枚举
      *
      * @param code 编码

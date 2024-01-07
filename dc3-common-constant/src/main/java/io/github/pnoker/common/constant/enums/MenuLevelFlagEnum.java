@@ -75,6 +75,17 @@ public enum MenuLevelFlagEnum {
     private final String remark;
 
     /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link MenuLevelFlagEnum}
+     */
+    public static MenuLevelFlagEnum ofIndex(Byte index) {
+        Optional<MenuLevelFlagEnum> any = Arrays.stream(MenuLevelFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
      * 根据枚举编码获取枚举
      *
      * @param code 编码

@@ -35,13 +35,13 @@ import org.springframework.context.annotation.Configuration;
 public class ExchangeConfig {
 
     /**
-     * 驱动同步相关，平台端、驱动端可负载
+     * 驱动注册、驱动端可负载
      *
      * @return TopicExchange
      */
     @Bean
-    TopicExchange syncExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_SYNC, true, false);
+    TopicExchange registerExchange() {
+        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_REGISTER, true, false);
     }
 
     /**

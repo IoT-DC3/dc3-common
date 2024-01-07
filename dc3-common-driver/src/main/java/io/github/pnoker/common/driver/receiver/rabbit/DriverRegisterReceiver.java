@@ -30,29 +30,28 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * 接收驱动同步
+ * 驱动注册消息接收
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Slf4j
 @Component
-public class DriverSyncDownReceiver {
+public class DriverRegisterReceiver {
 
     @Resource
     private DriverSyncService driverSyncService;
 
     @RabbitHandler
-    @RabbitListener(queues = "#{syncDownQueue.name}")
+    @RabbitListener(queues = "#{driverRegisterQueue.name}")
     public void driverSyncDownReceive(Channel channel, Message message, DriverSyncDownDTO entityDTO) {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
-            log.debug("Receive driver sync down: {}", JsonUtil.toPrettyJsonString(entityDTO));
             if (ObjectUtil.isNull(entityDTO)) {
-                log.error("Invalid driver sync down: {}", entityDTO);
+                log.error("跳过: 接收到的驱动注册信息无效");
                 return;
             }
-
+            log.debug("接收到驱动注册信息: {}", JsonUtil.toPrettyJsonString(entityDTO));
             driverSyncService.down(entityDTO);
         } catch (Exception e) {
             log.error(e.getMessage(), e);

@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -31,15 +32,21 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum PointValueTypeEnum {
-    BYTE("byte", "字节"),
-    SHORT("short", "短整数"),
-    INT("int", "整数"),
-    LONG("long", "长整数"),
-    FLOAT("float", "浮点数"),
-    DOUBLE("double", "双精度浮点数"),
-    BOOLEAN("boolean", "布尔量"),
-    STRING("string", "字符串"),
-    HEX("hex", "十六进制");
+    BYTE((byte) 0x00, "byte", "字节"),
+    SHORT((byte) 0x01, "short", "短整数"),
+    INT((byte) 0x02, "int", "整数"),
+    LONG((byte) 0x03, "long", "长整数"),
+    FLOAT((byte) 0x04, "float", "浮点数"),
+    DOUBLE((byte) 0x05, "double", "双精度浮点数"),
+    BOOLEAN((byte) 0x06, "boolean", "布尔量"),
+    STRING((byte) 0x07, "string", "字符串"),
+    HEX((byte) 0x08, "hex", "十六进制");
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 位号数据类型编码
@@ -50,6 +57,17 @@ public enum PointValueTypeEnum {
      * 备注
      */
     private final String remark;
+
+    /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link PointValueTypeEnum}
+     */
+    public static PointValueTypeEnum ofIndex(Byte index) {
+        Optional<PointValueTypeEnum> any = Arrays.stream(PointValueTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
 
     /**
      * 根据枚举编码获取枚举

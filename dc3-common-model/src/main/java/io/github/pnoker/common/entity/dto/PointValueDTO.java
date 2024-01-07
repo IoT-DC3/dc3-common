@@ -16,9 +16,7 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.github.pnoker.common.constant.common.TimeConstant;
 import lombok.*;
 
 import java.io.Serializable;

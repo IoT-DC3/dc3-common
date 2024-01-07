@@ -19,9 +19,9 @@ package io.github.pnoker.common.driver.service.impl;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.constant.enums.DriverStatusEnum;
+import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverDTO;
@@ -68,8 +68,8 @@ public class DriverSyncServiceImpl implements DriverSyncService {
             log.info("The driver {} is initializing", entityDTO.getClient());
             log.debug("The driver {} initialization information is: {}", driverProperty.getService(), JsonUtil.toPrettyJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
-                    RabbitConstant.TOPIC_EXCHANGE_SYNC,
-                    RabbitConstant.ROUTING_SYNC_UP_PREFIX + driverProperty.getClient(),
+                    RabbitConstant.TOPIC_EXCHANGE_REGISTER,
+                    RabbitConstant.ROUTING_REGISTER_UP_PREFIX + driverProperty.getClient(),
                     entityDTO
             );
 

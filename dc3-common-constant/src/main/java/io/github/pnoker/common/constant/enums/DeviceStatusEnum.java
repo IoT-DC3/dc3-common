@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -31,12 +32,17 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum DeviceStatusEnum {
-    ONLINE("ONLINE", "在线"),
-    OFFLINE("OFFLINE", "离线"),
-    MAINTAIN("MAINTAIN", "维护"),
-    FAULT("FAULT", "故障"),
+    ONLINE((byte) 0x00, "ONLINE", "在线"),
+    OFFLINE((byte) 0x01, "OFFLINE", "离线"),
+    MAINTAIN((byte) 0x02, "MAINTAIN", "维护"),
+    FAULT((byte) 0x03, "FAULT", "故障"),
     ;
 
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 状态编码
@@ -47,6 +53,17 @@ public enum DeviceStatusEnum {
      * 备注
      */
     private final String remark;
+
+    /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link DeviceStatusEnum}
+     */
+    public static DeviceStatusEnum ofIndex(Byte index) {
+        Optional<DeviceStatusEnum> any = Arrays.stream(DeviceStatusEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
 
     /**
      * 根据枚举编码获取枚举
