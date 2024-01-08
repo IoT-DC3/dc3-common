@@ -16,9 +16,7 @@
 
 package io.github.pnoker.common.config;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -59,7 +57,6 @@ public class RedisTemplateConfig {
         // Json 序列化配置
         JsonMapper jsonMapper = JsonMapper.builder()
                 .findAndAddModules()
-                .visibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
                 .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL)
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
                 .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)

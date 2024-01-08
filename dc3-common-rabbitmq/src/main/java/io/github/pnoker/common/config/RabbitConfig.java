@@ -58,9 +58,14 @@ public class RabbitConfig {
     }
 
     @Bean
-    RabbitTemplate rabbitTemplate(ObjectMapper objectMapper) {
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(ObjectMapper objectMapper) {
+        return new Jackson2JsonMessageConverter(objectMapper);
+    }
+
+    @Bean
+    RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter messageConverter) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(objectMapper));
+        rabbitTemplate.setMessageConverter(messageConverter);
         rabbitTemplate.setMandatory(true);
         rabbitTemplate.setReturnsCallback(message -> log.error("Send message({}) to exchange({}), routingKey({}) failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
@@ -72,13 +77,13 @@ public class RabbitConfig {
     }
 
     @Bean
-    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory() {
+    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory(Jackson2JsonMessageConverter messageConverter) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
 //        factory.setBatchSize(32);
 //        factory.setBatchListener(true);
 //        factory.setConsumerBatchEnabled(true);
-        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setMessageConverter(messageConverter);
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;
     }
