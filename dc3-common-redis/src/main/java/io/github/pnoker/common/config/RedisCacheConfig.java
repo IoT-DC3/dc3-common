@@ -16,13 +16,7 @@
 
 package io.github.pnoker.common.config;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
+import io.github.pnoker.common.utils.JsonUtil;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -96,25 +90,17 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     @Bean
     @Override
     public CacheManager cacheManager() {
-        RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(factory);
-
-        // Json 序列化配置
-        JsonMapper jsonMapper = JsonMapper.builder()
-                .findAndAddModules()
-                .activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL)
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
-                .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
-                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
-                .serializationInclusion(JsonInclude.Include.NON_NULL).build();
+        // 配置 ObjectMapper
         Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        serializer.setObjectMapper(jsonMapper);
+        serializer.setObjectMapper(JsonUtil.getJsonMapper());
 
         // 配置 Key & Value 序列化
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(serializer))
                 .disableCachingNullValues().entryTtl(timeToLive);
+
+        RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.builder(factory);
         return builder.cacheDefaults(config).build();
     }
 

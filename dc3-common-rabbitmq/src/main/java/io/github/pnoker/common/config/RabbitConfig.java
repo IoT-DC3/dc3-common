@@ -16,12 +16,7 @@
 
 package io.github.pnoker.common.config;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -47,25 +42,9 @@ public class RabbitConfig {
     private ConnectionFactory connectionFactory;
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return JsonMapper.builder()
-                .findAndAddModules()
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
-                .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
-                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
-                .serializationInclusion(JsonInclude.Include.NON_NULL).build();
-    }
-
-    @Bean
-    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(ObjectMapper objectMapper) {
-        return new Jackson2JsonMessageConverter(objectMapper);
-    }
-
-    @Bean
-    RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter messageConverter) {
+    RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(messageConverter);
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         rabbitTemplate.setMandatory(true);
         rabbitTemplate.setReturnsCallback(message -> log.error("Send message({}) to exchange({}), routingKey({}) failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
@@ -77,13 +56,13 @@ public class RabbitConfig {
     }
 
     @Bean
-    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory(Jackson2JsonMessageConverter messageConverter) {
+    public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
 //        factory.setBatchSize(32);
 //        factory.setBatchListener(true);
 //        factory.setConsumerBatchEnabled(true);
-        factory.setMessageConverter(messageConverter);
+        factory.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;
     }

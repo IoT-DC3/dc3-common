@@ -19,7 +19,10 @@ package io.github.pnoker.common.utils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.exception.JsonException;
@@ -44,14 +47,22 @@ public final class JsonUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    private static final ObjectMapper OBJECT_MAPPER = JsonMapper.builder()
-            .findAndAddModules()
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
-            .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
-            .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
-            .serializationInclusion(JsonInclude.Include.NON_NULL).build();
+    private static final JsonMapper JSON_MAPPER = getJsonMapper();
 
+    /**
+     * 返回一个 JsonMapper 对象
+     *
+     * @return JsonMapper
+     */
+    public static JsonMapper getJsonMapper() {
+        return JsonMapper.builder()
+                .findAndAddModules()
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
+                .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)
+                .configure(MapperFeature.DEFAULT_VIEW_INCLUSION, Boolean.FALSE)
+                .serializationInclusion(JsonInclude.Include.NON_NULL).build();
+    }
 
     /**
      * 反序列化，将 Json 字符串解析为 Java 对象
@@ -63,7 +74,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(String text, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(text, valueType);
+            return JSON_MAPPER.readValue(text, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -79,7 +90,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(byte[] bytes, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(bytes, valueType);
+            return JSON_MAPPER.readValue(bytes, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -95,7 +106,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(JsonParser jsonParser, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(jsonParser, valueType);
+            return JSON_MAPPER.readValue(jsonParser, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -111,7 +122,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(DataInput dataInput, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(dataInput, valueType);
+            return JSON_MAPPER.readValue(dataInput, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -127,7 +138,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(InputStream inputStream, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(inputStream, valueType);
+            return JSON_MAPPER.readValue(inputStream, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -143,7 +154,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(Reader reader, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(reader, valueType);
+            return JSON_MAPPER.readValue(reader, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -159,7 +170,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(File file, Class<T> valueType) {
         try {
-            return OBJECT_MAPPER.readValue(file, valueType);
+            return JSON_MAPPER.readValue(file, valueType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -175,7 +186,7 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(String text, TypeReference<T> typeReference) {
         try {
-            return OBJECT_MAPPER.readValue(text, typeReference);
+            return JSON_MAPPER.readValue(text, typeReference);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -191,8 +202,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(String text, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(text, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(text, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -208,8 +219,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(byte[] bytes, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(bytes, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(bytes, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -225,8 +236,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(JsonParser jsonParser, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(jsonParser, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(jsonParser, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -242,8 +253,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(DataInput dataInput, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(dataInput, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(dataInput, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -259,8 +270,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(InputStream inputStream, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(inputStream, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(inputStream, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -276,8 +287,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(Reader reader, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(reader, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(reader, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -293,8 +304,8 @@ public final class JsonUtil {
      */
     public static <T> List<T> parseArray(File file, Class<T> valueType) {
         try {
-            JavaType javaType = OBJECT_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
-            return OBJECT_MAPPER.readValue(file, javaType);
+            JavaType javaType = JSON_MAPPER.getTypeFactory().constructParametricType(ArrayList.class, valueType);
+            return JSON_MAPPER.readValue(file, javaType);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -309,7 +320,7 @@ public final class JsonUtil {
      */
     public static <T> String toJsonString(T type) {
         try {
-            return OBJECT_MAPPER.writeValueAsString(type);
+            return JSON_MAPPER.writeValueAsString(type);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -325,7 +336,7 @@ public final class JsonUtil {
      */
     public static <T> String toJsonString(T type, Class<?> serializationView) {
         try {
-            return OBJECT_MAPPER.writerWithView(serializationView).writeValueAsString(type);
+            return JSON_MAPPER.writerWithView(serializationView).writeValueAsString(type);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -340,7 +351,7 @@ public final class JsonUtil {
      */
     public static <T> String toPrettyJsonString(T type) {
         try {
-            return OBJECT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(type);
+            return JSON_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(type);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -356,7 +367,7 @@ public final class JsonUtil {
      */
     public static <T> String toPrettyJsonString(T type, Class<?> serializationView) {
         try {
-            return OBJECT_MAPPER.writerWithView(serializationView).withDefaultPrettyPrinter().writeValueAsString(type);
+            return JSON_MAPPER.writerWithView(serializationView).withDefaultPrettyPrinter().writeValueAsString(type);
         } catch (Exception e) {
             throw new JsonException(e);
         }
@@ -371,18 +382,9 @@ public final class JsonUtil {
      */
     public static <T> byte[] toJsonBytes(T type) {
         try {
-            return DecodeUtil.stringToByte(OBJECT_MAPPER.writeValueAsString(type));
+            return DecodeUtil.stringToByte(JSON_MAPPER.writeValueAsString(type));
         } catch (Exception e) {
             throw new JsonException(e);
         }
-    }
-
-    /**
-     * 返回一个ObjectMapper对象
-     *
-     * @return ObjectMapper
-     */
-    public static ObjectMapper getObjectMapper() {
-        return OBJECT_MAPPER;
     }
 }
