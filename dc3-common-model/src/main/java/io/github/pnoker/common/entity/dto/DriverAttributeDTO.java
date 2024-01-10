@@ -20,7 +20,10 @@ import io.github.pnoker.common.constant.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.DriverAttributeExt;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * DriverAttribute BO
@@ -30,7 +33,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverAttributeDTO extends BaseDTO {

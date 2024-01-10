@@ -21,7 +21,10 @@ import io.github.pnoker.common.constant.enums.ProfileShareFlagEnum;
 import io.github.pnoker.common.constant.enums.ProfileTypeFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.ProfileExt;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Profile BO
@@ -31,7 +34,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProfileDTO extends BaseDTO {

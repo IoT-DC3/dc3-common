@@ -18,7 +18,10 @@ package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * PointAttributeConfig BO
@@ -28,7 +31,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PointAttributeConfigDTO extends BaseDTO {

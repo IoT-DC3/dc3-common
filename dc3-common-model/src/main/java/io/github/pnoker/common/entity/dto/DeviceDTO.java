@@ -19,7 +19,10 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.constant.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +35,6 @@ import java.util.Set;
  */
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceDTO extends BaseDTO {
@@ -87,6 +89,5 @@ public class DeviceDTO extends BaseDTO {
     /**
      * 模版ID集
      */
-    @Builder.Default
     private Set<Long> profileIds = new HashSet<>(4);
 }

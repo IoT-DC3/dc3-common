@@ -63,13 +63,15 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void deviceEventSender(DeviceEventDTO entityDTO) {
-        if (ObjectUtil.isNotNull(entityDTO)) {
-            rabbitTemplate.convertAndSend(
-                    RabbitConstant.TOPIC_EXCHANGE_EVENT,
-                    RabbitConstant.ROUTING_DEVICE_EVENT_PREFIX + driverProperty.getService(),
-                    entityDTO
-            );
+        if (!ObjectUtil.isNotNull(entityDTO)) {
+            return;
         }
+
+        rabbitTemplate.convertAndSend(
+                RabbitConstant.TOPIC_EXCHANGE_EVENT,
+                RabbitConstant.ROUTING_DEVICE_EVENT_PREFIX + driverProperty.getService(),
+                entityDTO
+        );
     }
 
     @Override

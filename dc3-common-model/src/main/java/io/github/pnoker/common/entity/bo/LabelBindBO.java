@@ -43,12 +43,12 @@ public class LabelBindBO extends BaseBO {
     /**
      * 标签ID
      */
-    private String labelId;
+    private Long labelId;
 
     /**
      * 实体ID
      */
-    private String entityId;
+    private Long entityId;
 
     /**
      * 租户ID

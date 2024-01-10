@@ -27,7 +27,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -56,15 +55,15 @@ public class LabelBindVO extends BaseVO {
      * 标签ID
      */
     @Schema(description = "标签ID")
-    @NotBlank(message = "标签ID不能为空",
+    @NotNull(message = "标签ID不能为空",
             groups = {Add.class, Update.class})
-    private String labelId;
+    private Long labelId;
 
     /**
      * 实体ID
      */
     @Schema(description = "实体ID")
-    @NotBlank(message = "实体ID不能为空",
+    @NotNull(message = "实体ID不能为空",
             groups = {Add.class, Update.class})
-    private String entityId;
+    private Long entityId;
 }
