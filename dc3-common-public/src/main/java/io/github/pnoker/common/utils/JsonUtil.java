@@ -24,6 +24,9 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.exception.JsonException;
 
@@ -31,6 +34,7 @@ import java.io.DataInput;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +59,14 @@ public final class JsonUtil {
      * @return JsonMapper
      */
     public static JsonMapper getJsonMapper() {
+        LocalDateTimeSerializer serializer = new LocalDateTimeSerializer(LocalDateTimeUtil.getCompleteDateTimeFormatter());
+        LocalDateTimeDeserializer deserializer = new LocalDateTimeDeserializer(LocalDateTimeUtil.getCompleteDateTimeFormatter());
+        JavaTimeModule module = new JavaTimeModule();
+        module.addSerializer(LocalDateTime.class, serializer);
+        module.addDeserializer(LocalDateTime.class, deserializer);
         return JsonMapper.builder()
                 .findAndAddModules()
+                .addModule(module)
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, Boolean.FALSE)
                 .configure(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE, Boolean.TRUE)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, Boolean.FALSE)

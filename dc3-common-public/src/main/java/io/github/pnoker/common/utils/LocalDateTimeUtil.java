@@ -40,6 +40,28 @@ public class LocalDateTimeUtil {
     }
 
     /**
+     * 获取默认的时间格式
+     * <p>
+     * yyyy-MM-dd HH:mm:ss
+     *
+     * @return {@link DateTimeFormatter}
+     */
+    public static DateTimeFormatter getDefaultDateTimeFormatter() {
+        return DateTimeFormatter.ofPattern(TimeConstant.DEFAULT_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+    }
+
+    /**
+     * 获取完整的时间格式
+     * <p>
+     * yyyy-MM-dd HH:mm:ss.SSS
+     *
+     * @return {@link DateTimeFormatter}
+     */
+    public static DateTimeFormatter getCompleteDateTimeFormatter() {
+        return DateTimeFormatter.ofPattern(TimeConstant.COMPLETE_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+    }
+
+    /**
      * 获取毫秒
      *
      * @param localDateTime {@link LocalDateTime}
@@ -79,7 +101,7 @@ public class LocalDateTimeUtil {
      * @return R of String
      */
     public static String defaultFormat(LocalDateTime localDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.DEFAULT_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+        DateTimeFormatter formatter = getDefaultDateTimeFormatter();
         return localDateTime.format(formatter);
     }
 
@@ -90,7 +112,7 @@ public class LocalDateTimeUtil {
      * @return R of String
      */
     public static String completeFormat(LocalDateTime localDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.COMPLETE_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+        DateTimeFormatter formatter = getCompleteDateTimeFormatter();
         return localDateTime.format(formatter);
     }
 
@@ -102,7 +124,7 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime defaultDate(String dateString) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.DEFAULT_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+            DateTimeFormatter formatter = getDefaultDateTimeFormatter();
             return LocalDateTime.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
             return null;
@@ -117,7 +139,7 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime completeDate(String dateString) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TimeConstant.COMPLETE_DATE_FORMAT).withZone(TimeConstant.DEFAULT_ZONEID);
+            DateTimeFormatter formatter = getCompleteDateTimeFormatter();
             return LocalDateTime.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
             return null;
