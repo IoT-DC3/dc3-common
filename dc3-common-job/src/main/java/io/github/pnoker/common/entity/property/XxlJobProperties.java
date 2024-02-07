@@ -14,24 +14,26 @@
  * limitations under the License.
  */
 
-syntax = "proto3";
+package io.github.pnoker.common.entity.property;
 
-package api.common;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/*配置相关*/
-option java_package = "io.github.pnoker.api.common";
-option java_outer_classname = "RProto";
-option objc_class_prefix = "Common";
-option java_multiple_files = true;
-
-/*R DTO*/
-message GrpcRDTO {
-  /*是否成功*/
-  bool ok = 1;
-
-  /*状态码*/
-  string code = 2;
-
-  /*消息*/
-  string message = 3;
+/**
+ * @author pnoker
+ * @since 2022.1.0
+ */
+@Getter
+@Setter
+@ConfigurationProperties(prefix = "xxl.job")
+public class XxlJobProperties {
+    private String adminAddresses;
+    private String accessToken;
+    private String appName;
+    private String address;
+    private String ip;
+    private int executorPort;
+    private String logPath;
+    private int logRetentionDays;
 }

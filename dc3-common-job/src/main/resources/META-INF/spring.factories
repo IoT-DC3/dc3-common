@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  io.github.pnoker.common.config.XxlJobConfig,\
+  io.github.pnoker.common.init.XxlJobInitRunner
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  io.github.pnoker.common.config.ActiveXxlJobProfileConfig

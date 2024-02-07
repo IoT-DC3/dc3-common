@@ -26,27 +26,27 @@ option java_multiple_files = true;
 
 /*Base DTO*/
 message GrpcBaseDTO {
-    /*主键ID*/
-    int64 id = 1;
+  /*主键ID*/
+  int64 id = 1;
 
-    /*描述*/
-    string remark = 2;
+  /*描述*/
+  string remark = 2;
 
-    /*创建者ID*/
-    int64 creator_id = 3;
+  /*创建者ID*/
+  int64 creator_id = 3;
 
-    /*创建者名称*/
-    string creator_name = 4;
+  /*创建者名称*/
+  string creator_name = 4;
 
-    /*创建时间*/
-    int64 create_time = 5;
+  /*创建时间*/
+  int64 create_time = 5;
 
-    /*操作者ID*/
-    int64 operator_id = 6;
+  /*操作者ID*/
+  int64 operator_id = 6;
 
-    /*操作者名称*/
-    string operator_name = 7;
+  /*操作者名称*/
+  string operator_name = 7;
 
-    /*操作时间*/
-    int64 operate_time = 8;
+  /*操作时间*/
+  int64 operate_time = 8;
 }
