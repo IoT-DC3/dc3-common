@@ -19,7 +19,5 @@
 xxl:
   job:
     app-name: ${spring.application.name}-executor
-    access-token: default_token
-    executor-port: ${EXECUTOR_PORT:7070}
     log-path: dc3/logs/center/job/handler
     log-retention-days: 7
