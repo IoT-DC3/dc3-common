@@ -38,10 +38,10 @@ import java.util.List;
 public class Pages implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "当前分页，默认1")
+    @Schema(description = "当前分页", defaultValue = "1")
     private long current = 1;
 
-    @Schema(description = "分页条数")
+    @Schema(description = "分页条数", defaultValue = "20")
     private long size = 20;
 
     @Schema(description = "开始时间戳，毫秒")

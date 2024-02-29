@@ -18,6 +18,10 @@
 # 如果想要覆盖以下内容需要在dev、test、pre、pro中进行重新配置
 xxl:
   job:
+    access-token: default_token
+    # 不同服务需要设置为不同的端口
+    executor-port: ${EXECUTOR_PORT:7500}
+    admin-addresses: http://${XXL_JOB_HOST:dc3-job}:${XXL_JOB_PORT:8100}/xxl-job-admin
     app-name: ${spring.application.name}-executor
     log-path: dc3/logs/center/job/handler
     log-retention-days: 7
