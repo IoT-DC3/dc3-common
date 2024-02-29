@@ -33,25 +33,35 @@ public class ScheduleConstant {
     /**
      * 驱动任务调度分组
      */
-    public static final String DRIVER_SCHEDULE_GROUP = "DriverScheduleGroup";
+    public static final String DRIVER_SCHEDULE_GROUP = "driver-schedule-group";
 
     /**
-     * 读任务
+     * 驱动读任务
      */
-    public static final String READ_SCHEDULE_JOB = "ReadScheduleJob";
+    public static final String DRIVER_READ_SCHEDULE_JOB = "read-schedule-job";
 
     /**
-     * 自定义任务
+     * 驱动自定义任务
      */
-    public static final String CUSTOM_SCHEDULE_JOB = "CustomScheduleJob";
+    public static final String DRIVER_CUSTOM_SCHEDULE_JOB = "customs-chedule-job";
 
     /**
-     * 状态任务
+     * 驱动状态任务
      */
-    public static final String STATUS_SCHEDULE_JOB = "StatusScheduleJob";
+    public static final String DRIVER_STATUS_SCHEDULE_JOB = "status-schedule-job";
 
     /**
      * 驱动状态任务 Corn
      */
-    public static final String DRIVER_STATUS_CORN = "0/5 * * * * ?";
+    public static final String DRIVER_STATUS_SCHEDULE_CORN = "0/5 * * * * ?";
+
+    /**
+     * 数据任务调度分组
+     */
+    public static final String DATA_SCHEDULE_GROUP = "data-schedule-group";
+
+    /**
+     * 管理任务调度分组
+     */
+    public static final String MANAGER_SCHEDULE_GROUP = "manager-schedule-group";
 }

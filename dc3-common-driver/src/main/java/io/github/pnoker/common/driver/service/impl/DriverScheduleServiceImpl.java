@@ -18,15 +18,15 @@ package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
-import io.github.pnoker.common.driver.schedule.DriverCustomScheduleJob;
-import io.github.pnoker.common.driver.schedule.DriverReadScheduleJob;
-import io.github.pnoker.common.driver.schedule.DriverStatusScheduleJob;
+import io.github.pnoker.common.driver.job.DriverCustomScheduleJob;
+import io.github.pnoker.common.driver.job.DriverReadScheduleJob;
+import io.github.pnoker.common.driver.job.DriverStatusScheduleJob;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.entity.property.ScheduleProperty;
-import lombok.SneakyThrows;
+import io.github.pnoker.common.quartz.QuartzService;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.*;
+import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -40,9 +40,10 @@ import javax.annotation.Resource;
 public class DriverScheduleServiceImpl implements DriverScheduleService {
 
     @Resource
-    private Scheduler scheduler;
-    @Resource
     private DriverProperty driverProperty;
+
+    @Resource
+    private QuartzService quartzService;
 
     @Override
     public void initial() {
@@ -51,40 +52,20 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
             return;
         }
 
-        if (Boolean.TRUE.equals(property.getRead().getEnable())) {
-            createScheduleJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.READ_SCHEDULE_JOB, property.getRead().getCorn(), DriverReadScheduleJob.class);
-        }
-        if (Boolean.TRUE.equals(property.getCustom().getEnable())) {
-            createScheduleJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.CUSTOM_SCHEDULE_JOB, property.getCustom().getCorn(), DriverCustomScheduleJob.class);
-        }
-        createScheduleJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.STATUS_SCHEDULE_JOB, ScheduleConstant.DRIVER_STATUS_CORN, DriverStatusScheduleJob.class);
-
         try {
-            if (!scheduler.isShutdown()) {
-                scheduler.start();
+            if (Boolean.TRUE.equals(property.getRead().getEnable())) {
+                quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_READ_SCHEDULE_JOB, property.getRead().getCorn(), DriverReadScheduleJob.class);
             }
+            if (Boolean.TRUE.equals(property.getCustom().getEnable())) {
+                quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_CUSTOM_SCHEDULE_JOB, property.getCustom().getCorn(), DriverCustomScheduleJob.class);
+            }
+            quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_STATUS_SCHEDULE_JOB, ScheduleConstant.DRIVER_STATUS_SCHEDULE_CORN, DriverStatusScheduleJob.class);
+
+
+            quartzService.startScheduler();
         } catch (SchedulerException e) {
             log.error("Driver schedule initial error: {}", e.getMessage(), e);
         }
-    }
-
-    /**
-     * 创建调度任务
-     *
-     * @param group    group
-     * @param name     name
-     * @param corn     corn
-     * @param jobClass class
-     */
-    @SneakyThrows
-    public void createScheduleJobWithCorn(String group, String name, String corn, Class<? extends Job> jobClass) {
-        JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
-        Trigger trigger = TriggerBuilder.newTrigger()
-                .withIdentity(name, group)
-                .startAt(DateBuilder.futureDate(1, DateBuilder.IntervalUnit.SECOND))
-                .withSchedule(CronScheduleBuilder.cronSchedule(corn))
-                .startNow().build();
-        scheduler.scheduleJob(jobDetail, trigger);
     }
 
 }

@@ -19,12 +19,13 @@
 spring:
   quartz:
     properties:
-      org.quartz:
-        scheduler:
-          instanceName: QuartzScheduler
-          instanceId: AUTO
-        threadPool:
-          threadsInheritContextClassLoaderOfInitializingThread: true
-          class: org.quartz.simpl.SimpleThreadPool
-          threadPriority: 5
-          threadCount: 50
+      org:
+        quartz:
+          scheduler:
+            instanceName: ${spring.application.name}-quartz-scheduler
+            instanceId: AUTO
+          threadPool:
+            threadsInheritContextClassLoaderOfInitializingThread: true
+            class: org.quartz.simpl.SimpleThreadPool
+            threadPriority: 5
+            threadCount: 50

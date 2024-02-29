@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.schedule;
+package io.github.pnoker.common.driver.job;
 
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import lombok.extern.slf4j.Slf4j;

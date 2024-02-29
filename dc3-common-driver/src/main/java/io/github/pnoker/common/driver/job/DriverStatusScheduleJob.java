@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.schedule;
+package io.github.pnoker.common.driver.job;
 
 import io.github.pnoker.common.constant.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.driver.context.DriverContext;

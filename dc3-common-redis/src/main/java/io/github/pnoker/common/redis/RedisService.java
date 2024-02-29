@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.utils;
+package io.github.pnoker.common.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;
@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Redis 操作工具类
+ * Redis 工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -39,7 +39,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class RedisUtil {
+public class RedisService {
 
     @Resource
     private RedisTemplate redisTemplate;
