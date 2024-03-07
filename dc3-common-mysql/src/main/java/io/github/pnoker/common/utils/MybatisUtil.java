@@ -16,7 +16,9 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
@@ -37,6 +39,47 @@ public class MybatisUtil {
 
     private MybatisUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
+
+    /**
+     * 默认的代码生成器
+     * <p>
+     * 数据库相关的连接参数会被环境变量覆盖
+     *
+     * @param defaultHost     默认的数据库主机
+     * @param defaultPort     默认的数据库端口
+     * @param defaultDb       默认的数据库名称
+     * @param defaultUsername 默认的数据库用户名
+     * @param defaultPassword 默认的数据库密码
+     * @return FastAutoGenerator
+     */
+    public static FastAutoGenerator defaultGenerator(String defaultHost, String defaultPort, String defaultDb, String defaultUsername, String defaultPassword) {
+        String host = System.getenv("MYSQL_HOST");
+        if (CharSequenceUtil.isEmpty(host)) {
+            host = defaultHost;
+        }
+        String port = System.getenv("MYSQL_PORT");
+        if (CharSequenceUtil.isEmpty(port)) {
+            port = defaultPort;
+        }
+        String db = System.getenv("MYSQL_DB");
+        if (CharSequenceUtil.isEmpty(db)) {
+            db = defaultDb;
+        }
+        String username = System.getenv("MYSQL_USERNAME");
+        if (CharSequenceUtil.isEmpty(username)) {
+            username = defaultUsername;
+        }
+        String password = System.getenv("MYSQL_PASSWORD");
+        if (CharSequenceUtil.isEmpty(password)) {
+            password = defaultPassword;
+        }
+
+        return FastAutoGenerator.create(
+                String.format("jdbc:mysql://%s:%s/%s?useSSL=false", host, port, db),
+                username,
+                password
+        );
     }
 
     /**
