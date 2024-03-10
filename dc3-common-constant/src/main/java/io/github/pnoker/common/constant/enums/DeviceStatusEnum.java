@@ -32,10 +32,10 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum DeviceStatusEnum {
-    ONLINE((byte) 0x00, "ONLINE", "在线"),
-    OFFLINE((byte) 0x01, "OFFLINE", "离线"),
-    MAINTAIN((byte) 0x02, "MAINTAIN", "维护"),
-    FAULT((byte) 0x03, "FAULT", "故障"),
+    ONLINE((byte) 0, "ONLINE", "在线"),
+    OFFLINE((byte) 1, "OFFLINE", "离线"),
+    MAINTAIN((byte) 2, "MAINTAIN", "维护"),
+    FAULT((byte) 3, "FAULT", "故障"),
     ;
 
     /**
@@ -50,7 +50,7 @@ public enum DeviceStatusEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

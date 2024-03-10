@@ -35,17 +35,17 @@ public enum AlarmTypeFlagEnum {
     /**
      * 位号
      */
-    POINT((byte) 0x00, "point", "位号"),
+    POINT((byte) 0, "point", "位号"),
 
     /**
      * 设备
      */
-    DEVICE((byte) 0x01, "device", "设备"),
+    DEVICE((byte) 1, "device", "设备"),
 
     /**
      * 驱动
      */
-    DRIVER((byte) 0x02, "driver", "驱动"),
+    DRIVER((byte) 2, "driver", "驱动"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum AlarmTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

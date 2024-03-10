@@ -35,27 +35,27 @@ public enum MenuLevelFlagEnum {
     /**
      * 根菜单
      */
-    ROOT((byte) 0x00, "root", "根菜单"),
+    ROOT((byte) 0, "root", "根菜单"),
 
     /**
      * 一级子菜单
      */
-    C1((byte) 0x01, "c1", "一级子菜单"),
+    C1((byte) 1, "c1", "一级子菜单"),
 
     /**
      * 二级子菜单
      */
-    C2((byte) 0x02, "c2", "二级子菜单"),
+    C2((byte) 2, "c2", "二级子菜单"),
 
     /**
      * 三级子菜单
      */
-    C3((byte) 0x03, "c3", "三级子菜单"),
+    C3((byte) 3, "c3", "三级子菜单"),
 
     /**
      * 四级子菜单
      */
-    C4((byte) 0x04, "c4", "四级子菜单"),
+    C4((byte) 4, "c4", "四级子菜单"),
     ;
 
     /**
@@ -70,7 +70,7 @@ public enum MenuLevelFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

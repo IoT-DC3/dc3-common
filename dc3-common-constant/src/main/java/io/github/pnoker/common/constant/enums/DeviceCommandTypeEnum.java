@@ -35,27 +35,27 @@ public enum DeviceCommandTypeEnum {
     /**
      * 读位号值类型指令
      */
-    READ((byte) 0x00, "read", "读位号值类型指令"),
+    READ((byte) 0, "read", "读位号值类型指令"),
 
     /**
      * 批量读位号值类型指令
      */
-    READ_BATCH((byte) 0x01, "read_batch", "批量读位号值类型指令"),
+    READ_BATCH((byte) 1, "read_batch", "批量读位号值类型指令"),
 
     /**
      * 写位号值类型指令
      */
-    WRITE((byte) 0x02, "write", "写位号值类型指令"),
+    WRITE((byte) 2, "write", "写位号值类型指令"),
 
     /**
      * 批量写位号值类型指令
      */
-    WRITE_BATCH((byte) 0x03, "write_batch", "批量写位号值类型指令"),
+    WRITE_BATCH((byte) 3, "write_batch", "批量写位号值类型指令"),
 
     /**
      * 配置设备类型指令
      */
-    CONFIG((byte) 0x04, "config", "配置设备类型指令"),
+    CONFIG((byte) 4, "config", "配置设备类型指令"),
     ;
 
     /**
@@ -70,7 +70,7 @@ public enum DeviceCommandTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

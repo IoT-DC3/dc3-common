@@ -35,7 +35,7 @@ public enum DriverCommandTypeEnum {
     /**
      * 驱动配置类型指令
      */
-    CONFIG((byte) 0x00, "config", "驱动配置类型指令"),
+    CONFIG((byte) 0, "config", "驱动配置类型指令"),
     ;
 
     /**
@@ -50,7 +50,7 @@ public enum DriverCommandTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

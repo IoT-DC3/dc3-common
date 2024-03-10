@@ -35,17 +35,17 @@ public enum RwFlagEnum {
     /**
      * 只读
      */
-    R((byte) 0x00, "r", "只读"),
+    R((byte) 0, "r", "只读"),
 
     /**
      * 只写
      */
-    W((byte) 0x01, "w", "只写"),
+    W((byte) 1, "w", "只写"),
 
     /**
      * 读写
      */
-    RW((byte) 0x02, "rw", "读写"),
+    RW((byte) 2, "rw", "读写"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum RwFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

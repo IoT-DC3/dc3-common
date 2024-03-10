@@ -35,12 +35,12 @@ public enum AutoConfirmFlagEnum {
     /**
      * 自动
      */
-    AUTO((byte) 0x00, "auto", "AUTO"),
+    AUTO((byte) 0, "auto", "AUTO"),
 
     /**
      * 手动
      */
-    MANUAL((byte) 0x01, "manual", "手动"),
+    MANUAL((byte) 1, "manual", "手动"),
     ;
 
     /**
@@ -55,7 +55,7 @@ public enum AutoConfirmFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

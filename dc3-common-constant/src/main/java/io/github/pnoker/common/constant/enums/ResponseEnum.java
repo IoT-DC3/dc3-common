@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.constant.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -32,27 +33,44 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum ResponseEnum {
 
-    OK("R200", "成功"),
-    TOKEN_INVALID("R20301", "令牌无效"),
-    IP_INVALID("R20302", "IP无效"),
-    FAILURE("R500", "服务异常"),
-    NO_RESOURCE("R404", "资源不存在"),
-    OUT_RANGE("R900", "数字超出范围"),
+    OK((byte) 200, "R200", "成功"),
+    TOKEN_INVALID((byte) 20301, "R20301", "令牌无效"),
+    IP_INVALID((byte) 20302, "R20302", "IP无效"),
+    FAILURE((byte) 500, "R500", "服务异常"),
+    NO_RESOURCE((byte) 404, "R404", "资源不存在"),
+    OUT_RANGE((byte) 900, "R900", "数字超出范围"),
 
-    ADD_SUCCESS("R20001", "添加成功"),
-    DELETE_SUCCESS("R20002", "删除成功"),
-    UPDATE_SUCCESS("R20003", "更新成功"),
+    ADD_SUCCESS((byte) 20001, "R20001", "添加成功"),
+    DELETE_SUCCESS((byte) 20002, "R20002", "删除成功"),
+    UPDATE_SUCCESS((byte) 20003, "R20003", "更新成功"),
     ;
 
     /**
-     * 返回结果编码
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
+
+    /**
+     * 编码
      */
     private final String code;
 
     /**
-     * 返回结果信息
+     * 内容
      */
-    private final String message;
+    private final String text;
+
+    /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return {@link ResponseEnum}
+     */
+    public static ResponseEnum ofIndex(Byte index) {
+        Optional<ResponseEnum> any = Arrays.stream(ResponseEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
 
     /**
      * 根据枚举编码获取枚举

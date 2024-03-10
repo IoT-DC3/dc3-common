@@ -46,7 +46,7 @@ public enum GroupTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

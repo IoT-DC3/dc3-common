@@ -54,7 +54,7 @@ public class R<T> implements Serializable {
      * 响应信息
      */
     @Schema(description = "响应信息")
-    private String message = ResponseEnum.OK.getMessage();
+    private String message = ResponseEnum.OK.getText();
 
     /**
      * 响应数据
@@ -91,7 +91,7 @@ public class R<T> implements Serializable {
      * @return Response
      */
     public static <T> R<T> ok(ResponseEnum code) {
-        return new R<T>().success(code.getCode(), code.getMessage());
+        return new R<T>().success(code.getCode(), code.getText());
     }
 
     /**
@@ -158,7 +158,7 @@ public class R<T> implements Serializable {
      * @return Response
      */
     public static <T> R<T> fail(ResponseEnum code) {
-        return new R<T>().failure(code.getCode(), code.getMessage());
+        return new R<T>().failure(code.getCode(), code.getText());
     }
 
     /**
@@ -219,7 +219,7 @@ public class R<T> implements Serializable {
     private R<T> success() {
         this.ok = true;
         this.code = ResponseEnum.OK.getCode();
-        this.message = ResponseEnum.OK.getMessage();
+        this.message = ResponseEnum.OK.getText();
         return this;
     }
 
@@ -258,7 +258,7 @@ public class R<T> implements Serializable {
     private R<T> failure() {
         this.ok = false;
         this.code = ResponseEnum.FAILURE.getCode();
-        this.message = ResponseEnum.FAILURE.getMessage();
+        this.message = ResponseEnum.FAILURE.getText();
         return this;
     }
 

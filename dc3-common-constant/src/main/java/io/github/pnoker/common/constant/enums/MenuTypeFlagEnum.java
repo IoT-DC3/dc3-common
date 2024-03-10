@@ -36,12 +36,12 @@ public enum MenuTypeFlagEnum {
     /**
      * 标题菜单
      */
-    TITLE((byte) 0x00, "title", "标题菜单"),
+    TITLE((byte) 0, "title", "标题菜单"),
 
     /**
      * 通用菜单
      */
-    COMMON((byte) 0x01, "common", "通用菜单"),
+    COMMON((byte) 1, "common", "通用菜单"),
     ;
 
     /**
@@ -56,7 +56,7 @@ public enum MenuTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

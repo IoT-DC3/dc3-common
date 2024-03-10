@@ -35,17 +35,17 @@ public enum EnableFlagEnum {
     /**
      * 禁用
      */
-    DISABLE((byte) 0x00, "disable", "禁用"),
+    DISABLE((byte) 0, "disable", "禁用"),
 
     /**
      * 启用
      */
-    ENABLE((byte) 0x01, "enable", "启用"),
+    ENABLE((byte) 1, "enable", "启用"),
 
     /**
      * 暂存
      */
-    TEMP((byte) 0x02, "temp", "暂存"),
+    TEMP((byte) 2, "temp", "暂存"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum EnableFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

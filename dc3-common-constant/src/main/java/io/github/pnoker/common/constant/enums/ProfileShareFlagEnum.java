@@ -35,17 +35,17 @@ public enum ProfileShareFlagEnum {
     /**
      * 租户下共享模板
      */
-    TENANT((byte) 0x00, "tenant", "租户下共享模板"),
+    TENANT((byte) 0, "tenant", "租户下共享模板"),
 
     /**
      * 驱动下共享模板
      */
-    DRIVER((byte) 0x01, "driver", "驱动下共享模板"),
+    DRIVER((byte) 1, "driver", "驱动下共享模板"),
 
     /**
      * 用户下共享模板
      */
-    USER((byte) 0x02, "user", "用户下共享模板"),
+    USER((byte) 2, "user", "用户下共享模板"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum ProfileShareFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

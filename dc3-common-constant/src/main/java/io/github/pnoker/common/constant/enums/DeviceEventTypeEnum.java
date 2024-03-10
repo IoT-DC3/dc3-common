@@ -35,12 +35,12 @@ public enum DeviceEventTypeEnum {
     /**
      * 心跳事件
      */
-    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
+    HEARTBEAT((byte) 0, "heartbeat", "心跳事件"),
 
     /**
      * 报警事件
      */
-    ALARM((byte) 0x01, "alarm", "报警事件"),
+    ALARM((byte) 1, "alarm", "报警事件"),
     ;
 
     /**
@@ -55,7 +55,7 @@ public enum DeviceEventTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

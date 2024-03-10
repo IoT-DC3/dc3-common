@@ -36,22 +36,22 @@ public enum ApiTypeFlagEnum {
     /**
      * POST
      */
-    POST((byte) 0x00, "post", "POST"),
+    POST((byte) 0, "post", "POST"),
 
     /**
      * DELETE
      */
-    DELETE((byte) 0x01, "delete", "DELETE"),
+    DELETE((byte) 1, "delete", "DELETE"),
 
     /**
      * PUT
      */
-    PUT((byte) 0x02, "put", "PUT"),
+    PUT((byte) 2, "put", "PUT"),
 
     /**
      * GET
      */
-    GET((byte) 0x03, "get", "GET"),
+    GET((byte) 3, "get", "GET"),
     ;
 
     /**
@@ -66,7 +66,7 @@ public enum ApiTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

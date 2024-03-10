@@ -35,32 +35,32 @@ public enum MetadataTypeEnum {
     /**
      * 元数据
      */
-    METADATA((byte) 0x00, "metadata", "元数据"),
+    METADATA((byte) 0, "metadata", "元数据"),
 
     /**
      * 模板类型元数据
      */
-    PROFILE((byte) 0x01, "profile", "模板类型元数据"),
+    PROFILE((byte) 1, "profile", "模板类型元数据"),
 
     /**
      * 位号类型元数据
      */
-    POINT((byte) 0x02, "point", "位号类型元数据"),
+    POINT((byte) 2, "point", "位号类型元数据"),
 
     /**
      * 设备类型元数据
      */
-    DEVICE((byte) 0x03, "device", "设备类型元数据"),
+    DEVICE((byte) 3, "device", "设备类型元数据"),
 
     /**
      * 驱动属性配置类型元数据
      */
-    DRIVER_ATTRIBUTE_CONFIG((byte) 0x04, "driver_attribute_config", "驱动属性配置类型元数据"),
+    DRIVER_ATTRIBUTE_CONFIG((byte) 4, "driver_attribute_config", "驱动属性配置类型元数据"),
 
     /**
      * 位号属性配置类型元数据
      */
-    POINT_ATTRIBUTE_CONFIG((byte) 0x05, "point_attribute_config", "位号属性配置类型元数据"),
+    POINT_ATTRIBUTE_CONFIG((byte) 5, "point_attribute_config", "位号属性配置类型元数据"),
     ;
 
     /**
@@ -75,7 +75,7 @@ public enum MetadataTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

@@ -35,17 +35,17 @@ public enum AccrueFlagEnum {
     /**
      * 无规律
      */
-    NONE((byte) 0x00, "none", "无规律"),
+    NONE((byte) 0, "none", "无规律"),
 
     /**
      * 递增
      */
-    INCREMENT((byte) 0x01, "increment", "递增"),
+    INCREMENT((byte) 1, "increment", "递增"),
 
     /**
      * 递减
      */
-    DECREMENT((byte) 0x02, "decrement", "递减"),
+    DECREMENT((byte) 2, "decrement", "递减"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum AccrueFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

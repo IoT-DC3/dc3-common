@@ -32,15 +32,15 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum PointValueTypeEnum {
-    BYTE((byte) 0x00, "byte", "字节"),
-    SHORT((byte) 0x01, "short", "短整数"),
-    INT((byte) 0x02, "int", "整数"),
-    LONG((byte) 0x03, "long", "长整数"),
-    FLOAT((byte) 0x04, "float", "浮点数"),
-    DOUBLE((byte) 0x05, "double", "双精度浮点数"),
-    BOOLEAN((byte) 0x06, "boolean", "布尔量"),
-    STRING((byte) 0x07, "string", "字符串"),
-    HEX((byte) 0x08, "hex", "十六进制");
+    BYTE((byte) 0, "byte", "字节"),
+    SHORT((byte) 1, "short", "短整数"),
+    INT((byte) 2, "int", "整数"),
+    LONG((byte) 3, "long", "长整数"),
+    FLOAT((byte) 4, "float", "浮点数"),
+    DOUBLE((byte) 5, "double", "双精度浮点数"),
+    BOOLEAN((byte) 6, "boolean", "布尔量"),
+    STRING((byte) 7, "string", "字符串"),
+    HEX((byte) 8, "hex", "十六进制");
 
     /**
      * 索引
@@ -54,7 +54,7 @@ public enum PointValueTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

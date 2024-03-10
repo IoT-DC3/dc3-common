@@ -35,17 +35,17 @@ public enum MetadataCommandTypeEnum {
     /**
      * 新增
      */
-    ADD((byte) 0x00, "add", "新增"),
+    ADD((byte) 0, "add", "新增"),
 
     /**
      * 删除
      */
-    DELETE((byte) 0x01, "delete", "删除"),
+    DELETE((byte) 1, "delete", "删除"),
 
     /**
      * 更新
      */
-    UPDATE((byte) 0x02, "update", "更新"),
+    UPDATE((byte) 2, "update", "更新"),
     ;
 
     /**
@@ -60,7 +60,7 @@ public enum MetadataCommandTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 

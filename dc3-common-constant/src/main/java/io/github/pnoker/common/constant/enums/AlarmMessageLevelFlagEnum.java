@@ -35,22 +35,22 @@ public enum AlarmMessageLevelFlagEnum {
     /**
      * P0
      */
-    P0((byte) 0x00, "p0", "P0"),
+    P0((byte) 0, "p0", "P0"),
 
     /**
      * P1
      */
-    P1((byte) 0x01, "p1", "P1"),
+    P1((byte) 1, "p1", "P1"),
 
     /**
      * P2
      */
-    P2((byte) 0x02, "p2", "P2"),
+    P2((byte) 2, "p2", "P2"),
 
     /**
      * P3
      */
-    P3((byte) 0x03, "p3", "P3"),
+    P3((byte) 3, "p3", "P3"),
     ;
 
     /**
@@ -65,7 +65,7 @@ public enum AlarmMessageLevelFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
