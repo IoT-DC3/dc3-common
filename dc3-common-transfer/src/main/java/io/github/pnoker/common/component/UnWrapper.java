@@ -14,37 +14,39 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.base.enums;
+package io.github.pnoker.common.component;
+
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
+
 
 /**
- * 基础枚举
+ * 解包器
+ * <p>
+ * 当方法返回值是包装类（如Page、ResultWrapper等）时，指定解包的逻辑
+ * 注意解包之后的返回参数必须是某个bean或者集合类型
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface BaseEnum<T extends Enum<T>> {
+public interface UnWrapper<T> extends Converter<T, Object> {
 
     /**
-     * 根据枚举索引获取枚举
+     * 解包
      *
-     * @param index 索引
-     * @return {@link Enum}
+     * @param source 源
+     * @return 包装类内的实际对象
      */
-    T ofIndex(Byte index);
+    Object unWrap(T source);
 
     /**
-     * 根据枚举编码获取枚举
+     * 将convert更名为unWrap
      *
-     * @param code 编码
-     * @return {@link Enum}
+     * @param source 源
+     * @return 目标对象
      */
-    T ofCode(String code);
-
-    /**
-     * 根据枚举名称获取枚举
-     *
-     * @param name 枚举名称
-     * @return {@link Enum}
-     */
-    T ofName(String name);
+    @Override
+    default Object convert(@NonNull T source) {
+        return unWrap(source);
+    }
 }

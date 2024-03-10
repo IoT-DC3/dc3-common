@@ -102,9 +102,9 @@ public enum MetadataTypeEnum {
     }
 
     /**
-     * 根据枚举名称获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name 枚举名称
+     * @param name 枚举内容
      * @return {@link MetadataTypeEnum}
      */
     public static MetadataTypeEnum ofName(String name) {
