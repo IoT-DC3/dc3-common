@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.entity.property;
 
-import io.github.pnoker.common.constant.enums.DriverTypeFlagEnum;
+import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.entity.dto.DriverAttributeDTO;
 import io.github.pnoker.common.entity.dto.PointAttributeDTO;
 import lombok.Getter;

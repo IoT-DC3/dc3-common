@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.constant.enums.MetadataCommandTypeEnum;
-import io.github.pnoker.common.constant.enums.MetadataTypeEnum;
+import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.*;
 
 import java.io.Serializable;

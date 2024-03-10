@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.constant.enums.DeviceEventTypeEnum;
-import io.github.pnoker.common.constant.enums.DeviceStatusEnum;
+import io.github.pnoker.common.enums.DeviceEventTypeEnum;
+import io.github.pnoker.common.enums.DeviceStatusEnum;
 import lombok.*;
 
 import java.io.Serializable;

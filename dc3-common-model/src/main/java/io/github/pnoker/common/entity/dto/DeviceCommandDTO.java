@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.constant.enums.DeviceCommandTypeEnum;
+import io.github.pnoker.common.enums.DeviceCommandTypeEnum;
 import lombok.*;
 
 import java.io.Serializable;

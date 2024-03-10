@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.driver.job;
 
-import io.github.pnoker.common.constant.enums.DriverEventTypeEnum;
+import io.github.pnoker.common.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;

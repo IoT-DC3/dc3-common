@@ -13,7 +13,7 @@
     ,
     {
       "name": "driver.type",
-      "type": "io.github.pnoker.common.constant.enums.DriverTypeFlagEnum",
+      "type": "io.github.pnoker.common.enums.DriverTypeFlagEnum",
       "description": "Driver type."
     },
     {

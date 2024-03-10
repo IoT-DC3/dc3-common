@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.context;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.constant.enums.DriverStatusEnum;
+import io.github.pnoker.common.enums.DriverStatusEnum;
 import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
