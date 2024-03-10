@@ -42,7 +42,7 @@ public class UserSocialExt extends BaseExt {
      * <p>
      * 拓展内容可以通过 Type 和 Version 进行区分
      */
-    @Schema(description = "类型")
+    @Schema(description = "内容")
     private Content content;
 
     @Getter
