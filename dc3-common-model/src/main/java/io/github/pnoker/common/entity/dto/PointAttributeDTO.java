@@ -16,10 +16,10 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
-import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.PointAttributeExt;
+import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

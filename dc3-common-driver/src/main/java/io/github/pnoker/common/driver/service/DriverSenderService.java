@@ -16,10 +16,10 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.enums.DeviceStatusEnum;
 import io.github.pnoker.common.entity.dto.DeviceEventDTO;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
 import io.github.pnoker.common.entity.dto.PointValueDTO;
+import io.github.pnoker.common.enums.DeviceStatusEnum;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

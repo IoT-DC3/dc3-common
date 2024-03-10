@@ -16,11 +16,11 @@
 
 package io.github.pnoker.common.entity.dto;
 
+import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.ext.ProfileExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.ProfileShareFlagEnum;
 import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
-import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.ProfileExt;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
