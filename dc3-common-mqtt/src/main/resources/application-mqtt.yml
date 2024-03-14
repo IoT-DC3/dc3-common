@@ -23,6 +23,9 @@ driver:
     client-key: classpath:/certs/client.key
     client-key-pass: dc3-client
     topic-prefix: dc3/${driver.tenant}/${spring.application.name}/
+    default-send-topic:
+      qos: 1
+      name: command
     keep-alive: 15
     completion-timeout: 3000
     batch:
