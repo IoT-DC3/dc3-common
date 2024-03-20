@@ -23,6 +23,7 @@ import io.github.pnoker.common.driver.service.DriverCommandService;
 import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.PointDTO;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -61,7 +62,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
         for (DeviceDTO device : deviceMap.values()) {
             Set<Long> profileIds = device.getProfileIds();
             Map<Long, Map<String, AttributeConfigDTO>> pointInfoMap = driverContext.getDriverMetadataDTO().getPointInfoMap().get(device.getId());
-            if (CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointInfoMap)) {
+            if (EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) && CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointInfoMap)) {
                 continue;
             }
 
@@ -72,6 +73,10 @@ public class DriverReadScheduleJob extends QuartzJobBean {
                 }
 
                 for (Long pointId : pointMap.keySet()) {
+                    PointDTO point = pointMap.get(pointId);
+                    if (EnableFlagEnum.ENABLE.equals(point.getEnableFlag())) {
+                        continue;
+                    }
                     Map<String, AttributeConfigDTO> map = pointInfoMap.get(pointId);
                     if (ObjectUtil.isNull(map)) {
                         continue;
