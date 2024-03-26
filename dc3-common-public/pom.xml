@@ -168,7 +168,6 @@
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-exception</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>
