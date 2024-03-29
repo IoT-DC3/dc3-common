@@ -63,16 +63,22 @@
 
     <dependencies>
 
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
         <!-- TDEngine -->
         <dependency>
             <groupId>com.taosdata.jdbc</groupId>
             <artifactId>taos-jdbcdriver</artifactId>
         </dependency>
 
-        <!-- Spring Boot -->
+        <!-- DC3 Common 相关 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot</artifactId>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-repository</artifactId>
         </dependency>
 
     </dependencies>

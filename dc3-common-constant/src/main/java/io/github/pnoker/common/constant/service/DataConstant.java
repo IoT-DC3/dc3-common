@@ -41,12 +41,12 @@ public class DataConstant {
     public static final String DRIVER_EVENT_URL_PREFIX = "/driver/event";
     public static final String DEVICE_STATUS_URL_PREFIX = "/device/status";
     public static final String DEVICE_EVENT_URL_PREFIX = "/device/event";
-    public static final String RABBITMQ_CONNECTIONS_URL_PREFIX = "/rabbitmq/conn";
-    public static final String RABBITMQ_MESSAGES_URL_PREFIX = "/rabbitmq/mes";
-    public static final String RABBITMQ_PUBLISHERS_URL_PREFIX = "/rabbitmq/pub";
-    public static final String RABBITMQ_QUEUES_URL_PREFIX = "/rabbitmq/que";
-    public static final String RABBITMQ_CONSUMERS_URL_PREFIX = "/rabbitmq/con";
-    public static final String RABBITMQ_CHANNELS_URL_PREFIX = "/rabbitmq/chan";
-    public static final String RABBITMQ_NODES_URL_PREFIX = "/rabbitmq/node";
+    public static final String RABBITMQ_CONNECTION_URL_PREFIX = "/rabbitmq/conn";
+    public static final String RABBITMQ_MESSAGE_URL_PREFIX = "/rabbitmq/mes";
+    public static final String RABBITMQ_PUBLISHER_URL_PREFIX = "/rabbitmq/pub";
+    public static final String RABBITMQ_QUEUE_URL_PREFIX = "/rabbitmq/que";
+    public static final String RABBITMQ_CONSUMER_URL_PREFIX = "/rabbitmq/con";
+    public static final String RABBITMQ_CHANNEL_URL_PREFIX = "/rabbitmq/chan";
+    public static final String RABBITMQ_NODE_URL_PREFIX = "/rabbitmq/node";
     public static final String RABBITMQ_CLUSTER_URL_PREFIX = "/rabbitmq/clu";
 }

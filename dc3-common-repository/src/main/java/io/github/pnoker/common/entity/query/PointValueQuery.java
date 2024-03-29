@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.bo;
+package io.github.pnoker.common.entity.query;
 
+import io.github.pnoker.common.entity.common.Pages;
+import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
- * 位号值
+ * PointValue Query
  *
  * @author pnoker
  * @since 2022.1.0
@@ -32,41 +34,49 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PointValueBO implements Serializable {
+@Schema(title = "PointValue", description = "位号值-查询")
+public class PointValueQuery implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Schema(description = "分页")
+    private Pages page;
+
     /**
-     * ID
+     * 租户ID
      */
-    private String id;
+    @Schema(description = "使能标识", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private Long tenantId;
+
+    // 查询字段
 
     /**
      * 设备ID
      */
+    @Schema(description = "设备ID")
     private Long deviceId;
+
+    /**
+     * 设备名称
+     */
+    @Schema(description = "设备名称")
+    private String deviceName;
 
     /**
      * 位号ID
      */
+    @Schema(description = "位号ID")
     private Long pointId;
 
     /**
-     * 原始值
+     * 位号名称
      */
-    private String rawValue;
+    @Schema(description = "位号名称")
+    private String pointName;
 
     /**
-     * 处理值
+     * 使能标识
      */
-    private String value;
+    @Schema(description = "使能标识")
+    private EnableFlagEnum enableFlag;
 
-    /**
-     * 原始时间
-     */
-    private LocalDateTime originTime;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
 }

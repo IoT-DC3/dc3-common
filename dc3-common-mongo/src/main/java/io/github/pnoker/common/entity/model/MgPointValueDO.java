@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.bo;
+package io.github.pnoker.common.entity.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 位号值
+ * MongoDB 位号数据
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class PointValueBO implements Serializable {
+@Document
+public class MgPointValueDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * ID
-     */
+    @MongoId
     private String id;
 
     /**

@@ -69,6 +69,12 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
+        <!-- DC3 Common 相关 -->
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-repository</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

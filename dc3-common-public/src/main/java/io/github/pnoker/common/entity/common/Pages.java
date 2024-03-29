@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 分页
+ * 分页参数配置
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,7 +34,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Schema(description = "分页")
+@Schema(description = "分页参数配置")
 public class Pages implements Serializable {
     private static final long serialVersionUID = 1L;
 

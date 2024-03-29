@@ -173,7 +173,7 @@ public class RedisService {
      * @param expireMillis Map String:Long
      */
     public void setExpire(Map<String, Long> expireMillis) {
-        if (null != expireMillis && expireMillis.size() > 0) {
+        if (null != expireMillis && !expireMillis.isEmpty()) {
             StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
             redisTemplate.execute((RedisCallback<Object>) connection -> {
                 expireMillis.forEach((key, expire) -> {

@@ -17,7 +17,9 @@
 package io.github.pnoker.common.repository;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.entity.bo.PointValueBO;
+import io.github.pnoker.common.entity.query.PointValueQuery;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,17 +42,44 @@ public interface RepositoryService {
     /**
      * 保存 PointValue
      *
-     * @param pointValueBO PointValue
+     * @param entityBO PointValue
      * @throws IOException IOException
      */
-    void savePointValue(PointValueBO pointValueBO) throws IOException;
+    void savePointValue(PointValueBO entityBO) throws IOException;
 
     /**
      * 保存 PointValue 集合
      *
-     * @param deviceId      设备ID
-     * @param pointValueBOS PointValue Array
+     * @param deviceId  设备ID
+     * @param entityBOS PointValue Array
      * @throws IOException IOException
      */
-    void savePointValues(Long deviceId, List<PointValueBO> pointValueBOS) throws IOException;
+    void savePointValue(Long deviceId, List<PointValueBO> entityBOS) throws IOException;
+
+    /**
+     * 获取历史 PointValue
+     *
+     * @param deviceId 设备ID
+     * @param pointId  位号ID
+     * @param count    数量
+     * @return History Value Array
+     */
+    List<String> selectHistoryPointValue(Long deviceId, Long pointId, int count);
+
+    /**
+     * 查询最新 PointValue
+     *
+     * @param deviceId 设备ID
+     * @param pointIds 位号ID集
+     * @return PointValueBO Array
+     */
+    List<PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds);
+
+    /**
+     * 分页查询 PointValue
+     *
+     * @param entityQuery Entry of Query
+     * @return Entity of BO Page
+     */
+    Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery);
 }
