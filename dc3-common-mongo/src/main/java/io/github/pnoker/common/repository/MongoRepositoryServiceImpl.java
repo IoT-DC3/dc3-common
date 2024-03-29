@@ -24,7 +24,7 @@ import io.github.pnoker.common.constant.common.SuffixConstant;
 import io.github.pnoker.common.constant.driver.StorageConstant;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.entity.builder.PointValueBuilder;
+import io.github.pnoker.common.entity.builder.MgPointValueBuilder;
 import io.github.pnoker.common.entity.common.Pages;
 import io.github.pnoker.common.entity.model.MgPointValueDO;
 import io.github.pnoker.common.entity.query.PointValueQuery;
@@ -51,11 +51,8 @@ import java.util.stream.Collectors;
  * @since 2022.1.0
  */
 @Slf4j
-@Service
+@Service("mongoRepositoryService")
 public class MongoRepositoryServiceImpl implements RepositoryService, InitializingBean {
-
-    @Resource
-    private PointValueBuilder pointValueBuilder;
 
     @Resource
     private MongoTemplate mongoTemplate;
@@ -73,7 +70,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         final String collection = StorageConstant.POINT_VALUE_PREFIX + entityBO.getDeviceId();
         ensurePointValueIndex(collection);
-        MgPointValueDO entityDO = pointValueBuilder.buildMgDOByBO(entityBO);
+        MgPointValueDO entityDO = MgPointValueBuilder.buildMgDOByBO(entityBO);
         mongoTemplate.insert(entityDO, collection);
     }
 
@@ -87,7 +84,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         ensurePointValueIndex(collection);
         final List<MgPointValueDO> entityDOS = entityBOS.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
-                .map(entityBO -> pointValueBuilder.buildMgDOByBO(entityBO))
+                .map(entityBO -> MgPointValueBuilder.buildMgDOByBO(entityBO))
                 .collect(Collectors.toList());
         mongoTemplate.insert(entityDOS, collection);
     }
@@ -144,7 +141,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         query.limit((int) pages.getSize()).skip(pages.getSize() * (pages.getCurrent() - 1));
         query.with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(PointValueBO::getCreateTime)));
         List<MgPointValueDO> pointValueDOS = mongoTemplate.find(query, MgPointValueDO.class, collection);
-        List<PointValueBO> pointValueBOS = pointValueBuilder.buildBOListByDOList(pointValueDOS);
+        List<PointValueBO> pointValueBOS = MgPointValueBuilder.buildBOListByDOList(pointValueDOS);
         entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOS);
         return entityPageBO;
     }

@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
  * @since 2022.1.0
  */
 @Slf4j
-@Service
+@Service("redisRepositoryService")
 public class RedisRepositoryServiceImpl implements RepositoryService, InitializingBean {
 
     @Resource
