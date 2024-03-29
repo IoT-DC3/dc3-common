@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.redis.repository;
+package io.github.pnoker.common.redis.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.common.PrefixConstant;
 import io.github.pnoker.common.constant.common.SymbolConstant;
-import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.entity.query.PointValueQuery;
-import io.github.pnoker.common.redis.service.RedisService;
-import io.github.pnoker.common.repository.RepositoryService;
-import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
+import io.github.pnoker.common.redis.entity.builder.RedisPointValueBuilder;
+import io.github.pnoker.common.redis.entity.model.RedisPointValueDO;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -44,47 +38,38 @@ import java.util.stream.Collectors;
  * @since 2022.1.0
  */
 @Slf4j
-@Service("redisRepositoryService")
-public class RedisRepositoryServiceImpl implements RepositoryService, InitializingBean {
+@Service
+public class RedisRepositoryService {
+
+    @Resource
+    private RedisPointValueBuilder redisPointValueBuilder;
 
     @Resource
     private RedisService redisService;
 
-    @Override
-    public String getRepositoryName() {
-        return StrategyConstant.Storage.REDIS;
-    }
-
-    @Override
     public void savePointValue(PointValueBO entityBO) {
         if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
             return;
         }
 
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + entityBO.getDeviceId() + SymbolConstant.DOT;
-        redisService.setKey(prefix + entityBO.getPointId(), entityBO);
+        RedisPointValueDO entityDO = redisPointValueBuilder.buildDOByBO(entityBO);
+        redisService.setKey(prefix + entityBO.getPointId(), entityDO);
     }
 
-    @Override
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
         if (ObjectUtil.isEmpty(deviceId)) {
             return;
         }
 
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
-        Map<String, PointValueBO> collect = entityBOS.stream()
+        List<RedisPointValueDO> entityDOS = redisPointValueBuilder.buildDOListByBOList(entityBOS);
+        Map<String, RedisPointValueDO> entityDOMap = entityDOS.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
                 .collect(Collectors.toMap(entityBO -> prefix + entityBO.getPointId(), Function.identity()));
-        redisService.setKey(collect);
+        redisService.setKey(entityDOMap);
     }
 
-    @Override
-    public List<String> selectHistoryPointValue(Long deviceId, Long pointId, int count) {
-        // redis 目前仅用于存放实时数据，不提供历史数据查询
-        return null;
-    }
-
-    @Override
     public List<PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds) {
         if (CollUtil.isEmpty(pointIds)) {
             return Collections.emptyList();
@@ -92,18 +77,8 @@ public class RedisRepositoryServiceImpl implements RepositoryService, Initializi
 
         String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
         List<String> keys = pointIds.stream().map(pointId -> prefix + pointId).collect(Collectors.toList());
-        List<PointValueBO> pointValueBOS = redisService.getKey(keys);
-        return pointValueBOS.stream().filter(Objects::nonNull).collect(Collectors.toList());
+        List<RedisPointValueDO> entityDOS = redisService.getKey(keys);
+        return redisPointValueBuilder.buildBOListByDOList(entityDOS);
     }
 
-    @Override
-    public Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery) {
-        // redis 目前仅用于存放实时数据，不提供历史数据查询
-        return null;
-    }
-
-    @Override
-    public void afterPropertiesSet() {
-        RepositoryStrategyFactory.put(StrategyConstant.Storage.REDIS, this);
-    }
 }

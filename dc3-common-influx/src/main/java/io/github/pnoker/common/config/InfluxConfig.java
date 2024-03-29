@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.time.Instant;
 
 /**
- * MongoDB config
+ * InfluxDB config
  *
  * @author pnoker
  * @since 2022.1.0

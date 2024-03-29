@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.mongo.entity.builder;
+package io.github.pnoker.common.redis.entity.builder;
 
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.mongo.entity.model.MgPointValueDO;
+import io.github.pnoker.common.redis.entity.model.RedisPointValueDO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -29,38 +29,38 @@ import java.util.List;
  * @since 2022.1.0
  */
 @Mapper(componentModel = "spring")
-public interface MgPointValueBuilder {
+public interface RedisPointValueBuilder {
 
     /**
-     * BO to Mongo DO
+     * BO to Redis DO
      *
      * @param entityBO EntityBO
      * @return EntityDO
      */
-    MgPointValueDO buildMgDOByBO(PointValueBO entityBO);
+    RedisPointValueDO buildDOByBO(PointValueBO entityBO);
 
     /**
-     * BOList to Mongo DOList
+     * BOList to Redis DOList
      *
-     * @param entityBOList EntityBO List
+     * @param entityBOList EntityBO Array
      * @return EntityDO
      */
-    List<MgPointValueDO> buildMgDOListByBOList(List<PointValueBO> entityBOList);
+    List<RedisPointValueDO> buildDOListByBOList(List<PointValueBO> entityBOList);
 
     /**
-     * Mongo DO to BO
+     * Redis DO to BO
      *
      * @param entityDO EntityDO
      * @return EntityBO
      */
-    PointValueBO buildBOByMgDO(MgPointValueDO entityDO);
+    PointValueBO buildBOByDO(RedisPointValueDO entityDO);
 
     /**
-     * Mongo DOList to BOList
+     * Redis DOList to BOList
      *
      * @param entityDOList EntityDO Array
      * @return EntityBO Array
      */
-    List<PointValueBO> buildBOListByDOList(List<MgPointValueDO> entityDOList);
+    List<PointValueBO> buildBOListByDOList(List<RedisPointValueDO> entityDOList);
 
 }

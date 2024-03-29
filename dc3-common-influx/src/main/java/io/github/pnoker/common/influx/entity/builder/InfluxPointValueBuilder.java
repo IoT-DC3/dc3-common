@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.mongo.entity.builder;
+package io.github.pnoker.common.influx.entity.builder;
 
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.mongo.entity.model.MgPointValueDO;
+import io.github.pnoker.common.influx.entity.model.InfluxPointValueDO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -29,38 +29,38 @@ import java.util.List;
  * @since 2022.1.0
  */
 @Mapper(componentModel = "spring")
-public interface MgPointValueBuilder {
+public interface InfluxPointValueBuilder {
 
     /**
-     * BO to Mongo DO
+     * BO to Influx DO
      *
      * @param entityBO EntityBO
      * @return EntityDO
      */
-    MgPointValueDO buildMgDOByBO(PointValueBO entityBO);
+    InfluxPointValueDO buildMgDOByBO(PointValueBO entityBO);
 
     /**
-     * BOList to Mongo DOList
+     * BOList to Influx DOList
      *
      * @param entityBOList EntityBO List
      * @return EntityDO
      */
-    List<MgPointValueDO> buildMgDOListByBOList(List<PointValueBO> entityBOList);
+    List<InfluxPointValueDO> buildMgDOListByBOList(List<PointValueBO> entityBOList);
 
     /**
-     * Mongo DO to BO
+     * Influx DO to BO
      *
      * @param entityDO EntityDO
      * @return EntityBO
      */
-    PointValueBO buildBOByMgDO(MgPointValueDO entityDO);
+    PointValueBO buildBOByMgDO(InfluxPointValueDO entityDO);
 
     /**
-     * Mongo DOList to BOList
+     * Influx DOList to BOList
      *
      * @param entityDOList EntityDO Array
      * @return EntityBO Array
      */
-    List<PointValueBO> buildBOListByDOList(List<MgPointValueDO> entityDOList);
+    List<PointValueBO> buildBOListByDOList(List<InfluxPointValueDO> entityDOList);
 
 }

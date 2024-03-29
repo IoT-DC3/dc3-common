@@ -62,7 +62,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
         for (DeviceDTO device : deviceMap.values()) {
             Set<Long> profileIds = device.getProfileIds();
             Map<Long, Map<String, AttributeConfigDTO>> pointInfoMap = driverContext.getDriverMetadataDTO().getPointInfoMap().get(device.getId());
-            if (EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) && CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointInfoMap)) {
+            if (!EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) || CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointInfoMap)) {
                 continue;
             }
 
@@ -72,17 +72,17 @@ public class DriverReadScheduleJob extends QuartzJobBean {
                     continue;
                 }
 
-                for (Long pointId : pointMap.keySet()) {
-                    PointDTO point = pointMap.get(pointId);
-                    if (EnableFlagEnum.ENABLE.equals(point.getEnableFlag())) {
+                for (Map.Entry<Long, PointDTO> entry : pointMap.entrySet()) {
+                    PointDTO point = pointMap.get(entry.getKey());
+                    if (!EnableFlagEnum.ENABLE.equals(point.getEnableFlag())) {
                         continue;
                     }
-                    Map<String, AttributeConfigDTO> map = pointInfoMap.get(pointId);
+                    Map<String, AttributeConfigDTO> map = pointInfoMap.get(entry.getKey());
                     if (ObjectUtil.isNull(map)) {
                         continue;
                     }
 
-                    threadPoolExecutor.execute(() -> driverCommandService.read(device.getId(), pointId));
+                    driverCommandService.read(device.getId(), entry.getKey());
                 }
             }
         }

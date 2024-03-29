@@ -45,7 +45,6 @@ public class StrategyConstant {
 
         public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.COLON;
 
-        public static final String REDIS = "redis";
         public static final String MONGO = "mongo";
         public static final String INFLUXDB = "influxdb";
         public static final String STRATEGY_OPENTSDB = "opentsdb";
