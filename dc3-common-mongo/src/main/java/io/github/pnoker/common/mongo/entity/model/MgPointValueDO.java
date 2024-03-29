@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.model;
+package io.github.pnoker.common.mongo.entity.model;
 
 import lombok.Getter;
 import lombok.Setter;

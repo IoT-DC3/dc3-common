@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.repository;
+package io.github.pnoker.common.mongo.repository;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -24,10 +24,11 @@ import io.github.pnoker.common.constant.common.SuffixConstant;
 import io.github.pnoker.common.constant.driver.StorageConstant;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.entity.builder.MgPointValueBuilder;
 import io.github.pnoker.common.entity.common.Pages;
-import io.github.pnoker.common.entity.model.MgPointValueDO;
 import io.github.pnoker.common.entity.query.PointValueQuery;
+import io.github.pnoker.common.mongo.entity.builder.MgPointValueBuilder;
+import io.github.pnoker.common.mongo.entity.model.MgPointValueDO;
+import io.github.pnoker.common.repository.RepositoryService;
 import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
 import io.github.pnoker.common.utils.FieldUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -55,6 +56,9 @@ import java.util.stream.Collectors;
 public class MongoRepositoryServiceImpl implements RepositoryService, InitializingBean {
 
     @Resource
+    private MgPointValueBuilder mgPointValueBuilder;
+
+    @Resource
     private MongoTemplate mongoTemplate;
 
     @Override
@@ -70,7 +74,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         final String collection = StorageConstant.POINT_VALUE_PREFIX + entityBO.getDeviceId();
         ensurePointValueIndex(collection);
-        MgPointValueDO entityDO = MgPointValueBuilder.buildMgDOByBO(entityBO);
+        MgPointValueDO entityDO = mgPointValueBuilder.buildMgDOByBO(entityBO);
         mongoTemplate.insert(entityDO, collection);
     }
 
@@ -84,7 +88,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         ensurePointValueIndex(collection);
         final List<MgPointValueDO> entityDOS = entityBOS.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
-                .map(entityBO -> MgPointValueBuilder.buildMgDOByBO(entityBO))
+                .map(entityBO -> mgPointValueBuilder.buildMgDOByBO(entityBO))
                 .collect(Collectors.toList());
         mongoTemplate.insert(entityDOS, collection);
     }
@@ -141,7 +145,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         query.limit((int) pages.getSize()).skip(pages.getSize() * (pages.getCurrent() - 1));
         query.with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(PointValueBO::getCreateTime)));
         List<MgPointValueDO> pointValueDOS = mongoTemplate.find(query, MgPointValueDO.class, collection);
-        List<PointValueBO> pointValueBOS = MgPointValueBuilder.buildBOListByDOList(pointValueDOS);
+        List<PointValueBO> pointValueBOS = mgPointValueBuilder.buildBOListByDOList(pointValueDOS);
         entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOS);
         return entityPageBO;
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.redis;
+package io.github.pnoker.common.redis.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisCallback;

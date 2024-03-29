@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   io.github.pnoker.common.config.MongoConfig,\
-  io.github.pnoker.common.repository.MongoRepositoryServiceImpl
+  io.github.pnoker.common.init.MongoInitRunner
 org.springframework.boot.env.EnvironmentPostProcessor=\
   io.github.pnoker.common.config.ActiveMongoProfileConfig

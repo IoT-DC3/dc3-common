@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.repository;
+package io.github.pnoker.common.redis.repository;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -24,7 +24,8 @@ import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.entity.query.PointValueQuery;
-import io.github.pnoker.common.redis.RedisService;
+import io.github.pnoker.common.redis.service.RedisService;
+import io.github.pnoker.common.repository.RepositoryService;
 import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
