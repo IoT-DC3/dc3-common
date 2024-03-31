@@ -20,7 +20,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.entity.query.PointValueQuery;
-import io.github.pnoker.common.influx.entity.builder.TDEnginePointValueBuilder;
+import io.github.pnoker.common.tdengine.entity.builder.TDEnginePointValueBuilder;
 import io.github.pnoker.common.repository.RepositoryService;
 import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
 import lombok.extern.slf4j.Slf4j;

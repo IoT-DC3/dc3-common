@@ -17,7 +17,7 @@
 package io.github.pnoker.common.tdengine.entity.builder;
 
 import io.github.pnoker.common.entity.bo.PointValueBO;
-import io.github.pnoker.common.influx.entity.model.TDEnginePointValueDO;
+import io.github.pnoker.common.tdengine.entity.model.TDEnginePointValueDO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
