@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.influx.entity.builder;
+package io.github.pnoker.common.tdengine.entity.builder;
 
 import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.influx.entity.model.TDEnginePointValueDO;

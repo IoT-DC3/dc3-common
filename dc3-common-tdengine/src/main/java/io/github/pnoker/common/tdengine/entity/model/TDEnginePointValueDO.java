@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.influx.entity.model;
+package io.github.pnoker.common.tdengine.entity.model;
 
 import lombok.Getter;
 import lombok.Setter;
