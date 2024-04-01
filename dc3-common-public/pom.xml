@@ -81,6 +81,12 @@
             <artifactId>mybatis-plus-extension</artifactId>
         </dependency>
 
+        <!-- Ok Http -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
         <!-- Caffeine Cache -->
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
