@@ -16,15 +16,18 @@
 
 package io.github.pnoker.common.prometheus.service;
 
+import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.exception.RequestException;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.IOException;
+import java.util.Map;
 
 /**
  * Prometheus 工具类
@@ -36,17 +39,69 @@ import java.io.IOException;
 @Component
 public class PrometheusService {
 
+    @Value("${prometheus.api.query}")
+    private String queryApiUrl;
+
+    @Value("${prometheus.api.query-range}")
+    private String queryRangeApiUrl;
+
     @Resource
     private OkHttpClient okHttpClient;
 
-    private String sendGetRequest(String url) {
+    /**
+     * 查询
+     *
+     * @param params Parameter Map
+     * @return
+     */
+    private String query(Map<String, String> params) {
         try {
+            HttpUrl url = HttpUrl.parse(queryApiUrl);
+            if (ObjectUtil.isNull(url)) {
+                throw new RequestException("Request url empty");
+            }
+            HttpUrl.Builder builder = url.newBuilder();
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                builder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+
+            Request request = new Request.Builder()
+                    .url(builder.build())
+                    .get()
+                    .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
+                throw new RequestException("Request failed or empty response");
+            }
+            return response.body().string();
+        } catch (Exception e) {
+            throw new RequestException(e);
+        }
+    }
+
+    /**
+     * 查询
+     *
+     * @param params Parameter Map
+     * @return
+     */
+    private String queryRange(Map<String, String> params) {
+        try {
+            HttpUrl url = HttpUrl.parse(queryRangeApiUrl);
+            if (ObjectUtil.isNull(url)) {
+                throw new RequestException("Request url empty");
+            }
+            HttpUrl.Builder builder = url.newBuilder();
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                builder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+
             Request request = new Request.Builder()
                     .url(url)
                     .get()
                     .build();
             Response response = okHttpClient.newCall(request).execute();
-            if (!response.isSuccessful() || response.body() == null) {
+            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
                 throw new RequestException("Request failed or empty response");
             }
             return response.body().string();
