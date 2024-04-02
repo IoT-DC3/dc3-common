@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author pnoker
  * @since 2022.1.0
  */
-interface EnumPool {
+public interface EnumPool {
 
     /**
      * 存储所有枚举
