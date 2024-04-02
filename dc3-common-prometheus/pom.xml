@@ -69,6 +69,12 @@
             <artifactId>spring-boot</artifactId>
         </dependency>
 
+        <!-- Ok Http -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
         <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>

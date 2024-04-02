@@ -1,6 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.pnoker.common.config.RedisTemplateConfig,\
-  io.github.pnoker.common.config.RedisCacheConfig,\
+  io.github.pnoker.common.config.OkHttpConfig,\
   io.github.pnoker.common.init.PrometheusInitRunner
 org.springframework.boot.env.EnvironmentPostProcessor=\
   io.github.pnoker.common.config.ActivePrometheusProfileConfig
