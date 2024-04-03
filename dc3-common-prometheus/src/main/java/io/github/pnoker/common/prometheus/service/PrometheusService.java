@@ -54,7 +54,7 @@ public class PrometheusService {
      * @param params Parameter Map
      * @return
      */
-    private String query(Map<String, String> params) {
+    public String query(Map<String, String> params) {
         try {
             HttpUrl url = HttpUrl.parse(queryApiUrl);
             if (ObjectUtil.isNull(url)) {
@@ -85,7 +85,7 @@ public class PrometheusService {
      * @param params Parameter Map
      * @return
      */
-    private String queryRange(Map<String, String> params) {
+    public String queryRange(Map<String, String> params) {
         try {
             HttpUrl url = HttpUrl.parse(queryRangeApiUrl);
             if (ObjectUtil.isNull(url)) {
