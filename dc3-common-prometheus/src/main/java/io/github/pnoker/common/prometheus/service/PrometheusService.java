@@ -52,11 +52,32 @@ public class PrometheusService {
      * 查询
      *
      * @param params Parameter Map
-     * @return
+     * @return String of Response Body
      */
     public String query(Map<String, String> params) {
+        return getString(queryApiUrl, params);
+    }
+
+    /**
+     * 查询
+     *
+     * @param params Parameter Map
+     * @return String of Response Body
+     */
+    public String queryRange(Map<String, String> params) {
+        return getString(queryRangeApiUrl, params);
+    }
+
+    /**
+     * Prometheus Query 查询接口
+     *
+     * @param api    Api URL
+     * @param params Parameter Map
+     * @return String of Response Body
+     */
+    private String getString(String api, Map<String, String> params) {
         try {
-            HttpUrl url = HttpUrl.parse(queryApiUrl);
+            HttpUrl url = HttpUrl.parse(api);
             if (ObjectUtil.isNull(url)) {
                 throw new RequestException("Request url empty");
             }
@@ -67,37 +88,6 @@ public class PrometheusService {
 
             Request request = new Request.Builder()
                     .url(builder.build())
-                    .get()
-                    .build();
-            Response response = okHttpClient.newCall(request).execute();
-            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
-                throw new RequestException("Request failed or empty response");
-            }
-            return response.body().string();
-        } catch (Exception e) {
-            throw new RequestException(e);
-        }
-    }
-
-    /**
-     * 查询
-     *
-     * @param params Parameter Map
-     * @return
-     */
-    public String queryRange(Map<String, String> params) {
-        try {
-            HttpUrl url = HttpUrl.parse(queryRangeApiUrl);
-            if (ObjectUtil.isNull(url)) {
-                throw new RequestException("Request url empty");
-            }
-            HttpUrl.Builder builder = url.newBuilder();
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                builder.addQueryParameter(entry.getKey(), entry.getValue());
-            }
-
-            Request request = new Request.Builder()
-                    .url(url)
                     .get()
                     .build();
             Response response = okHttpClient.newCall(request).execute();
