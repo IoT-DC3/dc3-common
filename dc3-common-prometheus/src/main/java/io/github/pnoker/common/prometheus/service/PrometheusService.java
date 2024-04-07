@@ -27,6 +27,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -65,7 +71,7 @@ public class PrometheusService {
      * @return String of Response Body
      */
     public String queryRange(Map<String, String> params) {
-        return getString(queryRangeApiUrl, params);
+        return getRangeString(queryRangeApiUrl, params);
     }
 
     /**
@@ -85,7 +91,6 @@ public class PrometheusService {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 builder.addQueryParameter(entry.getKey(), entry.getValue());
             }
-
             Request request = new Request.Builder()
                     .url(builder.build())
                     .get()
@@ -98,6 +103,47 @@ public class PrometheusService {
         } catch (Exception e) {
             throw new RequestException(e);
         }
+    }
+    private String getRangeString(String api, Map<String, String> params) {
+        try {
+            HttpUrl url = HttpUrl.parse(api);
+            if (ObjectUtil.isNull(url)) {
+                throw new RequestException("Request url empty");
+            }
+            HttpUrl.Builder builder = url.newBuilder();
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                builder.addQueryParameter(entry.getKey(), entry.getValue());
+            }
+            // 获取当前时间并转换为 UTC 时间
+            LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+            // 计算前 15 分钟之前的时间并转换为 UTC 时间
+            LocalDateTime fifteenMinutesAgo = now.minusMinutes(15);
+            long time1 = fifteenMinutesAgo.toEpochSecond(ZoneOffset.UTC);
+            long time2 = now.toEpochSecond(ZoneOffset.UTC);
+            String rangeUrl = builder.build()+"&start=" + time1 + "&end=" + time2 + "&step=15";
+            Request request = new Request.Builder()
+                    .url(rangeUrl)
+                    .get()
+                    .build();
+            Response response = okHttpClient.newCall(request).execute();
+            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
+                throw new RequestException("Request failed or empty response");
+            }
+            return response.body().string();
+        } catch (Exception e) {
+            throw new RequestException(e);
+        }
+    }
+    public String UnTimeUnix(Double dtime) {
+        // 将 UNIX 时间戳转换为 Instant 对象
+        Instant instant = Instant.ofEpochSecond(Math.round(dtime));// 2024-03-18 08:04:00
+        // 将 Instant 对象转换为 LocalDateTime 对象，使用默认时区
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        // 定义日期时间格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        // 格式化日期和时间
+        String formattedDateTime = dateTime.format(formatter);
+        return formattedDateTime;
     }
 
 }
