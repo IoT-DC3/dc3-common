@@ -18,14 +18,16 @@ syntax = "proto3";
 
 package api.common;
 
-/*配置相关*/
+/*
+Config
+*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "PageProto";
 option objc_class_prefix = "Common";
 option java_multiple_files = true;
 
 /*Page DTO*/
-message GrpcPageDTO {
+message GrpcPage {
   /*总数*/
   int64 total = 1;
 

@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.utils;
 
-import io.github.pnoker.api.common.GrpcBaseDTO;
+import io.github.pnoker.api.common.GrpcBase;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import io.github.pnoker.common.entity.base.BaseBO;
@@ -33,8 +33,8 @@ public class BuilderUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    public static GrpcBaseDTO buildBaseDTOByDO(BaseBO entityBO) {
-        GrpcBaseDTO.Builder builder = GrpcBaseDTO.newBuilder();
+    public static GrpcBase buildBaseDTOByDO(BaseBO entityBO) {
+        GrpcBase.Builder builder = GrpcBase.newBuilder();
         builder.setId(entityBO.getId());
         builder.setRemark(entityBO.getRemark());
         builder.setCreatorId(entityBO.getCreatorId());
