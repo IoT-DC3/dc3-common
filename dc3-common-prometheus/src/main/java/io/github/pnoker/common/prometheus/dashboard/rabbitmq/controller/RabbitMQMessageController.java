@@ -61,7 +61,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryReMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQReMess(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryUnackMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQUnackMess(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -145,7 +145,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryUnConfPub(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQUnConfPub(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -159,7 +159,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryUnRoutDrop(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQUnRoutDrop(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -173,7 +173,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryUnRoutPub(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQUnRoutPub(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -201,7 +201,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryMessReDel(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQMessReDel(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -257,7 +257,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryPoAutoAck(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQPoAutoAck(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -271,7 +271,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryPoNoResult(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQPoNoResult(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -285,7 +285,7 @@ public class RabbitMQMessageController {
     public R<RabbitMQDataVo> queryPoWithAck(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQPoWithAck(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {

@@ -47,7 +47,7 @@ public class RabbitMQNodeController {
     public R<RabbitMQDataVo> queryNodes(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQNodeService.queryNode(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {

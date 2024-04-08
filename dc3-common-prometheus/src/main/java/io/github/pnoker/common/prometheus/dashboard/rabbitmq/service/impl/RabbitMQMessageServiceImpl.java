@@ -85,17 +85,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,17 +116,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -278,17 +278,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -309,17 +309,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -340,17 +340,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -404,17 +404,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -529,18 +529,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
-
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -562,17 +561,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();
@@ -593,17 +592,17 @@ public class RabbitMQMessageServiceImpl implements RabbitMQMessageService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             JsonNode resultNode = rootNode.path("data").path("result").get(0);
-            List<Integer> ivalues = new ArrayList<>();
+            List<Double> values = new ArrayList<>();
             List<Long> times = new ArrayList<>();
             for (int i = 0; i < 61; i++) {
                 long time = resultNode.path("values").get(i).get(0).asLong();
                 times.add(time);
-                int ivalue = resultNode.path("values").get(i).get(1).asInt();
-                ivalues.add(ivalue);
+                Double ivalue = resultNode.path("values").get(i).get(1).asDouble();
+                values.add(ivalue);
             }
             RabbitMQDataVo rabbitMQDataVo = new RabbitMQDataVo();
             rabbitMQDataVo.setTimes(times);
-            rabbitMQDataVo.setIvalues(ivalues);
+            rabbitMQDataVo.setValues(values);
             return rabbitMQDataVo;
         } catch (Exception e) {
             e.printStackTrace();

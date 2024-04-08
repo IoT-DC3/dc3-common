@@ -45,7 +45,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryQues(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryQue(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryRToC(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.readyToCons(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryPToC(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.pendToCons(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryToQue(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryToQue(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryQueDec(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryQueDec(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryQueCre(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryQueCre(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -129,7 +129,7 @@ public class RabbitMQQueueController {
     public R<RabbitMQDataVo> queryQueDel(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryQueDel(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {

@@ -49,7 +49,7 @@ public class RabbitMQConnectionController {
     public R<RabbitMQDataVo> queryConns(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryConn(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -63,7 +63,7 @@ public class RabbitMQConnectionController {
     public R<RabbitMQDataVo> queryToConns(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryToConn(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class RabbitMQConnectionController {
     public R<RabbitMQDataVo> queryConnsOpen(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryConnOpen(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
@@ -91,7 +91,7 @@ public class RabbitMQConnectionController {
     public R<RabbitMQDataVo> queryConnsClose(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryConnClose(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {

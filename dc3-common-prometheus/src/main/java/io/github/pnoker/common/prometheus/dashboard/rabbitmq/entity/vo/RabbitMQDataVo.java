@@ -24,5 +24,4 @@ import java.util.List;
 public class RabbitMQDataVo {
     private List<Long> times;
     private List<Double> values;
-    private List<Integer> ivalues;
 }

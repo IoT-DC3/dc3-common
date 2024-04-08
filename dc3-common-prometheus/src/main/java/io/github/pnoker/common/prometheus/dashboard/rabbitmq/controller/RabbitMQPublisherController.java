@@ -46,7 +46,7 @@ public class RabbitMQPublisherController {
     public R<RabbitMQDataVo> queryPubs(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQPublisherService.queryPub(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {

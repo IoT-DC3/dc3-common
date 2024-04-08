@@ -48,7 +48,7 @@ public class RabbitMQConsumerController {
     public R<RabbitMQDataVo> queryCons(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConsumerService.queryCon(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getIvalues().isEmpty()) {
+            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
                 return R.ok(rabbbit);
             }
         } catch (Exception e) {
