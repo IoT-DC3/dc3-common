@@ -65,7 +65,7 @@ public class DriverCommandServiceImpl implements DriverCommandService {
             if (CharSequenceUtil.isEmpty(rawValue)) {
                 throw new ReadPointException("The read point value is null");
             }
-            if (DefaultConstant.DEFAULT_VALUE.equals(rawValue)) {
+            if (DefaultConstant.DEFAULT_STRING_VALUE.equals(rawValue)) {
                 throw new ReadPointException(CharSequenceUtil.format("The read point value is invalid: {}", rawValue));
             }
 

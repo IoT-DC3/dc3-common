@@ -21,6 +21,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.common.Pages;
 import lombok.extern.slf4j.Slf4j;
@@ -57,8 +58,8 @@ public class PageUtil {
         if (pages.getCurrent() < 1) {
             pages.setCurrent(1);
         }
-        if (pages.getSize() > 100) {
-            pages.setSize(100);
+        if (pages.getSize() > DefaultConstant.DEFAULT_MAX_PAGE_SIZE) {
+            pages.setSize(DefaultConstant.DEFAULT_MAX_PAGE_SIZE);
         }
         List<OrderItem> orders = pages.getOrders();
         if (CollUtil.isEmpty(orders)) {

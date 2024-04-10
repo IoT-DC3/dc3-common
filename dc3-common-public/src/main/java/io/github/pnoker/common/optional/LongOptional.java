@@ -14,38 +14,33 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.constant.common;
+package io.github.pnoker.common.optional;
+
+import io.github.pnoker.common.constant.common.DefaultConstant;
+
+import java.util.function.LongConsumer;
 
 /**
- * 默认 相关常量
+ * 自定义 long Optional
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public class DefaultConstant {
+public final class LongOptional {
 
-    private DefaultConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    private final long value;
+
+    private LongOptional(long value) {
+        this.value = value;
     }
 
-    /**
-     * 默认数字：0
-     */
-    // TODO: 需要统一将代码中的数字 0 替换成该常量
-    public static final Integer DEFAULT_INT = 0;
+    public static LongOptional of(long value) {
+        return new LongOptional(value);
+    }
 
-    /**
-     * 默认值：nil
-     */
-    public static final String DEFAULT_STRING_VALUE = "nil";
-
-    /**
-     * 默认分页数
-     */
-    public static final Integer DEFAULT_PAGE_SIZE = 20;
-
-    /**
-     * 默认最大分页数
-     */
-    public static final Integer DEFAULT_MAX_PAGE_SIZE = 100;
+    public void ifPresent(LongConsumer consumer) {
+        if (value > DefaultConstant.DEFAULT_INT) {
+            consumer.accept(value);
+        }
+    }
 }

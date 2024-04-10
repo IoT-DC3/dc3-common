@@ -17,6 +17,7 @@
 package io.github.pnoker.common.entity.common;
 
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,7 +43,7 @@ public class Pages implements Serializable {
     private long current = 1;
 
     @Schema(description = "分页条数", defaultValue = "20")
-    private long size = 20;
+    private long size = DefaultConstant.DEFAULT_PAGE_SIZE;
 
     @Schema(description = "开始时间戳，毫秒")
     private long startTime;
