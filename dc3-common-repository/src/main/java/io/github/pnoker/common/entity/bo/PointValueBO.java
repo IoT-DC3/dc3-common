@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.bo;
 import lombok.*;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -69,4 +70,8 @@ public class PointValueBO implements Serializable {
      * 创建时间
      */
     private LocalDateTime createTime;
+    /**
+     * 创建时间
+     */
+    private Timestamp ts;
 }

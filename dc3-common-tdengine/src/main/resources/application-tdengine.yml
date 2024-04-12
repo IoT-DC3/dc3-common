@@ -1,15 +1,24 @@
 spring:
   datasource:
+    driver-class-name: com.taosdata.jdbc.TSDBDriver
+    druid:
+      initial-size: 5
+      max-active: 5
+      max-evictable-idle-time-millis: 900000
+      max-wait: 60000
+      min-evictable-idle-time-millis: 600000
+      min-idle: 5
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      validation-query: select server_status();
+      validation-query-timeout: 5000
     dynamic:
+      primary: master #设置默认的数据源或者数据源组
+      strict: false #严格匹配数据源，默认为false，true未匹配到数据源时会抛出异常，false使用默认数据源
       datasource:
         taos:
-          type: com.zaxxer.hikari.HikariDataSource
-          driver-class-name: com.taosdata.jdbc.TSDBDriver
-          url: jdbc:TAOS://localhost:6030/dc3?charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
-          username: root
           password: taosdata
-          hikari:
-            pool-name: dc3-hikaricp
-            max-lifetime: 1765000
-            maximum-pool-size: 64
-            minimum-idle: 4
+          url: jdbc:TAOS-RS://192.168.1.67:6041/dc3?charset=UTF-8&locale=en_US.UTF-8&timezone=UTC-8
+          username: root

@@ -16,10 +16,12 @@
 
 package io.github.pnoker.common.tdengine.entity.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -58,10 +60,13 @@ public class TDEnginePointValueDO implements Serializable {
     /**
      * 原始时间
      */
-    private LocalDateTime originTime;
+    private String originTime;
 
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
+    private Timestamp ts;
 }

@@ -16,19 +16,26 @@
 
 package io.github.pnoker.common.tdengine.repository;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
+import io.github.pnoker.common.entity.common.Pages;
 import io.github.pnoker.common.entity.query.PointValueQuery;
 import io.github.pnoker.common.repository.RepositoryService;
 import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
 import io.github.pnoker.common.tdengine.entity.builder.TDEnginePointValueBuilder;
+import io.github.pnoker.common.tdengine.entity.model.TDEnginePointValueDO;
+import io.github.pnoker.common.tdengine.mapper.TDEngineRepositoryMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author pnoker
@@ -41,37 +48,73 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
     @Resource
     private TDEnginePointValueBuilder tdEnginePointValueBuilder;
 
+    @Resource
+    private TDEngineRepositoryMapper tdEngineRepositoryMapper;
+
+    private final String stable = "device_point_data";
+
     @Override
     public String getRepositoryName() {
-        return StrategyConstant.Storage.INFLUXDB;
+        return StrategyConstant.Storage.TDENGINE;
     }
 
     @Override
     public void savePointValue(PointValueBO entityBO) {
+        if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
+            return;
+        }
+        String tableName = stable + entityBO.getDeviceId();
+        TDEnginePointValueDO tdEnginePointValueDO = tdEnginePointValueBuilder.buildMgDOByBO(entityBO);
+        tdEngineRepositoryMapper.savePointValue(tableName, tdEnginePointValueDO);
     }
 
     @Override
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
+        if (ObjectUtil.isEmpty(deviceId)) {
+            return;
+        }
+        String tableName = stable + deviceId;
+        List<TDEnginePointValueDO> tdEnginePointValueDOS = tdEnginePointValueBuilder.buildMgDOListByBOList(entityBOS);
+        tdEngineRepositoryMapper.saveBatchPointValue(tableName, tdEnginePointValueDOS);
     }
 
     @Override
     public List<String> selectHistoryPointValue(Long deviceId, Long pointId, int count) {
-        return null;
+        List<TDEnginePointValueDO> result = tdEngineRepositoryMapper.selectHistoryPointValue(deviceId, pointId, count);
+        return result.stream().map(e -> e.getValue()).collect(Collectors.toList());
     }
 
     @Override
     public List<PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds) {
-        return null;
+        if (CollUtil.isEmpty(pointIds)) {
+            return Collections.emptyList();
+        }
+        List<TDEnginePointValueDO> tdEnginePointValueDOS = tdEngineRepositoryMapper.selectLatestPointValue(deviceId, pointIds);
+        List<PointValueBO> pointValueBOS = tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOS);
+        return pointValueBOS;
     }
 
     @Override
     public Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery) {
-        return null;
+        if (ObjectUtil.isEmpty(entityQuery.getPage())) {
+            entityQuery.setPage(new Pages());
+        }
+        Page<PointValueBO> entityPageBO = new Page<>();
+        Pages pages = entityQuery.getPage();
+        long count = tdEngineRepositoryMapper.count(entityQuery);
+        pages.setCurrent((pages.getCurrent() - 1) * pages.getSize());
+        List<TDEnginePointValueDO> pointValueDOS = tdEngineRepositoryMapper.selectPagePointValue(entityQuery, pages);
+        for (TDEnginePointValueDO pointValueDO : pointValueDOS) {
+            pointValueDO.setCreateTime(pointValueDO.getTs().toLocalDateTime());
+        }
+        List<PointValueBO> pointValueBOS = tdEnginePointValueBuilder.buildBOListByDOList(pointValueDOS);
+        entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOS);
+        return entityPageBO;
     }
 
     @Override
     public void afterPropertiesSet() {
-        RepositoryStrategyFactory.put(StrategyConstant.Storage.INFLUXDB, this);
+        RepositoryStrategyFactory.put(StrategyConstant.Storage.TDENGINE, this);
     }
 
 }
