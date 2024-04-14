@@ -21,7 +21,6 @@ public class InfluxMapperBO {
     private BigDecimal rawValue;
 
 
-
     public InfluxMapperBO(Instant time, String deviceId, String pointId, String originTime, BigDecimal value, BigDecimal rawValue) {
         this.time = time;
         this.deviceId = deviceId;

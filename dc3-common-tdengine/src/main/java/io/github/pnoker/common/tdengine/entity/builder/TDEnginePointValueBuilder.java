@@ -20,7 +20,6 @@ import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.tdengine.entity.model.TDEnginePointValueDO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
@@ -40,8 +39,8 @@ public interface TDEnginePointValueBuilder {
      * @return EntityDO
      */
     @Mapping(source = "originTime", target = "originTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
-   // @Mapping(source = "createTime", target = "createTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Mapping(target = "ts" ,ignore = true)
+    // @Mapping(source = "createTime", target = "createTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Mapping(target = "ts", ignore = true)
     TDEnginePointValueDO buildMgDOByBO(PointValueBO entityBO);
 
     /**
@@ -59,7 +58,7 @@ public interface TDEnginePointValueBuilder {
      * @return EntityBO
      */
     @Mapping(source = "originTime", target = "originTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Mapping(target = "ts" ,ignore = true)
+    @Mapping(target = "ts", ignore = true)
     PointValueBO buildBOByMgDO(TDEnginePointValueDO entityDO);
 
     /**

@@ -33,7 +33,6 @@ import io.github.pnoker.common.influx.entity.model.InfluxMapperDO;
 import io.github.pnoker.common.influx.entity.model.InfluxPointValueDO;
 import io.github.pnoker.common.repository.RepositoryService;
 import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
-import io.github.pnoker.common.utils.FieldUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -42,7 +41,6 @@ import javax.annotation.Resource;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -96,7 +94,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
             Point point = Point.measurement("dc3")
                     .addTag("deviceId", influxPointValueDO.getDeviceId().toString())
                     .addTag("pointId", influxPointValueDO.getPointId().toString())
-                    .addTag("originTime",influxPointValueDO.getOriginTime().toString() )
+                    .addTag("originTime", influxPointValueDO.getOriginTime().toString())
                     .addField("value", Long.valueOf(influxPointValueDO.getValue()))
                     .addField("rawValue", Long.valueOf(influxPointValueDO.getRawValue()))
                     .time(Instant.now(), WritePrecision.MS);

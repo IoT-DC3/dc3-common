@@ -41,6 +41,7 @@ import java.util.List;
 public class RabbitMQChannelServiceImpl implements RabbitMQChannelService {
     @Resource
     private PrometheusService prometheusService;
+
     @Override
     public RabbitMQDataVo queryChan(String cluster) {
         try {

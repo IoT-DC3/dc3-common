@@ -32,7 +32,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -104,6 +103,7 @@ public class PrometheusService {
             throw new RequestException(e);
         }
     }
+
     private String getRangeString(String api, Map<String, String> params) {
         try {
             HttpUrl url = HttpUrl.parse(api);
@@ -120,7 +120,7 @@ public class PrometheusService {
             LocalDateTime fifteenMinutesAgo = now.minusMinutes(15);
             long time1 = fifteenMinutesAgo.toEpochSecond(ZoneOffset.UTC);
             long time2 = now.toEpochSecond(ZoneOffset.UTC);
-            String rangeUrl = builder.build()+"&start=" + time1 + "&end=" + time2 + "&step=15";
+            String rangeUrl = builder.build() + "&start=" + time1 + "&end=" + time2 + "&step=15";
             Request request = new Request.Builder()
                     .url(rangeUrl)
                     .get()
@@ -134,6 +134,7 @@ public class PrometheusService {
             throw new RequestException(e);
         }
     }
+
     public String UnTimeUnix(Double dtime) {
         // 将 UNIX 时间戳转换为 Instant 对象
         Instant instant = Instant.ofEpochSecond(Math.round(dtime));// 2024-03-18 08:04:00
