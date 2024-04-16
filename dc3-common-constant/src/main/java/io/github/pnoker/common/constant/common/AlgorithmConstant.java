@@ -41,12 +41,12 @@ public class AlgorithmConstant {
     /**
      * 加密算法 对称AES
      */
-    public static final String ALGORITHM_AES = "AES/GCM/NoPadding";
+    public static final String ALGORITHM_AES = "AES";
 
     /**
      * 加密算法 非对称RSA
      */
-    public static final String ALGORITHM_RSA = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
+    public static final String ALGORITHM_RSA = "RSA";
 
     /**
      * 加密算法 SHA256withRSA
