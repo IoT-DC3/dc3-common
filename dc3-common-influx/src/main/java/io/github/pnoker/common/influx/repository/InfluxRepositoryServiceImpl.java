@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.influx.repository;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.influxdb.client.InfluxDBClient;
@@ -39,14 +40,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -106,12 +106,55 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
 
     @Override
     public List<String> selectHistoryPointValue(Long deviceId, Long pointId, int count) {
-        return null;
+        QueryApi queryApi = influxDBClient.getQueryApi();
+        String flux = "from(bucket:\"dc3\")" +
+                "|> range(start: -30d)" + // Filter by last 30 day
+                "|> filter(fn: (r) => r._measurement == \"dc3\" and r.deviceId == \"" + deviceId + "\" and r.pointId == \"" + pointId + "\")" +
+                "|> sort(columns: [\"_time\"], desc: true)";
+        List<InfluxMapperDO> query = queryApi.query(flux, InfluxMapperDO.class);
+        List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
+        List<InfluxMapperBO> sortedList = influxMapperBOS.stream()
+                .sorted((a, b) -> b.getTime().compareTo(a.getTime())) // 倒序排序
+                .collect(Collectors.toList());
+        List<InfluxMapperBO> takenList = sortedList.subList(0, count);
+        List<String> valueList = takenList.stream()
+                .map(InfluxMapperBO::getValue) // 提取 value 属性
+                .map(Object::toString) // 转换为字符串
+                .collect(Collectors.toList());
+        return valueList;
     }
 
     @Override
     public List<PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds) {
-        return null;
+        if (CollUtil.isEmpty(pointIds)) {
+            return Collections.emptyList();
+        }
+        QueryApi queryApi = influxDBClient.getQueryApi();
+        String pointIdsStr = pointIds.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining("|"));
+        String flux = "from(bucket:\"dc3\")" +
+                "|> range(start: -30d)" + // Filter by last 1 day
+                "|> filter(fn: (r) => r._measurement == \"dc3\" and r.deviceId == \"" + deviceId + "\" and r.pointId =~ /" + pointIdsStr + "/)" +
+                "|> group(columns: [\"pointId\"])";
+
+     //   System.out.println(flux);
+        // 执行查询
+        List<InfluxMapperDO> query = queryApi.query(flux, InfluxMapperDO.class);
+        List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
+        Map<String, InfluxMapperBO> latestDataMap = new HashMap<>();
+      //  System.out.println("-------------------------------------------");
+        for (InfluxMapperBO bo : influxMapperBOS) {
+            String key = bo.getDeviceId() + "-" + bo.getPointId();
+            if (!latestDataMap.containsKey(key) || bo.getTime().compareTo(latestDataMap.get(key).getTime()) > 0) {
+                latestDataMap.put(key, bo);
+            }
+        }
+
+        List<InfluxMapperBO> latestDataList = new ArrayList<>(latestDataMap.values());
+        List<InfluxPointValueDO> influxPointValueDOS = convertMapperBoToValueDo(latestDataList);
+        List<PointValueBO> pointValueBOS = influxPointValueBuilder.buildBOListByDOList(influxPointValueDOS);
+        return pointValueBOS;
     }
 
     @Override
@@ -132,7 +175,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
             flux.append("and r.pointId ==\"" + entityQuery.getPointId() + "\"");
         }
         flux.append(")");
-        System.out.println(flux.toString());
+        //System.out.println(flux.toString());
         List<InfluxMapperDO> query = queryApi.query(flux.toString(), InfluxMapperDO.class);
         List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
         List<InfluxPointValueDO> influxPointValueDOS = convertMapperBoToValueDo(influxMapperBOS);
