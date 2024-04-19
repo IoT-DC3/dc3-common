@@ -42,6 +42,7 @@ import java.util.List;
 public class RabbitMQConsumerServiceImpl implements RabbitMQConsumerService {
     @Resource
     private PrometheusService prometheusService;
+
     @Override
     public RabbitMQDataVo queryCon(String cluster) {
         try {

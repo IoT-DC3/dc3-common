@@ -17,7 +17,6 @@
 package io.github.pnoker.common.prometheus.dashboard.rabbitmq.controller;
 
 
-
 import io.github.pnoker.common.constant.service.DataConstant;
 import io.github.pnoker.common.entity.R;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQDataVo;

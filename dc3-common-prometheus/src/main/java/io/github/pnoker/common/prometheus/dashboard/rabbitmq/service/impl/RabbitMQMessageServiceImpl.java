@@ -24,6 +24,7 @@ import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQD
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.service.RabbitMQMessageService;
 import io.github.pnoker.common.prometheus.service.PrometheusService;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;

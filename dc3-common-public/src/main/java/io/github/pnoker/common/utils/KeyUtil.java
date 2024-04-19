@@ -23,8 +23,8 @@ import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.entity.auth.Keys;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.*;
@@ -60,7 +60,7 @@ public class KeyUtil {
      */
     public static Keys.Aes genAesKey() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(AlgorithmConstant.ALGORITHM_AES);
-        keyGenerator.init(128);
+        keyGenerator.init(256);
         SecretKey secretKey = keyGenerator.generateKey();
         return new Keys.Aes(DecodeUtil.byteToString(DecodeUtil.encode(secretKey.getEncoded())));
     }
@@ -150,7 +150,7 @@ public class KeyUtil {
         KeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(AlgorithmConstant.ALGORITHM_RSA).generatePublic(keySpec);
         //RSA加密
-        Cipher cipher = Cipher.getInstance(AlgorithmConstant.ALGORITHM_RSA);
+        Cipher cipher = Cipher.getInstance(AlgorithmConstant.ALGORITHM_AES);
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
         return DecodeUtil.byteToString(DecodeUtil.encode(cipher.doFinal(DecodeUtil.stringToByte(content))));
     }
@@ -191,12 +191,13 @@ public class KeyUtil {
      * @return Token String
      */
     public static String generateToken(String userName, String salt, Long tenantId) {
+        SecretKey key = io.jsonwebtoken.security.Keys.hmacShaKeyFor(DecodeUtil.stringToByte(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + salt));
         JwtBuilder builder = Jwts.builder()
-                .setIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .setSubject(userName)
-                .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, DecodeUtil.stringToByte(salt))
-                .setExpiration(TimeUtil.expireTime(TimeoutConstant.TOKEN_CACHE_TIMEOUT, Calendar.HOUR));
+                .issuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + tenantId)
+                .subject(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + userName)
+                .issuedAt(new Date())
+                .signWith(key, Jwts.SIG.HS256)
+                .expiration(TimeUtil.expireTime(TimeoutConstant.TOKEN_CACHE_TIMEOUT, Calendar.HOUR));
         return builder.compact();
     }
 
@@ -210,12 +211,13 @@ public class KeyUtil {
      * @return Claims
      */
     public static Claims parserToken(String userName, String salt, String token, Long tenantId) {
-        return Jwts.parser()
-                .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .requireSubject(userName)
-                .setSigningKey(DecodeUtil.stringToByte(salt))
-                .parseClaimsJws(token)
-                .getBody();
+        SecretKey key = io.jsonwebtoken.security.Keys.hmacShaKeyFor(DecodeUtil.stringToByte(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + salt));
+        JwtParser parser = Jwts.parser()
+                .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + tenantId)
+                .requireSubject(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + userName)
+                .verifyWith(key)
+                .build();
+        return parser.parseSignedClaims(token).getPayload();
     }
 
 }
