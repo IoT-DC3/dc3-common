@@ -96,7 +96,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
             Point point = Point.measurement("dc3")
                     .addTag("deviceId", influxPointValueDO.getDeviceId().toString())
                     .addTag("pointId", influxPointValueDO.getPointId().toString())
-                    .addTag("originTime",influxPointValueDO.getOriginTime().toString() )
+                    .addTag("originTime", influxPointValueDO.getOriginTime().toString())
                     .addField("value", Long.valueOf(influxPointValueDO.getValue()))
                     .addField("rawValue", Long.valueOf(influxPointValueDO.getRawValue()))
                     .time(Instant.now(), WritePrecision.MS);
@@ -138,12 +138,12 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
                 "|> filter(fn: (r) => r._measurement == \"dc3\" and r.deviceId == \"" + deviceId + "\" and r.pointId =~ /" + pointIdsStr + "/)" +
                 "|> group(columns: [\"pointId\"])";
 
-     //   System.out.println(flux);
+        //   System.out.println(flux);
         // 执行查询
         List<InfluxMapperDO> query = queryApi.query(flux, InfluxMapperDO.class);
         List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
         Map<String, InfluxMapperBO> latestDataMap = new HashMap<>();
-      //  System.out.println("-------------------------------------------");
+        //  System.out.println("-------------------------------------------");
         for (InfluxMapperBO bo : influxMapperBOS) {
             String key = bo.getDeviceId() + "-" + bo.getPointId();
             if (!latestDataMap.containsKey(key) || bo.getTime().compareTo(latestDataMap.get(key).getTime()) > 0) {
