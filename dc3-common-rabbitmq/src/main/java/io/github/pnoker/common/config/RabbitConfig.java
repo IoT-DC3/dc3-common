@@ -59,9 +59,6 @@ public class RabbitConfig {
     public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-//        factory.setBatchSize(32);
-//        factory.setBatchListener(true);
-//        factory.setConsumerBatchEnabled(true);
         factory.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;

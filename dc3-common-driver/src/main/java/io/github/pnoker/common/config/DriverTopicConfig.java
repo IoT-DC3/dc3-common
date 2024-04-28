@@ -64,7 +64,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒：30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_REGISTER_DOWN_PREFIX + driverProperty.getClient(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_REGISTER_DOWN_PREFIX + driverProperty.getClient(), false, false, false, arguments);
     }
 
     @Bean
@@ -82,7 +82,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒：30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, false, arguments);
     }
 
     @Bean
@@ -96,16 +96,14 @@ public class DriverTopicConfig {
     }
 
     @Bean
-    @Lazy
     Queue driverCommandQueue() {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒：30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX + driverProperty.getService(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
     }
 
     @Bean
-    @Lazy
     Binding driverCommandBinding(Queue driverCommandQueue) {
         Binding binding = BindingBuilder
                 .bind(driverCommandQueue)
@@ -120,7 +118,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒：30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX + driverProperty.getService(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
     }
 
     @Bean
