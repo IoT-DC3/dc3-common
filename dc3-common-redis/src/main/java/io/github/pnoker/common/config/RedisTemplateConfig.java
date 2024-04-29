@@ -49,10 +49,9 @@ public class RedisTemplateConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         // 配置 ObjectMapper
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
         JsonMapper jsonMapper = JsonUtil.getJsonMapper();
         jsonMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
-        serializer.setObjectMapper(jsonMapper);
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(jsonMapper, Object.class);
 
         // 配置 Key & Value 序列化
         RedisTemplate<String, Object> template = new RedisTemplate<>();

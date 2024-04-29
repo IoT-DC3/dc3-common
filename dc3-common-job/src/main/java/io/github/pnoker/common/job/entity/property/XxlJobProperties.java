@@ -14,33 +14,28 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.property;
+package io.github.pnoker.common.job.entity.property;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
+/**
+ * @author pnoker
+ * @since 2022.1.0
+ */
 @Getter
 @Setter
 @Validated
-@ConfigurationProperties(prefix = "influx")
-public class InfluxProperties {
-
-    @NotNull
-    private String url;
-
-    @NotNull
-    private String organization;
-
-    @NotNull
-    private String bucket;
-
-    private String token;
-
-    private String username;
-
-    private String password;
-
+@ConfigurationProperties(prefix = "xxl.job")
+public class XxlJobProperties {
+    private String adminAddresses;
+    private String accessToken;
+    private String appName;
+    private String address;
+    private String ip;
+    private int executorPort;
+    private String logPath;
+    private int logRetentionDays;
 }

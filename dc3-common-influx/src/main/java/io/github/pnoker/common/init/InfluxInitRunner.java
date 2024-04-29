@@ -16,8 +16,10 @@
 
 package io.github.pnoker.common.init;
 
+import io.github.pnoker.common.influx.entity.property.InfluxProperties;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +33,7 @@ import org.springframework.stereotype.Component;
 @ComponentScan(basePackages = {
         "io.github.pnoker.common.influx.*"
 })
+@EnableConfigurationProperties(InfluxProperties.class)
 public class InfluxInitRunner implements ApplicationRunner {
 
     @Override

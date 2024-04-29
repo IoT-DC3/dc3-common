@@ -17,8 +17,9 @@
 package io.github.pnoker.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import io.github.pnoker.common.entity.property.XxlJobProperties;
+import io.github.pnoker.common.job.entity.property.XxlJobProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

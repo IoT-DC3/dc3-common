@@ -16,10 +16,11 @@
 
 package io.github.pnoker.common.init;
 
-import io.github.pnoker.common.entity.property.XxlJobProperties;
+import io.github.pnoker.common.job.entity.property.XxlJobProperties;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,6 +30,9 @@ import org.springframework.stereotype.Component;
  * @since 2022.1.0
  */
 @Component
+@ComponentScan(basePackages = {
+        "io.github.pnoker.common.job.*"
+})
 @EnableConfigurationProperties({XxlJobProperties.class})
 public class XxlJobInitRunner implements ApplicationRunner {
 

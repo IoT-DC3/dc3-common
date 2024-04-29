@@ -20,7 +20,7 @@ import io.github.pnoker.common.utils.JsonUtil;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,7 @@ import java.time.Duration;
  */
 @Configuration
 @ConfigurationProperties(prefix = "spring.cache.redis")
-public class RedisCacheConfig extends CachingConfigurerSupport {
+public class RedisCacheConfig implements CachingConfigurer {
 
     @Resource
     private RedisConnectionFactory factory;
@@ -91,8 +91,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     @Override
     public CacheManager cacheManager() {
         // 配置 ObjectMapper
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        serializer.setObjectMapper(JsonUtil.getJsonMapper());
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(JsonUtil.getJsonMapper(),Object.class);
 
         // 配置 Key & Value 序列化
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()

@@ -22,7 +22,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -63,7 +62,8 @@ public class FileUtil {
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-        return new CommonsMultipartFile(item);
+        // TODO 2024.04.29 修复springboot3兼容性
+        return null;
     }
 
 }
