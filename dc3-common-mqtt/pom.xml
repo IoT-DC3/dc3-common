@@ -81,12 +81,6 @@
             <artifactId>spring-integration-mqtt</artifactId>
         </dependency>
 
-        <!-- Hibernate Validator -->
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-
         <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>

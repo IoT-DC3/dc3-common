@@ -39,7 +39,7 @@ public final class LongOptional {
     }
 
     public void ifPresent(LongConsumer consumer) {
-        if (value > DefaultConstant.DEFAULT_INT) {
+        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
             consumer.accept(value);
         }
     }

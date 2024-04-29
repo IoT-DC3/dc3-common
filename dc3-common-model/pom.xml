@@ -75,12 +75,6 @@
             <artifactId>mybatis-plus-extension</artifactId>
         </dependency>
 
-        <!-- Hibernate Validator -->
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-
         <!-- Swagger Annotations -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
