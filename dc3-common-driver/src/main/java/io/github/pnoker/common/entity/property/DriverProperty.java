@@ -93,12 +93,12 @@ public class DriverProperty {
 
     /*以下定义为内部参数*/
     /**
-     * 驱动节点编号，8位随机数
+     * 驱动节点编号, 8位随机数
      */
     private String node;
 
     /**
-     * 驱动服务名称，租户/应用名称
+     * 驱动服务名称, 租户/应用名称
      */
     private String service;
 
@@ -113,7 +113,7 @@ public class DriverProperty {
     private Integer port;
 
     /**
-     * 驱动客户端，租户/应用名称_驱动节点编号
+     * 驱动客户端, 租户/应用名称_驱动节点编号
      */
     private String client;
 }

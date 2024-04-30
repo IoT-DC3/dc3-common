@@ -45,7 +45,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 事件相关，平台端可负载
+     * 事件相关, 平台端可负载
      *
      * @return TopicExchange
      */
@@ -55,7 +55,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 元数据相关，平台端广播，驱动端订阅
+     * 元数据相关, 平台端广播, 驱动端订阅
      *
      * @return FanoutExchange
      */
@@ -65,7 +65,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 指令相关，驱动端可负载
+     * 指令相关, 驱动端可负载
      *
      * @return TopicExchange
      */
@@ -75,7 +75,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 数据相关，平台端可负载
+     * 数据相关, 平台端可负载
      *
      * @return TopicExchange
      */
@@ -85,7 +85,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * MQTT 相关，平台端可负载
+     * MQTT 相关, 平台端可负载
      *
      * @return TopicExchange
      */

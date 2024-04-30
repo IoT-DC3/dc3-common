@@ -20,6 +20,7 @@ import io.github.pnoker.common.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -35,6 +36,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverEventDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -69,6 +72,7 @@ public class DriverEventDTO implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DriverStatus implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**

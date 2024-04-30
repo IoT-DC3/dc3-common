@@ -45,8 +45,8 @@ public class ConvertUtil {
 
     /**
      * 位号数据处理
-     * 当出现精度问题，向上调整
-     * 例如：byte 类型的数据经过 base 和 multiple 之后超出范围，将其调整为float类型
+     * 当出现精度问题, 向上调整
+     * 例如: byte 类型的数据经过 base 和 multiple 之后超出范围, 将其调整为float类型
      *
      * @param point    Point
      * @param rawValue Raw Value
@@ -203,7 +203,7 @@ public class ConvertUtil {
     }
 
     /**
-     * 线性函数：y = ax + b
+     * 线性函数: y = ax + b
      *
      * @param x A
      * @param b B

@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.enums.DriverCommandTypeEnum;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -34,6 +35,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverCommandDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

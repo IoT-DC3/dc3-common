@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.common;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ import java.util.List;
 @Getter
 @Setter
 public class TreeNode implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private int id;

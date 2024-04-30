@@ -21,10 +21,9 @@ import io.github.pnoker.common.driver.service.DriverMetadataTempService;
 import io.github.pnoker.common.entity.dto.*;
 import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * 驱动元数据相关接口实现

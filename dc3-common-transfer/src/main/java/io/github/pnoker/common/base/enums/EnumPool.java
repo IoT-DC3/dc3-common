@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 枚举池，所有Dict的实现类都会在这里注册
+ * 枚举池, 所有Dict的实现类都会在这里注册
  *
  * @author pnoker
  * @since 2022.1.0

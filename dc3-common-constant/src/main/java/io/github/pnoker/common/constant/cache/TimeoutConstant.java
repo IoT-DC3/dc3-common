@@ -31,15 +31,15 @@ public class TimeoutConstant {
     }
 
     /**
-     * salt 在 redis 中的失效时间，分钟
+     * salt 在 redis 中的失效时间, 分钟
      */
     public static final int SALT_CACHE_TIMEOUT = 5;
     /**
-     * user 登陆限制失效时间，分钟
+     * user 登陆限制失效时间, 分钟
      */
     public static final int USER_LIMIT_TIMEOUT = 5;
     /**
-     * token 在 redis 中的失效时间，小时
+     * token 在 redis 中的失效时间, 小时
      */
     public static final int TOKEN_CACHE_TIMEOUT = 12;
 }

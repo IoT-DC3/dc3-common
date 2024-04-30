@@ -18,12 +18,11 @@ package io.github.pnoker.common;
 
 import io.github.pnoker.common.annotation.Transform;
 import io.github.pnoker.common.util.TransformUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.convert.support.GenericConversionService;
-
-import javax.annotation.Resource;
 
 /**
  * 转换器AOP
@@ -41,10 +40,10 @@ public class TransformAspect {
     @AfterReturning(pointcut = "@annotation(transformAnnotation)", returning = "returnValue")
     public void doAfter(Object returnValue, Transform transformAnnotation) throws IllegalAccessException {
         long l = System.currentTimeMillis();
-        // 获取容器中的转换器进行返回值解包，注意此处返回结果可能是Bean也可能是集合
+        // 获取容器中的转换器进行返回值解包, 注意此处返回结果可能是Bean也可能是集合
         Object result = genericConversionService.convert(returnValue, Object.class);
         TransformUtil.transform(result);
         long time = System.currentTimeMillis() - l;
-        log.debug("转换耗时：{}ms", time);
+        log.debug("转换耗时: {}ms", time);
     }
 }

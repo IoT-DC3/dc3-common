@@ -19,6 +19,7 @@ package io.github.pnoker.common.config;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.entity.property.DriverProperty;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -28,7 +29,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,7 +61,7 @@ public class DriverTopicConfig {
     @Bean
     Queue driverRegisterQueue() {
         Map<String, Object> arguments = new HashMap<>();
-        // 30秒：30 * 1000 = 30000L
+        // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
         return new Queue(RabbitConstant.QUEUE_REGISTER_DOWN_PREFIX + driverProperty.getClient(), false, false, false, arguments);
     }
@@ -79,7 +79,7 @@ public class DriverTopicConfig {
     @Bean
     Queue driverMetadataQueue() {
         Map<String, Object> arguments = new HashMap<>();
-        // 30秒：30 * 1000 = 30000L
+        // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
         return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, false, arguments);
     }
@@ -97,7 +97,7 @@ public class DriverTopicConfig {
     @Bean
     Queue driverCommandQueue() {
         Map<String, Object> arguments = new HashMap<>();
-        // 30秒：30 * 1000 = 30000L
+        // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
         return new Queue(RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
     }
@@ -115,7 +115,7 @@ public class DriverTopicConfig {
     @Bean
     Queue deviceCommandQueue() {
         Map<String, Object> arguments = new HashMap<>();
-        // 30秒：30 * 1000 = 30000L
+        // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
         return new Queue(RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
     }

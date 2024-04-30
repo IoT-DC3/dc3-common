@@ -49,7 +49,7 @@ public class DriverContext {
     private DriverStatusEnum driverStatus = DriverStatusEnum.OFFLINE;
 
     /**
-     * 驱动 元数据，当且仅当驱动注册成功之后由 Manager 返回
+     * 驱动 元数据, 当且仅当驱动注册成功之后由 Manager 返回
      */
     private DriverMetadataDTO driverMetadataDTO = new DriverMetadataDTO();
 

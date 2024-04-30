@@ -40,7 +40,7 @@ public class OpenAPIUtil {
                 .title(title)
                 .version("V3.0")
                 .contact(new Contact().name("IoT DC3").url("https://gitee.com/pnoker/iot-dc3"))
-                .description("IoT DC3 是一个基于 Spring Cloud 的 100% 完全开源的、分布式的物联网(IoT)平台，用于快速开发物联网项目和管理物联设备，是一整套物联系统解决方案。")
+                .description("IoT DC3 是一个基于 Spring Cloud 的 100% 完全开源的、分布式的物联网(IoT)平台, 用于快速开发物联网项目和管理物联设备, 是一整套物联系统解决方案。")
                 .termsOfService("https://doc.dc3.site"));
     }
 }

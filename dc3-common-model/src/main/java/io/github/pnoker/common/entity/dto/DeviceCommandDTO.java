@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.dto;
 import io.github.pnoker.common.enums.DeviceCommandTypeEnum;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -34,6 +35,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceCommandDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -68,6 +71,7 @@ public class DeviceCommandDTO implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DeviceRead implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**
@@ -104,6 +108,7 @@ public class DeviceCommandDTO implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DeviceWrite implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**

@@ -23,10 +23,10 @@ import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.redis.entity.builder.RedisPointValueBuilder;
 import io.github.pnoker.common.redis.entity.model.RedisPointValueDO;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

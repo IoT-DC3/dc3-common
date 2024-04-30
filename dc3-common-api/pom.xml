@@ -21,12 +21,12 @@
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-common</artifactId>
-        <version>2024.1.0</version>
+        <version>2024.2.0</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common-api</artifactId>
-    <version>2024.1.0</version>
+    <version>2024.2.0</version>
     <packaging>jar</packaging>
 
     <description>IOT DC3 平台 Api 通用 gRpc Proto。</description>
@@ -55,6 +55,15 @@
     </scm>
 
     <dependencies>
+
+        <!--
+        Javax Annotation Api
+        注意: 需要替换为jakarta.annotation-api, 但grpc官方暂时还没有响应但解决方案, 只能暂时添加这个兼容包
+        -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
 
         <!-- gRpc -->
         <dependency>

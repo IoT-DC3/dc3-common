@@ -65,7 +65,7 @@ public class RequestConstant {
 
         /**
          * 自定义 用户 请求头
-         * 用于向其他服务传递用户信息，其中包括：租户ID、用户ID、用户昵称、用户名称
+         * 用于向其他服务传递用户信息, 其中包括: 租户ID、用户ID、用户昵称、用户名称
          */
         public static final String X_AUTH_USER = "X-Auth-User";
 

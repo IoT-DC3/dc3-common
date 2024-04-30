@@ -20,6 +20,7 @@ import io.github.pnoker.common.enums.DeviceEventTypeEnum;
 import io.github.pnoker.common.enums.DeviceStatusEnum;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +37,8 @@ import java.util.concurrent.TimeUnit;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceEventDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -71,6 +74,7 @@ public class DeviceEventDTO implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DeviceStatus implements Serializable {
+        @Serial
         private static final long serialVersionUID = 1L;
 
         /**

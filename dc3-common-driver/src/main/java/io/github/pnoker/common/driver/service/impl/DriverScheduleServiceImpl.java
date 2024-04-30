@@ -25,11 +25,10 @@ import io.github.pnoker.common.driver.service.DriverScheduleService;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.entity.property.ScheduleProperty;
 import io.github.pnoker.common.quartz.QuartzService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author pnoker

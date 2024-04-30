@@ -103,7 +103,7 @@ public class DecodeUtil {
     }
 
     /**
-     * 必须配合encode使用，用于encode编码之后解码
+     * 必须配合encode使用, 用于encode编码之后解码
      *
      * @param bytes Byte Array
      * @return Byte Array
@@ -113,7 +113,7 @@ public class DecodeUtil {
     }
 
     /**
-     * 必须配合encode使用，用于encode编码之后解码
+     * 必须配合encode使用, 用于encode编码之后解码
      *
      * @param content 字符串
      * @return Byte Array

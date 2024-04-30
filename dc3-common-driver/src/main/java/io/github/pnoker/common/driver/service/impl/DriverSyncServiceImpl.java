@@ -30,11 +30,11 @@ import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 

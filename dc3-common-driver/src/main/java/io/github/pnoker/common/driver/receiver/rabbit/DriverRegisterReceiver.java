@@ -21,13 +21,12 @@ import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * 驱动注册消息接收

@@ -22,13 +22,12 @@ import io.github.pnoker.common.entity.R;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQDataVo;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.service.RabbitMQConnectionService;
 import io.github.pnoker.common.prometheus.service.PrometheusService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * RabbitMQ连接 Controller

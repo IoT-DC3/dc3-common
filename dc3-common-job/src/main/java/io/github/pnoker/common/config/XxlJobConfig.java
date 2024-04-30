@@ -18,12 +18,10 @@ package io.github.pnoker.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import io.github.pnoker.common.job.entity.property.XxlJobProperties;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.Resource;
 
 /**
  * XxlJob配置

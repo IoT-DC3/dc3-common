@@ -23,9 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQDataVo;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.service.RabbitMQMessageService;
 import io.github.pnoker.common.prometheus.service.PrometheusService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 

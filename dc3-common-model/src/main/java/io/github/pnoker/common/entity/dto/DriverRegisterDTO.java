@@ -18,6 +18,7 @@ package io.github.pnoker.common.entity.dto;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -31,6 +32,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverRegisterDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String tenant;

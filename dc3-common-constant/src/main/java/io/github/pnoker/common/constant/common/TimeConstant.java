@@ -31,12 +31,12 @@ public class TimeConstant {
     }
 
     /**
-     * 时区，默认为 Asia/Shanghai
+     * 时区, 默认为 Asia/Shanghai
      */
     public static final String DEFAULT_TIMEZONE = "Asia/Shanghai";
 
     /**
-     * 时区ID，默认为 Asia/Shanghai
+     * 时区ID, 默认为 Asia/Shanghai
      */
     public static final ZoneId DEFAULT_ZONEID = ZoneId.of(DEFAULT_TIMEZONE);
 

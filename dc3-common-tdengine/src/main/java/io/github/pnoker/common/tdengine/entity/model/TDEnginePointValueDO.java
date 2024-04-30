@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -33,6 +34,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class TDEnginePointValueDO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String id;

@@ -18,6 +18,7 @@ package io.github.pnoker.common.prometheus.service;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.exception.RequestException;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -26,7 +27,6 @@ import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -138,7 +138,7 @@ public class PrometheusService {
     public String UnTimeUnix(Double dtime) {
         // 将 UNIX 时间戳转换为 Instant 对象
         Instant instant = Instant.ofEpochSecond(Math.round(dtime));// 2024-03-18 08:04:00
-        // 将 Instant 对象转换为 LocalDateTime 对象，使用默认时区
+        // 将 Instant 对象转换为 LocalDateTime 对象, 使用默认时区
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         // 定义日期时间格式
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

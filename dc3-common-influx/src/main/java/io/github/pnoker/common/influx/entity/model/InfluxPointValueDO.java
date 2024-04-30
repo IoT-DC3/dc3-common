@@ -19,6 +19,7 @@ package io.github.pnoker.common.influx.entity.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -31,6 +32,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class InfluxPointValueDO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String id;

@@ -16,9 +16,9 @@
 
 package io.github.pnoker.common.component;
 
+import cn.hutool.core.util.ReflectUtil;
 import io.github.pnoker.common.annotation.Transform;
 import lombok.Data;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.core.ResolvableType;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.util.Assert;
@@ -28,7 +28,7 @@ import java.util.*;
 
 /**
  * 标记为@Transform的类的封装
- * 缓存相关信息，提高性能
+ * 缓存相关信息, 提高性能
  *
  * @author pnoker
  * @since 2022.1.0
@@ -48,13 +48,13 @@ public class TransformClass {
 
     public TransformClass(Class<?> clazz) {
         this.clazz = clazz;
-        Field[] allFields = FieldUtils.getAllFields(clazz);
+        Field[] allFields = ReflectUtil.getFields(clazz);
         for (Field field : allFields) {
             if (field.getType() == String.class && AnnotatedElementUtils.isAnnotated(field, Transform.class)) {
-                // 需要转换的字段，字段上的注解链上需要有@Transform，且字段类型必须为String
+                // 需要转换的字段, 字段上的注解链上需要有@Transform, 且字段类型必须为String
                 transformFields.add(new TransformField<>(field));
             } else if (field.getType() != String.class && field.isAnnotationPresent(Transform.class)) {
-                // 需要嵌套转换的字段，类型不为String，且字段上直接标注了@Transform
+                // 需要嵌套转换的字段, 类型不为String, 且字段上直接标注了@Transform
                 nestTransformFields.put(field, getClassFromField(field));
             }
         }
@@ -101,7 +101,7 @@ public class TransformClass {
     private Class<?> getClassFromField(Field field) {
         Class<?> fieldType = field.getType();
         if (Collection.class.isAssignableFrom(fieldType)) {
-            // 集合类型，获取泛型
+            // 集合类型, 获取泛型
             Class<?> genericClass = ResolvableType.forField(field).getGeneric(0).resolve();
             Assert.notNull(genericClass, "属性" + field.getName() + "的List上的泛型不能为空");
             return genericClass;

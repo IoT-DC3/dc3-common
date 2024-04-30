@@ -16,7 +16,7 @@ spring:
       validation-query-timeout: 5000
     dynamic:
       primary: master #设置默认的数据源或者数据源组
-      strict: false #严格匹配数据源，默认为false，true未匹配到数据源时会抛出异常，false使用默认数据源
+      strict: false #严格匹配数据源, 默认为false, true未匹配到数据源时会抛出异常, false使用默认数据源
       datasource:
         taos:
           password: taosdata

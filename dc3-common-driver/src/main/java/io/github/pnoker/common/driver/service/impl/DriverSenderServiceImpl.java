@@ -26,11 +26,11 @@ import io.github.pnoker.common.entity.property.DriverProperty;
 import io.github.pnoker.common.enums.DeviceEventTypeEnum;
 import io.github.pnoker.common.enums.DeviceStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -76,24 +76,18 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void deviceStatusSender(Long deviceId, DeviceStatusEnum status) {
-        DeviceEventDTO.DeviceStatus deviceStatus = new DeviceEventDTO.DeviceStatus(deviceId, status, 15, TimeUnit.MINUTES);
-        DeviceEventDTO deviceEventDTO = new DeviceEventDTO(DeviceEventTypeEnum.HEARTBEAT, JsonUtil.toJsonString(deviceStatus));
-        log.debug("上报设备事件: {}, 事件内容: {}", deviceEventDTO.getType().getCode(), JsonUtil.toJsonString(deviceEventDTO));
-        deviceEventSender(deviceEventDTO);
+        sendDeviceStatus(deviceId, status, 15, TimeUnit.MINUTES);
     }
 
     @Override
     public void deviceStatusSender(Long deviceId, DeviceStatusEnum status, int timeOut, TimeUnit timeUnit) {
-        DeviceEventDTO.DeviceStatus deviceStatus = new DeviceEventDTO.DeviceStatus(deviceId, status, timeOut, timeUnit);
-        DeviceEventDTO deviceEventDTO = new DeviceEventDTO(DeviceEventTypeEnum.HEARTBEAT, JsonUtil.toJsonString(deviceStatus));
-        log.debug("上报设备事件: {}, 事件内容: {}", deviceEventDTO.getType().getCode(), JsonUtil.toJsonString(deviceEventDTO));
-        deviceEventSender(deviceEventDTO);
+        sendDeviceStatus(deviceId, status, timeOut, timeUnit);
     }
 
     @Override
     public void pointValueSender(PointValueDTO entityDTO) {
         if (ObjectUtil.isNotNull(entityDTO)) {
-            log.debug("发送位号数据: {}", JsonUtil.toJsonString(entityDTO));
+            log.debug("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_VALUE,
                     RabbitConstant.ROUTING_POINT_VALUE_PREFIX + driverProperty.getService(),
@@ -107,6 +101,13 @@ public class DriverSenderServiceImpl implements DriverSenderService {
         if (ObjectUtil.isNotNull(entityDTOS)) {
             entityDTOS.forEach(this::pointValueSender);
         }
+    }
+
+    private void sendDeviceStatus(Long deviceId, DeviceStatusEnum status, int timeOut, TimeUnit timeUnit) {
+        DeviceEventDTO.DeviceStatus deviceStatus = new DeviceEventDTO.DeviceStatus(deviceId, status, timeOut, timeUnit);
+        DeviceEventDTO deviceEventDTO = new DeviceEventDTO(DeviceEventTypeEnum.HEARTBEAT, JsonUtil.toJsonString(deviceStatus));
+        log.debug("Report device event: {}, event content: {}", deviceEventDTO.getType().getCode(), JsonUtil.toJsonString(deviceEventDTO));
+        deviceEventSender(deviceEventDTO);
     }
 
 }

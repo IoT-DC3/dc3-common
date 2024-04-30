@@ -20,13 +20,12 @@ import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
 import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.property.DriverProperty;
+import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * Driver Initial
@@ -56,7 +55,7 @@ public class DriverInitRunner implements ApplicationRunner {
         // 执行驱动模块的自定义初始化函数
         driverCustomService.initial();
 
-        // 初始化驱动任务，包括驱动状态、读和自定义任务
+        // 初始化驱动任务, 包括驱动状态、读和自定义任务
         driverScheduleService.initial();
     }
 }

@@ -35,7 +35,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 
 
     /**
-     * 获取示例，如果找不到会报错
+     * 获取示例, 如果找不到会报错
      */
     public static <T> T getBean(Class<T> clazz) {
         return context.getBean(clazz);

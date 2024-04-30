@@ -18,6 +18,7 @@ package io.github.pnoker.common.entity.bo;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -34,6 +35,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PointValueBO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

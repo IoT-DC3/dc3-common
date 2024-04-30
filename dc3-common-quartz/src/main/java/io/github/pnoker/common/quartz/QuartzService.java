@@ -16,11 +16,10 @@
 
 package io.github.pnoker.common.quartz;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * Scheduler 工具类
@@ -88,7 +87,7 @@ public class QuartzService {
     /**
      * 关闭调度服务
      * <p>
-     * 直接关闭，不等待未执行完的任务
+     * 直接关闭, 不等待未执行完的任务
      *
      * @throws SchedulerException SchedulerException
      */

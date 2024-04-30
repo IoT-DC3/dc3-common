@@ -18,13 +18,12 @@ package io.github.pnoker.common.init;
 
 import io.github.pnoker.common.entity.property.MqttProperties;
 import io.github.pnoker.common.mqtt.service.MqttScheduleService;
+import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * Mqtt Initial

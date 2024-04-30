@@ -22,7 +22,7 @@ import java.lang.annotation.*;
 
 /**
  * 转换注解
- * 最基本的注解，可以被其他自定义注解衍生
+ * 最基本的注解, 可以被其他自定义注解衍生
  *
  * @author pnoker
  * @since 2022.1.0
@@ -40,7 +40,7 @@ public @interface Transform {
     /**
      * 来源字段
      * <p>
-     * 默认自动推断（要求转换后字段名必须以Name结尾，推断规则：如注解标注的字段是userName，自动推断结果为“user”，“userId”或“userCode”）
+     * 默认自动推断（要求转换后字段名必须以Name结尾, 推断规则: 如注解标注的字段是userName, 自动推断结果为“user”, “userId”或“userCode”）
      */
     String from() default "";
 }

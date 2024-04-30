@@ -19,6 +19,7 @@ package io.github.pnoker.common.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -29,6 +30,8 @@ import java.util.Set;
 @Getter
 @Setter
 public class AuthUser implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

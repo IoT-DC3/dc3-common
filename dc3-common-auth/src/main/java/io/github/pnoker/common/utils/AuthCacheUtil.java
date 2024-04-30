@@ -42,7 +42,7 @@ public class AuthCacheUtil {
     /**
      * 获取Redis User key
      *
-     * @param suffix   类型，SuffixConstant
+     * @param suffix   类型, SuffixConstant
      * @param tenantId 租户id
      * @param userName 用户名称
      * @return key

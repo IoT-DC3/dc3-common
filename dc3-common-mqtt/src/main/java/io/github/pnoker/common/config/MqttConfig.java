@@ -20,6 +20,7 @@ import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.entity.property.MqttProperties;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.MqttUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,6 @@ import org.springframework.integration.mqtt.support.DefaultPahoMessageConverter;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 
 

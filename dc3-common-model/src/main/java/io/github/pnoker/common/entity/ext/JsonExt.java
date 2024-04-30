@@ -18,6 +18,7 @@ package io.github.pnoker.common.entity.ext;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -32,20 +33,22 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JsonExt implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * 类型，用于解析Json字符串
+     * 类型, 用于解析Json字符串
      */
     private String type;
 
     /**
-     * 内容，Json字符串
+     * 内容, Json字符串
      */
     private String content;
 
     /**
-     * 版本，用于乐观锁
+     * 版本, 用于乐观锁
      */
     @Builder.Default
     private Long version = 1L;

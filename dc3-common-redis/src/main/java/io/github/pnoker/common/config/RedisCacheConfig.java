@@ -17,6 +17,7 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.CacheManager;
@@ -31,7 +32,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import javax.annotation.Resource;
 import java.time.Duration;
 
 /**
@@ -83,7 +83,7 @@ public class RedisCacheConfig implements CachingConfigurer {
     }
 
     /**
-     * 自定义 RedisCacheManager 类，主要是设置序列化，解决乱码问题
+     * 自定义 RedisCacheManager 类, 主要是设置序列化, 解决乱码问题
      *
      * @return CacheManager
      */
@@ -91,7 +91,7 @@ public class RedisCacheConfig implements CachingConfigurer {
     @Override
     public CacheManager cacheManager() {
         // 配置 ObjectMapper
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(JsonUtil.getJsonMapper(),Object.class);
+        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(JsonUtil.getJsonMapper(), Object.class);
 
         // 配置 Key & Value 序列化
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()

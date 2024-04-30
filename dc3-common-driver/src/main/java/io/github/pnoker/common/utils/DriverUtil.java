@@ -277,7 +277,7 @@ public class DriverUtil {
     }
 
     /**
-     * 获取基本类型 Class Name，默认：java.lang.String
+     * 获取基本类型 Class Name, 默认: java.lang.String
      *
      * @param type String Type, byte/short/int/long/float/double/boolean/string
      * @return Class Name

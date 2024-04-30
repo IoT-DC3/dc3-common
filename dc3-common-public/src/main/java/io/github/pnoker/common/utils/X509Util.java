@@ -50,7 +50,7 @@ public class X509Util {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    // TODO: 2023.10.16 此处有问题，目前为不可用状态
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     public static SSLSocketFactory getSSLSocketFactory(final String caCrtFile, final String crtFile, final String keyFile, final String password) {
         try {
             Security.addProvider(new BouncyCastleProvider());
@@ -86,12 +86,12 @@ public class X509Util {
         }
     }
 
-    // TODO: 2023.10.16 此处有问题，目前为不可用状态
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     private static <T> T loadCertificate(String caCrtFile) throws IOException {
         return loadCertificateWithPassword(caCrtFile, null);
     }
 
-    // TODO: 2023.10.16 此处有问题，目前为不可用状态
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     @SuppressWarnings("unchecked")
     private static <T> T loadCertificateWithPassword(String caCrtFile, String password) throws IOException {
         PemReader reader = null;

@@ -20,6 +20,7 @@ import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
 import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -35,6 +36,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DriverTransferMetadataDTO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

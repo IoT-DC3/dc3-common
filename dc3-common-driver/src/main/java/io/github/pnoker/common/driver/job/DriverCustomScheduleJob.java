@@ -17,13 +17,12 @@
 package io.github.pnoker.common.driver.job;
 
 import io.github.pnoker.common.driver.service.DriverCustomService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * 自定义调度任务

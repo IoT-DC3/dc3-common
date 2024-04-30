@@ -28,11 +28,11 @@ import io.github.pnoker.common.strategy.RepositoryStrategyFactory;
 import io.github.pnoker.common.tdengine.entity.builder.TDEnginePointValueBuilder;
 import io.github.pnoker.common.tdengine.entity.model.TDEnginePointValueDO;
 import io.github.pnoker.common.tdengine.mapper.TDEngineRepositoryMapper;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

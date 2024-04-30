@@ -21,6 +21,7 @@ import io.github.pnoker.common.entity.MessageHeader;
 import io.github.pnoker.common.entity.MqttMessage;
 import io.github.pnoker.common.mqtt.service.MqttReceiveService;
 import io.github.pnoker.common.mqtt.service.job.MqttScheduleJob;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +29,6 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -48,9 +48,9 @@ public class MqttReceiveHandler {
     private ThreadPoolExecutor threadPoolExecutor;
 
     /**
-     * 此处用于接收 MQTT 发送过来的数据，订阅的主题为 application.yml 中 mqtt.receive-topics 配置的 Topic 列表
-     * +（加号）：可以（只能）匹配一个单词
-     * #（井号）：可以匹配多个单词（或者零个）
+     * 此处用于接收 MQTT 发送过来的数据, 订阅的主题为 application.yml 中 mqtt.receive-topics 配置的 Topic 列表
+     * +（加号）: 可以（只能）匹配一个单词
+     * #（井号）: 可以匹配多个单词（或者零个）
      *
      * @return MessageHandler
      */

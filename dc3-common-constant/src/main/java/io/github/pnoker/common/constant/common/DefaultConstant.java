@@ -29,17 +29,17 @@ public class DefaultConstant {
     }
 
     /**
-     * 默认零：0
+     * 默认零: 0
      */
     public static final Integer DEFAULT_ZERO_VALUE = 0;
 
     /**
-     * 默认 Integer 空值：-1
+     * 默认 Integer 空值: -1
      */
     public static final Integer DEFAULT_NULL_INT_VALUE = -1;
 
     /**
-     * 默认 String 空值：nil
+     * 默认 String 空值: nil
      */
     public static final String DEFAULT_NULL_STRING_VALUE = "nil";
 
