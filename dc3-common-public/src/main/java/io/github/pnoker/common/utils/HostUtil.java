@@ -106,7 +106,7 @@ public class HostUtil {
                 lookupLocalMac(macList, networkInterface);
             }
             if (!macList.isEmpty()) {
-                return macList.stream().distinct().collect(Collectors.toList());
+                return macList.stream().distinct().toList();
             }
         } catch (Exception e) {
             log.warn("Failed to get local mac address");

@@ -112,12 +112,12 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
         List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
         List<InfluxMapperBO> sortedList = influxMapperBOS.stream()
                 .sorted((a, b) -> b.getTime().compareTo(a.getTime())) // 倒序排序
-                .collect(Collectors.toList());
+                .toList();
         List<InfluxMapperBO> takenList = sortedList.subList(0, count);
         List<String> valueList = takenList.stream()
                 .map(InfluxMapperBO::getValue) // 提取 value 属性
                 .map(Object::toString) // 转换为字符串
-                .collect(Collectors.toList());
+                .toList();
         return valueList;
     }
 

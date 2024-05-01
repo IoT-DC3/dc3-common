@@ -47,7 +47,7 @@ public class DeviceCommandReceiver {
     public void deviceCommandReceive(Channel channel, Message message, DeviceCommandDTO entityDTO) {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
-            log.info("Receive device command: {}", JsonUtil.toPrettyJsonString(entityDTO));
+            log.info("Receive device command: {}", JsonUtil.toJsonString(entityDTO));
             if (ObjectUtil.isNull(entityDTO)
                     || ObjectUtil.isNull(entityDTO.getType())
                     || CharSequenceUtil.isEmpty(entityDTO.getContent())) {

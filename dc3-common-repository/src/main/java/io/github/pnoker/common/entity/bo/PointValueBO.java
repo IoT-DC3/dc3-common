@@ -73,6 +73,7 @@ public class PointValueBO implements Serializable {
      * 创建时间
      */
     private LocalDateTime createTime;
+
     /**
      * 创建时间
      */

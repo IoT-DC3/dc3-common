@@ -46,7 +46,7 @@ public class DriverMetadataReceiver {
     public void driverMetadataReceive(Channel channel, Message message, DriverTransferMetadataDTO entityDTO) {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
-            log.debug("Receive driver metadata: {}", JsonUtil.toPrettyJsonString(entityDTO));
+            log.debug("Receive driver metadata: {}", JsonUtil.toJsonString(entityDTO));
             if (ObjectUtil.isNull(entityDTO)
                     || ObjectUtil.isNull(entityDTO.getType())
                     || ObjectUtil.isNull(entityDTO.getMetadataCommandType())) {

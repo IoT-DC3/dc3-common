@@ -87,7 +87,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
     @Override
     public void pointValueSender(PointValueDTO entityDTO) {
         if (ObjectUtil.isNotNull(entityDTO)) {
-            log.debug("Send point value: {}", JsonUtil.toJsonString(entityDTO));
+            log.info("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_VALUE,
                     RabbitConstant.ROUTING_POINT_VALUE_PREFIX + driverProperty.getService(),
@@ -106,7 +106,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
     private void sendDeviceStatus(Long deviceId, DeviceStatusEnum status, int timeOut, TimeUnit timeUnit) {
         DeviceEventDTO.DeviceStatus deviceStatus = new DeviceEventDTO.DeviceStatus(deviceId, status, timeOut, timeUnit);
         DeviceEventDTO deviceEventDTO = new DeviceEventDTO(DeviceEventTypeEnum.HEARTBEAT, JsonUtil.toJsonString(deviceStatus));
-        log.debug("Report device event: {}, event content: {}", deviceEventDTO.getType().getCode(), JsonUtil.toJsonString(deviceEventDTO));
+        log.info("Report device event: {}, event content: {}", deviceEventDTO.getType().getCode(), JsonUtil.toJsonString(deviceEventDTO));
         deviceEventSender(deviceEventDTO);
     }
 

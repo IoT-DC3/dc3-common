@@ -89,7 +89,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         List<MgPointValueDO> entityDOS = mgPointValueBuilder.buildMgDOListByBOList(entityBOS);
         entityDOS = entityDOS.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
-                .collect(Collectors.toList());
+                .toList();
         mongoTemplate.insert(entityDOS, collection);
     }
 
@@ -102,7 +102,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         query.limit(count).with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));
 
         List<MgPointValueDO> entityDOS = mongoTemplate.find(query, MgPointValueDO.class, StorageConstant.POINT_VALUE_PREFIX + deviceId);
-        return entityDOS.stream().map(MgPointValueDO::getValue).collect(Collectors.toList());
+        return entityDOS.stream().map(MgPointValueDO::getValue).toList();
     }
 
     @Override

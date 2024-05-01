@@ -83,9 +83,9 @@ public class DriverCommandServiceImpl implements DriverCommandService {
             return;
         }
 
-        log.info("Start command of read: {}", JsonUtil.toPrettyJsonString(commandDTO));
+        log.info("Start command of read: {}", JsonUtil.toJsonString(commandDTO));
         PointValueDTO read = read(deviceRead.getDeviceId(), deviceRead.getPointId());
-        log.info("End command of read: {}", JsonUtil.toPrettyJsonString(read));
+        log.info("End command of read: {}", JsonUtil.toJsonString(read));
     }
 
     @Override
@@ -112,7 +112,7 @@ public class DriverCommandServiceImpl implements DriverCommandService {
             return;
         }
 
-        log.info("Start command of write: {}", JsonUtil.toPrettyJsonString(commandDTO));
+        log.info("Start command of write: {}", JsonUtil.toJsonString(commandDTO));
         Boolean write = write(deviceWrite.getDeviceId(), deviceWrite.getPointId(), deviceWrite.getValue());
         log.info("End command of write: write {}", write);
     }

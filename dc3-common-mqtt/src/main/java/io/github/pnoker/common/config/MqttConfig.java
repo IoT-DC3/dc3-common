@@ -84,7 +84,7 @@ public class MqttConfig {
         adapter.setOutputChannel(mqttInboundChannel());
         adapter.setConverter(new DefaultPahoMessageConverter());
         adapter.setCompletionTimeout(mqttProperties.getCompletionTimeout());
-        log.info("Set receive topics: {}", JsonUtil.toPrettyJsonString(mqttProperties.getReceiveTopics()));
+        log.info("Set receive topics: {}", JsonUtil.toJsonString(mqttProperties.getReceiveTopics()));
         return adapter;
     }
 
@@ -99,7 +99,7 @@ public class MqttConfig {
         messageHandler.setAsync(true);
         messageHandler.setDefaultQos(mqttProperties.getDefaultSendTopic().getQos());
         messageHandler.setDefaultTopic(mqttProperties.getDefaultSendTopic().getName());
-        log.info("Set default send topic: {}", JsonUtil.toPrettyJsonString(mqttProperties.getDefaultSendTopic()));
+        log.info("Set default send topic: {}", JsonUtil.toJsonString(mqttProperties.getDefaultSendTopic()));
         return messageHandler;
     }
 

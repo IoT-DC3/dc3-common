@@ -66,7 +66,7 @@ public class DriverSyncServiceImpl implements DriverSyncService {
         try {
             DriverRegisterDTO entityDTO = buildRegisterDTOByProperty();
             log.info("The driver {} is initializing", entityDTO.getClient());
-            log.debug("The driver {} initialization information is: {}", driverProperty.getService(), JsonUtil.toPrettyJsonString(entityDTO));
+            log.debug("The driver {} initialization information is: {}", driverProperty.getService(), JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_REGISTER,
                     RabbitConstant.ROUTING_REGISTER_UP_PREFIX + driverProperty.getClient(),
@@ -102,9 +102,9 @@ public class DriverSyncServiceImpl implements DriverSyncService {
         }
         driverContext.setDriverMetadataDTO(driverMetadataDTO);
         driverContext.setDriverStatus(DriverStatusEnum.ONLINE);
-        driverMetadataDTO.getDriverAttributeMap().values().forEach(driverAttribute -> log.info("Syncing driver attribute[{}] metadata: {}", driverAttribute.getAttributeName(), JsonUtil.toPrettyJsonString(driverAttribute)));
-        driverMetadataDTO.getPointAttributeMap().values().forEach(pointAttribute -> log.info("Syncing point attribute[{}] metadata: {}", pointAttribute.getAttributeName(), JsonUtil.toPrettyJsonString(pointAttribute)));
-        driverMetadataDTO.getDeviceMap().values().forEach(device -> log.info("Syncing device[{}] metadata: {}", device.getDeviceName(), JsonUtil.toPrettyJsonString(device)));
+        driverMetadataDTO.getDriverAttributeMap().values().forEach(driverAttribute -> log.info("Syncing driver attribute[{}] metadata: {}", driverAttribute.getAttributeName(), JsonUtil.toJsonString(driverAttribute)));
+        driverMetadataDTO.getPointAttributeMap().values().forEach(pointAttribute -> log.info("Syncing point attribute[{}] metadata: {}", pointAttribute.getAttributeName(), JsonUtil.toJsonString(pointAttribute)));
+        driverMetadataDTO.getDeviceMap().values().forEach(device -> log.info("Syncing device[{}] metadata: {}", device.getDeviceName(), JsonUtil.toJsonString(device)));
         log.info("The metadata synced successfully.");
     }
 

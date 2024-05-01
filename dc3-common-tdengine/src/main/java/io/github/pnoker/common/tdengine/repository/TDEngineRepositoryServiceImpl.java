@@ -81,7 +81,7 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
     @Override
     public List<String> selectHistoryPointValue(Long deviceId, Long pointId, int count) {
         List<TDEnginePointValueDO> result = tdEngineRepositoryMapper.selectHistoryPointValue(deviceId, pointId, count);
-        return result.stream().map(e -> e.getValue()).collect(Collectors.toList());
+        return result.stream().map(TDEnginePointValueDO::getValue).toList();
     }
 
     @Override
@@ -90,8 +90,7 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
             return Collections.emptyList();
         }
         List<TDEnginePointValueDO> tdEnginePointValueDOS = tdEngineRepositoryMapper.selectLatestPointValue(deviceId, pointIds);
-        List<PointValueBO> pointValueBOS = tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOS);
-        return pointValueBOS;
+        return tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOS);
     }
 
     @Override

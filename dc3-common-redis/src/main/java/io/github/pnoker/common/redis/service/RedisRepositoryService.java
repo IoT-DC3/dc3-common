@@ -76,7 +76,7 @@ public class RedisRepositoryService {
         }
 
         String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
-        List<String> keys = pointIds.stream().map(pointId -> prefix + pointId).collect(Collectors.toList());
+        List<String> keys = pointIds.stream().map(pointId -> prefix + pointId).toList();
         List<RedisPointValueDO> entityDOS = redisService.getKey(keys);
         return redisPointValueBuilder.buildBOListByDOList(entityDOS);
     }
