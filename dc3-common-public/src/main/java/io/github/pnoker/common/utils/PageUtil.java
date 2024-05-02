@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -26,9 +25,7 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.common.Pages;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 分页相关工具类
@@ -55,25 +52,26 @@ public class PageUtil {
         if (ObjectUtil.isNull(pages)) {
             pages = new Pages();
         }
-        if (pages.getCurrent() < 1) {
-            pages.setCurrent(1);
+
+        if (pages.getCurrent() < DefaultConstant.DEFAULT_ONE_VALUE) {
+            pages.setCurrent(DefaultConstant.DEFAULT_ONE_VALUE);
         }
+        page.setCurrent(pages.getCurrent());
+
         if (pages.getSize() > DefaultConstant.DEFAULT_MAX_PAGE_SIZE) {
             pages.setSize(DefaultConstant.DEFAULT_MAX_PAGE_SIZE);
         }
+        page.setSize(pages.getSize());
+
         List<OrderItem> orders = pages.getOrders();
-        if (CollUtil.isEmpty(orders)) {
-            orders = new ArrayList<>(2);
-        }
-        orders = orders.stream().filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
-        boolean match = orders.stream().anyMatch(order -> ObjectUtil.isNotNull(order) && "create_time".equals(order.getColumn()));
-        if (!match) {
+        boolean anyMatch = orders.stream()
+                .filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn()))
+                .anyMatch(order -> "create_time".equals(order.getColumn()));
+        if (!anyMatch) {
             orders.add(OrderItem.desc("create_time"));
         }
-
-        page.setCurrent(pages.getCurrent());
-        page.setSize(pages.getSize());
-        page.setOrders(orders);
+        List<OrderItem> orderItemList = orders.stream().filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
+        page.setOrders(orderItemList);
         return page;
     }
 }

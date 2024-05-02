@@ -29,14 +29,19 @@ public class DefaultConstant {
     }
 
     /**
-     * 默认零: 0
+     * 默认 Integer 空值: -1
+     */
+    public static final Integer DEFAULT_NULL_INT_VALUE = -1;
+
+    /**
+     * 零: 0
      */
     public static final Integer DEFAULT_ZERO_VALUE = 0;
 
     /**
-     * 默认 Integer 空值: -1
+     * 一: 1
      */
-    public static final Integer DEFAULT_NULL_INT_VALUE = -1;
+    public static final Integer DEFAULT_ONE_VALUE = 1;
 
     /**
      * 默认 String 空值: nil
