@@ -17,23 +17,23 @@
 package io.github.pnoker.common.driver.job;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.service.DriverCommandService;
-import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
-import io.github.pnoker.common.entity.dto.PointDTO;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.stream.Collectors;
 
 /**
  * Read Schedule Job
@@ -45,45 +45,43 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Component
 public class DriverReadScheduleJob extends QuartzJobBean {
 
-    @Resource
-    private DriverContext driverContext;
-    @Resource
-    private ThreadPoolExecutor threadPoolExecutor;
-    @Resource
-    private DriverCommandService driverCommandService;
+    private final DriverContext driverContext;
+    private final DriverCommandService driverCommandService;
+
+    public DriverReadScheduleJob(DriverContext driverContext, DriverCommandService driverCommandService) {
+        this.driverContext = driverContext;
+        this.driverCommandService = driverCommandService;
+    }
 
     @Override
-    protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        Map<Long, DeviceDTO> deviceMap = driverContext.getDriverMetadataDTO().getDeviceMap();
+    protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        Map<Long, DeviceDTO> deviceMap = driverContext.getDriverMetadata().getDeviceMap();
         if (ObjectUtil.isNull(deviceMap)) {
             return;
         }
 
-        for (DeviceDTO device : deviceMap.values()) {
-            Set<Long> profileIds = device.getProfileIds();
-            Map<Long, Map<String, AttributeConfigDTO>> pointConfigMap = driverContext.getDriverMetadataDTO().getPointConfigMap().get(device.getId());
-            if (!EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) || CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointConfigMap)) {
-                continue;
-            }
+        List<DeviceDTO> deviceDTOS = deviceMap.values().stream()
+                .filter(deviceDTO -> EnableFlagEnum.ENABLE.equals(deviceDTO.getEnableFlag())
+                        && CollUtil.isNotEmpty(deviceDTO.getProfileIds())
+                        && MapUtil.isNotEmpty(driverContext.getDriverMetadata().getDriverConfigMap().get(deviceDTO.getId()))
+                        && MapUtil.isNotEmpty(driverContext.getDriverMetadata().getPointConfigMap().get(deviceDTO.getId()))
+                )
+                .toList();
 
-            for (Long profileId : profileIds) {
-                Map<Long, PointDTO> pointMap = driverContext.getDriverMetadataDTO().getProfilePointMap().get(profileId);
-                if (ObjectUtil.isNull(pointMap)) {
-                    continue;
-                }
+        Map<Long, Set<Long>> devicePointMap = deviceDTOS.stream().collect(
+                Collectors.toMap(
+                        DeviceDTO::getId,
+                        deviceDTO -> deviceDTO.getProfileIds().stream()
+                                .map(profileId -> driverContext.getDriverMetadata().getProfilePointMap().get(profileId))
+                                .filter(MapUtil::isNotEmpty)
+                                .flatMap(pointMap -> pointMap.keySet().stream())
+                                .collect(Collectors.toSet())
+                )
+        );
 
-                for (Map.Entry<Long, PointDTO> entry : pointMap.entrySet()) {
-                    PointDTO point = pointMap.get(entry.getKey());
-                    if (!EnableFlagEnum.ENABLE.equals(point.getEnableFlag())) {
-                        continue;
-                    }
-                    Map<String, AttributeConfigDTO> map = pointConfigMap.get(entry.getKey());
-                    if (ObjectUtil.isNull(map)) {
-                        continue;
-                    }
-
-                    driverCommandService.read(device.getId(), entry.getKey());
-                }
+        for (Map.Entry<Long, Set<Long>> entry : devicePointMap.entrySet()) {
+            for (Long pointId : entry.getValue()) {
+                driverCommandService.read(entry.getKey(), pointId);
             }
         }
     }

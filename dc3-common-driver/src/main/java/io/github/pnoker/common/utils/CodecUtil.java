@@ -29,9 +29,9 @@ import java.util.Base64;
  * @since 2022.1.0
  */
 @Slf4j
-public class DriverUtil {
+public class CodecUtil {
 
-    private DriverUtil() {
+    private CodecUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 

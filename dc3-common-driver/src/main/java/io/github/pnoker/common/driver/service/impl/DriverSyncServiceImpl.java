@@ -100,7 +100,7 @@ public class DriverSyncServiceImpl implements DriverSyncService {
         if (ObjectUtil.isNull(driverMetadataDTO)) {
             driverMetadataDTO = new DriverMetadataDTO();
         }
-        driverContext.setDriverMetadataDTO(driverMetadataDTO);
+        driverContext.setDriverMetadata(driverMetadataDTO);
         driverContext.setDriverStatus(DriverStatusEnum.ONLINE);
         driverMetadataDTO.getDriverAttributeMap().values().forEach(driverAttribute -> log.info("Syncing driver attribute[{}] metadata: {}", driverAttribute.getAttributeName(), JsonUtil.toJsonString(driverAttribute)));
         driverMetadataDTO.getPointAttributeMap().values().forEach(pointAttribute -> log.info("Syncing point attribute[{}] metadata: {}", pointAttribute.getAttributeName(), JsonUtil.toJsonString(pointAttribute)));

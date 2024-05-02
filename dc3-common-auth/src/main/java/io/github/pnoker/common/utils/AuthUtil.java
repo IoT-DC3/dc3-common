@@ -77,7 +77,7 @@ public class AuthUtil {
     public static String getLoginToken() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         if (ObjectUtil.isNull(requestAttributes)) {
-            throw new ServiceException("requestAttributes cannot be null!");
+            throw new ServiceException("requestAttributes can't be null!");
         }
 
         String token = requestAttributes.getRequest().getHeader(AuthConstant.header_token);

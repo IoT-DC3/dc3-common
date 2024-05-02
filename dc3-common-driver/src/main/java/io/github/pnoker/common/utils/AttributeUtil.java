@@ -68,7 +68,7 @@ public class AttributeUtil {
             throw new EmptyException("Attribute value is empty");
         }
 
-        final String message = "Attribute type is: {}, cannot be cast to class: {}";
+        final String message = "Attribute type is: {}, can't be cast to class: {}";
         return switch (attributeType) {
             case STRING -> {
                 if (!clazz.equals(String.class)) {

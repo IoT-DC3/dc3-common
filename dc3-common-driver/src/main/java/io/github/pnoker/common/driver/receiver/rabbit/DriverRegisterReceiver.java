@@ -50,7 +50,7 @@ public class DriverRegisterReceiver {
                 log.error("跳过: 接收到的驱动注册信息无效");
                 return;
             }
-            log.debug("接收到驱动注册信息: {}", JsonUtil.toJsonString(entityDTO));
+            log.debug("Syncing driver register metadata: {}", JsonUtil.toJsonString(entityDTO));
             driverSyncService.down(entityDTO);
         } catch (Exception e) {
             log.error(e.getMessage(), e);

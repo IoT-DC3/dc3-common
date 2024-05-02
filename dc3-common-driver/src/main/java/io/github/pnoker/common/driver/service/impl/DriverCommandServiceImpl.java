@@ -27,7 +27,7 @@ import io.github.pnoker.common.entity.dto.*;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.exception.ServiceException;
-import io.github.pnoker.common.utils.ConvertUtil;
+import io.github.pnoker.common.utils.ValueUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -68,7 +68,7 @@ public class DriverCommandServiceImpl implements DriverCommandService {
                 throw new ReadPointException(CharSequenceUtil.format("The read point value is invalid: {}", rawValue));
             }
 
-            PointValueDTO pointValue = new PointValueDTO(deviceId, pointId, rawValue, ConvertUtil.convertValue(point, rawValue));
+            PointValueDTO pointValue = new PointValueDTO(deviceId, pointId, rawValue, ValueUtil.getFinalValue(point, rawValue));
             driverSenderService.pointValueSender(pointValue);
             return pointValue;
         } catch (Exception e) {
