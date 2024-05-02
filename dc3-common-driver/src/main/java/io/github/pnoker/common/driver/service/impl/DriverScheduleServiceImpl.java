@@ -18,15 +18,16 @@ package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
+import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.ScheduleProperty;
 import io.github.pnoker.common.driver.job.DriverCustomScheduleJob;
 import io.github.pnoker.common.driver.job.DriverReadScheduleJob;
 import io.github.pnoker.common.driver.job.DriverStatusScheduleJob;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
-import io.github.pnoker.common.entity.property.DriverProperty;
-import io.github.pnoker.common.entity.property.ScheduleProperty;
+import io.github.pnoker.common.exception.CronException;
 import io.github.pnoker.common.quartz.QuartzService;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +39,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DriverScheduleServiceImpl implements DriverScheduleService {
 
-    @Resource
-    private DriverProperty driverProperty;
+    private final DriverProperty driverProperty;
+    private final QuartzService quartzService;
 
-    @Resource
-    private QuartzService quartzService;
+    public DriverScheduleServiceImpl(DriverProperty driverProperty, QuartzService quartzService) {
+        this.driverProperty = driverProperty;
+        this.quartzService = quartzService;
+    }
 
     @Override
     public void initial() {
@@ -52,14 +55,21 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
         }
 
         try {
-            if (Boolean.TRUE.equals(property.getRead().getEnable())) {
-                quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_READ_SCHEDULE_JOB, property.getRead().getCorn(), DriverReadScheduleJob.class);
-            }
-            if (Boolean.TRUE.equals(property.getCustom().getEnable())) {
-                quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_CUSTOM_SCHEDULE_JOB, property.getCustom().getCorn(), DriverCustomScheduleJob.class);
-            }
-            quartzService.createJobWithCorn(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_STATUS_SCHEDULE_JOB, ScheduleConstant.DRIVER_STATUS_SCHEDULE_CORN, DriverStatusScheduleJob.class);
+            quartzService.createJobWithCron(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_STATUS_SCHEDULE_JOB, ScheduleConstant.DRIVER_STATUS_SCHEDULE_CRON, DriverStatusScheduleJob.class);
 
+            if (Boolean.TRUE.equals(property.getRead().getEnable())) {
+                if (!CronExpression.isValidExpression(property.getRead().getCron())) {
+                    throw new CronException("Read schedule cron expression is invalid");
+                }
+                quartzService.createJobWithCron(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_READ_SCHEDULE_JOB, property.getRead().getCron(), DriverReadScheduleJob.class);
+            }
+
+            if (Boolean.TRUE.equals(property.getCustom().getEnable())) {
+                if (!CronExpression.isValidExpression(property.getCustom().getCron())) {
+                    throw new CronException("Custom schedule cron expression is invalid");
+                }
+                quartzService.createJobWithCron(ScheduleConstant.DRIVER_SCHEDULE_GROUP, ScheduleConstant.DRIVER_CUSTOM_SCHEDULE_JOB, property.getCustom().getCron(), DriverCustomScheduleJob.class);
+            }
 
             quartzService.startScheduler();
         } catch (SchedulerException e) {

@@ -45,14 +45,14 @@ public class DriverMetadataDTO implements Serializable {
     private Map<Long, PointAttributeDTO> pointAttributeMap;
 
     /**
-     * deviceId(driverAttribute.name,(driverInfo.value,driverAttribute.type))
+     * deviceId(driverAttribute.name,(driverConfig.value,driverAttribute.type))
      */
-    private Map<Long, Map<String, AttributeConfigDTO>> driverInfoMap;
+    private Map<Long, Map<String, AttributeConfigDTO>> driverConfigMap;
 
     /**
-     * deviceId(pointId(pointAttribute.name,(pointInfo.value,pointAttribute.type)))
+     * deviceId(pointId(pointAttribute.name,(pointConfig.value,pointAttribute.type)))
      */
-    private Map<Long, Map<Long, Map<String, AttributeConfigDTO>>> pointInfoMap;
+    private Map<Long, Map<Long, Map<String, AttributeConfigDTO>>> pointConfigMap;
 
     /**
      * deviceId,device
@@ -68,8 +68,8 @@ public class DriverMetadataDTO implements Serializable {
         this.driverAttributeMap = new ConcurrentHashMap<>(16);
         this.pointAttributeMap = new ConcurrentHashMap<>(16);
         this.deviceMap = new ConcurrentHashMap<>(16);
-        this.driverInfoMap = new ConcurrentHashMap<>(16);
-        this.pointInfoMap = new ConcurrentHashMap<>(16);
+        this.driverConfigMap = new ConcurrentHashMap<>(16);
+        this.pointConfigMap = new ConcurrentHashMap<>(16);
         this.profilePointMap = new ConcurrentHashMap<>(16);
     }
 }

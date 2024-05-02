@@ -59,8 +59,8 @@ public class DriverContext {
      * @param deviceId 设备ID
      * @return Map String:AttributeInfo
      */
-    public Map<String, AttributeConfigDTO> getDriverInfoByDeviceId(Long deviceId) {
-        return this.driverMetadataDTO.getDriverInfoMap().get(deviceId);
+    public Map<String, AttributeConfigDTO> getDriverConfigByDeviceId(Long deviceId) {
+        return this.driverMetadataDTO.getDriverConfigMap().get(deviceId);
     }
 
     /**
@@ -69,8 +69,8 @@ public class DriverContext {
      * @param deviceId 设备ID
      * @return Map String:(Map String:AttributeInfo)
      */
-    public Map<Long, Map<String, AttributeConfigDTO>> getPointInfoByDeviceId(Long deviceId) {
-        Map<Long, Map<String, AttributeConfigDTO>> tmpMap = this.driverMetadataDTO.getPointInfoMap().get(deviceId);
+    public Map<Long, Map<String, AttributeConfigDTO>> getPointConfigByDeviceId(Long deviceId) {
+        Map<Long, Map<String, AttributeConfigDTO>> tmpMap = this.driverMetadataDTO.getPointConfigMap().get(deviceId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.size() < 1) {
             throw new NotFoundException("Device({}) does not exist", deviceId);
         }
@@ -84,8 +84,8 @@ public class DriverContext {
      * @param pointId  位号ID
      * @return Map String:AttributeInfo
      */
-    public Map<String, AttributeConfigDTO> getPointInfoByDeviceIdAndPointId(Long deviceId, Long pointId) {
-        Map<String, AttributeConfigDTO> tmpMap = getPointInfoByDeviceId(deviceId).get(pointId);
+    public Map<String, AttributeConfigDTO> getPointConfigByDeviceIdAndPointId(Long deviceId, Long pointId) {
+        Map<String, AttributeConfigDTO> tmpMap = getPointConfigByDeviceId(deviceId).get(pointId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.size() < 1) {
             throw new NotFoundException("Point({}) info does not exist", pointId);
         }

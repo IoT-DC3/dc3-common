@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.property;
+package io.github.pnoker.common.driver.entity.property;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,6 +53,6 @@ public class ScheduleProperty {
     @AllArgsConstructor
     public static class ScheduleConfig {
         private Boolean enable = false;
-        private String corn = "* */15 * * * ?";
+        private String cron = "* */15 * * * ?";
     }
 }

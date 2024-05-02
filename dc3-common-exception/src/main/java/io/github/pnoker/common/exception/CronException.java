@@ -14,22 +14,26 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.exception;
 
-import lombok.*;
-
-import java.io.Serializable;
+import cn.hutool.core.text.CharSequenceUtil;
 
 /**
+ * 自定义 Cron 异常
+ *
  * @author pnoker
  * @since 2022.1.0
  */
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class MqttMessage implements Serializable {
-    private MessageHeader header;
-    private String payload;
+public class CronException extends RuntimeException {
+    public CronException() {
+        this(null);
+    }
+
+    public CronException(Throwable cause) {
+        super(cause);
+    }
+
+    public CronException(CharSequence template, Object... params) {
+        super(CharSequenceUtil.format(template, params));
+    }
 }

@@ -16,11 +16,10 @@
 
 package io.github.pnoker.common.init;
 
+import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
 import io.github.pnoker.common.driver.service.DriverSyncService;
-import io.github.pnoker.common.entity.property.DriverProperty;
-import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -40,12 +39,15 @@ import org.springframework.stereotype.Component;
 @EnableConfigurationProperties({DriverProperty.class})
 public class DriverInitRunner implements ApplicationRunner {
 
-    @Resource
-    private DriverSyncService driverSyncService;
-    @Resource
-    private DriverCustomService driverCustomService;
-    @Resource
-    private DriverScheduleService driverScheduleService;
+    private final DriverSyncService driverSyncService;
+    private final DriverCustomService driverCustomService;
+    private final DriverScheduleService driverScheduleService;
+
+    public DriverInitRunner(DriverSyncService driverSyncService, DriverCustomService driverCustomService, DriverScheduleService driverScheduleService) {
+        this.driverSyncService = driverSyncService;
+        this.driverCustomService = driverCustomService;
+        this.driverScheduleService = driverScheduleService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

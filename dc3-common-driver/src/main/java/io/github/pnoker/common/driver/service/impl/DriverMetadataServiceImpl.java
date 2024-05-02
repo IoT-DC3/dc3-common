@@ -75,26 +75,26 @@ public class DriverMetadataServiceImpl implements DriverMetadataService {
     }
 
     @Override
-    public void driverInfoMetadata(DriverTransferMetadataDTO entityDTO) {
+    public void driverConfigMetadata(DriverTransferMetadataDTO entityDTO) {
         DriverAttributeConfigDTO driverAttributeConfig = JsonUtil.parseObject(entityDTO.getContent(), DriverAttributeConfigDTO.class);
         if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Upsert driver attribute config: {}", JsonUtil.toJsonString(driverAttributeConfig));
-            driverMetadataTempService.upsertDriverInfo(driverAttributeConfig);
+            driverMetadataTempService.upsertDriverConfig(driverAttributeConfig);
         } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Delete driver attribute config: {}", JsonUtil.toJsonString(driverAttributeConfig));
-            driverMetadataTempService.deleteDriverInfo(driverAttributeConfig.getDeviceId(), driverAttributeConfig.getDriverAttributeId());
+            driverMetadataTempService.deleteDriverConfig(driverAttributeConfig.getDeviceId(), driverAttributeConfig.getDriverAttributeId());
         }
     }
 
     @Override
-    public void pointInfoMetadata(DriverTransferMetadataDTO entityDTO) {
+    public void pointConfigMetadata(DriverTransferMetadataDTO entityDTO) {
         PointAttributeConfigDTO pointAttributeConfig = JsonUtil.parseObject(entityDTO.getContent(), PointAttributeConfigDTO.class);
         if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Upsert point attribute config: {}", JsonUtil.toJsonString(pointAttributeConfig));
-            driverMetadataTempService.upsertPointInfo(pointAttributeConfig);
+            driverMetadataTempService.upsertPointConfig(pointAttributeConfig);
         } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Delete point attribute config: {}", JsonUtil.toJsonString(pointAttributeConfig));
-            driverMetadataTempService.deletePointInfo(pointAttributeConfig.getPointId(), pointAttributeConfig.getId(), pointAttributeConfig.getPointAttributeId());
+            driverMetadataTempService.deletePointConfig(pointAttributeConfig.getPointId(), pointAttributeConfig.getId(), pointAttributeConfig.getPointAttributeId());
         }
     }
 }

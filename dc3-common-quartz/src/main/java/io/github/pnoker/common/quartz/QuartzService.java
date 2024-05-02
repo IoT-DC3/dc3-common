@@ -59,16 +59,16 @@ public class QuartzService {
      *
      * @param group    任务分组
      * @param name     任务名称
-     * @param corn     Corn 表达式
+     * @param cron     Cron 表达式
      * @param jobClass 任务执行类
      * @throws SchedulerException SchedulerException
      */
-    public void createJobWithCorn(String group, String name, String corn, Class<? extends Job> jobClass) throws SchedulerException {
+    public void createJobWithCron(String group, String name, String cron, Class<? extends Job> jobClass) throws SchedulerException {
         JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity(name, group)
                 .startAt(DateBuilder.futureDate(1, DateBuilder.IntervalUnit.SECOND))
-                .withSchedule(CronScheduleBuilder.cronSchedule(corn))
+                .withSchedule(CronScheduleBuilder.cronSchedule(cron))
                 .startNow().build();
         scheduler.scheduleJob(jobDetail, trigger);
     }

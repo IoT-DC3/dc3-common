@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity;
+package io.github.pnoker.common.mqtt.entity;
 
 import lombok.Getter;
 import lombok.Setter;

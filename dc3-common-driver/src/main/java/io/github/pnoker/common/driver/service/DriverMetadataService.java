@@ -52,12 +52,12 @@ public interface DriverMetadataService {
      *
      * @param entityDTO DriverMetadataDTO
      */
-    void driverInfoMetadata(DriverTransferMetadataDTO entityDTO);
+    void driverConfigMetadata(DriverTransferMetadataDTO entityDTO);
 
     /**
      * 位号配置元数据
      *
      * @param entityDTO DriverMetadataDTO
      */
-    void pointInfoMetadata(DriverTransferMetadataDTO entityDTO);
+    void pointConfigMetadata(DriverTransferMetadataDTO entityDTO);
 }

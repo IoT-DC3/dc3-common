@@ -61,8 +61,8 @@ public class DriverReadScheduleJob extends QuartzJobBean {
 
         for (DeviceDTO device : deviceMap.values()) {
             Set<Long> profileIds = device.getProfileIds();
-            Map<Long, Map<String, AttributeConfigDTO>> pointInfoMap = driverContext.getDriverMetadataDTO().getPointInfoMap().get(device.getId());
-            if (!EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) || CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointInfoMap)) {
+            Map<Long, Map<String, AttributeConfigDTO>> pointConfigMap = driverContext.getDriverMetadataDTO().getPointConfigMap().get(device.getId());
+            if (!EnableFlagEnum.ENABLE.equals(device.getEnableFlag()) || CollUtil.isEmpty(profileIds) || ObjectUtil.isNull(pointConfigMap)) {
                 continue;
             }
 
@@ -77,7 +77,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
                     if (!EnableFlagEnum.ENABLE.equals(point.getEnableFlag())) {
                         continue;
                     }
-                    Map<String, AttributeConfigDTO> map = pointInfoMap.get(entry.getKey());
+                    Map<String, AttributeConfigDTO> map = pointConfigMap.get(entry.getKey());
                     if (ObjectUtil.isNull(map)) {
                         continue;
                     }

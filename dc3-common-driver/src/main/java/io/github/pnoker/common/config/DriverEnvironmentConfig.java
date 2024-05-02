@@ -56,7 +56,7 @@ public class DriverEnvironmentConfig implements EnvironmentPostProcessor {
         String client = CharSequenceUtil.format("{}/{}_{}", tenant, name, node);
         String service = CharSequenceUtil.format("{}/{}", tenant, name);
 
-        Map<String, Object> source = new HashMap<>(2);
+        Map<String, Object> source = new HashMap<>(4);
         source.put(EnvironmentConstant.DRIVER_NODE, node);
         source.put(EnvironmentConstant.DRIVER_SERVICE, service);
         source.put(EnvironmentConstant.DRIVER_HOST, HostUtil.localHost());

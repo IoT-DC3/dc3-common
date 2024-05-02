@@ -17,8 +17,8 @@
 package io.github.pnoker.common.mqtt.handler;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import io.github.pnoker.common.entity.MessageHeader;
-import io.github.pnoker.common.entity.MqttMessage;
+import io.github.pnoker.common.mqtt.entity.MessageHeader;
+import io.github.pnoker.common.mqtt.entity.MqttMessage;
 import io.github.pnoker.common.mqtt.service.MqttReceiveService;
 import io.github.pnoker.common.mqtt.service.job.MqttScheduleJob;
 import jakarta.annotation.Resource;

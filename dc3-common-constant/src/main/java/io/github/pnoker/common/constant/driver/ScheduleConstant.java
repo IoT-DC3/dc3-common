@@ -51,9 +51,9 @@ public class ScheduleConstant {
     public static final String DRIVER_STATUS_SCHEDULE_JOB = "status-schedule-job";
 
     /**
-     * 驱动状态任务 Corn
+     * 驱动状态任务 Cron
      */
-    public static final String DRIVER_STATUS_SCHEDULE_CORN = "0/5 * * * * ?";
+    public static final String DRIVER_STATUS_SCHEDULE_CRON = "0/15 * * * * ?";
 
     /**
      * 数据任务调度分组

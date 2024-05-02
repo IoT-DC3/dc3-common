@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.init;
 
-import io.github.pnoker.common.entity.property.MqttProperties;
+import io.github.pnoker.common.mqtt.entity.property.MqttProperties;
 import io.github.pnoker.common.mqtt.service.MqttScheduleService;
 import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;

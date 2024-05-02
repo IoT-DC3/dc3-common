@@ -70,9 +70,9 @@ public interface DriverMetadataTempService {
     /**
      * 向驱动原数据中添加驱动配置信息
      *
-     * @param driverAttributeConfig DriverInfo
+     * @param driverAttributeConfig DriverConfig
      */
-    void upsertDriverInfo(DriverAttributeConfigDTO driverAttributeConfig);
+    void upsertDriverConfig(DriverAttributeConfigDTO driverAttributeConfig);
 
     /**
      * 删除驱动原数据中添加驱动配置信息
@@ -80,14 +80,14 @@ public interface DriverMetadataTempService {
      * @param deviceId    设备ID
      * @param attributeId Attribute ID
      */
-    void deleteDriverInfo(Long deviceId, Long attributeId);
+    void deleteDriverConfig(Long deviceId, Long attributeId);
 
     /**
      * 向驱动原数据中添加位号配置信息
      *
-     * @param pointAttributeConfig PointInfo
+     * @param pointAttributeConfig PointConfig
      */
-    void upsertPointInfo(PointAttributeConfigDTO pointAttributeConfig);
+    void upsertPointConfig(PointAttributeConfigDTO pointAttributeConfig);
 
     /**
      * 删除驱动原数据中添加位号配置信息
@@ -96,5 +96,5 @@ public interface DriverMetadataTempService {
      * @param pointId     位号ID
      * @param attributeId Attribute ID
      */
-    void deletePointInfo(Long deviceId, Long pointId, Long attributeId);
+    void deletePointConfig(Long deviceId, Long pointId, Long attributeId);
 }

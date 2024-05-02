@@ -17,7 +17,7 @@
 package io.github.pnoker.common.mqtt.service;
 
 
-import io.github.pnoker.common.entity.MqttMessage;
+import io.github.pnoker.common.mqtt.entity.MqttMessage;
 
 import java.util.List;
 

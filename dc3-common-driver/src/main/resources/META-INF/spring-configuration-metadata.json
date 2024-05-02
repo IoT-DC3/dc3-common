@@ -10,7 +10,6 @@
       "type": "java.lang.String",
       "description": "Driver code."
     },
-    ,
     {
       "name": "driver.type",
       "type": "io.github.pnoker.common.enums.DriverTypeFlagEnum",
@@ -32,9 +31,9 @@
       "description": "Driver read schedule status."
     },
     {
-      "name": "driver.schedule.read.corn",
+      "name": "driver.schedule.read.cron",
       "type": "java.lang.String",
-      "description": "Driver read schedule corn."
+      "description": "Driver read schedule cron."
     },
     {
       "name": "driver.schedule.custom.enable",
@@ -42,9 +41,9 @@
       "description": "Driver custom schedule status."
     },
     {
-      "name": "driver.schedule.custom.corn",
+      "name": "driver.schedule.custom.cron",
       "type": "java.lang.String",
-      "description": "Driver custom schedule corn."
+      "description": "Driver custom schedule cron."
     },
     {
       "name": "driver.custom",

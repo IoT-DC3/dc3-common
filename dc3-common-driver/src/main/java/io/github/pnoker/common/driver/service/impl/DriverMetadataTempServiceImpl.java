@@ -55,16 +55,16 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
         // Add device to context
         driverContext.getDriverMetadataDTO().getDeviceMap().put(device.getId(), device);
         // Add device driver attribute config to context
-        driverContext.getDriverMetadataDTO().getDriverInfoMap().computeIfAbsent(device.getId(), k -> new ConcurrentHashMap<>(16));
+        driverContext.getDriverMetadataDTO().getDriverConfigMap().computeIfAbsent(device.getId(), k -> new ConcurrentHashMap<>(16));
         // Add device point attribute config to context
-        driverContext.getDriverMetadataDTO().getPointInfoMap().computeIfAbsent(device.getId(), k -> new ConcurrentHashMap<>(16));
+        driverContext.getDriverMetadataDTO().getPointConfigMap().computeIfAbsent(device.getId(), k -> new ConcurrentHashMap<>(16));
     }
 
     @Override
     public void deleteDevice(Long id) {
         driverContext.getDriverMetadataDTO().getDeviceMap().entrySet().removeIf(next -> next.getKey().equals(id));
-        driverContext.getDriverMetadataDTO().getDriverInfoMap().entrySet().removeIf(next -> next.getKey().equals(id));
-        driverContext.getDriverMetadataDTO().getPointInfoMap().entrySet().removeIf(next -> next.getKey().equals(id));
+        driverContext.getDriverMetadataDTO().getDriverConfigMap().entrySet().removeIf(next -> next.getKey().equals(id));
+        driverContext.getDriverMetadataDTO().getPointConfigMap().entrySet().removeIf(next -> next.getKey().equals(id));
     }
 
     @Override
@@ -83,47 +83,47 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
     }
 
     @Override
-    public void upsertDriverInfo(DriverAttributeConfigDTO driverAttributeConfig) {
+    public void upsertDriverConfig(DriverAttributeConfigDTO driverAttributeConfig) {
         DriverAttributeDTO attribute = driverContext.getDriverMetadataDTO().getDriverAttributeMap().get(driverAttributeConfig.getDriverAttributeId());
         if (ObjectUtil.isNotNull(attribute)) {
             // Add driver attribute config to driver attribute config map context
-            driverContext.getDriverMetadataDTO().getDriverInfoMap().computeIfAbsent(driverAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
+            driverContext.getDriverMetadataDTO().getDriverConfigMap().computeIfAbsent(driverAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
                     .put(attribute.getAttributeName(), new AttributeConfigDTO(driverAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
         }
     }
 
     @Override
-    public void deleteDriverInfo(Long deviceId, Long attributeId) {
+    public void deleteDriverConfig(Long deviceId, Long attributeId) {
         DriverAttributeDTO attribute = driverContext.getDriverMetadataDTO().getDriverAttributeMap().get(attributeId);
         if (ObjectUtil.isNotNull(attribute)) {
             // Delete driver attribute config from driver attribute config map context
-            driverContext.getDriverMetadataDTO().getDriverInfoMap().computeIfPresent(deviceId, (k, v) -> {
+            driverContext.getDriverMetadataDTO().getDriverConfigMap().computeIfPresent(deviceId, (k, v) -> {
                 v.entrySet().removeIf(next -> next.getKey().equals(attribute.getAttributeName()));
                 return v;
             });
 
             // If the driver attribute is null, delete the driver attribute config from the driver attribute config map context
-            driverContext.getDriverMetadataDTO().getDriverInfoMap().entrySet().removeIf(next -> next.getValue().size() < 1);
+            driverContext.getDriverMetadataDTO().getDriverConfigMap().entrySet().removeIf(next -> next.getValue().size() < 1);
         }
     }
 
     @Override
-    public void upsertPointInfo(PointAttributeConfigDTO pointAttributeConfig) {
+    public void upsertPointConfig(PointAttributeConfigDTO pointAttributeConfig) {
         PointAttributeDTO attribute = driverContext.getDriverMetadataDTO().getPointAttributeMap().get(pointAttributeConfig.getPointAttributeId());
         if (ObjectUtil.isNotNull(attribute)) {
             // Add the point attribute config to the device point attribute config map context
-            driverContext.getDriverMetadataDTO().getPointInfoMap().computeIfAbsent(pointAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
+            driverContext.getDriverMetadataDTO().getPointConfigMap().computeIfAbsent(pointAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
                     .computeIfAbsent(pointAttributeConfig.getPointId(), k -> new ConcurrentHashMap<>(16))
                     .put(attribute.getAttributeName(), new AttributeConfigDTO(pointAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
         }
     }
 
     @Override
-    public void deletePointInfo(Long deviceId, Long pointId, Long attributeId) {
+    public void deletePointConfig(Long deviceId, Long pointId, Long attributeId) {
         PointAttributeDTO attribute = driverContext.getDriverMetadataDTO().getPointAttributeMap().get(attributeId);
         if (ObjectUtil.isNotNull(attribute)) {
             // Delete the point attribute config from the device info map context
-            driverContext.getDriverMetadataDTO().getPointInfoMap().computeIfPresent(deviceId, (key1, value1) -> {
+            driverContext.getDriverMetadataDTO().getPointConfigMap().computeIfPresent(deviceId, (key1, value1) -> {
                 value1.computeIfPresent(pointId, (key2, value2) -> {
                     value2.entrySet().removeIf(next -> next.getKey().equals(attribute.getAttributeName()));
                     return value2;
@@ -132,7 +132,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
             });
 
             // If the point attribute is null, delete the point attribute config from the point attribute config map context
-            driverContext.getDriverMetadataDTO().getPointInfoMap().computeIfPresent(deviceId, (key, value) -> {
+            driverContext.getDriverMetadataDTO().getPointConfigMap().computeIfPresent(deviceId, (key, value) -> {
                 value.entrySet().removeIf(next -> next.getValue().size() < 1);
                 return value;
             });

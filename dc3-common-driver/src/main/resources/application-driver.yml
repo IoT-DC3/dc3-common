@@ -18,4 +18,4 @@
 # 如果想要覆盖以下内容需要在dev、test、pre、pro中进行重新配置
 spring:
   main:
-    allow-bean-definition-overriding: false
+    allow-bean-definition-overriding: true

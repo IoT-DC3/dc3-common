@@ -65,10 +65,10 @@ public class DriverMetadataReceiver {
                     driverMetadataService.deviceMetadata(entityDTO);
                     break;
                 case DRIVER_ATTRIBUTE_CONFIG:
-                    driverMetadataService.driverInfoMetadata(entityDTO);
+                    driverMetadataService.driverConfigMetadata(entityDTO);
                     break;
                 case POINT_ATTRIBUTE_CONFIG:
-                    driverMetadataService.pointInfoMetadata(entityDTO);
+                    driverMetadataService.pointConfigMetadata(entityDTO);
                     break;
                 default:
                     break;

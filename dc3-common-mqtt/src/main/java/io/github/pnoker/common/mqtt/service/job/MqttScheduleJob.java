@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.mqtt.service.job;
 
-import io.github.pnoker.common.entity.MqttMessage;
+import io.github.pnoker.common.mqtt.entity.MqttMessage;
 import io.github.pnoker.common.mqtt.service.MqttReceiveService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

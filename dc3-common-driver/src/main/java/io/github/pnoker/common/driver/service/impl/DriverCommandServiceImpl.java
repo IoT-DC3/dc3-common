@@ -55,8 +55,8 @@ public class DriverCommandServiceImpl implements DriverCommandService {
 
         try {
             String rawValue = driverCustomService.read(
-                    driverContext.getDriverInfoByDeviceId(deviceId),
-                    driverContext.getPointInfoByDeviceIdAndPointId(deviceId, pointId),
+                    driverContext.getDriverConfigByDeviceId(deviceId),
+                    driverContext.getPointConfigByDeviceIdAndPointId(deviceId, pointId),
                     device,
                     driverContext.getPointByDeviceIdAndPointId(deviceId, pointId)
             );
@@ -95,8 +95,8 @@ public class DriverCommandServiceImpl implements DriverCommandService {
             PointDTO point = driverContext.getPointByDeviceIdAndPointId(deviceId, pointId);
             AttributeTypeFlagEnum typeEnum = AttributeTypeFlagEnum.ofCode(point.getPointTypeFlag().getCode());
             return driverCustomService.write(
-                    driverContext.getDriverInfoByDeviceId(deviceId),
-                    driverContext.getPointInfoByDeviceIdAndPointId(deviceId, pointId),
+                    driverContext.getDriverConfigByDeviceId(deviceId),
+                    driverContext.getPointConfigByDeviceIdAndPointId(deviceId, pointId),
                     device,
                     new AttributeConfigDTO(value, typeEnum)
             );

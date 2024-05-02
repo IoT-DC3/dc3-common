@@ -89,9 +89,9 @@ public class MetadataConstant {
      * @author pnoker
      * @since 2022.1.0
      */
-    public static class DriverInfo {
+    public static class DriverConfig {
 
-        private DriverInfo() {
+        private DriverConfig() {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 
@@ -106,9 +106,9 @@ public class MetadataConstant {
      * @author pnoker
      * @since 2022.1.0
      */
-    public static class PointInfo {
+    public static class PointConfig {
 
-        private PointInfo() {
+        private PointConfig() {
             throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
         }
 

@@ -16,18 +16,15 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
-import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Map;
 
 /**
+ * 驱动工具类
+ *
  * @author pnoker
  * @since 2022.1.0
  */
@@ -36,30 +33,6 @@ public class DriverUtil {
 
     private DriverUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
-    /**
-     * 获取 属性值
-     *
-     * @param infoMap   Attribute Info
-     * @param attribute String Attribute Name
-     * @param <T>       T
-     * @return T
-     */
-    public static <T> T attribute(Map<String, AttributeConfigDTO> infoMap, String attribute) {
-        return value(infoMap.get(attribute).getType().getCode(), infoMap.get(attribute).getValue());
-    }
-
-    /**
-     * 通过类型转换数据
-     *
-     * @param type  String Type, byte/short/int/long/float/double/boolean/string
-     * @param value String Value
-     * @param <T>   T
-     * @return T
-     */
-    public static <T> T value(String type, String value) {
-        return Convert.convertByClassName(getTypeClassName(type), value);
     }
 
     /**
@@ -92,12 +65,11 @@ public class DriverUtil {
      */
     public static String bcdBytesToString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
-        for (int i = 0; i < bytes.length; i++) {
-            sb.append((byte) ((bytes[i] & 0xf0) >>> 4));
-            sb.append((byte) (bytes[i] & 0x0f));
+        for (byte aByte : bytes) {
+            sb.append((byte) ((aByte & 0xf0) >>> 4));
+            sb.append((byte) (aByte & 0x0f));
         }
-        return sb.toString().substring(0, 1).equalsIgnoreCase("0") ? sb
-                .toString().substring(1) : sb.toString();
+        return sb.substring(0, 1).equalsIgnoreCase("0") ? sb.substring(1) : sb.toString();
     }
 
     /**
@@ -275,47 +247,4 @@ public class DriverUtil {
         }
         return xor;
     }
-
-    /**
-     * 获取基本类型 Class Name, 默认: java.lang.String
-     *
-     * @param type String Type, byte/short/int/long/float/double/boolean/string
-     * @return Class Name
-     */
-    public static String getTypeClassName(String type) {
-        String className = String.class.getName();
-
-        PointTypeFlagEnum valueType = PointTypeFlagEnum.ofCode(type);
-        if (ObjectUtil.isNull(valueType)) {
-            throw new IllegalArgumentException("Unsupported type of " + type);
-        }
-
-        switch (valueType) {
-            case BYTE:
-                className = Byte.class.getName();
-                break;
-            case SHORT:
-                className = Short.class.getName();
-                break;
-            case INT:
-                className = Integer.class.getName();
-                break;
-            case LONG:
-                className = Long.class.getName();
-                break;
-            case FLOAT:
-                className = Float.class.getName();
-                break;
-            case DOUBLE:
-                className = Double.class.getName();
-                break;
-            case BOOLEAN:
-                className = Boolean.class.getName();
-                break;
-            default:
-                break;
-        }
-        return className;
-    }
-
 }

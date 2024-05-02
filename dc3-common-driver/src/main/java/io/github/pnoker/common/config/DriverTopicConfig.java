@@ -17,8 +17,7 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import io.github.pnoker.common.driver.context.DriverContext;
-import io.github.pnoker.common.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
@@ -43,8 +42,6 @@ public class DriverTopicConfig {
 
     @Resource
     private DriverProperty driverProperty;
-    @Resource
-    private DriverContext driverContext;
 
     @Resource
     private TopicExchange registerExchange;

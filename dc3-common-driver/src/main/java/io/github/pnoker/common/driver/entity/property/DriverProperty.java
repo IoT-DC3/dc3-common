@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.property;
+package io.github.pnoker.common.driver.entity.property;
 
 import io.github.pnoker.common.entity.dto.DriverAttributeDTO;
 import io.github.pnoker.common.entity.dto.PointAttributeDTO;

@@ -42,23 +42,23 @@ public interface DriverCustomService {
     /**
      * 读操作, 请灵活运行, 有些类型设备不一定能直接读取数据
      *
-     * @param driverInfo Driver Attribute Info
-     * @param pointInfo  Point Attribute Info
-     * @param device     Device
-     * @param point      Point
+     * @param driverConfig Driver Attribute Config
+     * @param pointConfig  Point Attribute Config
+     * @param device       Device
+     * @param point        Point
      * @return R of String Value
      */
-    String read(Map<String, AttributeConfigDTO> driverInfo, Map<String, AttributeConfigDTO> pointInfo, DeviceDTO device, PointDTO point);
+    String read(Map<String, AttributeConfigDTO> driverConfig, Map<String, AttributeConfigDTO> pointConfig, DeviceDTO device, PointDTO point);
 
     /**
      * 写操作, 请灵活运行, 有些类型设备不一定能直接写入数据
      *
-     * @param driverInfo Driver Attribute Info
-     * @param pointInfo  Point Attribute Info
-     * @param device     Device
-     * @param value      Value Attribute Info
+     * @param driverConfig Driver Attribute Config
+     * @param pointConfig  Point Attribute Config
+     * @param device       Device
+     * @param value        Value Attribute Config
      * @return Boolean 是否写入
      */
-    Boolean write(Map<String, AttributeConfigDTO> driverInfo, Map<String, AttributeConfigDTO> pointInfo, DeviceDTO device, AttributeConfigDTO value);
+    Boolean write(Map<String, AttributeConfigDTO> driverConfig, Map<String, AttributeConfigDTO> pointConfig, DeviceDTO device, AttributeConfigDTO value);
 
 }
