@@ -39,7 +39,7 @@ public class AttributeConfigDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 值, string, 需要通过type确定真实的数据类型
+     * 值, string, 需要根据type确定真实的数据类型
      */
     private String value;
 

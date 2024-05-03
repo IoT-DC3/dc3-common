@@ -40,7 +40,7 @@ public class TenantExt extends BaseExt {
     /**
      * 拓展内容
      * <p>
-     * 拓展内容可以通过 Type 和 Version 进行区分
+     * 拓展内容可以根据 Type 和 Version 进行区分
      */
     @Schema(description = "内容")
     private Content content;

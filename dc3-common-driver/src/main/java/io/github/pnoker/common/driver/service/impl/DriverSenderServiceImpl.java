@@ -26,7 +26,6 @@ import io.github.pnoker.common.entity.dto.PointValueDTO;
 import io.github.pnoker.common.enums.DeviceEventTypeEnum;
 import io.github.pnoker.common.enums.DeviceStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -42,11 +41,13 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DriverSenderServiceImpl implements DriverSenderService {
 
-    @Resource
-    private DriverProperty driverProperty;
+    private final DriverProperty driverProperty;
+    private final RabbitTemplate rabbitTemplate;
 
-    @Resource
-    private RabbitTemplate rabbitTemplate;
+    public DriverSenderServiceImpl(DriverProperty driverProperty, RabbitTemplate rabbitTemplate) {
+        this.driverProperty = driverProperty;
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     @Override
     public void driverEventSender(DriverEventDTO entityDTO) {

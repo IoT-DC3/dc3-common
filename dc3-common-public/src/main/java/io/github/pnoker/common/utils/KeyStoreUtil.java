@@ -64,7 +64,7 @@ public class KeyStoreUtil {
                 return resource;
             }
         }
-        throw new NotFoundException("Certificate file '{}' does not exist", fileName);
+        throw new NotFoundException("Certificate file '{}' doesn't exist", fileName);
     }
 
     private static void importKeystore(InputStream crtInputStream, String crtAliasName, String passphrase) throws Exception {

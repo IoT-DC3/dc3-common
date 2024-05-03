@@ -22,7 +22,6 @@ import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
-import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverDTO;
 import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
@@ -30,7 +29,6 @@ import io.github.pnoker.common.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -48,18 +46,17 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DriverSyncServiceImpl implements DriverSyncService {
 
-    @Resource
-    private DriverContext driverContext;
-    @Resource
-    private DriverProperty driverProperty;
+    private final DriverContext driverContext;
+    private final DriverProperty driverProperty;
+    private final RabbitTemplate rabbitTemplate;
+    private final ThreadPoolExecutor threadPoolExecutor;
 
-    @Resource
-    private DriverSenderService driverSenderService;
-
-    @Resource
-    private RabbitTemplate rabbitTemplate;
-    @Resource
-    private ThreadPoolExecutor threadPoolExecutor;
+    public DriverSyncServiceImpl(DriverContext driverContext, DriverProperty driverProperty, RabbitTemplate rabbitTemplate, ThreadPoolExecutor threadPoolExecutor) {
+        this.driverContext = driverContext;
+        this.driverProperty = driverProperty;
+        this.rabbitTemplate = rabbitTemplate;
+        this.threadPoolExecutor = threadPoolExecutor;
+    }
 
     @Override
     public void up() {

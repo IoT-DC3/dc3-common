@@ -34,13 +34,21 @@ public final class StringOptional {
         this.value = value;
     }
 
-    public static StringOptional of(String value) {
+    public static StringOptional ofNullable(String value) {
         return new StringOptional(value);
     }
 
-    public void ifPresent(Consumer<String> consumer) {
+    public void ifPresent(Consumer<String> action) {
         if (CharSequenceUtil.isNotEmpty(value)) {
-            consumer.accept(value);
+            action.accept(value);
+        }
+    }
+
+    public void ifPresentOrElse(Consumer<String> action, Runnable emptyAction) {
+        if (CharSequenceUtil.isNotEmpty(value)) {
+            action.accept(value);
+        } else {
+            emptyAction.run();
         }
     }
 }

@@ -22,7 +22,6 @@ import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.service.DriverCommandService;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -39,8 +38,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeviceCommandReceiver {
 
-    @Resource
-    private DriverCommandService driverCommandService;
+    private final DriverCommandService driverCommandService;
+
+    public DeviceCommandReceiver(DriverCommandService driverCommandService) {
+        this.driverCommandService = driverCommandService;
+    }
 
     @RabbitHandler
     @RabbitListener(queues = "#{deviceCommandQueue.name}")

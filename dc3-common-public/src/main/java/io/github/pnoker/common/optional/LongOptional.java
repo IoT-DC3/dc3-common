@@ -21,7 +21,7 @@ import io.github.pnoker.common.constant.common.DefaultConstant;
 import java.util.function.LongConsumer;
 
 /**
- * 自定义 long Optional
+ * 自定义 Long Optional
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,13 +34,21 @@ public final class LongOptional {
         this.value = value;
     }
 
-    public static LongOptional of(long value) {
+    public static LongOptional ofNullable(long value) {
         return new LongOptional(value);
     }
 
-    public void ifPresent(LongConsumer consumer) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
-            consumer.accept(value);
+    public void ifPresent(LongConsumer action) {
+        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+            action.accept(value);
+        }
+    }
+
+    public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
+        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+            action.accept(value);
+        } else {
+            emptyAction.run();
         }
     }
 }

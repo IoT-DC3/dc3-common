@@ -60,7 +60,7 @@ public class TransformField<T> {
         String originFieldName = mergedAnnotation.from().isEmpty() ? analyzeOriginFieldName(field) : mergedAnnotation.from();
         this.originField = ReflectUtil.getField(field.getDeclaringClass(), originFieldName);
         Class<? extends Transformer<T, Annotation>> transformerClass = (Class<? extends Transformer<T, Annotation>>) mergedAnnotation.transformer();
-        // 通过spring容器拿转换器实例
+        // 根据spring容器拿转换器实例
         this.transformer = SpringContextUtil.getBean(transformerClass);
         // 获取自定义注解类型（Transformer上有两个泛型, 第一个是转换前的值类型, 第二个是是自定义注解类型）
         ResolvableType resolvableType = ResolvableType.forClass(Transformer.class, transformerClass);

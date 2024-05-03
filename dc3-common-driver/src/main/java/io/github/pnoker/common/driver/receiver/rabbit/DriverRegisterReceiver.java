@@ -21,7 +21,6 @@ import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.service.DriverSyncService;
 import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -38,8 +37,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DriverRegisterReceiver {
 
-    @Resource
-    private DriverSyncService driverSyncService;
+    private final DriverSyncService driverSyncService;
+
+    public DriverRegisterReceiver(DriverSyncService driverSyncService) {
+        this.driverSyncService = driverSyncService;
+    }
 
     @RabbitHandler
     @RabbitListener(queues = "#{driverRegisterQueue.name}")

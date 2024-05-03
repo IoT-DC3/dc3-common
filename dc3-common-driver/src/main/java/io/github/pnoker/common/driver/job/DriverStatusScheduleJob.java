@@ -21,7 +21,6 @@ import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
 import io.github.pnoker.common.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.quartz.JobExecutionContext;
@@ -39,10 +38,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DriverStatusScheduleJob extends QuartzJobBean {
 
-    @Resource
-    private DriverContext driverContext;
-    @Resource
-    private DriverSenderService driverSenderService;
+    private final DriverContext driverContext;
+    private final DriverSenderService driverSenderService;
+
+    public DriverStatusScheduleJob(DriverContext driverContext, DriverSenderService driverSenderService) {
+        this.driverContext = driverContext;
+        this.driverSenderService = driverSenderService;
+    }
 
     @Override
     protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) throws JobExecutionException {

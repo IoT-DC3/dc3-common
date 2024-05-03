@@ -16,36 +16,45 @@
 
 package io.github.pnoker.common.optional;
 
-import io.github.pnoker.common.constant.common.DefaultConstant;
+import cn.hutool.core.util.ObjectUtil;
+import io.github.pnoker.common.enums.EnableFlagEnum;
 
-import java.util.function.IntConsumer;
+import java.util.function.Consumer;
 
 /**
- * 自定义 Integer Optional
+ * 自定义 Enable Optional
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public final class IntegerOptional {
+public final class EnableOptional {
 
-    private final int value;
+    private final EnableFlagEnum value;
 
-    private IntegerOptional(int value) {
-        this.value = value;
+    private EnableOptional(byte index) {
+        this.value = EnableFlagEnum.ofIndex(index);
     }
 
-    public static IntegerOptional ofNullable(int value) {
-        return new IntegerOptional(value);
+    private EnableOptional(int index) {
+        this.value = EnableFlagEnum.ofIndex((byte) index);
     }
 
-    public void ifPresent(IntConsumer action) {
-        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+    public static EnableOptional ofNullable(byte index) {
+        return new EnableOptional(index);
+    }
+
+    public static EnableOptional ofNullable(int index) {
+        return new EnableOptional(index);
+    }
+
+    public void ifPresent(Consumer<EnableFlagEnum> action) {
+        if (ObjectUtil.isNotNull(value)) {
             action.accept(value);
         }
     }
 
-    public void ifPresentOrElse(IntConsumer action, Runnable emptyAction) {
-        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+    public void ifPresentOrElse(Consumer<EnableFlagEnum> action, Runnable emptyAction) {
+        if (ObjectUtil.isNotNull(value)) {
             action.accept(value);
         } else {
             emptyAction.run();

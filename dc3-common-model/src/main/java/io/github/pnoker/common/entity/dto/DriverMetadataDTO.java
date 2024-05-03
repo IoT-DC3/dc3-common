@@ -41,7 +41,15 @@ public class DriverMetadataDTO implements Serializable {
 
     private Long driverId;
     private Long tenantId;
+
+    /**
+     * attributeId,driverAttribute
+     */
     private Map<Long, DriverAttributeDTO> driverAttributeMap;
+
+    /**
+     * attributeId,pointAttribute
+     */
     private Map<Long, PointAttributeDTO> pointAttributeMap;
 
     /**

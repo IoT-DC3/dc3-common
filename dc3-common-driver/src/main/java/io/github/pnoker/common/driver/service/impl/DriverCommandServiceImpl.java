@@ -27,9 +27,8 @@ import io.github.pnoker.common.entity.dto.*;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.exception.ServiceException;
-import io.github.pnoker.common.utils.ValueUtil;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
+import io.github.pnoker.common.utils.ValueUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +40,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DriverCommandServiceImpl implements DriverCommandService {
 
-    @Resource
-    private DriverContext driverContext;
-    @Resource
-    private DriverSenderService driverSenderService;
-    @Resource
-    private DriverCustomService driverCustomService;
+    private final DriverContext driverContext;
+    private final DriverSenderService driverSenderService;
+    private final DriverCustomService driverCustomService;
+
+    public DriverCommandServiceImpl(DriverContext driverContext, DriverSenderService driverSenderService, DriverCustomService driverCustomService) {
+        this.driverContext = driverContext;
+        this.driverSenderService = driverSenderService;
+        this.driverCustomService = driverCustomService;
+    }
 
     @Override
     public PointValueDTO read(Long deviceId, Long pointId) {

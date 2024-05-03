@@ -33,9 +33,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum MetadataTypeEnum {
     /**
-     * 元数据
+     * 驱动类型元数据
      */
-    METADATA((byte) 0, "metadata", "元数据"),
+    DRIVER((byte) 0, "driver", "驱动类型元数据"),
 
     /**
      * 模板类型元数据

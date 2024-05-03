@@ -17,10 +17,7 @@
 package io.github.pnoker.common.entity.ext;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -33,6 +30,7 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseExt implements Serializable {
@@ -50,7 +48,7 @@ public class BaseExt implements Serializable {
      * 版本, 用于乐观锁
      */
     @Schema(description = "版本")
-    private Long version;
+    private Integer version = 1;
 
     /**
      * 描述

@@ -14,33 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.optional;
+package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.constant.common.DefaultConstant;
-
-import java.util.function.LongConsumer;
+import io.github.pnoker.common.entity.dto.DeviceDTO;
 
 /**
- * 自定义 byte Optional
+ * 设备元数据相关接口
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public final class ByteOptional {
+public interface DeviceMetadataService {
 
-    private final byte value;
-
-    private ByteOptional(byte value) {
-        this.value = value;
-    }
-
-    public static ByteOptional of(byte value) {
-        return new ByteOptional(value);
-    }
-
-    public void ifPresent(LongConsumer consumer) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
-            consumer.accept(value);
-        }
-    }
+    /**
+     * 根据 设备ID 获取设备元数据
+     *
+     * @param id 设备ID
+     * @return DeviceDTO
+     */
+    DeviceDTO selectById(Long id);
 }

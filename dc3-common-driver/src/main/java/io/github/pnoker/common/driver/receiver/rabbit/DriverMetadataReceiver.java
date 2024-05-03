@@ -21,7 +21,6 @@ import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.service.DriverMetadataService;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -38,8 +37,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DriverMetadataReceiver {
 
-    @Resource
-    private DriverMetadataService driverMetadataService;
+    private final DriverMetadataService driverMetadataService;
+
+    public DriverMetadataReceiver(DriverMetadataService driverMetadataService) {
+        this.driverMetadataService = driverMetadataService;
+    }
 
     @RabbitHandler
     @RabbitListener(queues = "#{driverMetadataQueue.name}")

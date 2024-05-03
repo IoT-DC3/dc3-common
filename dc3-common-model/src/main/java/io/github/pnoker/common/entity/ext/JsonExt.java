@@ -51,7 +51,7 @@ public class JsonExt implements Serializable {
      * 版本, 用于乐观锁
      */
     @Builder.Default
-    private Long version = 1L;
+    private Integer version = 1;
 
     /**
      * 描述

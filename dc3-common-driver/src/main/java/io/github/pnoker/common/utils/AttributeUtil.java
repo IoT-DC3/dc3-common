@@ -51,7 +51,7 @@ public class AttributeUtil {
     }
 
     /**
-     * 通过类型转换数据
+     * 根据类型转换数据
      *
      * @param attributeType  Attribute Type {@link  AttributeTypeFlagEnum}
      * @param attributeValue Attribute Value

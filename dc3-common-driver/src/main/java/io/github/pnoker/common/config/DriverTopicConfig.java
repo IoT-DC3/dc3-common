@@ -18,7 +18,6 @@ package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -40,15 +39,17 @@ import java.util.Map;
 @ConditionalOnClass(ExchangeConfig.class)
 public class DriverTopicConfig {
 
-    @Resource
-    private DriverProperty driverProperty;
+    private final DriverProperty driverProperty;
+    private final TopicExchange registerExchange;
+    private final TopicExchange metadataExchange;
+    private final TopicExchange commandExchange;
 
-    @Resource
-    private TopicExchange registerExchange;
-    @Resource
-    private TopicExchange metadataExchange;
-    @Resource
-    private TopicExchange commandExchange;
+    public DriverTopicConfig(DriverProperty driverProperty, TopicExchange registerExchange, TopicExchange metadataExchange, TopicExchange commandExchange) {
+        this.driverProperty = driverProperty;
+        this.registerExchange = registerExchange;
+        this.metadataExchange = metadataExchange;
+        this.commandExchange = commandExchange;
+    }
 
     /**
      * 该 Queue 用于接收来自管理端下行的注册数据

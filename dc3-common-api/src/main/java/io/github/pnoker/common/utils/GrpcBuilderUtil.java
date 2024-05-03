@@ -22,6 +22,7 @@ import io.github.pnoker.api.common.GrpcPage;
 import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.base.BaseBO;
+import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.common.Pages;
 
 import java.util.Optional;
@@ -41,24 +42,69 @@ public class GrpcBuilderUtil {
     /**
      * Entity Base BO to Grpc Base DTO
      *
-     * @param entityBO BaseBO
+     * @param entityBO EntityBO
+     * @param <T>      EntityBO extends BaseBO
      * @return GrpcBase
      */
-    public static GrpcBase buildGrpcBaseByBO(BaseBO entityBO) {
+    public static <T extends BaseBO> GrpcBase buildGrpcBaseByBO(T entityBO) {
         if (ObjectUtil.isNull(entityBO)) {
             return null;
         }
 
         GrpcBase.Builder builder = GrpcBase.newBuilder();
-        Optional.of(entityBO.getId()).ifPresent(builder::setId);
-        Optional.of(entityBO.getRemark()).ifPresent(builder::setRemark);
-        Optional.of(entityBO.getCreatorId()).ifPresent(builder::setCreatorId);
-        Optional.of(entityBO.getCreatorName()).ifPresent(builder::setCreatorName);
-        Optional.of(entityBO.getCreateTime()).ifPresent(time -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(time)));
-        Optional.of(entityBO.getOperatorId()).ifPresent(builder::setOperatorId);
-        Optional.of(entityBO.getOperatorName()).ifPresent(builder::setOperatorName);
-        Optional.of(entityBO.getOperateTime()).ifPresent(time -> builder.setOperateTime(LocalDateTimeUtil.milliSeconds(time)));
+        Optional.ofNullable(entityBO.getId()).ifPresentOrElse(builder::setId, () -> builder.setId(DefaultConstant.DEFAULT_NULL_INT_VALUE));
+        Optional.ofNullable(entityBO.getRemark()).ifPresent(builder::setRemark);
+        Optional.ofNullable(entityBO.getCreatorId()).ifPresentOrElse(builder::setCreatorId, () -> builder.setCreatorId(DefaultConstant.DEFAULT_NULL_INT_VALUE));
+        Optional.ofNullable(entityBO.getCreatorName()).ifPresent(builder::setCreatorName);
+        Optional.ofNullable(entityBO.getCreateTime()).ifPresent(time -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(time)));
+        Optional.ofNullable(entityBO.getOperatorId()).ifPresentOrElse(builder::setOperatorId, () -> builder.setOperatorId(DefaultConstant.DEFAULT_NULL_INT_VALUE));
+        Optional.ofNullable(entityBO.getOperatorName()).ifPresent(builder::setOperatorName);
+        Optional.ofNullable(entityBO.getOperateTime()).ifPresent(time -> builder.setOperateTime(LocalDateTimeUtil.milliSeconds(time)));
         return builder.build();
+    }
+
+    /**
+     * Grpc Base to Base BO
+     *
+     * @param entityGrpc GrpcBase
+     * @param entityBO   EntityBO
+     * @param <T>        EntityBO extends BaseBO
+     */
+    public static <T extends BaseBO> void buildBaseBOByGrpcBase(GrpcBase entityGrpc, T entityBO) {
+        if (ObjectUtil.isNull(entityGrpc)) {
+            return;
+        }
+
+        entityBO.setId(entityGrpc.getId());
+        entityBO.setRemark(entityGrpc.getRemark());
+        entityBO.setCreatorId(entityGrpc.getCreatorId());
+        entityBO.setCreatorName(entityGrpc.getCreatorName());
+        entityBO.setCreateTime(LocalDateTimeUtil.localDateTime(entityGrpc.getCreateTime()));
+        entityBO.setOperatorId(entityGrpc.getOperatorId());
+        entityBO.setOperatorName(entityGrpc.getOperatorName());
+        entityBO.setOperateTime(LocalDateTimeUtil.localDateTime(entityGrpc.getOperateTime()));
+    }
+
+    /**
+     * Grpc Base to Base DTO
+     *
+     * @param entityGrpc GrpcBase
+     * @param entityDTO  EntityDTO
+     * @param <T>        EntityDTO extends GrpcBase
+     */
+    public static <T extends BaseDTO> void buildBaseDTOByGrpcBase(GrpcBase entityGrpc, T entityDTO) {
+        if (ObjectUtil.isNull(entityGrpc)) {
+            return;
+        }
+
+        entityDTO.setId(entityGrpc.getId());
+        entityDTO.setRemark(entityGrpc.getRemark());
+        entityDTO.setCreatorId(entityGrpc.getCreatorId());
+        entityDTO.setCreatorName(entityGrpc.getCreatorName());
+        entityDTO.setCreateTime(LocalDateTimeUtil.localDateTime(entityGrpc.getCreateTime()));
+        entityDTO.setOperatorId(entityGrpc.getOperatorId());
+        entityDTO.setOperatorName(entityGrpc.getOperatorName());
+        entityDTO.setOperateTime(LocalDateTimeUtil.localDateTime(entityGrpc.getOperateTime()));
     }
 
     /**
