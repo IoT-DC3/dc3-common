@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.context;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
+import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
 import io.github.pnoker.common.entity.dto.PointDTO;
@@ -59,7 +59,7 @@ public class DriverContext {
      * @param deviceId 设备ID
      * @return Map String:AttributeInfo
      */
-    public Map<String, AttributeConfigDTO> getDriverConfigByDeviceId(Long deviceId) {
+    public Map<String, AttributeBO> getDriverConfigByDeviceId(Long deviceId) {
         return this.driverMetadata.getDriverConfigMap().get(deviceId);
     }
 
@@ -69,8 +69,8 @@ public class DriverContext {
      * @param deviceId 设备ID
      * @return Map String:(Map String:AttributeInfo)
      */
-    public Map<Long, Map<String, AttributeConfigDTO>> getPointConfigByDeviceId(Long deviceId) {
-        Map<Long, Map<String, AttributeConfigDTO>> tmpMap = this.driverMetadata.getPointConfigMap().get(deviceId);
+    public Map<Long, Map<String, AttributeBO>> getPointConfigByDeviceId(Long deviceId) {
+        Map<Long, Map<String, AttributeBO>> tmpMap = this.driverMetadata.getPointConfigMap().get(deviceId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.isEmpty()) {
             throw new NotFoundException("Device({}) doesn't exist", deviceId);
         }
@@ -84,8 +84,8 @@ public class DriverContext {
      * @param pointId  位号ID
      * @return Map String:AttributeInfo
      */
-    public Map<String, AttributeConfigDTO> getPointConfigByDeviceIdAndPointId(Long deviceId, Long pointId) {
-        Map<String, AttributeConfigDTO> tmpMap = getPointConfigByDeviceId(deviceId).get(pointId);
+    public Map<String, AttributeBO> getPointConfigByDeviceIdAndPointId(Long deviceId, Long pointId) {
+        Map<String, AttributeBO> tmpMap = getPointConfigByDeviceId(deviceId).get(pointId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.isEmpty()) {
             throw new NotFoundException("Point({}) info doesn't exist", pointId);
         }

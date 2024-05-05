@@ -24,7 +24,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -89,5 +89,20 @@ public class DeviceDTO extends BaseDTO {
     /**
      * 模版ID集
      */
-    private Set<Long> profileIds = new HashSet<>(4);
+    private Set<Long> profileIds;
+
+    /**
+     * 位号ID集
+     */
+    private Set<Long> pointIds;
+
+    /**
+     * 驱动配置
+     */
+    private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap;
+
+    /**
+     * 位号配置
+     */
+    private Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap;
 }

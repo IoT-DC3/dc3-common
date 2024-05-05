@@ -41,7 +41,6 @@ public class LogsAspect {
         // nothing to do
     }
 
-    // TODO 这个日志逻辑有点鸡肋, 这个里需要写点别的逻辑
     @Around("logsCut() && @annotation(logs)")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint, Logs logs) throws Throwable {
         String uuid = UUID.randomUUID().toString();

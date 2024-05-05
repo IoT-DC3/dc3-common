@@ -25,7 +25,7 @@ import lombok.Setter;
 /**
  * Profile Ext
  * <p>
- * 模板相关拓展信息
+ * 模版相关拓展信息
  *
  * @author pnoker
  * @since 2022.1.0
@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "模板相关拓展")
+@Schema(description = "模版相关拓展")
 public class ProfileExt extends BaseExt {
 
     /**

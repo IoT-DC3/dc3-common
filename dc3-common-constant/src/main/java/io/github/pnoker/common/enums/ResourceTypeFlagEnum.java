@@ -39,9 +39,9 @@ public enum ResourceTypeFlagEnum {
     DRIVER((byte) 0, "driver", "驱动"),
 
     /**
-     * 模板
+     * 模版
      */
-    PROFILE((byte) 1, "profile", "模板"),
+    PROFILE((byte) 1, "profile", "模版"),
 
     /**
      * 位号

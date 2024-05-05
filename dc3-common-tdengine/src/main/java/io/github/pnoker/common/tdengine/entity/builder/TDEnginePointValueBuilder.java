@@ -18,6 +18,7 @@ package io.github.pnoker.common.tdengine.entity.builder;
 
 import io.github.pnoker.common.entity.bo.PointValueBO;
 import io.github.pnoker.common.tdengine.entity.model.TDEnginePointValueDO;
+import io.github.pnoker.common.utils.MapStructUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -29,7 +30,7 @@ import java.util.List;
  * @author pnoker
  * @since 2022.1.0
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {MapStructUtil.class})
 public interface TDEnginePointValueBuilder {
 
     /**

@@ -44,21 +44,21 @@ public class DriverProperty {
     /**
      * 租户
      */
-    @NotBlank(message = "Tenant can't be empty")
+    @NotBlank(message = "租户不能为空")
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid driver tenant")
+            message = "无效的租户")
     private String tenant;
 
     /**
      * 驱动类型
      */
-    @NotNull(message = "Driver type can't be empty")
-    private DriverTypeFlagEnum type = DriverTypeFlagEnum.DRIVER;
+    @NotNull(message = "驱动类型不能为空")
+    private DriverTypeFlagEnum type = DriverTypeFlagEnum.DRIVER_CLIENT;
 
     /**
      * 驱动名称
      */
-    @NotBlank(message = "Driver name can't be empty")
+    @NotBlank(message = "驱动名称不能为空")
     @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
             message = "驱动名称格式无效")
     private String name;
@@ -66,9 +66,9 @@ public class DriverProperty {
     /**
      * 驱动编号
      */
-    @NotBlank(message = "Driver code can't be empty")
+    @NotBlank(message = "驱动编号不能为空")
     @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "Invalid driver code")
+            message = "无效的驱动编号")
     private String code;
 
     /**

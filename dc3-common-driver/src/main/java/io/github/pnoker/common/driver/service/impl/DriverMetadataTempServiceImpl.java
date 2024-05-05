@@ -19,6 +19,7 @@ package io.github.pnoker.common.driver.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.service.DriverMetadataTempService;
+import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -88,7 +89,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
         if (ObjectUtil.isNotNull(attribute)) {
             // Add driver attribute config to driver attribute config map context
             driverContext.getDriverMetadata().getDriverConfigMap().computeIfAbsent(driverAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
-                    .put(attribute.getAttributeName(), new AttributeConfigDTO(driverAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
+                    .put(attribute.getAttributeName(), new AttributeBO(driverAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
         }
     }
 
@@ -114,7 +115,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
             // Add the point attribute config to the device point attribute config map context
             driverContext.getDriverMetadata().getPointConfigMap().computeIfAbsent(pointAttributeConfig.getDeviceId(), k -> new ConcurrentHashMap<>(16))
                     .computeIfAbsent(pointAttributeConfig.getPointId(), k -> new ConcurrentHashMap<>(16))
-                    .put(attribute.getAttributeName(), new AttributeConfigDTO(pointAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
+                    .put(attribute.getAttributeName(), new AttributeBO(pointAttributeConfig.getConfigValue(), attribute.getAttributeTypeFlag()));
         }
     }
 

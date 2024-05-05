@@ -17,6 +17,7 @@
 package io.github.pnoker.common.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
+import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.enums.RwFlagEnum;
@@ -80,17 +81,17 @@ public class PointDTO extends BaseDTO {
     private String unit;
 
     /**
-     * 模板ID
+     * 模版ID
      */
     private Long profileId;
 
     /**
-     * 报警通知模板ID
+     * 报警通知模版ID
      */
     private Long alarmNotifyProfileId;
 
     /**
-     * 报警信息模板ID
+     * 报警信息模版ID
      */
     private Long alarmMessageProfileId;
 
@@ -98,6 +99,11 @@ public class PointDTO extends BaseDTO {
      * 分组ID
      */
     private Long groupId;
+
+    /**
+     * 位号拓展信息
+     */
+    private PointExt pointExt;
 
     /**
      * 使能标识

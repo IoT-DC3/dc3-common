@@ -17,24 +17,25 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.context.DriverContext;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.grpc.client.DeviceClient;
+import io.github.pnoker.common.driver.grpc.client.DriverClient;
+import io.github.pnoker.common.driver.grpc.client.PointClient;
+import io.github.pnoker.common.driver.metadata.DeviceMetadata;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
+import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverSyncService;
-import io.github.pnoker.common.entity.dto.DriverDTO;
-import io.github.pnoker.common.entity.dto.DriverMetadataDTO;
-import io.github.pnoker.common.entity.dto.DriverRegisterDTO;
-import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
+import io.github.pnoker.common.entity.dto.*;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 驱动同步相关接口实现
@@ -46,13 +47,27 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DriverSyncServiceImpl implements DriverSyncService {
 
+    private final DriverClient driverClient;
+    private final DeviceClient deviceClient;
+    private final PointClient pointClient;
     private final DriverContext driverContext;
+    private final DriverMetadata driverMetadata;
+    private final DeviceMetadata deviceMetadata;
+    private final PointMetadata pointMetadata;
     private final DriverProperty driverProperty;
     private final RabbitTemplate rabbitTemplate;
     private final ThreadPoolExecutor threadPoolExecutor;
 
-    public DriverSyncServiceImpl(DriverContext driverContext, DriverProperty driverProperty, RabbitTemplate rabbitTemplate, ThreadPoolExecutor threadPoolExecutor) {
+    public DriverSyncServiceImpl(DriverClient driverClient, DeviceClient deviceClient, PointClient pointClient, DriverContext driverContext,
+                                 DriverMetadata driverMetadata, DeviceMetadata deviceMetadata, PointMetadata pointMetadata, DriverProperty driverProperty,
+                                 RabbitTemplate rabbitTemplate, ThreadPoolExecutor threadPoolExecutor) {
+        this.driverClient = driverClient;
+        this.pointClient = pointClient;
+        this.deviceClient = deviceClient;
         this.driverContext = driverContext;
+        this.driverMetadata = driverMetadata;
+        this.deviceMetadata = deviceMetadata;
+        this.pointMetadata = pointMetadata;
         this.driverProperty = driverProperty;
         this.rabbitTemplate = rabbitTemplate;
         this.threadPoolExecutor = threadPoolExecutor;
@@ -64,22 +79,14 @@ public class DriverSyncServiceImpl implements DriverSyncService {
             DriverRegisterDTO entityDTO = buildRegisterDTOByProperty();
             log.info("The driver {} is initializing", entityDTO.getClient());
             log.debug("The driver {} initialization information is: {}", driverProperty.getService(), JsonUtil.toJsonString(entityDTO));
-            rabbitTemplate.convertAndSend(
-                    RabbitConstant.TOPIC_EXCHANGE_REGISTER,
-                    RabbitConstant.ROUTING_REGISTER_UP_PREFIX + driverProperty.getClient(),
-                    entityDTO
-            );
-
-            threadPoolExecutor.submit(() -> {
-                while (!DriverStatusEnum.ONLINE.equals(driverContext.getDriverStatus())) {
-                    ThreadUtil.sleep(500);
-                }
-            }).get(15, TimeUnit.SECONDS);
-
+            driverClient.driverRegister(entityDTO);
+            List<DeviceDTO> deviceDTOList = deviceClient.list();
+            deviceDTOList.forEach(deviceDTO -> deviceMetadata.setCache(deviceDTO.getId(), deviceDTO));
+            List<PointDTO> pointDTOList = pointClient.list();
+            pointDTOList.forEach(pointDTO -> pointMetadata.setCache(pointDTO.getId(), pointDTO));
             log.info("The driver {} is initialized successfully.", entityDTO.getClient());
-        } catch (Exception ignored) {
-            log.error("The driver initialization failed, registration response timed out.");
-            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            log.error("The driver initialization failed: {}", e.getMessage(), e);
             System.exit(1);
         }
     }
@@ -112,28 +119,19 @@ public class DriverSyncServiceImpl implements DriverSyncService {
      */
     private DriverRegisterDTO buildRegisterDTOByProperty() {
         DriverRegisterDTO driverRegisterDTO = new DriverRegisterDTO();
-        driverRegisterDTO.setDriver(buildDriverByProperty());
+        DriverDTO driverDTO = new DriverDTO();
+        driverDTO.setDriverName(driverProperty.getName());
+        driverDTO.setDriverCode(driverProperty.getCode());
+        driverDTO.setServiceName(driverProperty.getService());
+        driverDTO.setServiceHost(driverProperty.getHost());
+        driverDTO.setDriverTypeFlag(driverProperty.getType());
+        driverDTO.setRemark(driverProperty.getRemark());
+        driverRegisterDTO.setDriver(driverDTO);
         driverRegisterDTO.setTenant(driverProperty.getTenant());
         driverRegisterDTO.setClient(driverProperty.getClient());
         driverRegisterDTO.setDriverAttributes(driverProperty.getDriverAttribute());
         driverRegisterDTO.setPointAttributes(driverProperty.getPointAttribute());
         return driverRegisterDTO;
-    }
-
-    /**
-     * Property To Driver
-     *
-     * @return Driver
-     */
-    private DriverDTO buildDriverByProperty() {
-        DriverDTO entityDO = new DriverDTO();
-        entityDO.setDriverName(driverProperty.getName());
-        entityDO.setDriverCode(driverProperty.getCode());
-        entityDO.setServiceName(driverProperty.getService());
-        entityDO.setServiceHost(driverProperty.getHost());
-        entityDO.setDriverTypeFlag(driverProperty.getType());
-        entityDO.setRemark(driverProperty.getRemark());
-        return entityDO;
     }
 
 }

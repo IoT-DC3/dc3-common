@@ -14,23 +14,37 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service;
+package io.github.pnoker.common.entity.bo;
 
-import io.github.pnoker.common.entity.dto.DeviceDTO;
+import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import lombok.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
- * 设备元数据相关接口
+ * 属性配置
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface DeviceMetadataService {
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AttributeBO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
-     * 根据 设备ID 获取设备元数据
-     *
-     * @param id 设备ID
-     * @return DeviceDTO
+     * 值, string, 需要根据type确定真实的数据类型
      */
-    DeviceDTO selectById(Long id);
+    private String value;
+
+    /**
+     * 类型, value type, 用于确定value的真实类型
+     */
+    private AttributeTypeFlagEnum type;
 }

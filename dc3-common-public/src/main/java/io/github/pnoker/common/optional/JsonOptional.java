@@ -16,36 +16,37 @@
 
 package io.github.pnoker.common.optional;
 
-import io.github.pnoker.common.constant.common.DefaultConstant;
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.json.JSONUtil;
 
-import java.util.function.LongConsumer;
+import java.util.function.Consumer;
 
 /**
- * 自定义 Long Optional
+ * 自定义 String Optional
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public final class LongOptional {
+public final class JsonOptional {
 
-    private final long value;
+    private final String value;
 
-    private LongOptional(long value) {
+    private JsonOptional(String value) {
         this.value = value;
     }
 
-    public static LongOptional ofNullable(long value) {
-        return new LongOptional(value);
+    public static JsonOptional ofNullable(String value) {
+        return new JsonOptional(value);
     }
 
-    public void ifPresent(LongConsumer action) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+    public void ifPresent(Consumer<String> action) {
+        if (CharSequenceUtil.isNotEmpty(value) && JSONUtil.isTypeJSON(value)) {
             action.accept(value);
         }
     }
 
-    public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+    public void ifPresentOrElse(Consumer<String> action, Runnable emptyAction) {
+        if (CharSequenceUtil.isNotEmpty(value) && JSONUtil.isTypeJSON(value)) {
             action.accept(value);
         } else {
             emptyAction.run();

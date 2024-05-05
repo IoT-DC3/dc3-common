@@ -58,7 +58,7 @@ public interface BaseController {
     /**
      * 获取租户ID
      *
-     * @return Tenant ID
+     * @return 租户ID
      */
     default Long getTenantId() {
         return UserHeaderUtil.getUserHeader().getTenantId();

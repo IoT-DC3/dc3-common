@@ -14,60 +14,68 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.service.impl;
+package io.github.pnoker.common.driver.metadata;
 
 
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import io.github.pnoker.api.common.driver.DeviceApiGrpc;
-import io.github.pnoker.api.common.driver.GrpcDeviceQuery;
-import io.github.pnoker.api.common.driver.GrpcRDeviceDTO;
-import io.github.pnoker.common.constant.service.ManagerConstant;
-import io.github.pnoker.common.driver.entity.builder.DeviceBuilder;
-import io.github.pnoker.common.driver.service.DeviceMetadataService;
+import io.github.pnoker.common.driver.grpc.client.DeviceClient;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 设备元数据
+ *
+ * @author pnoker
+ * @since 2022.1.0
+ */
 @Slf4j
-@Service
-public class DeviceMetadataServiceImpl implements DeviceMetadataService {
+@Component
+public class DeviceMetadata {
 
-    @GrpcClient(ManagerConstant.SERVICE_NAME)
-    private DeviceApiGrpc.DeviceApiBlockingStub deviceApiBlockingStub;
-
-    private final DeviceBuilder deviceBuilder;
+    /**
+     * deviceId,deviceDTO
+     */
     private final AsyncLoadingCache<Long, DeviceDTO> cache;
 
-    public DeviceMetadataServiceImpl(DeviceBuilder deviceBuilder) {
-        this.deviceBuilder = deviceBuilder;
+    private final DeviceClient deviceClient;
+
+    public DeviceMetadata(DeviceClient deviceClient) {
+        this.deviceClient = deviceClient;
         this.cache = Caffeine.newBuilder()
                 .maximumSize(1000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
-                .removalListener((key, value, cause) -> log.info("Remove key={}, value={} cache, reason is: {}", key, value, cause))
+                .removalListener((key, value, cause) -> log.info("Remove device={}, value={} cache, reason is: {}", key, value, cause))
                 .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
                     log.info("Load device metadata by id: {}", rawValue);
-                    DeviceDTO deviceDTO = selectById(rawValue);
+                    DeviceDTO deviceDTO = deviceClient.selectById(rawValue);
                     log.info("Cache device metadata: {}", JsonUtil.toJsonString(deviceDTO));
                     return deviceDTO;
                 }, executor));
     }
 
-    @Override
-    public DeviceDTO selectById(Long id) {
-        GrpcDeviceQuery.Builder query = GrpcDeviceQuery.newBuilder();
-        query.setDeviceId(id);
-        GrpcRDeviceDTO rDeviceDTO = deviceApiBlockingStub.selectById(query.build());
-        if (!rDeviceDTO.getResult().getOk()) {
-            log.error("Device doesn't exist: {}", id);
+    public DeviceDTO getCache(long id) {
+        try {
+            CompletableFuture<DeviceDTO> future = cache.get(id);
+            return future.get();
+        } catch (Exception e) {
+            log.error("Get device metadata by id: {}", id, e);
             return null;
         }
-
-        return deviceBuilder.buildDTOByGrpcDTO(rDeviceDTO.getData());
     }
+
+    public List<CompletableFuture<DeviceDTO>> getAllCache() {
+        return cache.asMap().values().stream().toList();
+    }
+
+    public void setCache(long id, DeviceDTO deviceDTO) {
+        cache.put(id, CompletableFuture.completedFuture(deviceDTO));
+    }
+
 }

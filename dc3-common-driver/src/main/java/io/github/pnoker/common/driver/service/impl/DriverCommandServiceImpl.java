@@ -20,9 +20,13 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.github.pnoker.common.driver.context.DriverContext;
+import io.github.pnoker.common.driver.metadata.DeviceMetadata;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
+import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverCommandService;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverSenderService;
+import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.*;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.exception.ReadPointException;
@@ -31,6 +35,9 @@ import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.ValueUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author pnoker
@@ -41,26 +48,53 @@ import org.springframework.stereotype.Service;
 public class DriverCommandServiceImpl implements DriverCommandService {
 
     private final DriverContext driverContext;
+    private final DriverMetadata driverMetadata;
+    private final DeviceMetadata deviceMetadata;
+    private final PointMetadata pointMetadata;
     private final DriverSenderService driverSenderService;
     private final DriverCustomService driverCustomService;
 
-    public DriverCommandServiceImpl(DriverContext driverContext, DriverSenderService driverSenderService, DriverCustomService driverCustomService) {
+    public DriverCommandServiceImpl(DriverContext driverContext, DriverMetadata driverMetadata, DeviceMetadata deviceMetadata, PointMetadata pointMetadata, DriverSenderService driverSenderService, DriverCustomService driverCustomService) {
         this.driverContext = driverContext;
+        this.driverMetadata = driverMetadata;
+        this.deviceMetadata = deviceMetadata;
+        this.pointMetadata = pointMetadata;
         this.driverSenderService = driverSenderService;
         this.driverCustomService = driverCustomService;
     }
 
     @Override
     public PointValueDTO read(Long deviceId, Long pointId) {
-        DeviceDTO device = driverContext.getDeviceByDeviceId(deviceId);
-        PointDTO point = driverContext.getPointByDeviceIdAndPointId(deviceId, pointId);
+        DeviceDTO device = deviceMetadata.getCache(deviceId);
+        PointDTO point = pointMetadata.getCache(pointId);
+        Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap = device.getDriverAttributeConfigMap();
+        Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap = device.getPointAttributeConfigMap();
+
+        Map<String, AttributeBO> driverMap = new HashMap<>();
+        for (Map.Entry<Long, DriverAttributeConfigDTO> entity : driverAttributeConfigMap.entrySet()) {
+            DriverAttributeDTO driverAttributeDTO = driverMetadata.getDriverAttributeMap().get(entity.getKey());
+            AttributeBO attributeBO = new AttributeBO();
+            attributeBO.setType(driverAttributeDTO.getAttributeTypeFlag());
+            attributeBO.setValue(entity.getValue().getConfigValue());
+            driverMap.put(driverAttributeDTO.getAttributeName(), attributeBO);
+        }
+
+        Map<String, AttributeBO> pointMap = new HashMap<>();
+        for (Map.Entry<Long, PointAttributeConfigDTO> entity : pointAttributeConfigMap.entrySet()) {
+            PointAttributeDTO driverAttributeDTO = driverMetadata.getPointAttributeMap().get(entity.getKey());
+            AttributeBO attributeBO = new AttributeBO();
+            attributeBO.setType(driverAttributeDTO.getAttributeTypeFlag());
+            attributeBO.setValue(entity.getValue().getConfigValue());
+            pointMap.put(driverAttributeDTO.getAttributeName(), attributeBO);
+        }
+
 
         try {
             String rawValue = driverCustomService.read(
-                    driverContext.getDriverConfigByDeviceId(deviceId),
-                    driverContext.getPointConfigByDeviceIdAndPointId(deviceId, pointId),
+                    driverMap,
+                    pointMap,
                     device,
-                    driverContext.getPointByDeviceIdAndPointId(deviceId, pointId)
+                    point
             );
 
             if (CharSequenceUtil.isEmpty(rawValue)) {
@@ -100,7 +134,7 @@ public class DriverCommandServiceImpl implements DriverCommandService {
                     driverContext.getDriverConfigByDeviceId(deviceId),
                     driverContext.getPointConfigByDeviceIdAndPointId(deviceId, pointId),
                     device,
-                    new AttributeConfigDTO(value, typeEnum)
+                    new AttributeBO(value, typeEnum)
             );
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());

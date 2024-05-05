@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
+import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.PointDTO;
 
@@ -48,7 +48,7 @@ public interface DriverCustomService {
      * @param point        Point
      * @return R of String Value
      */
-    String read(Map<String, AttributeConfigDTO> driverConfig, Map<String, AttributeConfigDTO> pointConfig, DeviceDTO device, PointDTO point);
+    String read(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, PointDTO point);
 
     /**
      * 写操作, 请灵活运行, 有些类型设备不一定能直接写入数据
@@ -59,6 +59,6 @@ public interface DriverCustomService {
      * @param value        Value Attribute Config
      * @return Boolean 是否写入
      */
-    Boolean write(Map<String, AttributeConfigDTO> driverConfig, Map<String, AttributeConfigDTO> pointConfig, DeviceDTO device, AttributeConfigDTO value);
+    Boolean write(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, AttributeBO value);
 
 }

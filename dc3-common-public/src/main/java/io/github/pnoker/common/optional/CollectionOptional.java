@@ -16,36 +16,37 @@
 
 package io.github.pnoker.common.optional;
 
-import io.github.pnoker.common.constant.common.DefaultConstant;
+import cn.hutool.core.collection.CollUtil;
 
-import java.util.function.LongConsumer;
+import java.util.Collection;
+import java.util.function.Consumer;
 
 /**
- * 自定义 Long Optional
+ * 自定义 Collection Optional
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public final class LongOptional {
+public final class CollectionOptional<T> {
 
-    private final long value;
+    private final Collection<T> value;
 
-    private LongOptional(long value) {
+    private CollectionOptional(Collection<T> value) {
         this.value = value;
     }
 
-    public static LongOptional ofNullable(long value) {
-        return new LongOptional(value);
+    public static <T> CollectionOptional<T> ofNullable(Collection<T> value) {
+        return new CollectionOptional<>(value);
     }
 
-    public void ifPresent(LongConsumer action) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+    public void ifPresent(Consumer<Collection<T>> action) {
+        if (CollUtil.isNotEmpty(value)) {
             action.accept(value);
         }
     }
 
-    public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+    public void ifPresentOrElse(Consumer<Collection<?>> action, Runnable emptyAction) {
+        if (CollUtil.isNotEmpty(value)) {
             action.accept(value);
         } else {
             emptyAction.run();

@@ -19,6 +19,7 @@ package io.github.pnoker.common.entity.builder;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.base.BaseVO;
+import io.github.pnoker.common.utils.MapStructUtil;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
  * @author pnoker
  * @since 2022.1.0
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {MapStructUtil.class})
 public interface BaseBuilder {
 
     /**

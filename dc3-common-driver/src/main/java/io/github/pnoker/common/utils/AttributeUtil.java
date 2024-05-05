@@ -19,7 +19,7 @@ package io.github.pnoker.common.utils;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.dto.AttributeConfigDTO;
+import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.TypeException;
@@ -42,11 +42,11 @@ public class AttributeUtil {
     /**
      * 获取 属性值
      *
-     * @param attributeConfig Attribute Config {@link AttributeConfigDTO}
+     * @param attributeConfig Attribute Config {@link AttributeBO}
      * @param <T>             T
      * @return T
      */
-    public static <T> T getAttributeValue(AttributeConfigDTO attributeConfig, Class<T> clazz) {
+    public static <T> T getAttributeValue(AttributeBO attributeConfig, Class<T> clazz) {
         return value(attributeConfig.getType(), attributeConfig.getValue(), clazz);
     }
 

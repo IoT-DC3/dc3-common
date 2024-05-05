@@ -53,9 +53,9 @@ public enum EntityTypeFlagEnum {
     DRIVER((byte) 3, "driver", "驱动"),
 
     /**
-     * 模板
+     * 模版
      */
-    PROFILE((byte) 4, "profile", "模板"),
+    PROFILE((byte) 4, "profile", "模版"),
 
     /**
      * 位号

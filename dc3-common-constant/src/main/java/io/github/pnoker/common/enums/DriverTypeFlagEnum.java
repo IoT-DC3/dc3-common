@@ -33,19 +33,24 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum DriverTypeFlagEnum {
     /**
-     * 协议驱动
+     * 协议驱动, 客户端模式
      */
-    DRIVER((byte) 0, "driver", "协议类型驱动"),
+    DRIVER_CLIENT((byte) 0, "driver_client", "协议类型驱动, 客户端模式"),
+
+    /**
+     * 协议驱动,  服务端模式
+     */
+    DRIVER_SERVER((byte) 1, "driver_server", "协议类型驱动, 客户端模式"),
 
     /**
      * 网关驱动
      */
-    GATEWAY((byte) 1, "gateway", "网关类型驱动"),
+    GATEWAY((byte) 2, "gateway", "网关类型驱动"),
 
     /**
      * 串联驱动
      */
-    CONNECT((byte) 2, "connect", "串联类型驱动"),
+    CONNECT((byte) 3, "connect", "串联类型驱动"),
     ;
 
     /**
