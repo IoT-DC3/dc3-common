@@ -32,9 +32,8 @@ public interface DriverWriteService {
      * @param deviceId 设备ID
      * @param pointId  位号ID
      * @param value    位号值
-     * @return 是否写成功
      */
-    Boolean write(Long deviceId, Long pointId, String value);
+    void write(Long deviceId, Long pointId, String value);
 
     /**
      * 指令写取位号值

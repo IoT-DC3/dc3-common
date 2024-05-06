@@ -141,7 +141,7 @@ message GrpcDriverAttributeDTO {
 }
 
 /*
-Driver Attribute Config
+驱动属性配置
 */
 message GrpcDriverAttributeConfigDTO {
   /*
@@ -188,7 +188,7 @@ message GrpcPointAttributeDTO {
 }
 
 /*
-Point Attribute Config
+位号属性配置
 */
 message GrpcPointAttributeConfigDTO {
   /*

@@ -16,15 +16,15 @@
 
 package io.github.pnoker.common.driver.job;
 
-import io.github.pnoker.common.driver.context.DriverContext;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
 import io.github.pnoker.common.enums.DriverEventTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
@@ -38,17 +38,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class DriverStatusScheduleJob extends QuartzJobBean {
 
-    private final DriverContext driverContext;
-    private final DriverSenderService driverSenderService;
+    @Resource
+    DriverMetadata driverMetadata;
 
-    public DriverStatusScheduleJob(DriverContext driverContext, DriverSenderService driverSenderService) {
-        this.driverContext = driverContext;
-        this.driverSenderService = driverSenderService;
-    }
+    @Resource
+    private DriverSenderService driverSenderService;
 
     @Override
-    protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        DriverEventDTO.DriverStatus driverStatus = new DriverEventDTO.DriverStatus(driverContext.getDriverMetadata().getDriverId(), driverContext.getDriverStatus());
+    protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
+        DriverEventDTO.DriverStatus driverStatus = new DriverEventDTO.DriverStatus(driverMetadata.getDriver().getId(), driverMetadata.getDriverStatus());
         DriverEventDTO driverEventDTO = new DriverEventDTO(DriverEventTypeEnum.HEARTBEAT, JsonUtil.toJsonString(driverStatus));
         log.info("Report driver event: {}, event content: {}", driverEventDTO.getType().getCode(), JsonUtil.toJsonString(driverEventDTO));
         driverSenderService.driverEventSender(driverEventDTO);

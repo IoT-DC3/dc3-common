@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.driver.service;
 
+import io.github.pnoker.common.driver.entity.bean.RWPointValue;
 import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.driver.entity.dto.PointDTO;
 import io.github.pnoker.common.entity.bo.AttributeBO;
@@ -30,35 +31,43 @@ import java.util.Map;
  */
 public interface DriverCustomService {
     /**
-     * 初始化接口, 会在驱动启动时执行
+     * 初始化接口
+     * <p>
+     * 会在驱动启动时执行
      */
     void initial();
 
     /**
-     * 自定义调度接口, 配置文件 driver.schedule.custom 进行配置
+     * 自定义调度接口
+     * <p>
+     * 配置文件 driver.schedule.custom 进行配置
      */
     void schedule();
 
     /**
-     * 读操作, 请灵活运行, 有些类型设备不一定能直接读取数据
+     * 读操作
+     * <p>
+     * 请灵活运行, 有些类型设备不一定能直接读取数据
      *
-     * @param driverConfig Driver Attribute Config
-     * @param pointConfig  Point Attribute Config
-     * @param device       Device
-     * @param point        Point
-     * @return R of String Value
+     * @param driverConfig 驱动属性配置
+     * @param pointConfig  位号属性配置
+     * @param device       设备
+     * @param point        位号
+     * @return 以字符串形式返回读取的值, 也存在抛异常
      */
     String read(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, PointDTO point);
 
     /**
-     * 写操作, 请灵活运行, 有些类型设备不一定能直接写入数据
+     * 写操作
+     * <p>
+     * 请灵活运行, 有些类型设备不一定能直接写入数据
      *
-     * @param driverConfig Driver Attribute Config
-     * @param pointConfig  Point Attribute Config
-     * @param device       Device
-     * @param value        Value Attribute Config
-     * @return Boolean 是否写入
+     * @param driverConfig 驱动属性配置
+     * @param pointConfig  位号属性配置
+     * @param device       设备
+     * @param value        待写入数据
+     * @return 是否写入, 也存在抛异常
      */
-    Boolean write(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, AttributeBO value);
+    Boolean write(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, PointDTO point, RWPointValue value);
 
 }

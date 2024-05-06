@@ -98,11 +98,14 @@ public class DeviceDTO extends BaseDTO {
 
     /**
      * 驱动配置
+     * <p>
+     * attributeId,attributeConfig
      */
     private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap;
 
     /**
      * 位号配置
+     * point(attributeId,attributeConfig)
      */
-    private Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap;
+    private Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap;
 }

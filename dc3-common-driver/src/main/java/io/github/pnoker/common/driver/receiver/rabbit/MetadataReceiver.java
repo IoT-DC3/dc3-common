@@ -57,20 +57,11 @@ public class MetadataReceiver {
             }
 
             switch (entityDTO.getType()) {
-                case PROFILE:
-                    driverMetadataService.profileMetadata(entityDTO);
-                    break;
                 case POINT:
                     driverMetadataService.pointMetadata(entityDTO);
                     break;
                 case DEVICE:
                     driverMetadataService.deviceMetadata(entityDTO);
-                    break;
-                case DRIVER_ATTRIBUTE_CONFIG:
-                    driverMetadataService.driverConfigMetadata(entityDTO);
-                    break;
-                case POINT_ATTRIBUTE_CONFIG:
-                    driverMetadataService.pointConfigMetadata(entityDTO);
                     break;
                 default:
                     break;

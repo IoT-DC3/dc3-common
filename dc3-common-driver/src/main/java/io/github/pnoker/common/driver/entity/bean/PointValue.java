@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.entity.dto;
+package io.github.pnoker.common.driver.entity.bean;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -22,7 +22,6 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * MongoDB 位号数据
@@ -36,7 +35,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PointValueDTO implements Serializable {
+public class PointValue implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -63,8 +62,6 @@ public class PointValueDTO implements Serializable {
      */
     private String rawValue;
 
-    private List<String> children;
-
     /**
      * 原始时间
      */
@@ -75,7 +72,7 @@ public class PointValueDTO implements Serializable {
      */
     private LocalDateTime createTime;
 
-    public PointValueDTO(Long deviceId, Long pointId, String rawValue, String value) {
+    public PointValue(Long deviceId, Long pointId, String rawValue, String value) {
         this.deviceId = deviceId;
         this.pointId = pointId;
         this.rawValue = rawValue;

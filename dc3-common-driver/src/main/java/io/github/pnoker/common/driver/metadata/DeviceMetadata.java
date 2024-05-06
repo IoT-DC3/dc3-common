@@ -17,11 +17,14 @@
 package io.github.pnoker.common.driver.metadata;
 
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.*;
 import io.github.pnoker.common.driver.grpc.client.DeviceClient;
+import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.exception.ConfigException;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -30,9 +33,11 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * 设备元数据
@@ -50,11 +55,14 @@ public class DeviceMetadata {
     private final AsyncLoadingCache<Long, DeviceDTO> cache;
 
     @Resource
+    private DriverMetadata driverMetadata;
+
+    @Resource
     private DeviceClient deviceClient;
 
     public DeviceMetadata() {
         this.cache = Caffeine.newBuilder()
-                .maximumSize(1000)
+                .maximumSize(2000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
                 .removalListener((key, value, cause) -> log.info("Remove device={}, value={} cache, reason is: {}", key, value, cause))
                 .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
@@ -70,7 +78,20 @@ public class DeviceMetadata {
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
-    public List<DeviceDTO> getAllCache() {
+    public void loadCache(long id) {
+        DeviceDTO entityDTO = deviceClient.selectById(id);
+        setCache(entityDTO.getId(), entityDTO);
+    }
+
+    public void setCache(long id, DeviceDTO deviceDTO) {
+        cache.put(id, CompletableFuture.completedFuture(deviceDTO));
+    }
+
+    public void removeCache(long id) {
+        cache.put(id, CompletableFuture.completedFuture(null));
+    }
+
+    public List<DeviceDTO> getAllDevice() {
         List<DeviceDTO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<DeviceDTO>> futures = cache.asMap().values();
         for (CompletableFuture<DeviceDTO> future : futures) {
@@ -87,7 +108,7 @@ public class DeviceMetadata {
         return entityDTOList;
     }
 
-    public DeviceDTO getCache(long id) {
+    public DeviceDTO getDevice(long id) {
         try {
             CompletableFuture<DeviceDTO> future = cache.get(id);
             return future.get();
@@ -98,12 +119,131 @@ public class DeviceMetadata {
         }
     }
 
-    public void setCache(long id, DeviceDTO deviceDTO) {
-        cache.put(id, CompletableFuture.completedFuture(deviceDTO));
+    /**
+     * 获取驱动属性配置
+     * <p>
+     * 会校验是否完整
+     *
+     * @param deviceId 设备ID
+     * @return 属性配置Map
+     */
+    public Map<String, AttributeBO> getDriverAttributeConfig(long deviceId) {
+        Map<Long, DriverAttributeDTO> attributeMap = driverMetadata.getDriverAttributeMap();
+        if (MapUtil.isEmpty(attributeMap)) {
+            return MapUtil.empty();
+        }
+
+        DeviceDTO device = getDevice(deviceId);
+        if (ObjectUtil.isNull(device)) {
+            throw new ConfigException("Failed to get config, the device is empty");
+        }
+
+        Map<Long, DriverAttributeConfigDTO> attributeConfigMap = device.getDriverAttributeConfigMap();
+        if (MapUtil.isEmpty(attributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the driver attribute config is empty");
+        }
+        if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
+            throw new ConfigException("Failed to get config, the driver attribute config is incomplete");
+        }
+
+        return attributeMap.entrySet().stream()
+                .collect(Collectors.toMap(
+                                entry -> entry.getValue().getAttributeName(),
+                                entry -> AttributeBO.builder()
+                                        .type(entry.getValue().getAttributeTypeFlag())
+                                        .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                        .build()
+                        )
+                );
     }
 
-    public void removeCache(long id) {
-        cache.put(id, CompletableFuture.completedFuture(null));
+    /**
+     * 获取设备下指定位号属性配置
+     * <p>
+     * 会校验是否完整
+     *
+     * @param deviceId 设备ID
+     * @param pointId  位号ID
+     * @return 属性配置Map
+     */
+    public Map<String, AttributeBO> getPointAttributeConfig(long deviceId, long pointId) {
+        Map<Long, PointAttributeDTO> attributeMap = driverMetadata.getPointAttributeMap();
+        if (MapUtil.isEmpty(attributeMap)) {
+            return MapUtil.empty();
+        }
+
+        DeviceDTO device = getDevice(deviceId);
+        if (ObjectUtil.isNull(device)) {
+            throw new ConfigException("Failed to get config, the device is empty");
+        }
+
+        Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigMap();
+        if (ObjectUtil.isNull(pointAttributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the device point attribute config is empty");
+        }
+
+        Map<Long, PointAttributeConfigDTO> attributeConfigMap = pointAttributeConfigMap.get(pointId);
+        if (MapUtil.isEmpty(attributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the point attribute config is empty");
+        }
+        if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
+            throw new ConfigException("Failed to get config, the point attribute config is incomplete");
+        }
+
+        return attributeMap.entrySet().stream()
+                .collect(Collectors.toMap(
+                                entry -> entry.getValue().getAttributeName(),
+                                entry -> AttributeBO.builder()
+                                        .type(entry.getValue().getAttributeTypeFlag())
+                                        .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                        .build()
+                        )
+                );
+    }
+
+    /**
+     * 获取设备下全部位号属性配置
+     * <p>
+     * 会校验是否完整
+     *
+     * @param deviceId 设备ID
+     * @return 属性配置Map
+     */
+    public Map<Long, Map<String, AttributeBO>> getPointAttributeConfig(long deviceId) {
+        Map<Long, PointAttributeDTO> attributeMap = driverMetadata.getPointAttributeMap();
+        if (MapUtil.isEmpty(attributeMap)) {
+            return MapUtil.empty();
+        }
+
+        DeviceDTO device = getDevice(deviceId);
+        if (ObjectUtil.isNull(device)) {
+            throw new ConfigException("Failed to get config, the device is empty");
+        }
+
+        Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigMap();
+        if (ObjectUtil.isNull(pointAttributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the device point attribute config is empty");
+        }
+
+        return pointAttributeConfigMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry1 -> {
+            Map<Long, PointAttributeConfigDTO> attributeConfigMap = entry1.getValue();
+            if (MapUtil.isEmpty(attributeConfigMap)) {
+                throw new ConfigException("Failed to get config, the point attribute config is empty");
+            }
+            if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
+                throw new ConfigException("Failed to get config, the point attribute config is incomplete");
+            }
+
+            return attributeMap.entrySet().stream()
+                    .collect(Collectors.toMap(
+                                    entry -> entry.getValue().getAttributeName(),
+                                    entry -> AttributeBO.builder()
+                                            .type(entry.getValue().getAttributeTypeFlag())
+                                            .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                            .build()
+                            )
+                    );
+        }));
     }
 
 }

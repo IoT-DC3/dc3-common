@@ -124,8 +124,8 @@ public class DeviceClient {
         });
 
         CollectionOptional.ofNullable(rDeviceAttachDTO.getPointConfigsList()).ifPresent(list -> {
-            Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap = list.stream()
-                    .collect(Collectors.toMap(GrpcPointAttributeConfigDTO::getPointAttributeId, grpcPointAttributeConfigBuilder::buildDTOByGrpcDTO));
+            Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = list.stream()
+                    .collect(Collectors.groupingBy(GrpcPointAttributeConfigDTO::getPointId, Collectors.toMap(GrpcPointAttributeConfigDTO::getPointAttributeId, grpcPointAttributeConfigBuilder::buildDTOByGrpcDTO)));
             deviceDTO.setPointAttributeConfigMap(pointAttributeConfigMap);
         });
 

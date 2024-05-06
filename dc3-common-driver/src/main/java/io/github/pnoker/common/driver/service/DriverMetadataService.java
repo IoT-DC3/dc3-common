@@ -27,13 +27,6 @@ import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
 public interface DriverMetadataService {
 
     /**
-     * 模板元数据
-     *
-     * @param entityDTO DriverMetadataDTO
-     */
-    void profileMetadata(DriverTransferMetadataDTO entityDTO);
-
-    /**
      * 设备元数据
      *
      * @param entityDTO DriverMetadataDTO
@@ -46,18 +39,4 @@ public interface DriverMetadataService {
      * @param entityDTO DriverMetadataDTO
      */
     void pointMetadata(DriverTransferMetadataDTO entityDTO);
-
-    /**
-     * 驱动配置元数据
-     *
-     * @param entityDTO DriverMetadataDTO
-     */
-    void driverConfigMetadata(DriverTransferMetadataDTO entityDTO);
-
-    /**
-     * 位号配置元数据
-     *
-     * @param entityDTO DriverMetadataDTO
-     */
-    void pointConfigMetadata(DriverTransferMetadataDTO entityDTO);
 }

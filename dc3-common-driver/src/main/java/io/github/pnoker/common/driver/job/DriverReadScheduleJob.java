@@ -51,7 +51,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
-        List<DeviceDTO> entityDTOList = deviceMetadata.getAllCache();
+        List<DeviceDTO> entityDTOList = deviceMetadata.getAllDevice();
         if (CollUtil.isEmpty(entityDTOList)) {
             return;
         }

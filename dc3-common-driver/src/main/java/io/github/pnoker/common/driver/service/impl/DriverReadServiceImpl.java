@@ -19,9 +19,9 @@ package io.github.pnoker.common.driver.service.impl;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.DefaultConstant;
+import io.github.pnoker.common.driver.entity.bean.PointValue;
 import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.driver.entity.dto.PointDTO;
-import io.github.pnoker.common.driver.entity.dto.PointValueDTO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
@@ -31,7 +31,6 @@ import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
 import io.github.pnoker.common.exception.ReadPointException;
-import io.github.pnoker.common.utils.AttributeUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.ValueUtil;
 import jakarta.annotation.Resource;
@@ -62,7 +61,7 @@ public class DriverReadServiceImpl implements DriverReadService {
     @Override
     public void read(Long deviceId, Long pointId) {
         try {
-            DeviceDTO device = deviceMetadata.getCache(deviceId);
+            DeviceDTO device = deviceMetadata.getDevice(deviceId);
             if (ObjectUtil.isNull(device)) {
                 throw new ReadPointException("Failed to read point value, device[{}] is null", deviceId);
             }
@@ -71,10 +70,10 @@ public class DriverReadServiceImpl implements DriverReadService {
                 throw new ReadPointException("Failed to read point value, device[{}] not contained point[{}]", deviceId, pointId);
             }
 
-            Map<String, AttributeBO> driverConfig = AttributeUtil.getDriverAttributeConfig(driverMetadata.getDriverAttributeMap(), device.getDriverAttributeConfigMap());
-            Map<String, AttributeBO> pointConfig = AttributeUtil.getPointAttributeConfig(driverMetadata.getPointAttributeMap(), device.getPointAttributeConfigMap());
+            Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverAttributeConfig(deviceId);
+            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId,pointId);
 
-            PointDTO point = pointMetadata.getCache(pointId);
+            PointDTO point = pointMetadata.getPoint(pointId);
             if (ObjectUtil.isNull(point)) {
                 throw new ReadPointException("Failed to read point value, point[{}] is null" + deviceId);
             }
@@ -88,7 +87,7 @@ public class DriverReadServiceImpl implements DriverReadService {
                 throw new ReadPointException(CharSequenceUtil.format("Failed to read point value, point value is invalid: {}", rawValue));
             }
 
-            PointValueDTO pointValue = new PointValueDTO(deviceId, pointId, rawValue, ValueUtil.getFinalValue(point, rawValue));
+            PointValue pointValue = new PointValue(deviceId, pointId, rawValue, ValueUtil.getValue(point, rawValue));
             driverSenderService.pointValueSender(pointValue);
         } catch (Exception e) {
             throw new ReadPointException(e.getMessage(), e);

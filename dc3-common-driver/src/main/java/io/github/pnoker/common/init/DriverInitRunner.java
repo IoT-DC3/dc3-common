@@ -49,7 +49,7 @@ public class DriverInitRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // 驱动注册，包括基本的信息同步
+        // 驱动注册, 包括基本的信息同步
         driverRegisterService.initial();
 
         // 执行驱动模块的自定义初始化函数

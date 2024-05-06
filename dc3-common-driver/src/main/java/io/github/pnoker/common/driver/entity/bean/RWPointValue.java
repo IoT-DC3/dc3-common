@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.bo;
+package io.github.pnoker.common.driver.entity.bean;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.TypeException;
 import io.github.pnoker.common.exception.UnSupportException;
@@ -28,7 +28,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 属性配置
+ * 读数据实体类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,7 +38,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttributeBO implements Serializable {
+public class RWPointValue implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -50,8 +50,10 @@ public class AttributeBO implements Serializable {
 
     /**
      * 类型, value type, 用于确定value的真实类型
+     * <p>
+     * 同位号数据类型一致
      */
-    private AttributeTypeFlagEnum type;
+    private PointTypeFlagEnum type;
 
     /**
      * 根据类型转换数据
@@ -61,15 +63,15 @@ public class AttributeBO implements Serializable {
      * @return T
      */
     @SuppressWarnings("unchecked")
-    public <T> T getAttributeValue(Class<T> clazz) {
+    public <T> T getValue(Class<T> clazz) {
         if (ObjectUtil.isNull(type)) {
-            throw new UnSupportException("Unsupported attribute type of " + type);
+            throw new UnSupportException("Unsupported point type of " + type);
         }
         if (CharSequenceUtil.isEmpty(value)) {
-            throw new EmptyException("Attribute value is empty");
+            throw new EmptyException("Point value is empty");
         }
 
-        final String message = "Attribute type is: {}, can't be cast to class: {}";
+        final String message = "Point type is: {}, can't be cast to class: {}";
         return switch (type) {
             case STRING -> {
                 if (!clazz.equals(String.class)) {

@@ -52,7 +52,7 @@ public class ValueUtil {
      * @param rawValue Raw Value
      * @return Value
      */
-    public static String getFinalValue(PointDTO point, String rawValue) {
+    public static String getValue(PointDTO point, String rawValue) {
         if (ObjectUtil.isNull(point)) {
             throw new EmptyException("Point is empty");
         }

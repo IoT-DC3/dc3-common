@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.driver.entity.dto.PointValueDTO;
+import io.github.pnoker.common.driver.entity.bean.PointValue;
 import io.github.pnoker.common.entity.dto.DeviceEventDTO;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
 import io.github.pnoker.common.enums.DeviceStatusEnum;
@@ -69,13 +69,13 @@ public interface DriverSenderService {
      *
      * @param entityDTO PointValue
      */
-    void pointValueSender(PointValueDTO entityDTO);
+    void pointValueSender(PointValue entityDTO);
 
     /**
      * 批量发送位号值到消息组件
      *
      * @param entityDTOS PointValue Array
      */
-    void pointValueSender(List<PointValueDTO> entityDTOS);
+    void pointValueSender(List<PointValue> entityDTOS);
 
 }

@@ -16,27 +16,14 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.driver.entity.dto.*;
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
 
 /**
  * @author pnoker
  * @since 2022.1.0
  */
 public interface DriverMetadataTempService {
-
-    /**
-     * 向 DeviceDriver 中添加模板
-     *
-     * @param profile Profile
-     */
-    void upsertProfile(ProfileDTO profile);
-
-    /**
-     * 删除驱动原数据中模板
-     *
-     * @param id ID
-     */
-    void deleteProfile(Long id);
 
     /**
      * 向驱动原数据中添加设备
@@ -62,39 +49,7 @@ public interface DriverMetadataTempService {
     /**
      * 删除驱动原数据中位号
      *
-     * @param profileId 模板ID
-     * @param id        ID
+     * @param id ID
      */
-    void deletePoint(Long profileId, Long id);
-
-    /**
-     * 向驱动原数据中添加驱动配置信息
-     *
-     * @param driverAttributeConfig DriverConfig
-     */
-    void upsertDriverConfig(DriverAttributeConfigDTO driverAttributeConfig);
-
-    /**
-     * 删除驱动原数据中添加驱动配置信息
-     *
-     * @param deviceId    设备ID
-     * @param attributeId Attribute ID
-     */
-    void deleteDriverConfig(Long deviceId, Long attributeId);
-
-    /**
-     * 向驱动原数据中添加位号配置信息
-     *
-     * @param pointAttributeConfig PointConfig
-     */
-    void upsertPointConfig(PointAttributeConfigDTO pointAttributeConfig);
-
-    /**
-     * 删除驱动原数据中添加位号配置信息
-     *
-     * @param deviceId    设备ID
-     * @param pointId     位号ID
-     * @param attributeId Attribute ID
-     */
-    void deletePointConfig(Long deviceId, Long pointId, Long attributeId);
+    void deletePoint(Long id);
 }

@@ -17,19 +17,24 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.driver.context.DriverContext;
+import io.github.pnoker.common.driver.entity.bean.RWPointValue;
 import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.metadata.DeviceMetadata;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
+import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverWriteService;
 import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.exception.ServiceException;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 /**
  * @author pnoker
@@ -40,22 +45,35 @@ import org.springframework.stereotype.Service;
 public class DriverWriteServiceImpl implements DriverWriteService {
 
     @Resource
-    private DriverContext driverContext;
+    private DriverMetadata driverMetadata;
+    @Resource
+    private DeviceMetadata deviceMetadata;
+    @Resource
+    private PointMetadata pointMetadata;
     @Resource
     private DriverCustomService driverCustomService;
 
     @Override
-    public Boolean write(Long deviceId, Long pointId, String value) {
-        DeviceDTO device = driverContext.getDeviceByDeviceId(deviceId);
+    public void write(Long deviceId, Long pointId, String value) {
         try {
-            PointDTO point = driverContext.getPointByDeviceIdAndPointId(deviceId, pointId);
-            AttributeTypeFlagEnum typeEnum = AttributeTypeFlagEnum.ofCode(point.getPointTypeFlag().getCode());
-            return driverCustomService.write(
-                    driverContext.getDriverConfigByDeviceId(deviceId),
-                    driverContext.getPointConfigByDeviceIdAndPointId(deviceId, pointId),
-                    device,
-                    new AttributeBO(value, typeEnum)
-            );
+            DeviceDTO device = deviceMetadata.getDevice(deviceId);
+            if (ObjectUtil.isNull(device)) {
+                throw new ReadPointException("Failed to write point value, device[{}] is null", deviceId);
+            }
+
+            if (!device.getPointIds().contains(pointId)) {
+                throw new ReadPointException("Failed to write point value, device[{}] not contained point[{}]", deviceId, pointId);
+            }
+
+            Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverAttributeConfig(deviceId);
+            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId,pointId);
+
+            PointDTO point = pointMetadata.getPoint(pointId);
+            if (ObjectUtil.isNull(point)) {
+                throw new ReadPointException("Failed to write point value, point[{}] is null" + deviceId);
+            }
+
+            driverCustomService.write(driverConfig, pointConfig, device, point, new RWPointValue(value, point.getPointTypeFlag()));
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }
@@ -69,8 +87,8 @@ public class DriverWriteServiceImpl implements DriverWriteService {
         }
 
         log.info("Start command of write: {}", JsonUtil.toJsonString(commandDTO));
-        Boolean write = write(deviceWrite.getDeviceId(), deviceWrite.getPointId(), deviceWrite.getValue());
-        log.info("End command of write: write {}", write);
+        write(deviceWrite.getDeviceId(), deviceWrite.getPointId(), deviceWrite.getValue());
+        log.info("End command of write: write");
     }
 
 }

@@ -16,7 +16,8 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import io.github.pnoker.common.driver.entity.dto.*;
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
 import io.github.pnoker.common.driver.service.DriverMetadataService;
 import io.github.pnoker.common.driver.service.DriverMetadataTempService;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
@@ -40,18 +41,6 @@ public class DriverMetadataServiceImpl implements DriverMetadataService {
     private DriverMetadataTempService driverMetadataTempService;
 
     @Override
-    public void profileMetadata(DriverTransferMetadataDTO entityDTO) {
-        ProfileDTO profile = JsonUtil.parseObject(entityDTO.getContent(), ProfileDTO.class);
-        if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Upsert profile: {}", JsonUtil.toJsonString(profile));
-            driverMetadataTempService.upsertProfile(profile);
-        } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Delete profile: {}", JsonUtil.toJsonString(profile));
-            driverMetadataTempService.deleteProfile(profile.getId());
-        }
-    }
-
-    @Override
     public void deviceMetadata(DriverTransferMetadataDTO entityDTO) {
         DeviceDTO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceDTO.class);
         if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
@@ -71,31 +60,7 @@ public class DriverMetadataServiceImpl implements DriverMetadataService {
             driverMetadataTempService.upsertPoint(point);
         } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Delete point: {}", JsonUtil.toJsonString(point));
-            driverMetadataTempService.deletePoint(point.getProfileId(), point.getId());
-        }
-    }
-
-    @Override
-    public void driverConfigMetadata(DriverTransferMetadataDTO entityDTO) {
-        DriverAttributeConfigDTO driverAttributeConfig = JsonUtil.parseObject(entityDTO.getContent(), DriverAttributeConfigDTO.class);
-        if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Upsert driver attribute config: {}", JsonUtil.toJsonString(driverAttributeConfig));
-            driverMetadataTempService.upsertDriverConfig(driverAttributeConfig);
-        } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Delete driver attribute config: {}", JsonUtil.toJsonString(driverAttributeConfig));
-            driverMetadataTempService.deleteDriverConfig(driverAttributeConfig.getDeviceId(), driverAttributeConfig.getDriverAttributeId());
-        }
-    }
-
-    @Override
-    public void pointConfigMetadata(DriverTransferMetadataDTO entityDTO) {
-        PointAttributeConfigDTO pointAttributeConfig = JsonUtil.parseObject(entityDTO.getContent(), PointAttributeConfigDTO.class);
-        if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Upsert point attribute config: {}", JsonUtil.toJsonString(pointAttributeConfig));
-            driverMetadataTempService.upsertPointConfig(pointAttributeConfig);
-        } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
-            log.info("Delete point attribute config: {}", JsonUtil.toJsonString(pointAttributeConfig));
-            driverMetadataTempService.deletePointConfig(pointAttributeConfig.getPointId(), pointAttributeConfig.getId(), pointAttributeConfig.getPointAttributeId());
+            driverMetadataTempService.deletePoint(point.getId());
         }
     }
 }

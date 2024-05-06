@@ -53,7 +53,7 @@ public class PointMetadata {
     public PointMetadata(PointClient pointClient) {
         this.pointClient = pointClient;
         this.cache = Caffeine.newBuilder()
-                .maximumSize(1000)
+                .maximumSize(2000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
                 .removalListener((key, value, cause) -> log.info("Remove point={}, value={} cache, reason is: {}", key, value, cause))
                 .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
@@ -69,7 +69,20 @@ public class PointMetadata {
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
-    public List<PointDTO> getAllCache() {
+    public void loadCache(long id) {
+        PointDTO entityDTO = pointClient.selectById(id);
+        setCache(entityDTO.getId(), entityDTO);
+    }
+
+    public void setCache(long id, PointDTO pointDTO) {
+        cache.put(id, CompletableFuture.completedFuture(pointDTO));
+    }
+
+    public void removeCache(long id) {
+        cache.put(id, CompletableFuture.completedFuture(null));
+    }
+
+    public List<PointDTO> getAllPoint() {
         List<PointDTO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<PointDTO>> futures = cache.asMap().values();
         for (CompletableFuture<PointDTO> future : futures) {
@@ -86,7 +99,7 @@ public class PointMetadata {
         return entityDTOList;
     }
 
-    public PointDTO getCache(long id) {
+    public PointDTO getPoint(long id) {
         try {
             CompletableFuture<PointDTO> future = cache.get(id);
             return future.get();
@@ -95,13 +108,5 @@ public class PointMetadata {
             log.error("Failed to get point cache: {}", e.getMessage(), e);
             return null;
         }
-    }
-
-    public void setCache(long id, PointDTO pointDTO) {
-        cache.put(id, CompletableFuture.completedFuture(pointDTO));
-    }
-
-    public void removeCache(long id) {
-        cache.put(id, CompletableFuture.completedFuture(null));
     }
 }

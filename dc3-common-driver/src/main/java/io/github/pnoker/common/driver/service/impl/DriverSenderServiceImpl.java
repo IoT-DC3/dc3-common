@@ -18,7 +18,7 @@ package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import io.github.pnoker.common.driver.entity.dto.PointValueDTO;
+import io.github.pnoker.common.driver.entity.bean.PointValue;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.dto.DeviceEventDTO;
@@ -86,7 +86,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
     }
 
     @Override
-    public void pointValueSender(PointValueDTO entityDTO) {
+    public void pointValueSender(PointValue entityDTO) {
         if (ObjectUtil.isNotNull(entityDTO)) {
             log.info("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
@@ -98,7 +98,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
     }
 
     @Override
-    public void pointValueSender(List<PointValueDTO> entityDTOList) {
+    public void pointValueSender(List<PointValue> entityDTOList) {
         if (ObjectUtil.isNotNull(entityDTOList)) {
             entityDTOList.forEach(this::pointValueSender);
         }
