@@ -29,6 +29,7 @@ import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.dto.DriverAttributeConfigDTO;
 import io.github.pnoker.common.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.exception.ServiceException;
+import io.github.pnoker.common.optional.CollectionOptional;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
@@ -115,18 +116,19 @@ public class DeviceClient {
     private DeviceDTO buildDTOByGrpcAttachDTO(GrpcRDeviceAttachDTO rDeviceAttachDTO) {
         DeviceDTO deviceDTO = grpcDeviceBuilder.buildDTOByGrpcDTO(rDeviceAttachDTO.getDevice());
         deviceDTO.setPointIds(new HashSet<>(rDeviceAttachDTO.getPointIdsList()));
-        Map<Long, GrpcDriverAttributeConfigDTO> rDriverAttributeConfigMapMap = rDeviceAttachDTO.getDriverConfigMapMap();
-        if (!rDriverAttributeConfigMapMap.isEmpty()) {
-            Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap = rDriverAttributeConfigMapMap.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> grpcDriverAttributeConfigBuilder.buildDTOByGrpcDTO(entry.getValue())));
+
+        CollectionOptional.ofNullable(rDeviceAttachDTO.getDriverConfigsList()).ifPresent(list -> {
+            Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap = list.stream()
+                    .collect(Collectors.toMap(GrpcDriverAttributeConfigDTO::getDriverAttributeId, grpcDriverAttributeConfigBuilder::buildDTOByGrpcDTO));
             deviceDTO.setDriverAttributeConfigMap(driverAttributeConfigMap);
-        }
-        Map<Long, GrpcPointAttributeConfigDTO> rPointAttributeConfigMapMap = rDeviceAttachDTO.getPointConfigMapMap();
-        if (!rPointAttributeConfigMapMap.isEmpty()) {
-            Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap = rPointAttributeConfigMapMap.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, entry -> grpcPointAttributeConfigBuilder.buildDTOByGrpcDTO(entry.getValue())));
+        });
+
+        CollectionOptional.ofNullable(rDeviceAttachDTO.getPointConfigsList()).ifPresent(list -> {
+            Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap = list.stream()
+                    .collect(Collectors.toMap(GrpcPointAttributeConfigDTO::getPointAttributeId, grpcPointAttributeConfigBuilder::buildDTOByGrpcDTO));
             deviceDTO.setPointAttributeConfigMap(pointAttributeConfigMap);
-        }
+        });
+
         return deviceDTO;
     }
 }

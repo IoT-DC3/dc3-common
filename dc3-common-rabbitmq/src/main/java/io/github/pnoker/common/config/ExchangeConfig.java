@@ -35,16 +35,6 @@ import org.springframework.context.annotation.Configuration;
 public class ExchangeConfig {
 
     /**
-     * 驱动注册、驱动端可负载
-     *
-     * @return TopicExchange
-     */
-    @Bean
-    TopicExchange registerExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_REGISTER, true, false);
-    }
-
-    /**
      * 事件相关, 平台端可负载
      *
      * @return TopicExchange

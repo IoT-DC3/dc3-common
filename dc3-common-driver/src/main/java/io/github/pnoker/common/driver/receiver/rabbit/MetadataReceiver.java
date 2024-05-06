@@ -35,11 +35,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class DriverMetadataReceiver {
+public class MetadataReceiver {
 
     private final DriverMetadataService driverMetadataService;
 
-    public DriverMetadataReceiver(DriverMetadataService driverMetadataService) {
+    public MetadataReceiver(DriverMetadataService driverMetadataService) {
         this.driverMetadataService = driverMetadataService;
     }
 

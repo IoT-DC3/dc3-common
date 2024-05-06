@@ -16,15 +16,25 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.entity.dto.DriverAttributeConfigDTO;
+import io.github.pnoker.common.entity.dto.DriverAttributeDTO;
+import io.github.pnoker.common.entity.dto.PointAttributeConfigDTO;
+import io.github.pnoker.common.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import io.github.pnoker.common.exception.ConfigException;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.TypeException;
 import io.github.pnoker.common.exception.UnSupportException;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 属性工具类
@@ -51,10 +61,72 @@ public class AttributeUtil {
     }
 
     /**
+     * 获取驱动属性配置
+     * <p>
+     * 会校验是否完整
+     *
+     * @param attributeMap       驱动属性
+     * @param attributeConfigMap 驱动属性配置
+     * @return 属性配置Map
+     */
+    public static Map<String, AttributeBO> getDriverAttributeConfig(Map<Long, DriverAttributeDTO> attributeMap, Map<Long, DriverAttributeConfigDTO> attributeConfigMap) {
+        if (!isDriverAttributeComplete(attributeMap, attributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the driver attribute config is incomplete");
+        }
+
+        Map<String, AttributeBO> configMap = new HashMap<>();
+        if (MapUtil.isEmpty(attributeMap)) {
+            return configMap;
+        }
+
+        for (Map.Entry<Long, DriverAttributeDTO> entry : attributeMap.entrySet()) {
+            DriverAttributeDTO attribute = entry.getValue();
+            DriverAttributeConfigDTO config = attributeConfigMap.get(entry.getKey());
+            AttributeBO entityBO = new AttributeBO();
+            entityBO.setType(attribute.getAttributeTypeFlag());
+            entityBO.setValue(config.getConfigValue());
+            configMap.put(attribute.getAttributeName(), entityBO);
+        }
+
+        return configMap;
+    }
+
+    /**
+     * 获取位号属性配置
+     * <p>
+     * 会校验是否完整
+     *
+     * @param attributeMap       位号属性
+     * @param attributeConfigMap 位号属性配置
+     * @return 属性配置Map
+     */
+    public static Map<String, AttributeBO> getPointAttributeConfig(Map<Long, PointAttributeDTO> attributeMap, Map<Long, PointAttributeConfigDTO> attributeConfigMap) {
+        if (!isPointAttributeComplete(attributeMap, attributeConfigMap)) {
+            throw new ConfigException("Failed to get config, the point attribute config is incomplete");
+        }
+
+        Map<String, AttributeBO> configMap = new HashMap<>();
+        if (MapUtil.isEmpty(attributeMap)) {
+            return configMap;
+        }
+
+        for (Map.Entry<Long, PointAttributeDTO> entry : attributeMap.entrySet()) {
+            PointAttributeDTO attribute = entry.getValue();
+            PointAttributeConfigDTO config = attributeConfigMap.get(entry.getKey());
+            AttributeBO entityBO = new AttributeBO();
+            entityBO.setType(attribute.getAttributeTypeFlag());
+            entityBO.setValue(config.getConfigValue());
+            configMap.put(attribute.getAttributeName(), entityBO);
+        }
+
+        return configMap;
+    }
+
+    /**
      * 根据类型转换数据
      *
-     * @param attributeType  Attribute Type {@link  AttributeTypeFlagEnum}
-     * @param attributeValue Attribute Value
+     * @param attributeType  属性类型 {@link  AttributeTypeFlagEnum}
+     * @param attributeValue 属性值
      * @param clazz          T Class
      * @param <T>            T
      * @return T
@@ -119,5 +191,45 @@ public class AttributeUtil {
                 yield (T) Boolean.valueOf(attributeValue);
             }
         };
+    }
+
+    /**
+     * 校验驱动属性配置是否完整
+     *
+     * @param attributeMap       驱动属性
+     * @param attributeConfigMap 驱动属性配置
+     * @return 是否完整
+     */
+    private static boolean isDriverAttributeComplete(Map<Long, DriverAttributeDTO> attributeMap, Map<Long, DriverAttributeConfigDTO> attributeConfigMap) {
+        if (MapUtil.isEmpty(attributeMap)) {
+            return true;
+        }
+        if (MapUtil.isEmpty(attributeConfigMap)) {
+            return false;
+        }
+
+        Set<Long> attributeIds = attributeMap.keySet();
+        Set<Long> attributeConfigIds = attributeConfigMap.keySet();
+        return attributeConfigIds.containsAll(attributeIds);
+    }
+
+    /**
+     * 校验位号属性配置是否完整
+     *
+     * @param attributeMap       位号属性
+     * @param attributeConfigMap 位号属性配置
+     * @return 是否完整
+     */
+    private static boolean isPointAttributeComplete(Map<Long, PointAttributeDTO> attributeMap, Map<Long, PointAttributeConfigDTO> attributeConfigMap) {
+        if (MapUtil.isEmpty(attributeMap)) {
+            return true;
+        }
+        if (MapUtil.isEmpty(attributeConfigMap)) {
+            return false;
+        }
+
+        Set<Long> attributeIds = attributeMap.keySet();
+        Set<Long> attributeConfigIds = attributeConfigMap.keySet();
+        return attributeConfigIds.containsAll(attributeIds);
     }
 }

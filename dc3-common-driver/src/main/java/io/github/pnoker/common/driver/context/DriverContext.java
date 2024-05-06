@@ -72,7 +72,7 @@ public class DriverContext {
     public Map<Long, Map<String, AttributeBO>> getPointConfigByDeviceId(Long deviceId) {
         Map<Long, Map<String, AttributeBO>> tmpMap = this.driverMetadata.getPointConfigMap().get(deviceId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.isEmpty()) {
-            throw new NotFoundException("Device({}) doesn't exist", deviceId);
+            throw new NotFoundException("Device[{}] doesn't exist", deviceId);
         }
         return tmpMap;
     }
@@ -87,7 +87,7 @@ public class DriverContext {
     public Map<String, AttributeBO> getPointConfigByDeviceIdAndPointId(Long deviceId, Long pointId) {
         Map<String, AttributeBO> tmpMap = getPointConfigByDeviceId(deviceId).get(pointId);
         if (ObjectUtil.isNull(tmpMap) || tmpMap.isEmpty()) {
-            throw new NotFoundException("Point({}) info doesn't exist", pointId);
+            throw new NotFoundException("Point[{}] info doesn't exist", pointId);
         }
         return tmpMap;
     }
@@ -101,7 +101,7 @@ public class DriverContext {
     public DeviceDTO getDeviceByDeviceId(Long deviceId) {
         DeviceDTO device = this.driverMetadata.getDeviceMap().get(deviceId);
         if (ObjectUtil.isNull(device)) {
-            throw new NotFoundException("Device({}) doesn't exist", deviceId);
+            throw new NotFoundException("Device[{}] doesn't exist", deviceId);
         }
         return device;
     }
@@ -142,7 +142,7 @@ public class DriverContext {
             return optional.get().get(pointId);
         }
 
-        throw new NotFoundException("Point({}) info doesn't exist", pointId);
+        throw new NotFoundException("Point[{}] info doesn't exist", pointId);
     }
 
 }

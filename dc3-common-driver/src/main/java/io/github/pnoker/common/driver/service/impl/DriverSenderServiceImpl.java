@@ -98,9 +98,9 @@ public class DriverSenderServiceImpl implements DriverSenderService {
     }
 
     @Override
-    public void pointValueSender(List<PointValueDTO> entityDTOS) {
-        if (ObjectUtil.isNotNull(entityDTOS)) {
-            entityDTOS.forEach(this::pointValueSender);
+    public void pointValueSender(List<PointValueDTO> entityDTOList) {
+        if (ObjectUtil.isNotNull(entityDTOList)) {
+            entityDTOList.forEach(this::pointValueSender);
         }
     }
 

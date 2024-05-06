@@ -17,16 +17,21 @@
 package io.github.pnoker.common.driver.metadata;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import io.github.pnoker.common.driver.grpc.client.DeviceClient;
 import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,10 +49,10 @@ public class DeviceMetadata {
      */
     private final AsyncLoadingCache<Long, DeviceDTO> cache;
 
-    private final DeviceClient deviceClient;
+    @Resource
+    private DeviceClient deviceClient;
 
-    public DeviceMetadata(DeviceClient deviceClient) {
-        this.deviceClient = deviceClient;
+    public DeviceMetadata() {
         this.cache = Caffeine.newBuilder()
                 .maximumSize(1000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
@@ -60,22 +65,40 @@ public class DeviceMetadata {
                 }, executor));
     }
 
+    public List<DeviceDTO> getAllCache() {
+        List<DeviceDTO> entityDTOList = new ArrayList<>();
+        Collection<CompletableFuture<DeviceDTO>> futures = cache.asMap().values();
+        for (CompletableFuture<DeviceDTO> future : futures) {
+            try {
+                DeviceDTO entityDTO = future.get();
+                if (ObjectUtil.isNotNull(entityDTO)) {
+                    entityDTOList.add(entityDTO);
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                Thread.currentThread().interrupt();
+                log.error("Failed to get device cache: {}", e.getMessage(), e);
+            }
+        }
+        return entityDTOList;
+    }
+
     public DeviceDTO getCache(long id) {
         try {
             CompletableFuture<DeviceDTO> future = cache.get(id);
             return future.get();
-        } catch (Exception e) {
-            log.error("Get device metadata by id: {}", id, e);
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+            log.error("Failed to get device cache: {}", e.getMessage(), e);
             return null;
         }
     }
 
-    public List<CompletableFuture<DeviceDTO>> getAllCache() {
-        return cache.asMap().values().stream().toList();
-    }
-
     public void setCache(long id, DeviceDTO deviceDTO) {
         cache.put(id, CompletableFuture.completedFuture(deviceDTO));
+    }
+
+    public void removeCache(long id) {
+        cache.put(id, CompletableFuture.completedFuture(null));
     }
 
 }

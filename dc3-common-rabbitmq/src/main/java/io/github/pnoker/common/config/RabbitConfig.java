@@ -45,10 +45,10 @@ public class RabbitConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setReturnsCallback(message -> log.error("Send message({}) to exchange({}), routingKey({}) failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
+        rabbitTemplate.setReturnsCallback(message -> log.error("Send message[{}] to exchange[{}], routingKey[{}] failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             if (!ack) {
-                log.error("CorrelationData({}) ack failed: {}", correlationData, cause);
+                log.error("CorrelationData[{}] ack failed: {}", correlationData, cause);
             }
         });
         return rabbitTemplate;

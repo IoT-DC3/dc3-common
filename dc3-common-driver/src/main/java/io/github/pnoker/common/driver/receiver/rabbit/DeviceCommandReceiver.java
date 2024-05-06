@@ -19,9 +19,11 @@ package io.github.pnoker.common.driver.receiver.rabbit;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.rabbitmq.client.Channel;
-import io.github.pnoker.common.driver.service.DriverCommandService;
+import io.github.pnoker.common.driver.service.DriverReadService;
+import io.github.pnoker.common.driver.service.DriverWriteService;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
 import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -38,11 +40,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class DeviceCommandReceiver {
 
-    private final DriverCommandService driverCommandService;
+    @Resource
+    private DriverReadService driverReadService;
+    @Resource
+    private DriverWriteService driverWriteService;
 
-    public DeviceCommandReceiver(DriverCommandService driverCommandService) {
-        this.driverCommandService = driverCommandService;
-    }
 
     @RabbitHandler
     @RabbitListener(queues = "#{deviceCommandQueue.name}")
@@ -59,10 +61,10 @@ public class DeviceCommandReceiver {
 
             switch (entityDTO.getType()) {
                 case READ:
-                    driverCommandService.read(entityDTO);
+                    driverReadService.read(entityDTO);
                     break;
                 case WRITE:
-                    driverCommandService.write(entityDTO);
+                    driverWriteService.write(entityDTO);
                     break;
                 case CONFIG:
                     // to do something

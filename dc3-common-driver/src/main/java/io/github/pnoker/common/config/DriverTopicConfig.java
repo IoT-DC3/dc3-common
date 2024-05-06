@@ -40,38 +40,13 @@ import java.util.Map;
 public class DriverTopicConfig {
 
     private final DriverProperty driverProperty;
-    private final TopicExchange registerExchange;
     private final TopicExchange metadataExchange;
     private final TopicExchange commandExchange;
 
-    public DriverTopicConfig(DriverProperty driverProperty, TopicExchange registerExchange, TopicExchange metadataExchange, TopicExchange commandExchange) {
+    public DriverTopicConfig(DriverProperty driverProperty, TopicExchange metadataExchange, TopicExchange commandExchange) {
         this.driverProperty = driverProperty;
-        this.registerExchange = registerExchange;
         this.metadataExchange = metadataExchange;
         this.commandExchange = commandExchange;
-    }
-
-    /**
-     * 该 Queue 用于接收来自管理端下行的注册数据
-     *
-     * @return Queue
-     */
-    @Bean
-    Queue driverRegisterQueue() {
-        Map<String, Object> arguments = new HashMap<>();
-        // 30秒: 30 * 1000 = 30000L
-        arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_REGISTER_DOWN_PREFIX + driverProperty.getClient(), false, false, false, arguments);
-    }
-
-    @Bean
-    Binding driverRegisterBinding(Queue driverRegisterQueue) {
-        Binding binding = BindingBuilder
-                .bind(driverRegisterQueue)
-                .to(registerExchange)
-                .with(RabbitConstant.ROUTING_REGISTER_DOWN_PREFIX + driverProperty.getClient());
-        binding.addArgument(RabbitConstant.AUTO_DELETE, true);
-        return binding;
     }
 
     @Bean

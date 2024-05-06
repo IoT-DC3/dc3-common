@@ -25,23 +25,7 @@ import io.github.pnoker.common.entity.dto.PointValueDTO;
  * @author pnoker
  * @since 2022.1.0
  */
-public interface DriverCommandService {
-
-    /**
-     * 读取位号值
-     *
-     * @param deviceId 设备ID
-     * @param pointId  位号ID
-     * @return 位号值
-     */
-    PointValueDTO read(Long deviceId, Long pointId);
-
-    /**
-     * 指令读取位号值
-     *
-     * @param commandDTO {@link DeviceCommandDTO}
-     */
-    void read(DeviceCommandDTO commandDTO);
+public interface DriverWriteService {
 
     /**
      * 写取位号值

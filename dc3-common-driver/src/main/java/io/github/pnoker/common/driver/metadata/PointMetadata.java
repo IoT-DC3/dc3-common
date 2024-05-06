@@ -17,6 +17,7 @@
 package io.github.pnoker.common.driver.metadata;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import io.github.pnoker.common.driver.grpc.client.PointClient;
@@ -25,8 +26,11 @@ import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -60,21 +64,39 @@ public class PointMetadata {
                 }, executor));
     }
 
+    public List<PointDTO> getAllCache() {
+        List<PointDTO> entityDTOList = new ArrayList<>();
+        Collection<CompletableFuture<PointDTO>> futures = cache.asMap().values();
+        for (CompletableFuture<PointDTO> future : futures) {
+            try {
+                PointDTO entityDTO = future.get();
+                if (ObjectUtil.isNotNull(entityDTO)) {
+                    entityDTOList.add(entityDTO);
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                Thread.currentThread().interrupt();
+                log.error("Failed to get point cache: {}", e.getMessage(), e);
+            }
+        }
+        return entityDTOList;
+    }
+
     public PointDTO getCache(long id) {
         try {
             CompletableFuture<PointDTO> future = cache.get(id);
             return future.get();
-        } catch (Exception e) {
-            log.error("Get point metadata by id: {}", id, e);
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+            log.error("Failed to get point cache: {}", e.getMessage(), e);
             return null;
         }
     }
 
-    public List<CompletableFuture<PointDTO>> getAllCache() {
-        return cache.asMap().values().stream().toList();
-    }
-
     public void setCache(long id, PointDTO pointDTO) {
         cache.put(id, CompletableFuture.completedFuture(pointDTO));
+    }
+
+    public void removeCache(long id) {
+        cache.put(id, CompletableFuture.completedFuture(null));
     }
 }
