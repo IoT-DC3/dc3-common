@@ -38,11 +38,6 @@ public enum MetadataTypeEnum {
     DRIVER((byte) 0, "driver", "驱动类型元数据"),
 
     /**
-     * 模板类型元数据
-     */
-    PROFILE((byte) 1, "profile", "模板类型元数据"),
-
-    /**
      * 位号类型元数据
      */
     POINT((byte) 2, "point", "位号类型元数据"),
@@ -51,16 +46,6 @@ public enum MetadataTypeEnum {
      * 设备类型元数据
      */
     DEVICE((byte) 3, "device", "设备类型元数据"),
-
-    /**
-     * 驱动属性配置类型元数据
-     */
-    DRIVER_ATTRIBUTE_CONFIG((byte) 4, "driver_attribute_config", "驱动属性配置类型元数据"),
-
-    /**
-     * 位号属性配置类型元数据
-     */
-    POINT_ATTRIBUTE_CONFIG((byte) 5, "point_attribute_config", "位号属性配置类型元数据"),
     ;
 
     /**
