@@ -18,7 +18,7 @@ package io.github.pnoker.common.utils;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.OutRangeException;

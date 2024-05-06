@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.entity.builder;
 
 import io.github.pnoker.api.common.GrpcPointDTO;
-import io.github.pnoker.common.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
 import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.enums.RwFlagEnum;

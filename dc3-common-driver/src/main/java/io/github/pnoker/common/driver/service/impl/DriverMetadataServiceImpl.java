@@ -16,9 +16,10 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
+import io.github.pnoker.common.driver.entity.dto.*;
 import io.github.pnoker.common.driver.service.DriverMetadataService;
 import io.github.pnoker.common.driver.service.DriverMetadataTempService;
-import io.github.pnoker.common.entity.dto.*;
+import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
 import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;

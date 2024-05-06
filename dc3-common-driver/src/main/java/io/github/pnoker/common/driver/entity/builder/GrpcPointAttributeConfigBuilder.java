@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.entity.builder;
 
 import io.github.pnoker.api.common.GrpcPointAttributeConfigDTO;
-import io.github.pnoker.common.entity.dto.PointAttributeConfigDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.optional.EnableOptional;
 import io.github.pnoker.common.utils.GrpcBuilderUtil;
 import io.github.pnoker.common.utils.MapStructUtil;

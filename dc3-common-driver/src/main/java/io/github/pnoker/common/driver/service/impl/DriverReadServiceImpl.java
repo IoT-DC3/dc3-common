@@ -19,6 +19,9 @@ package io.github.pnoker.common.driver.service.impl;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.DefaultConstant;
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.dto.PointValueDTO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
@@ -27,9 +30,6 @@ import io.github.pnoker.common.driver.service.DriverReadService;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
-import io.github.pnoker.common.entity.dto.DeviceDTO;
-import io.github.pnoker.common.entity.dto.PointDTO;
-import io.github.pnoker.common.entity.dto.PointValueDTO;
 import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.utils.AttributeUtil;
 import io.github.pnoker.common.utils.JsonUtil;
@@ -67,7 +67,7 @@ public class DriverReadServiceImpl implements DriverReadService {
                 throw new ReadPointException("Failed to read point value, device[{}] is null", deviceId);
             }
 
-            if (device.getPointIds().contains(pointId)) {
+            if (!device.getPointIds().contains(pointId)) {
                 throw new ReadPointException("Failed to read point value, device[{}] not contained point[{}]", deviceId, pointId);
             }
 

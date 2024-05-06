@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.PointAttributeExt;
+import io.github.pnoker.common.entity.ext.DriverAttributeExt;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 位号属性BO
+ * 驱动属性BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -35,7 +35,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PointAttributeDTO extends BaseDTO {
+public class DriverAttributeDTO extends BaseDTO {
 
     /**
      * 显示名称
@@ -63,9 +63,9 @@ public class PointAttributeDTO extends BaseDTO {
     private Long driverId;
 
     /**
-     * 位号属性拓展信息
+     * 驱动属性拓展信息
      */
-    private PointAttributeExt attributeExt;
+    private DriverAttributeExt attributeExt;
 
     /**
      * 使能标识

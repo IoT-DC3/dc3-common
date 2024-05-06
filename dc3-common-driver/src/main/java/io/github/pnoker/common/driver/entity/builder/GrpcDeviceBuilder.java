@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.entity.builder;
 
 import io.github.pnoker.api.common.GrpcDeviceDTO;
-import io.github.pnoker.common.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.optional.CollectionOptional;
 import io.github.pnoker.common.optional.EnableOptional;

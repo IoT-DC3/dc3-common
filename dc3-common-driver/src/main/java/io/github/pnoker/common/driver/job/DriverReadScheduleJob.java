@@ -18,9 +18,9 @@ package io.github.pnoker.common.driver.job;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.service.DriverReadService;
-import io.github.pnoker.common.entity.dto.DeviceDTO;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

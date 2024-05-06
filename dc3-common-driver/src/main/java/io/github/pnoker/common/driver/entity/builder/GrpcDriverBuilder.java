@@ -19,7 +19,7 @@ package io.github.pnoker.common.driver.entity.builder;
 import io.github.pnoker.api.common.GrpcBase;
 import io.github.pnoker.api.common.GrpcDriverDTO;
 import io.github.pnoker.common.constant.common.DefaultConstant;
-import io.github.pnoker.common.entity.dto.DriverDTO;
+import io.github.pnoker.common.driver.entity.dto.DriverDTO;
 import io.github.pnoker.common.entity.ext.DriverExt;
 import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.optional.EnableOptional;

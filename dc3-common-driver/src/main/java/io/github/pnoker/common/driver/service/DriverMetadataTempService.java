@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.entity.dto.*;
+import io.github.pnoker.common.driver.entity.dto.*;
 
 /**
  * @author pnoker

@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.DeviceExt;
+import io.github.pnoker.common.entity.ext.PointAttributeExt;
+import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Map;
-import java.util.Set;
-
 /**
- * Device BO
+ * 位号属性BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -37,17 +35,27 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeviceDTO extends BaseDTO {
+public class PointAttributeDTO extends BaseDTO {
 
     /**
-     * 设备名称
+     * 显示名称
      */
-    private String deviceName;
+    private String displayName;
 
     /**
-     * 设备编号
+     * 属性名称
      */
-    private String deviceCode;
+    private String attributeName;
+
+    /**
+     * 属性类型标识
+     */
+    private AttributeTypeFlagEnum attributeTypeFlag;
+
+    /**
+     * 默认值
+     */
+    private String defaultValue;
 
     /**
      * 驱动ID
@@ -55,14 +63,9 @@ public class DeviceDTO extends BaseDTO {
     private Long driverId;
 
     /**
-     * 分组ID
+     * 位号属性拓展信息
      */
-    private Long groupId;
-
-    /**
-     * 设备拓展信息
-     */
-    private DeviceExt deviceExt;
+    private PointAttributeExt attributeExt;
 
     /**
      * 使能标识
@@ -83,26 +86,4 @@ public class DeviceDTO extends BaseDTO {
      * 版本
      */
     private Integer version;
-
-    // 附加字段
-
-    /**
-     * 模版ID集
-     */
-    private Set<Long> profileIds;
-
-    /**
-     * 位号ID集
-     */
-    private Set<Long> pointIds;
-
-    /**
-     * 驱动配置
-     */
-    private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap;
-
-    /**
-     * 位号配置
-     */
-    private Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap;
 }

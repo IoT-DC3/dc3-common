@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.ProfileExt;
+import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.ProfileShareFlagEnum;
-import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
- * Profile BO
+ * Device BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,27 +37,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileDTO extends BaseDTO {
+public class DeviceDTO extends BaseDTO {
 
     /**
-     * 模版名称
+     * 设备名称
      */
-    private String profileName;
+    private String deviceName;
 
     /**
-     * 模版编号
+     * 设备编号
      */
-    private String profileCode;
+    private String deviceCode;
 
     /**
-     * 模版共享类型标识
+     * 驱动ID
      */
-    private ProfileShareFlagEnum profileShareFlag;
-
-    /**
-     * 模版类型标识
-     */
-    private ProfileTypeFlagEnum profileTypeFlag;
+    private Long driverId;
 
     /**
      * 分组ID
@@ -64,9 +60,9 @@ public class ProfileDTO extends BaseDTO {
     private Long groupId;
 
     /**
-     * 模版拓展信息
+     * 设备拓展信息
      */
-    private ProfileExt profileExt;
+    private DeviceExt deviceExt;
 
     /**
      * 使能标识
@@ -87,4 +83,26 @@ public class ProfileDTO extends BaseDTO {
      * 版本
      */
     private Integer version;
+
+    // 附加字段
+
+    /**
+     * 模版ID集
+     */
+    private Set<Long> profileIds;
+
+    /**
+     * 位号ID集
+     */
+    private Set<Long> pointIds;
+
+    /**
+     * 驱动配置
+     */
+    private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap;
+
+    /**
+     * 位号配置
+     */
+    private Map<Long, PointAttributeConfigDTO> pointAttributeConfigMap;
 }

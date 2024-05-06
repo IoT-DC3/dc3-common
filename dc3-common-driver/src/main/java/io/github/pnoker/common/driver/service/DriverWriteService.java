@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.service;
 
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
-import io.github.pnoker.common.entity.dto.PointValueDTO;
 
 /**
  * 驱动指令服务

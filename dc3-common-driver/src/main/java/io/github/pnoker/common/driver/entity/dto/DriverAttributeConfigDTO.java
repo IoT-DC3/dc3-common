@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.enums.EnableFlagEnum;

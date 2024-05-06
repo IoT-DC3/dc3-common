@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.driver.entity.property;
 
-import io.github.pnoker.common.entity.dto.DriverAttributeDTO;
-import io.github.pnoker.common.entity.dto.PointAttributeDTO;
+import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

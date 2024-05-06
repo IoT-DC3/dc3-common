@@ -92,6 +92,6 @@ public class KeyStoreUtil {
             }
             keystore.store(outputStream, passphraseArray);
         }
-        log.info("Certificate '{}' imported successfully.", crtAliasName);
+        log.info("Certificate '{}' imported successfully", crtAliasName);
     }
 }

@@ -16,9 +16,9 @@
 
 package io.github.pnoker.common.driver.service;
 
+import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.dto.PointDTO;
 import io.github.pnoker.common.entity.bo.AttributeBO;
-import io.github.pnoker.common.entity.dto.DeviceDTO;
-import io.github.pnoker.common.entity.dto.PointDTO;
 
 import java.util.Map;
 

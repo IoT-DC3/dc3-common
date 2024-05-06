@@ -19,6 +19,7 @@ package io.github.pnoker.common.driver.service.impl;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.context.DriverContext;
+import io.github.pnoker.common.driver.entity.dto.*;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.grpc.client.DeviceClient;
 import io.github.pnoker.common.driver.grpc.client.DriverClient;
@@ -27,7 +28,7 @@ import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverSyncService;
-import io.github.pnoker.common.entity.dto.*;
+import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -84,7 +85,7 @@ public class DriverSyncServiceImpl implements DriverSyncService {
             deviceDTOList.forEach(deviceDTO -> deviceMetadata.setCache(deviceDTO.getId(), deviceDTO));
             List<PointDTO> pointDTOList = pointClient.list();
             pointDTOList.forEach(pointDTO -> pointMetadata.setCache(pointDTO.getId(), pointDTO));
-            log.info("The driver {} is initialized successfully.", entityDTO.getClient());
+            log.info("The driver {} is initialized successfully", entityDTO.getClient());
         } catch (Exception e) {
             log.error("The driver initialization failed: {}", e.getMessage(), e);
             System.exit(1);
@@ -109,7 +110,7 @@ public class DriverSyncServiceImpl implements DriverSyncService {
         driverMetadataDTO.getDriverAttributeMap().values().forEach(driverAttribute -> log.info("Syncing driver attribute[{}] metadata: {}", driverAttribute.getAttributeName(), JsonUtil.toJsonString(driverAttribute)));
         driverMetadataDTO.getPointAttributeMap().values().forEach(pointAttribute -> log.info("Syncing point attribute[{}] metadata: {}", pointAttribute.getAttributeName(), JsonUtil.toJsonString(pointAttribute)));
         driverMetadataDTO.getDeviceMap().values().forEach(device -> log.info("Syncing device[{}] metadata: {}", device.getDeviceName(), JsonUtil.toJsonString(device)));
-        log.info("The metadata synced successfully.");
+        log.info("The metadata synced successfully");
     }
 
     /**

@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.DriverAttributeExt;
-import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
+import io.github.pnoker.common.entity.ext.ProfileExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.ProfileShareFlagEnum;
+import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 驱动属性BO
+ * Profile BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -35,37 +36,37 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverAttributeDTO extends BaseDTO {
+public class ProfileDTO extends BaseDTO {
 
     /**
-     * 显示名称
+     * 模版名称
      */
-    private String displayName;
+    private String profileName;
 
     /**
-     * 属性名称
+     * 模版编号
      */
-    private String attributeName;
+    private String profileCode;
 
     /**
-     * 属性类型标识
+     * 模版共享类型标识
      */
-    private AttributeTypeFlagEnum attributeTypeFlag;
+    private ProfileShareFlagEnum profileShareFlag;
 
     /**
-     * 默认值
+     * 模版类型标识
      */
-    private String defaultValue;
+    private ProfileTypeFlagEnum profileTypeFlag;
 
     /**
-     * 驱动ID
+     * 分组ID
      */
-    private Long driverId;
+    private Long groupId;
 
     /**
-     * 驱动属性拓展信息
+     * 模版拓展信息
      */
-    private DriverAttributeExt attributeExt;
+    private ProfileExt profileExt;
 
     /**
      * 使能标识

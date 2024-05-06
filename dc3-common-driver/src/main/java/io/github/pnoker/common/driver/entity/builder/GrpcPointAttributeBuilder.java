@@ -19,7 +19,7 @@ package io.github.pnoker.common.driver.entity.builder;
 import io.github.pnoker.api.common.GrpcBase;
 import io.github.pnoker.api.common.GrpcPointAttributeDTO;
 import io.github.pnoker.common.constant.common.DefaultConstant;
-import io.github.pnoker.common.entity.dto.PointAttributeDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.entity.ext.PointAttributeExt;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.optional.EnableOptional;

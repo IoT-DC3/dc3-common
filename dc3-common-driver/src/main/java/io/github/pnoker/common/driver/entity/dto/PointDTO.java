@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.dto;
 
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.DriverExt;
-import io.github.pnoker.common.enums.DriverTypeFlagEnum;
+import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
+import io.github.pnoker.common.enums.PointTypeFlagEnum;
+import io.github.pnoker.common.enums.RwFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
- * Driver BO
+ * Point BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -35,37 +38,72 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverDTO extends BaseDTO {
+public class PointDTO extends BaseDTO {
 
     /**
-     * 驱动名称
+     * 位号名称
      */
-    private String driverName;
+    private String pointName;
 
     /**
-     * 驱动编号
+     * 位号编号
      */
-    private String driverCode;
+    private String pointCode;
 
     /**
-     * 驱动服务名称
+     * 位号类型标识
      */
-    private String serviceName;
+    private PointTypeFlagEnum pointTypeFlag;
 
     /**
-     * 服务主机
+     * 读写标识
      */
-    private String serviceHost;
+    private RwFlagEnum rwFlag;
 
     /**
-     * 驱动类型标识
+     * 基础值
      */
-    private DriverTypeFlagEnum driverTypeFlag;
+    private BigDecimal baseValue;
 
     /**
-     * 驱动拓展信息
+     * 比例系数
      */
-    private DriverExt driverExt;
+    private BigDecimal multiple;
+
+    /**
+     * 数据精度
+     */
+    private Byte valueDecimal;
+
+    /**
+     * 单位
+     */
+    private String unit;
+
+    /**
+     * 模版ID
+     */
+    private Long profileId;
+
+    /**
+     * 报警通知模版ID
+     */
+    private Long alarmNotifyProfileId;
+
+    /**
+     * 报警信息模版ID
+     */
+    private Long alarmMessageProfileId;
+
+    /**
+     * 分组ID
+     */
+    private Long groupId;
+
+    /**
+     * 位号拓展信息
+     */
+    private PointExt pointExt;
 
     /**
      * 使能标识
@@ -86,4 +124,5 @@ public class DriverDTO extends BaseDTO {
      * 版本
      */
     private Integer version;
+
 }
