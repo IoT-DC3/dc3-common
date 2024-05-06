@@ -16,25 +16,16 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.entity.dto.DriverSyncDownDTO;
-
 /**
- * 驱动同步相关接口
+ * 驱动注册相关接口
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public interface DriverSyncService {
+public interface DriverRegisterService {
 
     /**
-     * 同步驱动信息到平台端
+     * 注册驱动信息到平台端
      */
-    void up();
-
-    /**
-     * 同步平台端信息到驱动
-     *
-     * @param entityDTO DriverSyncDTO
-     */
-    void down(DriverSyncDownDTO entityDTO);
+    void initial();
 }

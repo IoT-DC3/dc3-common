@@ -18,8 +18,9 @@ package io.github.pnoker.common.init;
 
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.driver.service.DriverRegisterService;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
-import io.github.pnoker.common.driver.service.DriverSyncService;
+import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -39,20 +40,17 @@ import org.springframework.stereotype.Component;
 @EnableConfigurationProperties({DriverProperty.class})
 public class DriverInitRunner implements ApplicationRunner {
 
-    private final DriverSyncService driverSyncService;
-    private final DriverCustomService driverCustomService;
-    private final DriverScheduleService driverScheduleService;
-
-    public DriverInitRunner(DriverSyncService driverSyncService, DriverCustomService driverCustomService, DriverScheduleService driverScheduleService) {
-        this.driverSyncService = driverSyncService;
-        this.driverCustomService = driverCustomService;
-        this.driverScheduleService = driverScheduleService;
-    }
+    @Resource
+    private DriverRegisterService driverRegisterService;
+    @Resource
+    private DriverCustomService driverCustomService;
+    @Resource
+    private DriverScheduleService driverScheduleService;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // 驱动同步
-        driverSyncService.up();
+        // 驱动注册，包括基本的信息同步
+        driverRegisterService.initial();
 
         // 执行驱动模块的自定义初始化函数
         driverCustomService.initial();

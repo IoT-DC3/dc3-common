@@ -65,6 +65,11 @@ public class DeviceMetadata {
                 }, executor));
     }
 
+    public void loadAllCache() {
+        List<DeviceDTO> entityDTOList = deviceClient.list();
+        entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
+    }
+
     public List<DeviceDTO> getAllCache() {
         List<DeviceDTO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<DeviceDTO>> futures = cache.asMap().values();

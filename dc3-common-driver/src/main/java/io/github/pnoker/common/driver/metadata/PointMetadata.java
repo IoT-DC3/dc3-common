@@ -64,6 +64,11 @@ public class PointMetadata {
                 }, executor));
     }
 
+    public void loadAllCache() {
+        List<PointDTO> entityDTOList = pointClient.list();
+        entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
+    }
+
     public List<PointDTO> getAllCache() {
         List<PointDTO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<PointDTO>> futures = cache.asMap().values();
