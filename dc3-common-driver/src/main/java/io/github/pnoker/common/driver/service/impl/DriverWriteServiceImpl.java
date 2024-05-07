@@ -17,15 +17,15 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.driver.entity.bean.RWPointValue;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bean.WValue;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverWriteService;
-import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
 import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.exception.ServiceException;
@@ -56,7 +56,7 @@ public class DriverWriteServiceImpl implements DriverWriteService {
     @Override
     public void write(Long deviceId, Long pointId, String value) {
         try {
-            DeviceDTO device = deviceMetadata.getDevice(deviceId);
+            DeviceBO device = deviceMetadata.getDevice(deviceId);
             if (ObjectUtil.isNull(device)) {
                 throw new ReadPointException("Failed to write point value, device[{}] is null", deviceId);
             }
@@ -68,12 +68,12 @@ public class DriverWriteServiceImpl implements DriverWriteService {
             Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverAttributeConfig(deviceId);
             Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId,pointId);
 
-            PointDTO point = pointMetadata.getPoint(pointId);
+            PointBO point = pointMetadata.getPoint(pointId);
             if (ObjectUtil.isNull(point)) {
                 throw new ReadPointException("Failed to write point value, point[{}] is null" + deviceId);
             }
 
-            driverCustomService.write(driverConfig, pointConfig, device, point, new RWPointValue(value, point.getPointTypeFlag()));
+            driverCustomService.write(driverConfig, pointConfig, device, point, new WValue(value, point.getPointTypeFlag()));
         } catch (Exception e) {
             throw new ServiceException(e.getMessage());
         }

@@ -19,7 +19,7 @@ package io.github.pnoker.common.driver.entity.builder;
 import io.github.pnoker.api.common.GrpcBase;
 import io.github.pnoker.api.common.GrpcDriverDTO;
 import io.github.pnoker.common.constant.common.DefaultConstant;
-import io.github.pnoker.common.driver.entity.dto.DriverDTO;
+import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import io.github.pnoker.common.entity.ext.DriverExt;
 import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.optional.EnableOptional;
@@ -41,31 +41,31 @@ import java.util.Optional;
  * @since 2022.1.0
  */
 @Mapper(componentModel = "spring", uses = {MapStructUtil.class})
-public interface GrpcDriverBuilder {
+public interface DriverBuilder {
 
     @Mapping(target = "driverExt", ignore = true)
     @Mapping(target = "driverTypeFlag", ignore = true)
     @Mapping(target = "enableFlag", ignore = true)
-    DriverDTO buildDTOByGrpcDTO(GrpcDriverDTO entityGrpc);
+    DriverBO buildDTOByGrpcDTO(GrpcDriverDTO entityGrpc);
 
     @AfterMapping
-    default void afterProcess(GrpcDriverDTO entityGrpc, @MappingTarget DriverDTO entityDTO) {
-        GrpcBuilderUtil.buildBaseDTOByGrpcBase(entityGrpc.getBase(), entityDTO);
+    default void afterProcess(GrpcDriverDTO entityGrpc, @MappingTarget DriverBO entityBO) {
+        GrpcBuilderUtil.buildBaseBOByGrpcBase(entityGrpc.getBase(), entityBO);
 
-        JsonOptional.ofNullable(entityGrpc.getDriverExt()).ifPresent(value -> entityDTO.setDriverExt(JsonUtil.parseObject(value, DriverExt.class)));
-        Optional.ofNullable(DriverTypeFlagEnum.ofIndex((byte) entityGrpc.getDriverTypeFlag())).ifPresent(entityDTO::setDriverTypeFlag);
-        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityDTO::setEnableFlag);
+        JsonOptional.ofNullable(entityGrpc.getDriverExt()).ifPresent(value -> entityBO.setDriverExt(JsonUtil.parseObject(value, DriverExt.class)));
+        Optional.ofNullable(DriverTypeFlagEnum.ofIndex((byte) entityGrpc.getDriverTypeFlag())).ifPresent(entityBO::setDriverTypeFlag);
+        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityBO::setEnableFlag);
     }
 
 
     @Mapping(target = "driverExt", ignore = true)
     @Mapping(target = "driverTypeFlag", ignore = true)
     @Mapping(target = "enableFlag", ignore = true)
-    GrpcDriverDTO buildGrpcDTOByDTO(DriverDTO entityDTO);
+    GrpcDriverDTO buildGrpcDTOByDTO(DriverBO entityDTO);
 
     @AfterMapping
-    default void afterProcess(DriverDTO entityDTO, @MappingTarget GrpcDriverDTO.Builder entityGrpc) {
-        GrpcBase grpcBase = GrpcBuilderUtil.buildGrpcBaseByDTO(entityDTO);
+    default void afterProcess(DriverBO entityDTO, @MappingTarget GrpcDriverDTO.Builder entityGrpc) {
+        GrpcBase grpcBase = GrpcBuilderUtil.buildGrpcBaseByBO(entityDTO);
         entityGrpc.setBase(grpcBase);
 
         Optional.ofNullable(entityDTO.getDriverExt()).ifPresent(value -> entityGrpc.setDriverExt(JsonUtil.toJsonString(value)));

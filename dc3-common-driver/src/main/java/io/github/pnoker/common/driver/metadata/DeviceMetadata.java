@@ -21,9 +21,10 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.dto.*;
 import io.github.pnoker.common.driver.grpc.client.DeviceClient;
-import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.exception.ConfigException;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
@@ -52,7 +53,7 @@ public class DeviceMetadata {
     /**
      * deviceId,deviceDTO
      */
-    private final AsyncLoadingCache<Long, DeviceDTO> cache;
+    private final AsyncLoadingCache<Long, DeviceBO> cache;
 
     @Resource
     private DriverMetadata driverMetadata;
@@ -67,36 +68,36 @@ public class DeviceMetadata {
                 .removalListener((key, value, cause) -> log.info("Remove device={}, value={} cache, reason is: {}", key, value, cause))
                 .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
                     log.info("Load device metadata by id: {}", rawValue);
-                    DeviceDTO deviceDTO = deviceClient.selectById(rawValue);
-                    log.info("Cache device metadata: {}", JsonUtil.toJsonString(deviceDTO));
-                    return deviceDTO;
+                    DeviceBO deviceBO = deviceClient.selectById(rawValue);
+                    log.info("Cache device metadata: {}", JsonUtil.toJsonString(deviceBO));
+                    return deviceBO;
                 }, executor));
     }
 
     public void loadAllCache() {
-        List<DeviceDTO> entityDTOList = deviceClient.list();
+        List<DeviceBO> entityDTOList = deviceClient.list();
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
     public void loadCache(long id) {
-        DeviceDTO entityDTO = deviceClient.selectById(id);
+        DeviceBO entityDTO = deviceClient.selectById(id);
         setCache(entityDTO.getId(), entityDTO);
     }
 
-    public void setCache(long id, DeviceDTO deviceDTO) {
-        cache.put(id, CompletableFuture.completedFuture(deviceDTO));
+    public void setCache(long id, DeviceBO deviceBO) {
+        cache.put(id, CompletableFuture.completedFuture(deviceBO));
     }
 
     public void removeCache(long id) {
         cache.put(id, CompletableFuture.completedFuture(null));
     }
 
-    public List<DeviceDTO> getAllDevice() {
-        List<DeviceDTO> entityDTOList = new ArrayList<>();
-        Collection<CompletableFuture<DeviceDTO>> futures = cache.asMap().values();
-        for (CompletableFuture<DeviceDTO> future : futures) {
+    public List<DeviceBO> getAllDevice() {
+        List<DeviceBO> entityDTOList = new ArrayList<>();
+        Collection<CompletableFuture<DeviceBO>> futures = cache.asMap().values();
+        for (CompletableFuture<DeviceBO> future : futures) {
             try {
-                DeviceDTO entityDTO = future.get();
+                DeviceBO entityDTO = future.get();
                 if (ObjectUtil.isNotNull(entityDTO)) {
                     entityDTOList.add(entityDTO);
                 }
@@ -108,9 +109,9 @@ public class DeviceMetadata {
         return entityDTOList;
     }
 
-    public DeviceDTO getDevice(long id) {
+    public DeviceBO getDevice(long id) {
         try {
-            CompletableFuture<DeviceDTO> future = cache.get(id);
+            CompletableFuture<DeviceBO> future = cache.get(id);
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             Thread.currentThread().interrupt();
@@ -133,7 +134,7 @@ public class DeviceMetadata {
             return MapUtil.empty();
         }
 
-        DeviceDTO device = getDevice(deviceId);
+        DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
             throw new ConfigException("Failed to get config, the device is empty");
         }
@@ -172,7 +173,7 @@ public class DeviceMetadata {
             return MapUtil.empty();
         }
 
-        DeviceDTO device = getDevice(deviceId);
+        DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
             throw new ConfigException("Failed to get config, the device is empty");
         }
@@ -215,7 +216,7 @@ public class DeviceMetadata {
             return MapUtil.empty();
         }
 
-        DeviceDTO device = getDevice(deviceId);
+        DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
             throw new ConfigException("Failed to get config, the device is empty");
         }

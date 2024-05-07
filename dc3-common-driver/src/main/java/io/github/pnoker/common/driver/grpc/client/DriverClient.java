@@ -23,11 +23,11 @@ import io.github.pnoker.api.common.driver.DriverApiGrpc;
 import io.github.pnoker.api.common.driver.GrpcDriverRegisterDTO;
 import io.github.pnoker.api.common.driver.GrpcRDriverRegisterDTO;
 import io.github.pnoker.common.constant.service.ManagerConstant;
+import io.github.pnoker.common.driver.entity.bo.DriverBO;
+import io.github.pnoker.common.driver.entity.builder.DriverBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcDriverAttributeBuilder;
-import io.github.pnoker.common.driver.entity.builder.GrpcDriverBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcPointAttributeBuilder;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
-import io.github.pnoker.common.driver.entity.dto.DriverDTO;
 import io.github.pnoker.common.driver.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
@@ -54,7 +54,7 @@ public class DriverClient {
     private DriverMetadata driverMetadata;
 
     @Resource
-    private GrpcDriverBuilder grpcDriverBuilder;
+    private DriverBuilder driverBuilder;
     @Resource
     private GrpcDriverAttributeBuilder grpcDriverAttributeBuilder;
     @Resource
@@ -68,7 +68,7 @@ public class DriverClient {
     public void driverRegister(DriverRegisterDTO entityDTO) {
 
         GrpcDriverRegisterDTO.Builder builder = GrpcDriverRegisterDTO.newBuilder();
-        GrpcDriverDTO grpcDriverDTO = grpcDriverBuilder.buildGrpcDTOByDTO(entityDTO.getDriver());
+        GrpcDriverDTO grpcDriverDTO = driverBuilder.buildGrpcDTOByDTO(entityDTO.getDriver());
         builder.setTenant(entityDTO.getTenant())
                 .setClient(entityDTO.getClient())
                 .setDriver(grpcDriverDTO);
@@ -89,8 +89,8 @@ public class DriverClient {
             throw new ServiceException(rDriverRegisterDTO.getResult().getMessage());
         }
 
-        DriverDTO driverDTO = grpcDriverBuilder.buildDTOByGrpcDTO(rDriverRegisterDTO.getDriver());
-        driverMetadata.setDriver(driverDTO);
+        DriverBO driverBO = driverBuilder.buildDTOByGrpcDTO(rDriverRegisterDTO.getDriver());
+        driverMetadata.setDriver(driverBO);
 
         List<GrpcDriverAttributeDTO> driverAttributesList = rDriverRegisterDTO.getDriverAttributesList();
         Map<Long, DriverAttributeDTO> driverAttributeDTOMap = driverAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcDriverAttributeBuilder::buildDTOByGrpcDTO));

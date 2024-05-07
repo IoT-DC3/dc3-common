@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.service.DriverMetadataService;
 import io.github.pnoker.common.driver.service.DriverMetadataTempService;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
@@ -42,7 +42,7 @@ public class DriverMetadataServiceImpl implements DriverMetadataService {
 
     @Override
     public void deviceMetadata(DriverTransferMetadataDTO entityDTO) {
-        DeviceDTO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceDTO.class);
+        DeviceBO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceBO.class);
         if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Upsert device: {}", JsonUtil.toJsonString(device));
             driverMetadataTempService.upsertDevice(device);
@@ -54,7 +54,7 @@ public class DriverMetadataServiceImpl implements DriverMetadataService {
 
     @Override
     public void pointMetadata(DriverTransferMetadataDTO entityDTO) {
-        PointDTO point = JsonUtil.parseObject(entityDTO.getContent(), PointDTO.class);
+        PointBO point = JsonUtil.parseObject(entityDTO.getContent(), PointBO.class);
         if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
             log.info("Upsert point: {}", JsonUtil.toJsonString(point));
             driverMetadataTempService.upsertPoint(point);

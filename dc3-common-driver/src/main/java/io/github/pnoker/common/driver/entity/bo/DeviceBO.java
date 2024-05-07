@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.entity.dto;
+package io.github.pnoker.common.driver.entity.bo;
 
+import io.github.pnoker.common.driver.entity.dto.DriverAttributeConfigDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
+import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
@@ -37,7 +40,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeviceDTO extends BaseDTO {
+public class DeviceBO extends BaseBO {
 
     /**
      * 设备名称

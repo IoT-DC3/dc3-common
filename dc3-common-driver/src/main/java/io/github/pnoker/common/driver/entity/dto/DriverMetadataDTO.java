@@ -16,7 +16,9 @@
 
 package io.github.pnoker.common.driver.entity.dto;
 
-import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.driver.entity.bo.AttributeBO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -66,12 +68,12 @@ public class DriverMetadataDTO implements Serializable {
     /**
      * deviceId,device
      */
-    private Map<Long, DeviceDTO> deviceMap;
+    private Map<Long, DeviceBO> deviceMap;
 
     /**
      * profileId(pointId,point)
      */
-    private Map<Long, Map<Long, PointDTO>> profilePointMap;
+    private Map<Long, Map<Long, PointBO>> profilePointMap;
 
     public DriverMetadataDTO() {
         this.driverAttributeMap = new ConcurrentHashMap<>(16);

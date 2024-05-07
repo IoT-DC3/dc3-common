@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import io.github.pnoker.common.driver.entity.dto.DriverDTO;
+import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import io.github.pnoker.common.driver.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.grpc.client.DeviceClient;
@@ -77,16 +77,16 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
      * @return DriverRegisterDTO
      */
     private DriverRegisterDTO buildRegisterDTOByProperty() {
-        DriverDTO driverDTO = new DriverDTO();
-        driverDTO.setDriverName(driverProperty.getName());
-        driverDTO.setDriverCode(driverProperty.getCode());
-        driverDTO.setServiceName(driverProperty.getService());
-        driverDTO.setServiceHost(driverProperty.getHost());
-        driverDTO.setDriverTypeFlag(driverProperty.getType());
-        driverDTO.setRemark(driverProperty.getRemark());
+        DriverBO driverBO = new DriverBO();
+        driverBO.setDriverName(driverProperty.getName());
+        driverBO.setDriverCode(driverProperty.getCode());
+        driverBO.setServiceName(driverProperty.getService());
+        driverBO.setServiceHost(driverProperty.getHost());
+        driverBO.setDriverTypeFlag(driverProperty.getType());
+        driverBO.setRemark(driverProperty.getRemark());
 
         DriverRegisterDTO driverRegisterDTO = new DriverRegisterDTO();
-        driverRegisterDTO.setDriver(driverDTO);
+        driverRegisterDTO.setDriver(driverBO);
         driverRegisterDTO.setTenant(driverProperty.getTenant());
         driverRegisterDTO.setClient(driverProperty.getClient());
         driverRegisterDTO.setDriverAttributes(driverProperty.getDriverAttribute());

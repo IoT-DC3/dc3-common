@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.entity.dto;
+package io.github.pnoker.common.driver.entity.bo;
 
+import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.base.BaseDTO;
-import io.github.pnoker.common.entity.ext.ProfileExt;
+import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import io.github.pnoker.common.enums.ProfileShareFlagEnum;
-import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
+import io.github.pnoker.common.enums.PointTypeFlagEnum;
+import io.github.pnoker.common.enums.RwFlagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
- * Profile BO
+ * Point BO
  *
  * @author pnoker
  * @since 2022.1.0
@@ -36,27 +39,62 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProfileDTO extends BaseDTO {
+public class PointBO extends BaseBO {
 
     /**
-     * 模版名称
+     * 位号名称
      */
-    private String profileName;
+    private String pointName;
 
     /**
-     * 模版编号
+     * 位号编号
      */
-    private String profileCode;
+    private String pointCode;
 
     /**
-     * 模版共享类型标识
+     * 位号类型标识
      */
-    private ProfileShareFlagEnum profileShareFlag;
+    private PointTypeFlagEnum pointTypeFlag;
 
     /**
-     * 模版类型标识
+     * 读写标识
      */
-    private ProfileTypeFlagEnum profileTypeFlag;
+    private RwFlagEnum rwFlag;
+
+    /**
+     * 基础值
+     */
+    private BigDecimal baseValue;
+
+    /**
+     * 比例系数
+     */
+    private BigDecimal multiple;
+
+    /**
+     * 数据精度
+     */
+    private Byte valueDecimal;
+
+    /**
+     * 单位
+     */
+    private String unit;
+
+    /**
+     * 模版ID
+     */
+    private Long profileId;
+
+    /**
+     * 报警通知模版ID
+     */
+    private Long alarmNotifyProfileId;
+
+    /**
+     * 报警信息模版ID
+     */
+    private Long alarmMessageProfileId;
 
     /**
      * 分组ID
@@ -64,9 +102,9 @@ public class ProfileDTO extends BaseDTO {
     private Long groupId;
 
     /**
-     * 模版拓展信息
+     * 位号拓展信息
      */
-    private ProfileExt profileExt;
+    private PointExt pointExt;
 
     /**
      * 使能标识
@@ -87,4 +125,5 @@ public class ProfileDTO extends BaseDTO {
      * 版本
      */
     private Integer version;
+
 }

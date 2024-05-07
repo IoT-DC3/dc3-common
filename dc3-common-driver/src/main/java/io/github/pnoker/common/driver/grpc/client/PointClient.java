@@ -20,8 +20,8 @@ import io.github.pnoker.api.common.GrpcPage;
 import io.github.pnoker.api.common.GrpcPointDTO;
 import io.github.pnoker.api.common.driver.*;
 import io.github.pnoker.common.constant.service.ManagerConstant;
-import io.github.pnoker.common.driver.entity.builder.GrpcPointBuilder;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
+import io.github.pnoker.common.driver.entity.builder.PointBuilder;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
@@ -39,20 +39,20 @@ public class PointClient {
     private PointApiGrpc.PointApiBlockingStub pointApiBlockingStub;
 
     private final DriverMetadata driverMetadata;
-    private final GrpcPointBuilder grpcPointBuilder;
+    private final PointBuilder pointBuilder;
 
-    public PointClient(DriverMetadata driverMetadata, GrpcPointBuilder grpcPointBuilder) {
+    public PointClient(DriverMetadata driverMetadata, PointBuilder pointBuilder) {
         this.driverMetadata = driverMetadata;
-        this.grpcPointBuilder = grpcPointBuilder;
+        this.pointBuilder = pointBuilder;
     }
 
-    public List<PointDTO> list() {
+    public List<PointBO> list() {
         long current = 1;
         GrpcRPagePointDTO rPagePointDTO = getGrpcRPagePointDTO(current);
         GrpcPagePointDTO pageDTO = rPagePointDTO.getData();
         List<GrpcPointDTO> dataList = pageDTO.getDataList();
-        List<PointDTO> pointDTOS = dataList.stream().map(grpcPointBuilder::buildDTOByGrpcDTO).toList();
-        ArrayList<PointDTO> allPointDTOList = new ArrayList<>(pointDTOS);
+        List<PointBO> pointBOS = dataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
+        ArrayList<PointBO> allPointBOList = new ArrayList<>(pointBOS);
 
         long pages = pageDTO.getPage().getPages();
         while (current < pages) {
@@ -60,11 +60,11 @@ public class PointClient {
             GrpcRPagePointDTO tPagePointDTO = getGrpcRPagePointDTO(current);
             GrpcPagePointDTO tPageDTO = tPagePointDTO.getData();
             List<GrpcPointDTO> tDataList = tPageDTO.getDataList();
-            List<PointDTO> tPointDTOS = tDataList.stream().map(grpcPointBuilder::buildDTOByGrpcDTO).toList();
-            allPointDTOList.addAll(tPointDTOS);
+            List<PointBO> tPointBOS = tDataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
+            allPointBOList.addAll(tPointBOS);
             pages = tPageDTO.getPage().getPages();
         }
-        return allPointDTOList;
+        return allPointBOList;
     }
 
     /**
@@ -73,7 +73,7 @@ public class PointClient {
      * @param id 位号ID
      * @return PointDTO
      */
-    public PointDTO selectById(Long id) {
+    public PointBO selectById(Long id) {
         GrpcPointQuery.Builder query = GrpcPointQuery.newBuilder();
         query.setPointId(id);
         GrpcRPointDTO rPointDTO = pointApiBlockingStub.selectById(query.build());
@@ -82,7 +82,7 @@ public class PointClient {
             return null;
         }
 
-        return grpcPointBuilder.buildDTOByGrpcDTO(rPointDTO.getData());
+        return pointBuilder.buildDTOByGrpcDTO(rPointDTO.getData());
     }
 
     private GrpcRPagePointDTO getGrpcRPagePointDTO(long current) {

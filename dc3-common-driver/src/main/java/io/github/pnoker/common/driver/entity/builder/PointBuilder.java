@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.entity.builder;
 
 import io.github.pnoker.api.common.GrpcPointDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.enums.RwFlagEnum;
@@ -40,21 +40,21 @@ import java.util.Optional;
  * @since 2022.1.0
  */
 @Mapper(componentModel = "spring", uses = {MapStructUtil.class})
-public interface GrpcPointBuilder {
+public interface PointBuilder {
 
     @Mapping(target = "pointExt", ignore = true)
     @Mapping(target = "rwFlag", ignore = true)
     @Mapping(target = "pointTypeFlag", ignore = true)
     @Mapping(target = "enableFlag", ignore = true)
-    PointDTO buildDTOByGrpcDTO(GrpcPointDTO entityGrpc);
+    PointBO buildDTOByGrpcDTO(GrpcPointDTO entityGrpc);
 
     @AfterMapping
-    default void afterProcess(GrpcPointDTO entityGrpc, @MappingTarget PointDTO entityDTO) {
-        GrpcBuilderUtil.buildBaseDTOByGrpcBase(entityGrpc.getBase(), entityDTO);
+    default void afterProcess(GrpcPointDTO entityGrpc, @MappingTarget PointBO entityBO) {
+        GrpcBuilderUtil.buildBaseBOByGrpcBase(entityGrpc.getBase(), entityBO);
 
-        JsonOptional.ofNullable(entityGrpc.getPointExt()).ifPresent(value -> entityDTO.setPointExt(JsonUtil.parseObject(value, PointExt.class)));
-        Optional.ofNullable(RwFlagEnum.ofIndex((byte) entityGrpc.getRwFlag())).ifPresent(entityDTO::setRwFlag);
-        Optional.ofNullable(PointTypeFlagEnum.ofIndex((byte) entityGrpc.getPointTypeFlag())).ifPresent(entityDTO::setPointTypeFlag);
-        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityDTO::setEnableFlag);
+        JsonOptional.ofNullable(entityGrpc.getPointExt()).ifPresent(value -> entityBO.setPointExt(JsonUtil.parseObject(value, PointExt.class)));
+        Optional.ofNullable(RwFlagEnum.ofIndex((byte) entityGrpc.getRwFlag())).ifPresent(entityBO::setRwFlag);
+        Optional.ofNullable(PointTypeFlagEnum.ofIndex((byte) entityGrpc.getPointTypeFlag())).ifPresent(entityBO::setPointTypeFlag);
+        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityBO::setEnableFlag);
     }
 }

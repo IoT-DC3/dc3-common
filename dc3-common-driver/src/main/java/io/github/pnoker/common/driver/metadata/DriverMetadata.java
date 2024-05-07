@@ -17,8 +17,8 @@
 package io.github.pnoker.common.driver.metadata;
 
 
+import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
-import io.github.pnoker.common.driver.entity.dto.DriverDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import lombok.Getter;
@@ -48,7 +48,7 @@ public class DriverMetadata {
     /**
      * 驱动
      */
-    private DriverDTO driver;
+    private DriverBO driver;
 
     /**
      * 驱动属性Map

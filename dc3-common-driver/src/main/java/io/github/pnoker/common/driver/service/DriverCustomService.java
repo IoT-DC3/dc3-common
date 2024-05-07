@@ -16,10 +16,11 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.driver.entity.bean.RWPointValue;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
-import io.github.pnoker.common.entity.bo.AttributeBO;
+import io.github.pnoker.common.driver.entity.bean.RValue;
+import io.github.pnoker.common.driver.entity.bean.WValue;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
+import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public interface DriverCustomService {
      * @param point        位号
      * @return 以字符串形式返回读取的值, 也存在抛异常
      */
-    String read(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, PointDTO point);
+    RValue read(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceBO device, PointBO point);
 
     /**
      * 写操作
@@ -65,9 +66,9 @@ public interface DriverCustomService {
      * @param driverConfig 驱动属性配置
      * @param pointConfig  位号属性配置
      * @param device       设备
-     * @param value        待写入数据
+     * @param wValue        待写入数据
      * @return 是否写入, 也存在抛异常
      */
-    Boolean write(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceDTO device, PointDTO point, RWPointValue value);
+    Boolean write(Map<String, AttributeBO> driverConfig, Map<String, AttributeBO> pointConfig, DeviceBO device, PointBO point, WValue wValue);
 
 }

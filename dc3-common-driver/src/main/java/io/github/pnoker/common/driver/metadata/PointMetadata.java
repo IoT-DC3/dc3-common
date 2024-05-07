@@ -20,7 +20,7 @@ package io.github.pnoker.common.driver.metadata;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.grpc.client.PointClient;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class PointMetadata {
     /**
      * pointId,pointDTO
      */
-    private final AsyncLoadingCache<Long, PointDTO> cache;
+    private final AsyncLoadingCache<Long, PointBO> cache;
 
     private final PointClient pointClient;
 
@@ -58,36 +58,36 @@ public class PointMetadata {
                 .removalListener((key, value, cause) -> log.info("Remove point={}, value={} cache, reason is: {}", key, value, cause))
                 .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
                     log.info("Load point metadata by id: {}", rawValue);
-                    PointDTO pointDTO = this.pointClient.selectById(rawValue);
-                    log.info("Cache point metadata: {}", JsonUtil.toJsonString(pointDTO));
-                    return pointDTO;
+                    PointBO pointBO = this.pointClient.selectById(rawValue);
+                    log.info("Cache point metadata: {}", JsonUtil.toJsonString(pointBO));
+                    return pointBO;
                 }, executor));
     }
 
     public void loadAllCache() {
-        List<PointDTO> entityDTOList = pointClient.list();
+        List<PointBO> entityDTOList = pointClient.list();
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
     public void loadCache(long id) {
-        PointDTO entityDTO = pointClient.selectById(id);
+        PointBO entityDTO = pointClient.selectById(id);
         setCache(entityDTO.getId(), entityDTO);
     }
 
-    public void setCache(long id, PointDTO pointDTO) {
-        cache.put(id, CompletableFuture.completedFuture(pointDTO));
+    public void setCache(long id, PointBO pointBO) {
+        cache.put(id, CompletableFuture.completedFuture(pointBO));
     }
 
     public void removeCache(long id) {
         cache.put(id, CompletableFuture.completedFuture(null));
     }
 
-    public List<PointDTO> getAllPoint() {
-        List<PointDTO> entityDTOList = new ArrayList<>();
-        Collection<CompletableFuture<PointDTO>> futures = cache.asMap().values();
-        for (CompletableFuture<PointDTO> future : futures) {
+    public List<PointBO> getAllPoint() {
+        List<PointBO> entityDTOList = new ArrayList<>();
+        Collection<CompletableFuture<PointBO>> futures = cache.asMap().values();
+        for (CompletableFuture<PointBO> future : futures) {
             try {
-                PointDTO entityDTO = future.get();
+                PointBO entityDTO = future.get();
                 if (ObjectUtil.isNotNull(entityDTO)) {
                     entityDTOList.add(entityDTO);
                 }
@@ -99,9 +99,9 @@ public class PointMetadata {
         return entityDTOList;
     }
 
-    public PointDTO getPoint(long id) {
+    public PointBO getPoint(long id) {
         try {
-            CompletableFuture<PointDTO> future = cache.get(id);
+            CompletableFuture<PointBO> future = cache.get(id);
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             Thread.currentThread().interrupt();

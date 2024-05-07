@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.driver.service;
 
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 
 /**
  * @author pnoker
@@ -30,7 +30,7 @@ public interface DriverMetadataTempService {
      *
      * @param device Device
      */
-    void upsertDevice(DeviceDTO device);
+    void upsertDevice(DeviceBO device);
 
     /**
      * 删除驱动原数据中设备
@@ -44,7 +44,7 @@ public interface DriverMetadataTempService {
      *
      * @param point Point
      */
-    void upsertPoint(PointDTO point);
+    void upsertPoint(PointBO point);
 
     /**
      * 删除驱动原数据中位号

@@ -72,11 +72,11 @@ public class PointValue implements Serializable {
      */
     private LocalDateTime createTime;
 
-    public PointValue(Long deviceId, Long pointId, String rawValue, String value) {
-        this.deviceId = deviceId;
-        this.pointId = pointId;
-        this.rawValue = rawValue;
-        this.value = value;
+    public PointValue(RValue value) {
+        this.deviceId = value.getDevice().getId();
+        this.pointId = value.getPoint().getId();
+        this.rawValue = value.getValue();
+        this.value = value.getFinalValue();
         this.originTime = LocalDateTime.now();
     }
 }

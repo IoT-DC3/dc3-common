@@ -18,7 +18,7 @@ package io.github.pnoker.common.driver.job;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.service.DriverReadService;
 import io.github.pnoker.common.enums.EnableFlagEnum;
@@ -51,12 +51,12 @@ public class DriverReadScheduleJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
-        List<DeviceDTO> entityDTOList = deviceMetadata.getAllDevice();
+        List<DeviceBO> entityDTOList = deviceMetadata.getAllDevice();
         if (CollUtil.isEmpty(entityDTOList)) {
             return;
         }
 
-        for (DeviceDTO entityDTO : entityDTOList) {
+        for (DeviceBO entityDTO : entityDTOList) {
             if (EnableFlagEnum.ENABLE.equals(entityDTO.getEnableFlag())
                     && CollUtil.isNotEmpty(entityDTO.getProfileIds())
                     && CollUtil.isNotEmpty(entityDTO.getPointIds())

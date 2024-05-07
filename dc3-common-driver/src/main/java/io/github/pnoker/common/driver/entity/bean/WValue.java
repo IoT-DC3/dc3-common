@@ -28,7 +28,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 读数据实体类
+ * 写数据实体类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -38,7 +38,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RWPointValue implements Serializable {
+public class WValue implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

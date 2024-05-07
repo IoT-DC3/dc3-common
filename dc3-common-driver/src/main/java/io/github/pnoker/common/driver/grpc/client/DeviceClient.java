@@ -21,10 +21,10 @@ import io.github.pnoker.api.common.GrpcPage;
 import io.github.pnoker.api.common.GrpcPointAttributeConfigDTO;
 import io.github.pnoker.api.common.driver.*;
 import io.github.pnoker.common.constant.service.ManagerConstant;
-import io.github.pnoker.common.driver.entity.builder.GrpcDeviceBuilder;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.builder.DeviceBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcDriverAttributeConfigBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcPointAttributeConfigBuilder;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeConfigDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
@@ -48,24 +48,24 @@ public class DeviceClient {
     private DeviceApiGrpc.DeviceApiBlockingStub deviceApiBlockingStub;
 
     private final DriverMetadata driverMetadata;
-    private final GrpcDeviceBuilder grpcDeviceBuilder;
+    private final DeviceBuilder deviceBuilder;
     private final GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder;
     private final GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder;
 
-    public DeviceClient(DriverMetadata driverMetadata, GrpcDeviceBuilder grpcDeviceBuilder, GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder, GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder) {
+    public DeviceClient(DriverMetadata driverMetadata, DeviceBuilder deviceBuilder, GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder, GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder) {
         this.driverMetadata = driverMetadata;
-        this.grpcDeviceBuilder = grpcDeviceBuilder;
+        this.deviceBuilder = deviceBuilder;
         this.grpcDriverAttributeConfigBuilder = grpcDriverAttributeConfigBuilder;
         this.grpcPointAttributeConfigBuilder = grpcPointAttributeConfigBuilder;
     }
 
-    public List<DeviceDTO> list() {
+    public List<DeviceBO> list() {
         long current = 1;
         GrpcRPageDeviceDTO rPageDeviceDTO = getGrpcRPageDeviceDTO(current);
         GrpcPageDeviceDTO pageDTO = rPageDeviceDTO.getData();
         List<GrpcRDeviceAttachDTO> dataList = pageDTO.getDataList();
-        List<DeviceDTO> deviceDTOS = dataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
-        List<DeviceDTO> allDeviceDTOList = new ArrayList<>(deviceDTOS);
+        List<DeviceBO> deviceBOS = dataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
+        List<DeviceBO> allDeviceBOList = new ArrayList<>(deviceBOS);
 
         long pages = pageDTO.getPage().getPages();
         while (current < pages) {
@@ -73,11 +73,11 @@ public class DeviceClient {
             GrpcRPageDeviceDTO tPageDeviceDTO = getGrpcRPageDeviceDTO(current);
             GrpcPageDeviceDTO tPageDTO = tPageDeviceDTO.getData();
             List<GrpcRDeviceAttachDTO> tDataList = tPageDTO.getDataList();
-            List<DeviceDTO> tDeviceDTOS = tDataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
-            allDeviceDTOList.addAll(tDeviceDTOS);
+            List<DeviceBO> tDeviceBOS = tDataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
+            allDeviceBOList.addAll(tDeviceBOS);
             pages = tPageDTO.getPage().getPages();
         }
-        return allDeviceDTOList;
+        return allDeviceBOList;
     }
 
     /**
@@ -86,7 +86,7 @@ public class DeviceClient {
      * @param id 设备ID
      * @return DeviceDTO
      */
-    public DeviceDTO selectById(Long id) {
+    public DeviceBO selectById(Long id) {
         GrpcDeviceQuery.Builder query = GrpcDeviceQuery.newBuilder();
         query.setDeviceId(id);
         GrpcRDeviceDTO rDeviceDTO = deviceApiBlockingStub.selectById(query.build());
@@ -113,22 +113,22 @@ public class DeviceClient {
         return rPageDeviceDTO;
     }
 
-    private DeviceDTO buildDTOByGrpcAttachDTO(GrpcRDeviceAttachDTO rDeviceAttachDTO) {
-        DeviceDTO deviceDTO = grpcDeviceBuilder.buildDTOByGrpcDTO(rDeviceAttachDTO.getDevice());
-        deviceDTO.setPointIds(new HashSet<>(rDeviceAttachDTO.getPointIdsList()));
+    private DeviceBO buildDTOByGrpcAttachDTO(GrpcRDeviceAttachDTO rDeviceAttachDTO) {
+        DeviceBO deviceBO = deviceBuilder.buildDTOByGrpcDTO(rDeviceAttachDTO.getDevice());
+        deviceBO.setPointIds(new HashSet<>(rDeviceAttachDTO.getPointIdsList()));
 
         CollectionOptional.ofNullable(rDeviceAttachDTO.getDriverConfigsList()).ifPresent(list -> {
             Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap = list.stream()
                     .collect(Collectors.toMap(GrpcDriverAttributeConfigDTO::getDriverAttributeId, grpcDriverAttributeConfigBuilder::buildDTOByGrpcDTO));
-            deviceDTO.setDriverAttributeConfigMap(driverAttributeConfigMap);
+            deviceBO.setDriverAttributeConfigMap(driverAttributeConfigMap);
         });
 
         CollectionOptional.ofNullable(rDeviceAttachDTO.getPointConfigsList()).ifPresent(list -> {
             Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = list.stream()
                     .collect(Collectors.groupingBy(GrpcPointAttributeConfigDTO::getPointId, Collectors.toMap(GrpcPointAttributeConfigDTO::getPointAttributeId, grpcPointAttributeConfigBuilder::buildDTOByGrpcDTO)));
-            deviceDTO.setPointAttributeConfigMap(pointAttributeConfigMap);
+            deviceBO.setPointAttributeConfigMap(pointAttributeConfigMap);
         });
 
-        return deviceDTO;
+        return deviceBO;
     }
 }

@@ -16,8 +16,8 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverMetadataTempService;
@@ -41,7 +41,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
     PointMetadata pointMetadata;
 
     @Override
-    public void upsertDevice(DeviceDTO device) {
+    public void upsertDevice(DeviceBO device) {
         deviceMetadata.loadCache(device.getId());
     }
 
@@ -51,7 +51,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
     }
 
     @Override
-    public void upsertPoint(PointDTO point) {
+    public void upsertPoint(PointBO point) {
         pointMetadata.loadCache(point.getId());
     }
 

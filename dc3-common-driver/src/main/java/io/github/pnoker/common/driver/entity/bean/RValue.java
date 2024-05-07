@@ -14,45 +14,64 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.utils;
+package io.github.pnoker.common.driver.entity.bean;
 
 import cn.hutool.core.util.ObjectUtil;
-import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.driver.entity.dto.PointDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.OutRangeException;
-import lombok.extern.slf4j.Slf4j;
+import io.github.pnoker.common.utils.ArithmeticUtil;
+import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
- * 类型转换相关工具类集合
+ * 读数据实体类
  *
  * @author pnoker
  * @since 2022.1.0
  */
-@Slf4j
-public class ValueUtil {
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class RValue implements Serializable {
 
-    private ValueUtil() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private static final BigDecimal defaultBase = new BigDecimal(0);
     private static final BigDecimal defaultMultiple = new BigDecimal(1);
+
+    /**
+     * 设备
+     */
+    private DeviceBO device;
+
+    /**
+     * 位号
+     */
+    private PointBO point;
+
+    /**
+     * 值, string, 需要根据type确定真实的数据类型
+     */
+    private String value;
 
     /**
      * 位号数据处理
      * 当出现精度问题, 向上调整
      * 例如: byte 类型的数据经过 base 和 multiple 之后超出范围, 将其调整为float类型
      *
-     * @param point    Point
-     * @param rawValue Raw Value
-     * @return Value
+     * @return 根据位号配置计算返回计算值
      */
-    public static String getValue(PointDTO point, String rawValue) {
+    public String getFinalValue() {
         if (ObjectUtil.isNull(point)) {
             throw new EmptyException("Point is empty");
         }
@@ -63,14 +82,14 @@ public class ValueUtil {
         byte decimal = Optional.ofNullable(point.getValueDecimal()).orElse((byte) 6);
 
         return switch (valueType) {
-            case STRING -> rawValue;
-            case BYTE -> String.valueOf(getByteValue(rawValue, base, multiple));
-            case SHORT -> String.valueOf(getShortValue(rawValue, base, multiple));
-            case INT -> String.valueOf(getIntegerValue(rawValue, base, multiple));
-            case LONG -> String.valueOf(getLongValue(rawValue, base, multiple));
-            case FLOAT -> String.valueOf(getFloatValue(rawValue, base, multiple, decimal));
-            case DOUBLE -> String.valueOf(getDoubleValue(rawValue, base, multiple, decimal));
-            case BOOLEAN -> String.valueOf(getBooleanValue(rawValue));
+            case STRING -> value;
+            case BYTE -> String.valueOf(getByteValue(value, base, multiple));
+            case SHORT -> String.valueOf(getShortValue(value, base, multiple));
+            case INT -> String.valueOf(getIntegerValue(value, base, multiple));
+            case LONG -> String.valueOf(getLongValue(value, base, multiple));
+            case FLOAT -> String.valueOf(getFloatValue(value, base, multiple, decimal));
+            case DOUBLE -> String.valueOf(getDoubleValue(value, base, multiple, decimal));
+            case BOOLEAN -> String.valueOf(getBooleanValue(value));
         };
     }
 
@@ -82,7 +101,7 @@ public class ValueUtil {
      * @param a X
      * @return BigDecimal
      */
-    private static BigDecimal getLinearValue(BigDecimal a, String x, BigDecimal b) {
+    private BigDecimal getLinearValue(BigDecimal a, String x, BigDecimal b) {
         BigDecimal bigDecimal = new BigDecimal(x);
         if (defaultMultiple.compareTo(a) == 0 && defaultBase.compareTo(b) == 0) {
             return bigDecimal;
@@ -104,7 +123,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return short
      */
-    private static byte getByteValue(String rawValue, BigDecimal base, BigDecimal multiple) {
+    private byte getByteValue(String rawValue, BigDecimal base, BigDecimal multiple) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             return multiply.byteValue();
@@ -120,7 +139,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return short
      */
-    private static short getShortValue(String rawValue, BigDecimal base, BigDecimal multiple) {
+    private short getShortValue(String rawValue, BigDecimal base, BigDecimal multiple) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             return multiply.shortValue();
@@ -136,7 +155,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return int
      */
-    private static int getIntegerValue(String rawValue, BigDecimal base, BigDecimal multiple) {
+    private int getIntegerValue(String rawValue, BigDecimal base, BigDecimal multiple) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             return multiply.intValue();
@@ -152,7 +171,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return long
      */
-    private static long getLongValue(String rawValue, BigDecimal base, BigDecimal multiple) {
+    private long getLongValue(String rawValue, BigDecimal base, BigDecimal multiple) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             return multiply.longValue();
@@ -167,7 +186,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return float
      */
-    private static float getFloatValue(String rawValue, BigDecimal base, BigDecimal multiple, byte decimal) {
+    private float getFloatValue(String rawValue, BigDecimal base, BigDecimal multiple, byte decimal) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             if (Float.isInfinite(multiply.floatValue())) {
@@ -185,7 +204,7 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return double
      */
-    private static double getDoubleValue(String rawValue, BigDecimal base, BigDecimal multiple, byte decimal) {
+    private double getDoubleValue(String rawValue, BigDecimal base, BigDecimal multiple, byte decimal) {
         try {
             BigDecimal multiply = getLinearValue(multiple, rawValue, base);
             if (Double.isInfinite(multiply.doubleValue())) {
@@ -203,7 +222,8 @@ public class ValueUtil {
      * @param rawValue 原始值
      * @return boolean
      */
-    private static boolean getBooleanValue(String rawValue) {
+    private boolean getBooleanValue(String rawValue) {
         return Boolean.parseBoolean(rawValue);
     }
+
 }

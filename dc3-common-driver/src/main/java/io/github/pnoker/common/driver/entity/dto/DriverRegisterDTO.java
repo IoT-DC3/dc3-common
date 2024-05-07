@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.driver.entity.dto;
 
+import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import lombok.*;
 
 import java.io.Serial;
@@ -38,7 +39,7 @@ public class DriverRegisterDTO implements Serializable {
 
     private String tenant;
     private String client;
-    private DriverDTO driver;
+    private DriverBO driver;
     private List<DriverAttributeDTO> driverAttributes;
     private List<PointAttributeDTO> pointAttributes;
 

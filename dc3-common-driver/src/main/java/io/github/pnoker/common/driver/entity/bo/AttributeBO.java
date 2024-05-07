@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.bo;
+package io.github.pnoker.common.driver.entity.bo;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -61,7 +61,7 @@ public class AttributeBO implements Serializable {
      * @return T
      */
     @SuppressWarnings("unchecked")
-    public <T> T getAttributeValue(Class<T> clazz) {
+    public <T> T getValue(Class<T> clazz) {
         if (ObjectUtil.isNull(type)) {
             throw new UnSupportException("Unsupported attribute type of " + type);
         }

@@ -17,7 +17,7 @@
 package io.github.pnoker.common.driver.entity.builder;
 
 import io.github.pnoker.api.common.GrpcDeviceDTO;
-import io.github.pnoker.common.driver.entity.dto.DeviceDTO;
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.optional.CollectionOptional;
 import io.github.pnoker.common.optional.EnableOptional;
@@ -39,21 +39,21 @@ import java.util.HashSet;
  * @since 2022.1.0
  */
 @Mapper(componentModel = "spring", uses = {MapStructUtil.class})
-public interface GrpcDeviceBuilder {
+public interface DeviceBuilder {
 
     @Mapping(target = "deviceExt", ignore = true)
     @Mapping(target = "enableFlag", ignore = true)
     @Mapping(target = "profileIds", ignore = true)
     @Mapping(target = "driverAttributeConfigMap", ignore = true)
     @Mapping(target = "pointAttributeConfigMap", ignore = true)
-    DeviceDTO buildDTOByGrpcDTO(GrpcDeviceDTO entityGrpc);
+    DeviceBO buildDTOByGrpcDTO(GrpcDeviceDTO entityGrpc);
 
     @AfterMapping
-    default void afterProcess(GrpcDeviceDTO entityGrpc, @MappingTarget DeviceDTO entityDTO) {
-        GrpcBuilderUtil.buildBaseDTOByGrpcBase(entityGrpc.getBase(), entityDTO);
+    default void afterProcess(GrpcDeviceDTO entityGrpc, @MappingTarget DeviceBO entityBO) {
+        GrpcBuilderUtil.buildBaseBOByGrpcBase(entityGrpc.getBase(), entityBO);
 
-        CollectionOptional.ofNullable(entityGrpc.getProfileIdsList()).ifPresent(value -> entityDTO.setProfileIds(new HashSet<>(value)));
-        JsonOptional.ofNullable(entityGrpc.getDeviceExt()).ifPresent(value -> entityDTO.setDeviceExt(JsonUtil.parseObject(value, DeviceExt.class)));
-        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityDTO::setEnableFlag);
+        CollectionOptional.ofNullable(entityGrpc.getProfileIdsList()).ifPresent(value -> entityBO.setProfileIds(new HashSet<>(value)));
+        JsonOptional.ofNullable(entityGrpc.getDeviceExt()).ifPresent(value -> entityBO.setDeviceExt(JsonUtil.parseObject(value, DeviceExt.class)));
+        EnableOptional.ofNullable(entityGrpc.getEnableFlag()).ifPresent(entityBO::setEnableFlag);
     }
 }
