@@ -41,6 +41,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -103,4 +104,6 @@ public class DriverClient {
 
         driverMetadata.setDriverStatus(DriverStatusEnum.ONLINE);
     }
+
+    public Set<Long> getDevicePointMap(Long deviceId){return null;}
 }

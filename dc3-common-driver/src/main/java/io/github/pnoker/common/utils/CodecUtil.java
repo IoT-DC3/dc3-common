@@ -23,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * 驱动工具类
+ * 编码工具类
  *
  * @author pnoker
  * @since 2022.1.0

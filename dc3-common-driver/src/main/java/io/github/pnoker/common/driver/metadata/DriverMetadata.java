@@ -17,16 +17,23 @@
 package io.github.pnoker.common.driver.metadata;
 
 
+import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
+import io.github.pnoker.common.driver.grpc.client.DriverClient;
 import io.github.pnoker.common.enums.DriverStatusEnum;
+import io.github.pnoker.common.utils.JsonUtil;
+import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * 驱动元数据
@@ -39,6 +46,14 @@ import java.util.Map;
 @Setter
 @Component
 public class DriverMetadata {
+
+    /**
+     * deviceId,pointId
+     */
+    private final AsyncLoadingCache<Long, Set<Long>> cache;
+
+    @Resource
+    private DriverClient driverClient;
 
     /**
      * 驱动状态
@@ -64,4 +79,14 @@ public class DriverMetadata {
      */
     private Map<Long, PointAttributeDTO> pointAttributeMap;
 
+    public DriverMetadata() {
+        this.cache = Caffeine.newBuilder()
+                .removalListener((key, value, cause) -> log.info("Remove key={}, value={} cache, reason is: {}", key, value, cause))
+                .buildAsync((key, executor) -> CompletableFuture.supplyAsync(() -> {
+                    log.info("Load driver metadata by id: {}", key);
+                    Set<Long> devicePointMap = driverClient.getDevicePointMap(key);
+                    log.info("Cache driver metadata: {}", JsonUtil.toJsonString(devicePointMap));
+                    return devicePointMap;
+                }, executor));
+    }
 }

@@ -53,12 +53,12 @@ public class PointMetadata {
     public PointMetadata(PointClient pointClient) {
         this.pointClient = pointClient;
         this.cache = Caffeine.newBuilder()
-                .maximumSize(2000)
+                .maximumSize(5000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
-                .removalListener((key, value, cause) -> log.info("Remove point={}, value={} cache, reason is: {}", key, value, cause))
-                .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
-                    log.info("Load point metadata by id: {}", rawValue);
-                    PointBO pointBO = this.pointClient.selectById(rawValue);
+                .removalListener((key, value, cause) -> log.info("Remove key={}, value={} cache, reason is: {}", key, value, cause))
+                .buildAsync((key, executor) -> CompletableFuture.supplyAsync(() -> {
+                    log.info("Load point metadata by id: {}", key);
+                    PointBO pointBO = this.pointClient.selectById(key);
                     log.info("Cache point metadata: {}", JsonUtil.toJsonString(pointBO));
                     return pointBO;
                 }, executor));
@@ -93,7 +93,7 @@ public class PointMetadata {
                 }
             } catch (InterruptedException | ExecutionException e) {
                 Thread.currentThread().interrupt();
-                log.error("Failed to get point cache: {}", e.getMessage(), e);
+                log.error("Failed to get all point cache: {}", e.getMessage(), e);
             }
         }
         return entityDTOList;
@@ -105,7 +105,7 @@ public class PointMetadata {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             Thread.currentThread().interrupt();
-            log.error("Failed to get point cache: {}", e.getMessage(), e);
+            log.error("Failed to get the point cache: {}", e.getMessage(), e);
             return null;
         }
     }

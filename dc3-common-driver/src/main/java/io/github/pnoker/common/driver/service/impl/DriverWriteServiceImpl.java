@@ -65,8 +65,8 @@ public class DriverWriteServiceImpl implements DriverWriteService {
                 throw new ReadPointException("Failed to write point value, device[{}] not contained point[{}]", deviceId, pointId);
             }
 
-            Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverAttributeConfig(deviceId);
-            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId, pointId);
+            Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverConfig(deviceId);
+            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointConfig(deviceId, pointId);
 
             PointBO point = pointMetadata.getPoint(pointId);
             if (ObjectUtil.isNull(point)) {

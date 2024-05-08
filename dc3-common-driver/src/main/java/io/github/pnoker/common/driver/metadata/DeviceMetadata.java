@@ -66,12 +66,12 @@ public class DeviceMetadata {
 
     public DeviceMetadata() {
         this.cache = Caffeine.newBuilder()
-                .maximumSize(2000)
+                .maximumSize(5000)
                 .expireAfterWrite(24, TimeUnit.HOURS)
-                .removalListener((key, value, cause) -> log.info("Remove device={}, value={} cache, reason is: {}", key, value, cause))
-                .buildAsync((rawValue, executor) -> CompletableFuture.supplyAsync(() -> {
-                    log.info("Load device metadata by id: {}", rawValue);
-                    DeviceBO deviceBO = deviceClient.selectById(rawValue);
+                .removalListener((key, value, cause) -> log.info("Remove key={}, value={} cache, reason is: {}", key, value, cause))
+                .buildAsync((key, executor) -> CompletableFuture.supplyAsync(() -> {
+                    log.info("Load device metadata by id: {}", key);
+                    DeviceBO deviceBO = deviceClient.selectById(key);
                     log.info("Cache device metadata: {}", JsonUtil.toJsonString(deviceBO));
                     return deviceBO;
                 }, executor));
@@ -106,7 +106,7 @@ public class DeviceMetadata {
                 }
             } catch (InterruptedException | ExecutionException e) {
                 Thread.currentThread().interrupt();
-                log.error("Failed to get device cache: {}", e.getMessage(), e);
+                log.error("Failed to get all device cache: {}", e.getMessage(), e);
             }
         }
         return entityDTOList;
@@ -118,7 +118,7 @@ public class DeviceMetadata {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
             Thread.currentThread().interrupt();
-            log.error("Failed to get device cache: {}", e.getMessage(), e);
+            log.error("Failed to get the device cache: {}", e.getMessage(), e);
             return null;
         }
     }
@@ -131,7 +131,7 @@ public class DeviceMetadata {
      * @param deviceId 设备ID
      * @return 属性配置Map
      */
-    public Map<String, AttributeBO> getDriverAttributeConfig(long deviceId) {
+    public Map<String, AttributeBO> getDriverConfig(long deviceId) {
         Map<Long, DriverAttributeDTO> attributeMap = driverMetadata.getDriverAttributeMap();
         if (MapUtil.isEmpty(attributeMap)) {
             return MapUtil.empty();
@@ -139,15 +139,15 @@ public class DeviceMetadata {
 
         DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
-            throw new ConfigException("Failed to get config, the device is empty");
+            throw new ConfigException("Failed to get driver config, the device is empty");
         }
 
         Map<Long, DriverAttributeConfigDTO> attributeConfigMap = device.getDriverAttributeConfigMap();
         if (MapUtil.isEmpty(attributeConfigMap)) {
-            throw new ConfigException("Failed to get config, the driver attribute config is empty");
+            throw new ConfigException("Failed to get driver config, the driver attribute config is empty");
         }
         if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
-            throw new ConfigException("Failed to get config, the driver attribute config is incomplete");
+            throw new ConfigException("Failed to get driver config, the driver attribute config is incomplete");
         }
 
         return attributeMap.entrySet().stream()
@@ -170,7 +170,7 @@ public class DeviceMetadata {
      * @param pointId  位号ID
      * @return 属性配置Map
      */
-    public Map<String, AttributeBO> getPointAttributeConfig(long deviceId, long pointId) {
+    public Map<String, AttributeBO> getPointConfig(long deviceId, long pointId) {
         Map<Long, PointAttributeDTO> attributeMap = driverMetadata.getPointAttributeMap();
         if (MapUtil.isEmpty(attributeMap)) {
             return MapUtil.empty();
@@ -178,20 +178,20 @@ public class DeviceMetadata {
 
         DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
-            throw new ConfigException("Failed to get config, the device is empty");
+            throw new ConfigException("Failed to get point config, the device is empty");
         }
 
         Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigMap();
         if (ObjectUtil.isNull(pointAttributeConfigMap)) {
-            throw new ConfigException("Failed to get config, the device point attribute config is empty");
+            throw new ConfigException("Failed to get point config, the device point attribute config is empty");
         }
 
         Map<Long, PointAttributeConfigDTO> attributeConfigMap = pointAttributeConfigMap.get(pointId);
         if (MapUtil.isEmpty(attributeConfigMap)) {
-            throw new ConfigException("Failed to get config, the point attribute config is empty");
+            throw new ConfigException("Failed to get point config, the point attribute config is empty");
         }
         if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
-            throw new ConfigException("Failed to get config, the point attribute config is incomplete");
+            throw new ConfigException("Failed to get point config, the point attribute config is incomplete");
         }
 
         return attributeMap.entrySet().stream()
@@ -213,7 +213,7 @@ public class DeviceMetadata {
      * @param deviceId 设备ID
      * @return 属性配置Map
      */
-    public Map<Long, Map<String, AttributeBO>> getPointAttributeConfig(long deviceId) {
+    public Map<Long, Map<String, AttributeBO>> getPointConfig(long deviceId) {
         Map<Long, PointAttributeDTO> attributeMap = driverMetadata.getPointAttributeMap();
         if (MapUtil.isEmpty(attributeMap)) {
             return MapUtil.empty();
@@ -221,21 +221,21 @@ public class DeviceMetadata {
 
         DeviceBO device = getDevice(deviceId);
         if (ObjectUtil.isNull(device)) {
-            throw new ConfigException("Failed to get config, the device is empty");
+            throw new ConfigException("Failed to get point config, the device is empty");
         }
 
         Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigMap();
         if (ObjectUtil.isNull(pointAttributeConfigMap)) {
-            throw new ConfigException("Failed to get config, the device point attribute config is empty");
+            throw new ConfigException("Failed to get point config, the device point attribute config is empty");
         }
 
-        return pointAttributeConfigMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry1 -> {
-            Map<Long, PointAttributeConfigDTO> attributeConfigMap = entry1.getValue();
+        return pointAttributeConfigMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entryMap -> {
+            Map<Long, PointAttributeConfigDTO> attributeConfigMap = entryMap.getValue();
             if (MapUtil.isEmpty(attributeConfigMap)) {
-                throw new ConfigException("Failed to get config, the point attribute config is empty");
+                throw new ConfigException("Failed to get point config, the point attribute config is empty");
             }
             if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
-                throw new ConfigException("Failed to get config, the point attribute config is incomplete");
+                throw new ConfigException("Failed to get point config, the point attribute config is incomplete");
             }
 
             return attributeMap.entrySet().stream()

@@ -54,7 +54,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, false, arguments);
+        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, true, arguments);
     }
 
     @Bean
