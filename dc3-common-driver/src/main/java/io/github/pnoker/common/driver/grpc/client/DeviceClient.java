@@ -64,8 +64,8 @@ public class DeviceClient {
         GrpcRPageDeviceDTO rPageDeviceDTO = getGrpcRPageDeviceDTO(current);
         GrpcPageDeviceDTO pageDTO = rPageDeviceDTO.getData();
         List<GrpcRDeviceAttachDTO> dataList = pageDTO.getDataList();
-        List<DeviceBO> deviceBOS = dataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
-        List<DeviceBO> allDeviceBOList = new ArrayList<>(deviceBOS);
+        List<DeviceBO> deviceBOList = dataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
+        List<DeviceBO> allDeviceBOList = new ArrayList<>(deviceBOList);
 
         long pages = pageDTO.getPage().getPages();
         while (current < pages) {

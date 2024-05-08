@@ -41,7 +41,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -93,10 +92,11 @@ public class DriverClient {
         DriverBO driverBO = driverBuilder.buildDTOByGrpcDTO(rDriverRegisterDTO.getDriver());
         driverMetadata.setDriver(driverBO);
 
+        driverMetadata.setDeviceIds(rDriverRegisterDTO.getDeviceIdsList());
+
         List<GrpcDriverAttributeDTO> driverAttributesList = rDriverRegisterDTO.getDriverAttributesList();
         Map<Long, DriverAttributeDTO> driverAttributeDTOMap = driverAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcDriverAttributeBuilder::buildDTOByGrpcDTO));
         driverMetadata.setDriverAttributeMap(driverAttributeDTOMap);
-
 
         List<GrpcPointAttributeDTO> pointAttributesList = rDriverRegisterDTO.getPointAttributesList();
         Map<Long, PointAttributeDTO> pointAttributeDTOMap = pointAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcPointAttributeBuilder::buildDTOByGrpcDTO));
@@ -104,6 +104,4 @@ public class DriverClient {
 
         driverMetadata.setDriverStatus(DriverStatusEnum.ONLINE);
     }
-
-    public Set<Long> getDevicePointMap(Long deviceId){return null;}
 }

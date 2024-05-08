@@ -31,6 +31,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -64,6 +65,11 @@ public class DriverMetadata {
      * 驱动
      */
     private DriverBO driver;
+
+    /**
+     * 设备ID集合
+     */
+    private List<Long> deviceIds;
 
     /**
      * 驱动属性Map
