@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.entity.bo;
 
 import io.github.pnoker.common.entity.base.BaseBO;
-import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.DriverExt;
 import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;

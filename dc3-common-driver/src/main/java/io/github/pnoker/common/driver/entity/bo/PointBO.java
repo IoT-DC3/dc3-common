@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.entity.bo;
 
 import io.github.pnoker.common.entity.base.BaseBO;
-import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;

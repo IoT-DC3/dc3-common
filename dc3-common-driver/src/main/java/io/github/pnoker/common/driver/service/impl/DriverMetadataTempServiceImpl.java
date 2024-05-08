@@ -56,7 +56,7 @@ public class DriverMetadataTempServiceImpl implements DriverMetadataTempService 
     }
 
     @Override
-    public void deletePoint( Long pointId) {
+    public void deletePoint(Long pointId) {
         pointMetadata.removeCache(pointId);
     }
 

@@ -19,7 +19,6 @@ package io.github.pnoker.common.driver.entity.bo;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeConfigDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.entity.base.BaseBO;
-import io.github.pnoker.common.entity.base.BaseDTO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import lombok.AllArgsConstructor;

@@ -18,6 +18,7 @@ package io.github.pnoker.common.driver.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.entity.bean.WValue;
+import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
@@ -25,7 +26,6 @@ import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverWriteService;
-import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.entity.dto.DeviceCommandDTO;
 import io.github.pnoker.common.exception.ReadPointException;
 import io.github.pnoker.common.exception.ServiceException;
@@ -66,7 +66,7 @@ public class DriverWriteServiceImpl implements DriverWriteService {
             }
 
             Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverAttributeConfig(deviceId);
-            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId,pointId);
+            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointAttributeConfig(deviceId, pointId);
 
             PointBO point = pointMetadata.getPoint(pointId);
             if (ObjectUtil.isNull(point)) {
