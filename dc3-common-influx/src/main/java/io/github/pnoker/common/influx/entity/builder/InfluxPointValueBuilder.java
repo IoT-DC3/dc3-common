@@ -59,8 +59,8 @@ public interface InfluxPointValueBuilder {
     /**
      * Influx DOList to BOList
      *
-     * @param entityDOList EntityDO Array
-     * @return EntityBO Array
+     * @param entityDOList EntityDO 集合
+     * @return EntityBO 集合
      */
     List<PointValueBO> buildBOListByDOList(List<InfluxPointValueDO> entityDOList);
 

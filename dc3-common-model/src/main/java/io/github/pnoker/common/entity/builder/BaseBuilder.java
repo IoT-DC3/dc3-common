@@ -44,8 +44,8 @@ public interface BaseBuilder {
     /**
      * VOList to BOList
      *
-     * @param entityVOList EntityVO Array
-     * @return EntityBO Array
+     * @param entityVOList EntityVO 集合
+     * @return EntityBO 集合
      */
     List<BaseBO> buildBOListByVOList(List<BaseVO> entityVOList);
 
@@ -60,8 +60,8 @@ public interface BaseBuilder {
     /**
      * BOList to VOList
      *
-     * @param entityBOList EntityBO Array
-     * @return EntityVO Array
+     * @param entityBOList EntityBO 集合
+     * @return EntityVO 集合
      */
     List<BaseVO> buildVOListByBOList(List<BaseBO> entityBOList);
 
@@ -76,8 +76,8 @@ public interface BaseBuilder {
     /**
      * DTOList to BOList
      *
-     * @param entityDTOList EntityDTO Array
-     * @return EntityBO Array
+     * @param entityDTOList EntityDTO 集合
+     * @return EntityBO 集合
      */
     List<BaseBO> buildBOListByDTOList(List<BaseDTO> entityDTOList);
 
@@ -92,8 +92,8 @@ public interface BaseBuilder {
     /**
      * BOList to DTOList
      *
-     * @param entityBOList EntityBO Array
-     * @return EntityDTO Array
+     * @param entityBOList EntityBO 集合
+     * @return EntityDTO 集合
      */
     List<BaseDTO> buildDTOListByBOList(List<BaseBO> entityBOList);
 }

@@ -106,7 +106,7 @@ public class DeviceClient {
         query.setTenantId(driverMetadata.getDriver().getTenantId())
                 .setDriverId(driverMetadata.getDriver().getId())
                 .setPage(page);
-        GrpcRPageDeviceDTO rPageDeviceDTO = deviceApiBlockingStub.list(query.build());
+        GrpcRPageDeviceDTO rPageDeviceDTO = deviceApiBlockingStub.selectByPage(query.build());
         if (!rPageDeviceDTO.getResult().getOk()) {
             throw new ServiceException("获取设备列表失败");
         }

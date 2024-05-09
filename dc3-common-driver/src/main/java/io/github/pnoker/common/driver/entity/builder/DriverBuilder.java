@@ -43,6 +43,14 @@ import java.util.Optional;
 @Mapper(componentModel = "spring", uses = {MapStructUtil.class})
 public interface DriverBuilder {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "remark", ignore = true)
+    @Mapping(target = "creatorId", ignore = true)
+    @Mapping(target = "creatorName", ignore = true)
+    @Mapping(target = "createTime", ignore = true)
+    @Mapping(target = "operatorId", ignore = true)
+    @Mapping(target = "operatorName", ignore = true)
+    @Mapping(target = "operateTime", ignore = true)
     @Mapping(target = "driverExt", ignore = true)
     @Mapping(target = "driverTypeFlag", ignore = true)
     @Mapping(target = "enableFlag", ignore = true)

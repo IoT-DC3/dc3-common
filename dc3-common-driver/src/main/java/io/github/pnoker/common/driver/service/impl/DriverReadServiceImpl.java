@@ -46,8 +46,6 @@ import java.util.Map;
 public class DriverReadServiceImpl implements DriverReadService {
 
     @Resource
-    private DriverMetadata driverMetadata;
-    @Resource
     private DeviceMetadata deviceMetadata;
     @Resource
     private PointMetadata pointMetadata;

@@ -20,6 +20,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.service.DriverReadService;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import jakarta.annotation.Resource;
@@ -45,27 +46,30 @@ import java.util.Set;
 public class DriverReadScheduleJob extends QuartzJobBean {
 
     @Resource
+    private DriverMetadata driverMetadata;
+    @Resource
     private DeviceMetadata deviceMetadata;
     @Resource
     private DriverReadService driverReadService;
 
     @Override
     protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
-        List<DeviceBO> entityDTOList = deviceMetadata.getAllDevice();
-        if (CollUtil.isEmpty(entityDTOList)) {
+        List<Long> deviceIds = driverMetadata.getDeviceIds();
+        if (CollUtil.isEmpty(deviceIds)) {
             return;
         }
 
-        for (DeviceBO entityDTO : entityDTOList) {
-            if (EnableFlagEnum.ENABLE.equals(entityDTO.getEnableFlag())
-                    && CollUtil.isNotEmpty(entityDTO.getProfileIds())
-                    && CollUtil.isNotEmpty(entityDTO.getPointIds())
-                    && MapUtil.isNotEmpty(entityDTO.getDriverAttributeConfigMap())
-                    && MapUtil.isNotEmpty(entityDTO.getPointAttributeConfigMap())
+        for (Long deviceId : deviceIds) {
+            DeviceBO entityBO = deviceMetadata.getDevice(deviceId);
+            if (EnableFlagEnum.ENABLE.equals(entityBO.getEnableFlag())
+                    && CollUtil.isNotEmpty(entityBO.getProfileIds())
+                    && CollUtil.isNotEmpty(entityBO.getPointIds())
+                    && MapUtil.isNotEmpty(entityBO.getDriverAttributeConfigMap())
+                    && MapUtil.isNotEmpty(entityBO.getPointAttributeConfigMap())
             ) {
-                Set<Long> pointIds = entityDTO.getPointIds();
+                Set<Long> pointIds = entityBO.getPointIds();
                 for (Long pointId : pointIds) {
-                    driverReadService.read(entityDTO.getId(), pointId);
+                    driverReadService.read(deviceId, pointId);
                 }
             }
         }

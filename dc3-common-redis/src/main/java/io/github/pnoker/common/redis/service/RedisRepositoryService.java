@@ -63,8 +63,8 @@ public class RedisRepositoryService {
         }
 
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
-        List<RedisPointValueDO> entityDOS = redisPointValueBuilder.buildDOListByBOList(entityBOS);
-        Map<String, RedisPointValueDO> entityDOMap = entityDOS.stream()
+        List<RedisPointValueDO> entityDOList = redisPointValueBuilder.buildDOListByBOList(entityBOS);
+        Map<String, RedisPointValueDO> entityDOMap = entityDOList.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
                 .collect(Collectors.toMap(entityBO -> prefix + entityBO.getPointId(), Function.identity()));
         redisService.setKey(entityDOMap);
@@ -77,8 +77,8 @@ public class RedisRepositoryService {
 
         String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
         List<String> keys = pointIds.stream().map(pointId -> prefix + pointId).toList();
-        List<RedisPointValueDO> entityDOS = redisService.getKey(keys);
-        return redisPointValueBuilder.buildBOListByDOList(entityDOS);
+        List<RedisPointValueDO> entityDOList = redisService.getKey(keys);
+        return redisPointValueBuilder.buildBOListByDOList(entityDOList);
     }
 
 }

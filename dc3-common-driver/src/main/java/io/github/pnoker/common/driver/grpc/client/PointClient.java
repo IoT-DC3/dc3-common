@@ -92,7 +92,7 @@ public class PointClient {
         query.setTenantId(driverMetadata.getDriver().getTenantId())
                 .setDriverId(driverMetadata.getDriver().getId())
                 .setPage(page);
-        GrpcRPagePointDTO rPagePointDTO = pointApiBlockingStub.list(query.build());
+        GrpcRPagePointDTO rPagePointDTO = pointApiBlockingStub.selectByPage(query.build());
         if (!rPagePointDTO.getResult().getOk()) {
             throw new ServiceException("获取设备列表失败");
         }

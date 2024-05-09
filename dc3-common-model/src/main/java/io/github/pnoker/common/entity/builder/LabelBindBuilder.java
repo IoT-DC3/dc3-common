@@ -46,8 +46,8 @@ public interface LabelBindBuilder {
     /**
      * VOList to BOList
      *
-     * @param entityVOList EntityVO Array
-     * @return EntityBO Array
+     * @param entityVOList EntityVO 集合
+     * @return EntityBO 集合
      */
     List<LabelBindBO> buildBOListByVOList(List<LabelBindVO> entityVOList);
 
@@ -62,8 +62,8 @@ public interface LabelBindBuilder {
     /**
      * BOList to VOList
      *
-     * @param entityBOList EntityBO Array
-     * @return EntityVO Array
+     * @param entityBOList EntityBO 集合
+     * @return EntityVO 集合
      */
     List<LabelBindVO> buildVOListByBOList(List<LabelBindBO> entityBOList);
 

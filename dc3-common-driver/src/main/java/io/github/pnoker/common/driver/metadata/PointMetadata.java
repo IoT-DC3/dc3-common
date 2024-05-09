@@ -69,6 +69,9 @@ public class PointMetadata {
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
+    /**
+     * 加载缓存
+     */
     public void loadCache(long id) {
         PointBO entityDTO = pointClient.selectById(id);
         setCache(entityDTO.getId(), entityDTO);

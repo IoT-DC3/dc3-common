@@ -47,6 +47,7 @@ public class BaseExt implements Serializable {
     /**
      * 版本, 用于乐观锁
      */
+    @Builder.Default
     @Schema(description = "版本")
     private Integer version = 1;
 

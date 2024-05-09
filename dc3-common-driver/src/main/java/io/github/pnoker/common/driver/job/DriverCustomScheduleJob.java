@@ -20,7 +20,6 @@ import io.github.pnoker.common.driver.service.DriverCustomService;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +40,11 @@ public class DriverCustomScheduleJob extends QuartzJobBean {
     }
 
     @Override
-    protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        driverCustomService.schedule();
+    protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
+        try {
+            driverCustomService.schedule();
+        } catch (Exception e) {
+            log.error("Failed to execute custom schedule job: {}", e.getMessage(), e);
+        }
     }
 }

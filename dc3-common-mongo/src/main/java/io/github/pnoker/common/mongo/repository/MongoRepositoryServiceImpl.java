@@ -85,11 +85,11 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         final String collection = StorageConstant.POINT_VALUE_PREFIX + deviceId;
         ensurePointValueIndex(collection);
-        List<MgPointValueDO> entityDOS = mgPointValueBuilder.buildMgDOListByBOList(entityBOS);
-        entityDOS = entityDOS.stream()
+        List<MgPointValueDO> entityDOList = mgPointValueBuilder.buildMgDOListByBOList(entityBOS);
+        entityDOList = entityDOList.stream()
                 .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
                 .toList();
-        mongoTemplate.insert(entityDOS, collection);
+        mongoTemplate.insert(entityDOList, collection);
     }
 
     @Override
@@ -100,8 +100,8 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         query.fields().include(FieldUtil.getField(MgPointValueDO::getValue)).exclude(FieldUtil.getField(MgPointValueDO::getId));
         query.limit(count).with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));
 
-        List<MgPointValueDO> entityDOS = mongoTemplate.find(query, MgPointValueDO.class, StorageConstant.POINT_VALUE_PREFIX + deviceId);
-        return entityDOS.stream().map(MgPointValueDO::getValue).toList();
+        List<MgPointValueDO> entityDOList = mongoTemplate.find(query, MgPointValueDO.class, StorageConstant.POINT_VALUE_PREFIX + deviceId);
+        return entityDOList.stream().map(MgPointValueDO::getValue).toList();
     }
 
     @Override
@@ -125,8 +125,8 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         Aggregation aggregation = Aggregation.newAggregation(match, sort, group);
         String collection = StorageConstant.POINT_VALUE_PREFIX + deviceId;
         AggregationResults<MgPointValueDO> aggregate = mongoTemplate.aggregate(aggregation, collection, MgPointValueDO.class);
-        List<MgPointValueDO> entityDOS = aggregate.getMappedResults();
-        return mgPointValueBuilder.buildBOListByDOList(entityDOS);
+        List<MgPointValueDO> entityDOList = aggregate.getMappedResults();
+        return mgPointValueBuilder.buildBOListByDOList(entityDOList);
     }
 
     @Override
