@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "位号相关拓展")
 public class PointExt extends BaseExt {
 
     /**
@@ -42,14 +40,12 @@ public class PointExt extends BaseExt {
      * <p>
      * 拓展内容可以根据 Type 和 Version 进行区分
      */
-    @Schema(description = "内容")
     private Content content;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(description = "内容")
     public static class Content {
         private String keep;
     }

@@ -18,7 +18,6 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.enums.ResponseEnum;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +35,6 @@ import java.io.Serializable;
 @Setter
 @SuppressWarnings("all")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Schema(title = "R", description = "返回")
 public class R<T> implements Serializable {
 
     @Serial
@@ -45,25 +43,21 @@ public class R<T> implements Serializable {
     /**
      * 响应状态
      */
-    @Schema(description = "响应状态")
     private boolean ok = false;
 
     /**
      * 响应编码
      */
-    @Schema(description = "响应编码")
     private String code = ResponseEnum.OK.getCode();
 
     /**
      * 响应信息
      */
-    @Schema(description = "响应信息")
     private String message = ResponseEnum.OK.getText();
 
     /**
      * 响应数据
      */
-    @Schema(description = "响应数据")
     private T data;
 
     /**

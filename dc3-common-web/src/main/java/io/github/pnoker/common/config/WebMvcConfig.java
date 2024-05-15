@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.config;
 
-import com.github.xiaoymin.knife4j.spring.configuration.Knife4jProperties;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +41,6 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Resource
-    private Knife4jProperties knife4jProperties;
 
     @Resource
     private InterceptorConfig interceptorConfig;
@@ -60,11 +57,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
-        if (knife4jProperties.isEnable()) {
-            registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
-            registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        }
-
         registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/");
     }
 }

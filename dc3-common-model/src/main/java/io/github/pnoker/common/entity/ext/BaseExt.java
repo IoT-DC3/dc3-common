@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.io.Serial;
@@ -41,19 +40,16 @@ public class BaseExt implements Serializable {
     /**
      * 类型, 用于解析Json字符串
      */
-    @Schema(description = "类型")
     private String type;
 
     /**
      * 版本, 用于乐观锁
      */
     @Builder.Default
-    @Schema(description = "版本")
     private Integer version = 1;
 
     /**
      * 描述
      */
-    @Schema(description = "描述")
     private String remark;
 }

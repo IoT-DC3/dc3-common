@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "菜单相关拓展")
 public class MenuExt extends BaseExt {
 
     /**
@@ -42,37 +40,31 @@ public class MenuExt extends BaseExt {
      * <p>
      * 拓展内容可以根据 Type 和 Version 进行区分
      */
-    @Schema(description = "内容")
     private Content content;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(description = "内容")
     public static class Content {
         /**
          * 标题
          */
-        @Schema(description = "标题")
         private String title;
 
         /**
          * 图标
          */
-        @Schema(description = "图标")
         private String icon;
 
         /**
          * 链接
          */
-        @Schema(description = "链接")
         private String url;
 
         /**
          * 描述
          */
-        @Schema(description = "描述")
         private String remark;
     }
 }

@@ -64,27 +64,48 @@ public class PointMetadata {
                 }, executor));
     }
 
+    /**
+     * 重新加载缓存, 全量
+     */
     public void loadAllCache() {
         List<PointBO> entityDTOList = pointClient.list();
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
     /**
-     * 加载缓存
+     * 重新加载缓存, 指定位号
+     *
+     * @param id 位号ID
      */
     public void loadCache(long id) {
         PointBO entityDTO = pointClient.selectById(id);
         setCache(entityDTO.getId(), entityDTO);
     }
 
+    /**
+     * 设置缓存, 指定位号
+     *
+     * @param id      位号ID
+     * @param pointBO 位号
+     */
     public void setCache(long id, PointBO pointBO) {
         cache.put(id, CompletableFuture.completedFuture(pointBO));
     }
 
+    /**
+     * 删除缓存, 指定位号
+     *
+     * @param id 位号ID
+     */
     public void removeCache(long id) {
         cache.put(id, CompletableFuture.completedFuture(null));
     }
 
+    /**
+     * 获取全部缓存
+     *
+     * @return PointBO
+     */
     public List<PointBO> getAllPoint() {
         List<PointBO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<PointBO>> futures = cache.asMap().values();
@@ -102,6 +123,12 @@ public class PointMetadata {
         return entityDTOList;
     }
 
+    /**
+     * 获取指定缓存
+     *
+     * @param id 位号ID
+     * @return PointBO
+     */
     public PointBO getPoint(long id) {
         try {
             CompletableFuture<PointBO> future = cache.get(id);

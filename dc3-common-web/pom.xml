@@ -95,12 +95,6 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
-        <!-- Knife Open Api -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-        </dependency>
-
         <!-- Jakarta Servlet -->
         <dependency>
             <groupId>jakarta.servlet</groupId>

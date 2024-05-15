@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "用户社交相关拓展")
 public class UserSocialExt extends BaseExt {
 
     /**
@@ -42,43 +40,36 @@ public class UserSocialExt extends BaseExt {
      * <p>
      * 拓展内容可以根据 Type 和 Version 进行区分
      */
-    @Schema(description = "内容")
     private Content content;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(description = "内容")
     public static class Content {
         /**
          * 微信
          */
-        @Schema(description = "微信")
         private String wechat;
 
         /**
          * QQ
          */
-        @Schema(description = "QQ")
         private String qq;
 
         /**
          * 飞书
          */
-        @Schema(description = "飞书")
         private String lark;
 
         /**
          * 钉钉
          */
-        @Schema(description = "钉钉")
         private String dingTalk;
 
         /**
          * 社交主页
          */
-        @Schema(description = "社交主页")
         private String homeUrl;
     }
 }

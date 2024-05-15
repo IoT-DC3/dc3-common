@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import io.github.pnoker.common.valid.Update;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,7 +41,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@Schema(title = "Base", description = "基础")
 public class BaseVO implements Serializable {
 
     @Serial
@@ -51,7 +49,6 @@ public class BaseVO implements Serializable {
     /**
      * 主键ID
      */
-    @Schema(description = "主键ID")
     @NotNull(message = "主键ID不能为空",
             groups = {Update.class})
     private Long id;
@@ -59,44 +56,37 @@ public class BaseVO implements Serializable {
     /**
      * 描述
      */
-    @Schema(description = "描述")
     private String remark;
 
     /**
      * 创建者ID
      */
-    @Schema(description = "创建者ID")
     private Long creatorId;
 
     /**
      * 创建者名称
      */
-    @Schema(description = "创建者名称")
     private String creatorName;
 
     /**
      * 创建时间
      */
-    @Schema(description = "创建时间, yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
     private LocalDateTime createTime;
 
     /**
      * 操作者ID
      */
-    @Schema(description = "操作者ID")
     private Long operatorId;
 
     /**
      * 操作者名称
      */
-    @Schema(description = "操作者名称")
     private String operatorName;
 
     /**
      * 操作时间
      */
-    @Schema(description = "操作时间, yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
     private LocalDateTime operateTime;
 }

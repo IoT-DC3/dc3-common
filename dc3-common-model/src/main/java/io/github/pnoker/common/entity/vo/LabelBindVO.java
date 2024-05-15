@@ -21,7 +21,6 @@ import io.github.pnoker.common.entity.base.BaseVO;
 import io.github.pnoker.common.enums.EntityTypeFlagEnum;
 import io.github.pnoker.common.valid.Add;
 import io.github.pnoker.common.valid.Update;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,13 +38,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@Schema(title = "LabelBind", description = "标签绑定")
 public class LabelBindVO extends BaseVO {
 
     /**
      * 实体类型标识
      */
-    @Schema(description = "实体类型标识")
     @NotNull(message = "实体类型标识不能为空",
             groups = {Add.class, Update.class})
     private EntityTypeFlagEnum entityTypeFlag;
@@ -53,7 +50,6 @@ public class LabelBindVO extends BaseVO {
     /**
      * 标签ID
      */
-    @Schema(description = "标签ID")
     @NotNull(message = "标签ID不能为空",
             groups = {Add.class, Update.class})
     private Long labelId;
@@ -61,7 +57,6 @@ public class LabelBindVO extends BaseVO {
     /**
      * 实体ID
      */
-    @Schema(description = "实体ID")
     @NotNull(message = "实体ID不能为空",
             groups = {Add.class, Update.class})
     private Long entityId;

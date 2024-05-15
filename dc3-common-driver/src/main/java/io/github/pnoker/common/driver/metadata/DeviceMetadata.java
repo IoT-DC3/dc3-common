@@ -77,24 +77,48 @@ public class DeviceMetadata {
                 }, executor));
     }
 
+    /**
+     * 重新加载缓存, 全量
+     */
     public void loadAllCache() {
         List<DeviceBO> entityDTOList = deviceClient.list();
         entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
     }
 
+    /**
+     * 重新加载缓存, 指定设备
+     *
+     * @param id 设备ID
+     */
     public void loadCache(long id) {
         DeviceBO entityDTO = deviceClient.selectById(id);
         setCache(entityDTO.getId(), entityDTO);
     }
 
+    /**
+     * 设置缓存, 指定设备
+     *
+     * @param id       设备ID
+     * @param deviceBO 设备
+     */
     public void setCache(long id, DeviceBO deviceBO) {
         cache.put(id, CompletableFuture.completedFuture(deviceBO));
     }
 
+    /**
+     * 删除缓存, 指定设备
+     *
+     * @param id 设备ID
+     */
     public void removeCache(long id) {
         cache.put(id, CompletableFuture.completedFuture(null));
     }
 
+    /**
+     * 获取全部缓存
+     *
+     * @return DeviceBO 集合
+     */
     public List<DeviceBO> getAllDevice() {
         List<DeviceBO> entityDTOList = new ArrayList<>();
         Collection<CompletableFuture<DeviceBO>> futures = cache.asMap().values();
@@ -112,6 +136,12 @@ public class DeviceMetadata {
         return entityDTOList;
     }
 
+    /**
+     * 获取指定缓存
+     *
+     * @param id 设备ID
+     * @return DeviceBO
+     */
     public DeviceBO getDevice(long id) {
         try {
             CompletableFuture<DeviceBO> future = cache.get(id);

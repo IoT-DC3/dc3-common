@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.ext;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +33,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "用户身份相关拓展")
 public class UserIdentityExt extends BaseExt {
 
     /**
@@ -42,37 +40,31 @@ public class UserIdentityExt extends BaseExt {
      * <p>
      * 拓展内容可以根据 Type 和 Version 进行区分
      */
-    @Schema(description = "内容")
     private Content content;
 
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(description = "内容")
     public static class Content {
         /**
          * 真实姓名
          */
-        @Schema(description = "真实姓名")
         private String realName;
 
         /**
          * 性别
          */
-        @Schema(description = "性别")
         private String gender;
 
         /**
          * 国籍
          */
-        @Schema(description = "国籍")
         private String nationality;
 
         /**
          * 身份证号码
          */
-        @Schema(description = "身份证号码")
         private String idNumber;
     }
 }

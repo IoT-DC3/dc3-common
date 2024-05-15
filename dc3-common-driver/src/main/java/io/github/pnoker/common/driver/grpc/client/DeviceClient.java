@@ -84,7 +84,7 @@ public class DeviceClient {
      * 根据 设备ID 获取设备元数据
      *
      * @param id 设备ID
-     * @return DeviceDTO
+     * @return DeviceBO
      */
     public DeviceBO selectById(Long id) {
         GrpcDeviceQuery.Builder query = GrpcDeviceQuery.newBuilder();
