@@ -20,6 +20,7 @@ import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.map.MapUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQClusterVo;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.service.RabbitMQClusterService;
 import io.github.pnoker.common.prometheus.service.PrometheusService;
 import jakarta.annotation.Resource;
@@ -44,7 +45,7 @@ public class RabbitMQClusterServiceImpl implements RabbitMQClusterService {
     private PrometheusService prometheusService;
 
     @Override
-    public List<String> queryCluster() {
+    public List<RabbitMQClusterVo> queryCluster() {
         try {
             MapBuilder<String, String> builder = MapUtil.builder();
             builder.put("query", "rabbitmq_identity_info{namespace=''}");
@@ -54,11 +55,18 @@ public class RabbitMQClusterServiceImpl implements RabbitMQClusterService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonResponse);
             int n = rootNode.path("data").path("result").size();
-            List<String> clusters = new ArrayList<>();
+            List<RabbitMQClusterVo> clusters = new ArrayList<>();
             for (int i = 0; i < n; i++) {
+                RabbitMQClusterVo cluster = new RabbitMQClusterVo();
                 JsonNode metricNode = rootNode.path("data").path("result").get(i).path("metric");
                 String str = metricNode.path("rabbitmq_cluster").asText();
-                clusters.add(str);
+                cluster.setOriginal(str);
+                if(str.contains("rabbit")){
+                    cluster.setDisplay(str.replace("rabbit", ""));
+                }else {
+                    cluster.setDisplay(str);
+                }
+                clusters.add(cluster);
             }
             return clusters;
         } catch (IOException e) {

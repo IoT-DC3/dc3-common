@@ -16,6 +16,8 @@
 
 package io.github.pnoker.common.prometheus.dashboard.rabbitmq.service;
 
+import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQClusterVo;
+
 import java.util.List;
 
 /**
@@ -26,5 +28,5 @@ import java.util.List;
  */
 public interface RabbitMQClusterService {
 
-    List<String> queryCluster();
+    List<RabbitMQClusterVo> queryCluster();
 }

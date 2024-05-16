@@ -27,9 +27,4 @@ import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQD
 public interface RabbitMQChannelService {
     RabbitMQDataVo queryChan(String cluster);
 
-    RabbitMQDataVo queryToChan(String cluster);
-
-    RabbitMQDataVo queryChanOpen(String cluster);
-
-    RabbitMQDataVo queryChanClose(String cluster);
 }

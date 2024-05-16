@@ -57,46 +57,4 @@ public class RabbitMQConnectionController {
         }
         return R.fail();
     }
-
-    @GetMapping("/connections_total")
-    public R<RabbitMQDataVo> queryToConns(@RequestParam String cluster) {
-        try {
-            RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryToConn(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
-        }
-        return R.fail();
-    }
-
-    @GetMapping("/connections_open")
-    public R<RabbitMQDataVo> queryConnsOpen(@RequestParam String cluster) {
-        try {
-            RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryConnOpen(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
-        }
-        return R.fail();
-    }
-
-    @GetMapping("/connections_close")
-    public R<RabbitMQDataVo> queryConnsClose(@RequestParam String cluster) {
-        try {
-            RabbitMQDataVo rabbbit = rabbitMQConnectionService.queryConnClose(cluster);
-            if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
-        }
-        return R.fail();
-    }
 }

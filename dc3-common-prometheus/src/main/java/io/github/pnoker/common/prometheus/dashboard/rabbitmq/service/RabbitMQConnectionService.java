@@ -27,9 +27,4 @@ import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQD
 public interface RabbitMQConnectionService {
     RabbitMQDataVo queryConn(String cluster);
 
-    RabbitMQDataVo queryToConn(String cluster);
-
-    RabbitMQDataVo queryConnOpen(String cluster);
-
-    RabbitMQDataVo queryConnClose(String cluster);
 }

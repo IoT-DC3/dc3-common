@@ -29,8 +29,6 @@ public class RabbitMQNodeVo {
         private String erlangVersion;
         private String instance;
         private String job;
-        private String prometheusClientVersion;
-        private String prometheusPluginVersion;
         private String rabbitmqCluster;
         private String rabbitmqNode;
         private String rabbitmqVersion;

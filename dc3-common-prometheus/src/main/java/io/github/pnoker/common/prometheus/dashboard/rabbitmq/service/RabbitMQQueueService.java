@@ -27,15 +27,4 @@ import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQD
 public interface RabbitMQQueueService {
     RabbitMQDataVo queryQue(String cluster);
 
-    RabbitMQDataVo readyToCons(String cluster);
-
-    RabbitMQDataVo pendToCons(String cluster);
-
-    RabbitMQDataVo queryToQue(String cluster);
-
-    RabbitMQDataVo queryQueDec(String cluster);
-
-    RabbitMQDataVo queryQueCre(String cluster);
-
-    RabbitMQDataVo queryQueDel(String cluster);
 }

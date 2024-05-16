@@ -18,6 +18,7 @@ package io.github.pnoker.common.prometheus.dashboard.rabbitmq.controller;
 
 import io.github.pnoker.common.constant.service.DataConstant;
 import io.github.pnoker.common.entity.R;
+import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQClusterVo;
 import io.github.pnoker.common.prometheus.dashboard.rabbitmq.service.RabbitMQClusterService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +43,9 @@ public class RabbitMQClusterController {
     private RabbitMQClusterService rabbitMQClusterService;
 
     @GetMapping("/clusters")
-    public R<List<String>> queryCluster() {
+    public R<List<RabbitMQClusterVo>> queryCluster() {
         try {
-            List<String> rabbbit = rabbitMQClusterService.queryCluster();
+            List<RabbitMQClusterVo> rabbbit = rabbitMQClusterService.queryCluster();
             if (rabbbit != null) {
                 return R.ok(rabbbit);
             }
