@@ -17,7 +17,6 @@
 package io.github.pnoker.common.mongo.repository;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.common.PrefixConstant;
 import io.github.pnoker.common.constant.common.SuffixConstant;
@@ -45,6 +44,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -67,7 +67,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
     @Override
     public void savePointValue(PointValueBO entityBO) {
-        if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
+        if (Objects.isNull(entityBO.getDeviceId()) || Objects.isNull(entityBO.getPointId())) {
             return;
         }
 
@@ -79,7 +79,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
     @Override
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
-        if (ObjectUtil.isEmpty(deviceId)) {
+        if (Objects.isNull(deviceId)) {
             return;
         }
 
@@ -87,7 +87,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         ensurePointValueIndex(collection);
         List<MgPointValueDO> entityDOList = mgPointValueBuilder.buildMgDOListByBOList(entityBOS);
         entityDOList = entityDOList.stream()
-                .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
+                .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
                 .toList();
         mongoTemplate.insert(entityDOList, collection);
     }
@@ -131,7 +131,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
     @Override
     public Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery) {
-        if (ObjectUtil.isEmpty(entityQuery.getPage())) {
+        if (Objects.isNull(entityQuery.getPage())) {
             entityQuery.setPage(new Pages());
         }
 
@@ -139,9 +139,9 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         Criteria criteria = new Criteria();
         Query query = new Query(criteria);
-        if (ObjectUtil.isNotEmpty(entityQuery.getDeviceId()))
+        if (!Objects.isNull(entityQuery.getDeviceId()))
             criteria.and(FieldUtil.getField(MgPointValueDO::getDeviceId)).is(entityQuery.getDeviceId());
-        if (ObjectUtil.isNotEmpty(entityQuery.getPointId()))
+        if (!Objects.isNull(entityQuery.getPointId()))
             criteria.and(FieldUtil.getField(MgPointValueDO::getPointId)).is(entityQuery.getPointId());
 
         Pages pages = entityQuery.getPage();
@@ -149,7 +149,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
             criteria.and(FieldUtil.getField(MgPointValueDO::getCreateTime)).gte(new Date(pages.getStartTime())).lte(new Date(pages.getEndTime()));
         }
 
-        final String collection = ObjectUtil.isNotEmpty(entityQuery.getDeviceId()) ? StorageConstant.POINT_VALUE_PREFIX + entityQuery.getDeviceId() : PrefixConstant.POINT + SuffixConstant.VALUE;
+        final String collection = !Objects.isNull(entityQuery.getDeviceId()) ? StorageConstant.POINT_VALUE_PREFIX + entityQuery.getDeviceId() : PrefixConstant.POINT + SuffixConstant.VALUE;
         long count = mongoTemplate.count(query, collection);
         query.limit((int) pages.getSize()).skip(pages.getSize() * (pages.getCurrent() - 1));
         query.with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));

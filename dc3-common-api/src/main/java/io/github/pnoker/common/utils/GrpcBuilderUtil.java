@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.api.common.GrpcBase;
 import io.github.pnoker.api.common.GrpcPage;
 import io.github.pnoker.common.constant.common.DefaultConstant;
@@ -27,6 +26,7 @@ import io.github.pnoker.common.entity.common.Pages;
 import io.github.pnoker.common.optional.LongOptional;
 import io.github.pnoker.common.optional.StringOptional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -48,7 +48,7 @@ public class GrpcBuilderUtil {
      * @return Pages
      */
     public static Pages buildPagesByGrpcPage(GrpcPage page) {
-        if (ObjectUtil.isNull(page)) {
+        if (Objects.isNull(page)) {
             GrpcPage.Builder builder = GrpcPage.newBuilder();
             builder.setCurrent(1);
             builder.setPages(DefaultConstant.DEFAULT_PAGE_SIZE);
@@ -72,7 +72,7 @@ public class GrpcBuilderUtil {
      * @return GrpcBase
      */
     public static <T extends BaseBO> GrpcBase buildGrpcBaseByBO(T entityBO) {
-        if (ObjectUtil.isNull(entityBO)) {
+        if (Objects.isNull(entityBO)) {
             return null;
         }
 
@@ -96,7 +96,7 @@ public class GrpcBuilderUtil {
      * @param <T>        EntityBO extends BaseBO
      */
     public static <T extends BaseBO> void buildBaseBOByGrpcBase(GrpcBase entityGrpc, T entityBO) {
-        if (ObjectUtil.isNull(entityGrpc)) {
+        if (Objects.isNull(entityGrpc)) {
             return;
         }
 
@@ -118,7 +118,7 @@ public class GrpcBuilderUtil {
      * @return GrpcBase
      */
     public static <T extends BaseDTO> GrpcBase buildGrpcBaseByDTO(T entityDTO) {
-        if (ObjectUtil.isNull(entityDTO)) {
+        if (Objects.isNull(entityDTO)) {
             return null;
         }
 
@@ -142,7 +142,7 @@ public class GrpcBuilderUtil {
      * @param <T>        EntityDTO extends GrpcBase
      */
     public static <T extends BaseDTO> void buildBaseDTOByGrpcBase(GrpcBase entityGrpc, T entityDTO) {
-        if (ObjectUtil.isNull(entityGrpc)) {
+        if (Objects.isNull(entityGrpc)) {
             return;
         }
 

@@ -17,7 +17,6 @@
 package io.github.pnoker.common.tdengine.repository;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.driver.StrategyConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
@@ -35,6 +34,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -59,7 +59,7 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
 
     @Override
     public void savePointValue(PointValueBO entityBO) {
-        if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
+        if (Objects.isNull(entityBO.getDeviceId()) || Objects.isNull(entityBO.getPointId())) {
             return;
         }
         String tableName = stable + entityBO.getDeviceId();
@@ -69,7 +69,7 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
 
     @Override
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
-        if (ObjectUtil.isEmpty(deviceId)) {
+        if (Objects.isNull(deviceId)) {
             return;
         }
         String tableName = stable + deviceId;
@@ -94,7 +94,7 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
 
     @Override
     public Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery) {
-        if (ObjectUtil.isEmpty(entityQuery.getPage())) {
+        if (Objects.isNull(entityQuery.getPage())) {
             entityQuery.setPage(new Pages());
         }
         Page<PointValueBO> entityPageBO = new Page<>();

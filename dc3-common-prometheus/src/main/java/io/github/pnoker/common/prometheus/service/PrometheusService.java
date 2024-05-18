@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.prometheus.service;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.exception.RequestException;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +32,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Prometheus 工具类
@@ -83,7 +83,7 @@ public class PrometheusService {
     private String getString(String api, Map<String, String> params) {
         try {
             HttpUrl url = HttpUrl.parse(api);
-            if (ObjectUtil.isNull(url)) {
+            if (Objects.isNull(url)) {
                 throw new RequestException("Request url empty");
             }
             HttpUrl.Builder builder = url.newBuilder();
@@ -95,7 +95,7 @@ public class PrometheusService {
                     .get()
                     .build();
             Response response = okHttpClient.newCall(request).execute();
-            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
+            if (!response.isSuccessful() || Objects.isNull(response.body())) {
                 throw new RequestException("Request failed or empty response");
             }
             return response.body().string();
@@ -107,7 +107,7 @@ public class PrometheusService {
     private String getRangeString(String api, Map<String, String> params) {
         try {
             HttpUrl url = HttpUrl.parse(api);
-            if (ObjectUtil.isNull(url)) {
+            if (Objects.isNull(url)) {
                 throw new RequestException("Request url empty");
             }
             HttpUrl.Builder builder = url.newBuilder();
@@ -126,7 +126,7 @@ public class PrometheusService {
                     .get()
                     .build();
             Response response = okHttpClient.newCall(request).execute();
-            if (!response.isSuccessful() || ObjectUtil.isNull(response.body())) {
+            if (!response.isSuccessful() || Objects.isNull(response.body())) {
                 throw new RequestException("Request failed or empty response");
             }
             return response.body().string();

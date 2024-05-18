@@ -23,7 +23,6 @@ import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,11 +34,10 @@ import java.util.Map;
  * @author pnoker
  * @since 2022.1.0
  */
-@Slf4j
 @Getter
 @Setter
 @Component
-public class DriverMetadata {
+public final class DriverMetadata {
 
     /**
      * 驱动状态
@@ -57,16 +55,30 @@ public class DriverMetadata {
     private List<Long> deviceIds;
 
     /**
-     * 驱动属性Map
+     * 驱动属性ID Map
      * <p>
      * attributeId,driverAttribute
      */
-    private Map<Long, DriverAttributeDTO> driverAttributeMap;
+    private Map<Long, DriverAttributeDTO> driverAttributeIdMap;
 
     /**
-     * 位号属性Map
+     * 驱动属性名称 Map
+     * <p>
+     * attributeName,driverAttribute
+     */
+    private Map<String, DriverAttributeDTO> driverAttributeNameMap;
+
+    /**
+     * 位号属性ID Map
      * <p>
      * attributeId,pointAttribute
      */
-    private Map<Long, PointAttributeDTO> pointAttributeMap;
+    private Map<Long, PointAttributeDTO> pointAttributeIdMap;
+
+    /**
+     * 位号属性名称 Map
+     * <p>
+     * attributeName,driverAttribute
+     */
+    private Map<String, PointAttributeDTO> pointAttributeNameMap;
 }

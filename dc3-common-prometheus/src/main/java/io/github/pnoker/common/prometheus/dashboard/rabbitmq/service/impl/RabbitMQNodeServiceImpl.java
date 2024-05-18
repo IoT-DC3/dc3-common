@@ -98,23 +98,23 @@ public class RabbitMQNodeServiceImpl implements RabbitMQNodeService {
                 //给metric赋值
                 metric.setErlangVersion(metricNode.path("erlang_version").asText());
                 String instance = null;
-                if(metricNode.path("instance").asText().contains("rabbit")){
-                  instance =  metricNode.path("instance").asText().replace("rabbit", "");
+                if (metricNode.path("instance").asText().contains("rabbit")) {
+                    instance = metricNode.path("instance").asText().replace("rabbit", "");
                 }
                 metric.setInstance(instance);
                 String job = null;
-                if(metricNode.path("job").asText().contains("rabbit")){
-                    job =  metricNode.path("job").asText().replace("rabbit", "");
+                if (metricNode.path("job").asText().contains("rabbit")) {
+                    job = metricNode.path("job").asText().replace("rabbit", "");
                 }
                 metric.setJob(job);
                 String rabbitmq_cluster = null;
-                if(metricNode.path("rabbitmq_cluster").asText().contains("rabbit")){
-                    rabbitmq_cluster =  metricNode.path("rabbitmq_cluster").asText().replace("rabbit", "");
+                if (metricNode.path("rabbitmq_cluster").asText().contains("rabbit")) {
+                    rabbitmq_cluster = metricNode.path("rabbitmq_cluster").asText().replace("rabbit", "");
                 }
                 metric.setRabbitmqCluster(rabbitmq_cluster);
                 String rabbitmq_node = null;
-                if(metricNode.path("rabbitmq_node").asText().contains("rabbit")){
-                    rabbitmq_node =  metricNode.path("rabbitmq_node").asText().replace("rabbit", "");
+                if (metricNode.path("rabbitmq_node").asText().contains("rabbit")) {
+                    rabbitmq_node = metricNode.path("rabbitmq_node").asText().replace("rabbit", "");
                 }
                 metric.setRabbitmqNode(rabbitmq_node);
                 metric.setRabbitmqVersion(metricNode.path("rabbitmq_version").asText());

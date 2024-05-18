@@ -21,6 +21,8 @@ import io.github.pnoker.common.driver.entity.bean.WValue;
 import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
+import io.github.pnoker.common.driver.event.device.DeviceMetadataEvent;
+import io.github.pnoker.common.driver.event.point.PointMetadataEvent;
 
 import java.util.Map;
 
@@ -44,6 +46,24 @@ public interface DriverCustomService {
      * 配置文件 driver.schedule.custom 进行配置
      */
     void schedule();
+
+    /**
+     * 设备元数据事件
+     * <p>
+     * 设备元数据新增, 更新, 删除都会触发改事件
+     *
+     * @param event 设备事件{@link DeviceMetadataEvent}
+     */
+    void event(DeviceMetadataEvent event);
+
+    /**
+     * 位号元数据事件
+     * <p>
+     * 位号元数据新增, 更新, 删除都会触发改事件
+     *
+     * @param event 位号事件{@link PointMetadataEvent}
+     */
+    void event(PointMetadataEvent event);
 
     /**
      * 读操作

@@ -16,9 +16,9 @@
 
 package io.github.pnoker.common.optional;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -48,13 +48,13 @@ public final class EnableOptional {
     }
 
     public void ifPresent(Consumer<EnableFlagEnum> action) {
-        if (ObjectUtil.isNotNull(value)) {
+        if (!Objects.isNull(value)) {
             action.accept(value);
         }
     }
 
     public void ifPresentOrElse(Consumer<EnableFlagEnum> action, Runnable emptyAction) {
-        if (ObjectUtil.isNotNull(value)) {
+        if (!Objects.isNull(value)) {
             action.accept(value);
         } else {
             emptyAction.run();

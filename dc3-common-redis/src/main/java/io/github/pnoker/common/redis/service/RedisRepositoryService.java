@@ -17,7 +17,6 @@
 package io.github.pnoker.common.redis.service;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.PrefixConstant;
 import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.entity.bo.PointValueBO;
@@ -30,6 +29,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -48,7 +48,7 @@ public class RedisRepositoryService {
     private RedisService redisService;
 
     public void savePointValue(PointValueBO entityBO) {
-        if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
+        if (Objects.isNull(entityBO.getDeviceId()) || Objects.isNull(entityBO.getPointId())) {
             return;
         }
 
@@ -58,14 +58,14 @@ public class RedisRepositoryService {
     }
 
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
-        if (ObjectUtil.isEmpty(deviceId)) {
+        if (Objects.isNull(deviceId)) {
             return;
         }
 
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
         List<RedisPointValueDO> entityDOList = redisPointValueBuilder.buildDOListByBOList(entityBOS);
         Map<String, RedisPointValueDO> entityDOMap = entityDOList.stream()
-                .filter(entityBO -> ObjectUtil.isNotEmpty(entityBO.getPointId()))
+                .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
                 .collect(Collectors.toMap(entityBO -> prefix + entityBO.getPointId(), Function.identity()));
         redisService.setKey(entityDOMap);
     }

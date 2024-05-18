@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
 import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.*;
 
@@ -48,7 +48,7 @@ public class DriverTransferMetadataDTO implements Serializable {
     /**
      * 元数据操作类型
      */
-    private MetadataCommandTypeEnum metadataCommandType;
+    private MetadataOperateTypeEnum metadataCommandType;
 
     /**
      * 元数据内容
@@ -60,7 +60,7 @@ public class DriverTransferMetadataDTO implements Serializable {
      */
     private LocalDateTime createTime;
 
-    public DriverTransferMetadataDTO(MetadataTypeEnum type, MetadataCommandTypeEnum metadataCommandType, String content) {
+    public DriverTransferMetadataDTO(MetadataTypeEnum type, MetadataOperateTypeEnum metadataCommandType, String content) {
         this.type = type;
         this.metadataCommandType = metadataCommandType;
         this.content = content;

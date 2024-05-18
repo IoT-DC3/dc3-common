@@ -24,6 +24,7 @@ import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.entity.builder.PointBuilder;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.exception.ServiceException;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
@@ -38,13 +39,11 @@ public class PointClient {
     @GrpcClient(ManagerConstant.SERVICE_NAME)
     private PointApiGrpc.PointApiBlockingStub pointApiBlockingStub;
 
-    private final DriverMetadata driverMetadata;
-    private final PointBuilder pointBuilder;
+    @Resource
+    private DriverMetadata driverMetadata;
 
-    public PointClient(DriverMetadata driverMetadata, PointBuilder pointBuilder) {
-        this.driverMetadata = driverMetadata;
-        this.pointBuilder = pointBuilder;
-    }
+    @Resource
+    private PointBuilder pointBuilder;
 
     public List<PointBO> list() {
         long current = 1;

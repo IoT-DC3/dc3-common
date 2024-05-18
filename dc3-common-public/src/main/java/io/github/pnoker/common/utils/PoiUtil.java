@@ -16,11 +16,12 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+
+import java.util.Objects;
 
 /**
  * 表格操作相关工具类
@@ -75,12 +76,12 @@ public class PoiUtil {
      */
     public static String getCellStringValue(Sheet sheet, int rowIndex, int cellIndex) {
         Row driverAttributesRow = sheet.getRow(rowIndex);
-        if (ObjectUtil.isNull(driverAttributesRow)) {
+        if (Objects.isNull(driverAttributesRow)) {
             return "";
         }
 
         Cell driverAttributesCell = driverAttributesRow.getCell(cellIndex);
-        if (ObjectUtil.isNull(driverAttributesCell)) {
+        if (Objects.isNull(driverAttributesCell)) {
             return "";
         }
 
@@ -111,7 +112,7 @@ public class PoiUtil {
         Cell deviceNameCell = row.createCell(cellIndex);
         deviceNameCell.setCellValue(cellValue);
 
-        if (ObjectUtil.isNotNull(cellStyle)) {
+        if (!Objects.isNull(cellStyle)) {
             deviceNameCell.setCellStyle(cellStyle);
         }
     }

@@ -53,8 +53,8 @@ public interface DeviceBuilder {
     @Mapping(target = "enableFlag", ignore = true)
     @Mapping(target = "profileIds", ignore = true)
     @Mapping(target = "pointIds", ignore = true)
-    @Mapping(target = "driverAttributeConfigMap", ignore = true)
-    @Mapping(target = "pointAttributeConfigMap", ignore = true)
+    @Mapping(target = "driverAttributeConfigIdMap", ignore = true)
+    @Mapping(target = "pointAttributeConfigIdMap", ignore = true)
     DeviceBO buildDTOByGrpcDTO(GrpcDeviceDTO entityGrpc);
 
     @AfterMapping

@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.entity.bo;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.enums.AttributeTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.TypeException;
@@ -26,6 +25,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 属性配置
@@ -62,7 +62,7 @@ public class AttributeBO implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public <T> T getValue(Class<T> clazz) {
-        if (ObjectUtil.isNull(type)) {
+        if (Objects.isNull(type)) {
             throw new UnSupportException("Unsupported attribute type of " + type);
         }
         if (CharSequenceUtil.isEmpty(value)) {

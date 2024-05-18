@@ -17,7 +17,7 @@
 package io.github.pnoker.common.constant.common;
 
 /**
- * 环境变量、配置变量 相关常量
+ * 环境变量, 配置变量 相关常量
  *
  * @author pnoker
  * @since 2022.1.0

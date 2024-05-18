@@ -103,11 +103,11 @@ public class DeviceBO extends BaseBO {
      * <p>
      * attributeId,attributeConfig
      */
-    private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap;
+    private Map<Long, DriverAttributeConfigDTO> driverAttributeConfigIdMap;
 
     /**
      * 位号配置
-     * point(attributeId,attributeConfig)
+     * pointId(attributeId,attributeConfig)
      */
-    private Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap;
+    private Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigIdMap;
 }

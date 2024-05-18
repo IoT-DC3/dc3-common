@@ -17,11 +17,12 @@
 package io.github.pnoker.common.utils;
 
 import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.exception.UnAuthorizedException;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 /**
  * 用户请求头 相关工具类
@@ -45,7 +46,7 @@ public class UserHeaderUtil {
      */
     public static RequestHeader.UserHeader getUserHeader() {
         RequestHeader.UserHeader entityBO = USER_HEADER_THREAD_LOCAL.get();
-        if (ObjectUtil.isNull(entityBO)) {
+        if (Objects.isNull(entityBO)) {
             throw new UnAuthorizedException("Unable to get user header");
         }
 
@@ -61,7 +62,7 @@ public class UserHeaderUtil {
         RequestHeader.UserHeader entityBO = getUserHeader();
 
         Long tenantId = entityBO.getTenantId();
-        if (ObjectUtil.isNull(tenantId)) {
+        if (Objects.isNull(tenantId)) {
             throw new UnAuthorizedException("Unable to get tenant id of user header");
         }
 
@@ -77,7 +78,7 @@ public class UserHeaderUtil {
         RequestHeader.UserHeader entityBO = getUserHeader();
 
         Long userId = entityBO.getUserId();
-        if (ObjectUtil.isNull(userId)) {
+        if (Objects.isNull(userId)) {
             throw new UnAuthorizedException("Unable to get user id of user header");
         }
 
@@ -90,7 +91,7 @@ public class UserHeaderUtil {
      * @param entityBO {@link RequestHeader.UserHeader}
      */
     public static void setUserHeader(RequestHeader.UserHeader entityBO) {
-        if (ObjectUtil.isNull(entityBO) || ObjectUtil.isNull(entityBO.getTenantId()) || ObjectUtil.isNull(entityBO.getUserId())) {
+        if (Objects.isNull(entityBO) || Objects.isNull(entityBO.getTenantId()) || Objects.isNull(entityBO.getUserId())) {
             removeUserHeader();
         } else {
             USER_HEADER_THREAD_LOCAL.set(entityBO);

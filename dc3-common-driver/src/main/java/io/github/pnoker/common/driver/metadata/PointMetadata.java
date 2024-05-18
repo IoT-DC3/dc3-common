@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.metadata;
 
 
-import cn.hutool.core.util.ObjectUtil;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
@@ -26,8 +25,6 @@ import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -41,9 +38,11 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
-public class PointMetadata {
+public final class PointMetadata {
 
     /**
+     * 位号元数据缓存
+     * <p>
      * pointId,pointDTO
      */
     private final AsyncLoadingCache<Long, PointBO> cache;
@@ -83,6 +82,23 @@ public class PointMetadata {
     }
 
     /**
+     * 获取缓存, 指定位号
+     *
+     * @param id 位号ID
+     * @return PointBO
+     */
+    public PointBO getCache(long id) {
+        try {
+            CompletableFuture<PointBO> future = cache.get(id);
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+            log.error("Failed to get the point cache: {}", e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /**
      * 设置缓存, 指定位号
      *
      * @param id      位号ID
@@ -99,44 +115,5 @@ public class PointMetadata {
      */
     public void removeCache(long id) {
         cache.put(id, CompletableFuture.completedFuture(null));
-    }
-
-    /**
-     * 获取全部缓存
-     *
-     * @return PointBO
-     */
-    public List<PointBO> getAllPoint() {
-        List<PointBO> entityDTOList = new ArrayList<>();
-        Collection<CompletableFuture<PointBO>> futures = cache.asMap().values();
-        for (CompletableFuture<PointBO> future : futures) {
-            try {
-                PointBO entityDTO = future.get();
-                if (ObjectUtil.isNotNull(entityDTO)) {
-                    entityDTOList.add(entityDTO);
-                }
-            } catch (InterruptedException | ExecutionException e) {
-                Thread.currentThread().interrupt();
-                log.error("Failed to get all point cache: {}", e.getMessage(), e);
-            }
-        }
-        return entityDTOList;
-    }
-
-    /**
-     * 获取指定缓存
-     *
-     * @param id 位号ID
-     * @return PointBO
-     */
-    public PointBO getPoint(long id) {
-        try {
-            CompletableFuture<PointBO> future = cache.get(id);
-            return future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Thread.currentThread().interrupt();
-            log.error("Failed to get the point cache: {}", e.getMessage(), e);
-            return null;
-        }
     }
 }

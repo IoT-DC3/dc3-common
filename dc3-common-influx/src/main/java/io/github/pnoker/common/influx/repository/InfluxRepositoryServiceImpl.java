@@ -17,7 +17,6 @@
 package io.github.pnoker.common.influx.repository;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.QueryApi;
@@ -66,7 +65,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
 
     @Override
     public void savePointValue(PointValueBO entityBO) {
-        if (!ObjectUtil.isAllNotEmpty(entityBO.getDeviceId(), entityBO.getPointId())) {
+        if (Objects.isNull(entityBO.getDeviceId()) || Objects.isNull(entityBO.getPointId())) {
             return;
         }
         WriteApiBlocking writeApiBlocking = influxDBClient.getWriteApiBlocking();
@@ -84,7 +83,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
 
     @Override
     public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
-        if (ObjectUtil.isEmpty(deviceId)) {
+        if (Objects.isNull(deviceId)) {
             return;
         }
         WriteApiBlocking writeApiBlocking = influxDBClient.getWriteApiBlocking();
@@ -156,7 +155,7 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
 
     @Override
     public Page<PointValueBO> selectPagePointValue(PointValueQuery entityQuery) {
-        if (ObjectUtil.isEmpty(entityQuery.getPage())) {
+        if (Objects.isNull(entityQuery.getPage())) {
             entityQuery.setPage(new Pages());
         }
         QueryApi queryApi = influxDBClient.getQueryApi();
@@ -165,10 +164,10 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
                 + " |> range(start: -100h)" // 查询过去1小时的数据
                 + " |> filter(fn: (r) => r._measurement == \"dc3\"");
         Page<PointValueBO> entityPageBO = new Page<>();
-        if (ObjectUtil.isNotEmpty(entityQuery.getDeviceId())) {
+        if (!Objects.isNull(entityQuery.getDeviceId())) {
             flux.append("and r.deviceId ==\"" + entityQuery.getDeviceId() + "\"");
         }
-        if (ObjectUtil.isNotEmpty(entityQuery.getPointId())) {
+        if (!Objects.isNull(entityQuery.getPointId())) {
             flux.append("and r.pointId ==\"" + entityQuery.getPointId() + "\"");
         }
         flux.append(")");

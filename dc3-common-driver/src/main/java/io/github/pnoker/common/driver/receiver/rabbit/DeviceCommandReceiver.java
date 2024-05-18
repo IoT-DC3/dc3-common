@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.receiver.rabbit;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.service.DriverReadService;
 import io.github.pnoker.common.driver.service.DriverWriteService;
@@ -29,6 +28,8 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 /**
  * 接收设备指令
@@ -52,8 +53,8 @@ public class DeviceCommandReceiver {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
             log.info("Receive device command: {}", JsonUtil.toJsonString(entityDTO));
-            if (ObjectUtil.isNull(entityDTO)
-                    || ObjectUtil.isNull(entityDTO.getType())
+            if (Objects.isNull(entityDTO)
+                    || Objects.isNull(entityDTO.getType())
                     || CharSequenceUtil.isEmpty(entityDTO.getContent())) {
                 log.error("Invalid device command: {}", entityDTO);
                 return;

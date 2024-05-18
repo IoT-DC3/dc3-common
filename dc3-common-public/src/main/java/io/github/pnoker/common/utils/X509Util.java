@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.exception.ConnectorException;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +37,7 @@ import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.X509Certificate;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -100,7 +100,7 @@ public class X509Util {
             if (caCrtFile.startsWith(classPath)) {
                 InputStream inputStream = X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""));
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                if (ObjectUtil.isNotNull(password)) {
+                if (!Objects.isNull(password)) {
                     reader = new PemReader(inputStreamReader);
                 } else {
                     reader = new PemReader(inputStreamReader);
@@ -109,7 +109,7 @@ public class X509Util {
                 Path path = Paths.get(caCrtFile);
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(path));
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                if (ObjectUtil.isNotNull(password)) {
+                if (!Objects.isNull(password)) {
                     reader = new PemReader(inputStreamReader);
                 } else {
                     reader = new PemReader(inputStreamReader);
@@ -117,7 +117,7 @@ public class X509Util {
             }
             return (T) reader.readPemObject();
         } finally {
-            if (ObjectUtil.isNotNull(reader)) {
+            if (!Objects.isNull(reader)) {
                 reader.close();
             }
         }

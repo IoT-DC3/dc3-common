@@ -16,11 +16,9 @@
 
 package io.github.pnoker.common.config;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.mqtt.entity.property.MqttProperties;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.MqttUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +34,7 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -48,8 +47,11 @@ import java.util.ArrayList;
 @Configuration
 public class MqttConfig {
 
-    @Resource
-    private MqttProperties mqttProperties;
+    private final MqttProperties mqttProperties;
+
+    public MqttConfig(MqttProperties mqttProperties) {
+        this.mqttProperties = mqttProperties;
+    }
 
     @Bean
     public MessageChannel mqttInboundChannel() {
@@ -70,7 +72,7 @@ public class MqttConfig {
 
     @Bean
     public MessageProducer mqttInbound(MqttPahoClientFactory mqttClientFactory) {
-        if (ObjectUtil.isNull(mqttProperties.getReceiveTopics())) {
+        if (Objects.isNull(mqttProperties.getReceiveTopics())) {
             mqttProperties.setReceiveTopics(new ArrayList<>());
         }
 

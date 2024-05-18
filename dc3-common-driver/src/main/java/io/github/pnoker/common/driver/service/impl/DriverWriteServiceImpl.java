@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.entity.bean.WValue;
 import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
@@ -35,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -56,8 +56,8 @@ public class DriverWriteServiceImpl implements DriverWriteService {
     @Override
     public void write(Long deviceId, Long pointId, String value) {
         try {
-            DeviceBO device = deviceMetadata.getDevice(deviceId);
-            if (ObjectUtil.isNull(device)) {
+            DeviceBO device = deviceMetadata.getCache(deviceId);
+            if (Objects.isNull(device)) {
                 throw new ReadPointException("Failed to write point value, device[{}] is null", deviceId);
             }
 
@@ -68,8 +68,8 @@ public class DriverWriteServiceImpl implements DriverWriteService {
             Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverConfig(deviceId);
             Map<String, AttributeBO> pointConfig = deviceMetadata.getPointConfig(deviceId, pointId);
 
-            PointBO point = pointMetadata.getPoint(pointId);
-            if (ObjectUtil.isNull(point)) {
+            PointBO point = pointMetadata.getCache(pointId);
+            if (Objects.isNull(point)) {
                 throw new ReadPointException("Failed to write point value, point[{}] is null" + deviceId);
             }
 
@@ -82,7 +82,7 @@ public class DriverWriteServiceImpl implements DriverWriteService {
     @Override
     public void write(DeviceCommandDTO commandDTO) {
         DeviceCommandDTO.DeviceWrite deviceWrite = JsonUtil.parseObject(commandDTO.getContent(), DeviceCommandDTO.DeviceWrite.class);
-        if (ObjectUtil.isNull(deviceWrite)) {
+        if (Objects.isNull(deviceWrite)) {
             return;
         }
 

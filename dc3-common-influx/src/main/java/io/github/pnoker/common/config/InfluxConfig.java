@@ -24,7 +24,6 @@ import com.influxdb.client.domain.OnboardingResponse;
 import com.influxdb.client.service.SetupService;
 import io.github.pnoker.common.influx.entity.property.InfluxProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Response;
@@ -42,9 +41,11 @@ import java.time.Instant;
 @Configuration
 public class InfluxConfig {
 
-    @Autowired
-    InfluxProperties properties;
+    private final InfluxProperties properties;
 
+    public InfluxConfig(InfluxProperties properties) {
+        this.properties = properties;
+    }
 
     /**
      * 返回influx http客户端,如果用代码的方式进行初始化,则务必查看日志保留token或设置密码

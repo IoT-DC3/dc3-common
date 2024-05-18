@@ -18,7 +18,6 @@ package io.github.pnoker.common.utils;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.AuthConstant;
 import io.github.pnoker.common.constant.cache.TimeoutConstant;
 import io.github.pnoker.common.exception.ServiceException;
@@ -27,6 +26,7 @@ import io.github.pnoker.common.model.AuthUser;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,7 +44,7 @@ public class AuthUtil {
      */
     public static String getPasswordSalt(Long tenantId, String userName) {
         String saltKey = AuthCacheUtil.getSaltKey(tenantId, userName);
-        if (ObjectUtil.isNull(saltKey)) {
+        if (Objects.isNull(saltKey)) {
             return null;
         }
 
@@ -76,7 +76,7 @@ public class AuthUtil {
      */
     public static String getLoginToken() {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        if (ObjectUtil.isNull(requestAttributes)) {
+        if (Objects.isNull(requestAttributes)) {
             throw new ServiceException("requestAttributes can't be null!");
         }
 
@@ -105,7 +105,7 @@ public class AuthUtil {
     public static AuthUser getAuthUser() {
         String token = getLoginToken();
         AuthUser authUser = getAuthUserByToken(token);
-        if (ObjectUtil.isNull(authUser)) {
+        if (Objects.isNull(authUser)) {
             throw new UnAuthorizedException("please login first!");
         }
         return authUser;

@@ -61,7 +61,7 @@ public class TransformClass {
     }
 
     /**
-     * 转换本类所有需要转换的字段（不含嵌套转换）
+     * 转换本类所有需要转换的字段(不含嵌套转换)
      *
      * @param obj 对象或集合
      */

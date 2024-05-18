@@ -18,7 +18,6 @@ package io.github.pnoker.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import io.github.pnoker.common.job.entity.property.XxlJobProperties;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +32,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class XxlJobConfig {
 
-    @Resource
-    private XxlJobProperties xxlJobProperties;
+    private final XxlJobProperties xxlJobProperties;
+
+    public XxlJobConfig(XxlJobProperties xxlJobProperties) {
+        this.xxlJobProperties = xxlJobProperties;
+    }
 
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {

@@ -30,6 +30,7 @@ import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.exception.ServiceException;
 import io.github.pnoker.common.optional.CollectionOptional;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
@@ -47,17 +48,15 @@ public class DeviceClient {
     @GrpcClient(ManagerConstant.SERVICE_NAME)
     private DeviceApiGrpc.DeviceApiBlockingStub deviceApiBlockingStub;
 
-    private final DriverMetadata driverMetadata;
-    private final DeviceBuilder deviceBuilder;
-    private final GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder;
-    private final GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder;
+    @Resource
+    private DriverMetadata driverMetadata;
 
-    public DeviceClient(DriverMetadata driverMetadata, DeviceBuilder deviceBuilder, GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder, GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder) {
-        this.driverMetadata = driverMetadata;
-        this.deviceBuilder = deviceBuilder;
-        this.grpcDriverAttributeConfigBuilder = grpcDriverAttributeConfigBuilder;
-        this.grpcPointAttributeConfigBuilder = grpcPointAttributeConfigBuilder;
-    }
+    @Resource
+    private DeviceBuilder deviceBuilder;
+    @Resource
+    private GrpcDriverAttributeConfigBuilder grpcDriverAttributeConfigBuilder;
+    @Resource
+    private GrpcPointAttributeConfigBuilder grpcPointAttributeConfigBuilder;
 
     public List<DeviceBO> list() {
         long current = 1;
@@ -120,13 +119,13 @@ public class DeviceClient {
         CollectionOptional.ofNullable(rDeviceAttachDTO.getDriverConfigsList()).ifPresent(list -> {
             Map<Long, DriverAttributeConfigDTO> driverAttributeConfigMap = list.stream()
                     .collect(Collectors.toMap(GrpcDriverAttributeConfigDTO::getDriverAttributeId, grpcDriverAttributeConfigBuilder::buildDTOByGrpcDTO));
-            deviceBO.setDriverAttributeConfigMap(driverAttributeConfigMap);
+            deviceBO.setDriverAttributeConfigIdMap(driverAttributeConfigMap);
         });
 
         CollectionOptional.ofNullable(rDeviceAttachDTO.getPointConfigsList()).ifPresent(list -> {
             Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = list.stream()
                     .collect(Collectors.groupingBy(GrpcPointAttributeConfigDTO::getPointId, Collectors.toMap(GrpcPointAttributeConfigDTO::getPointAttributeId, grpcPointAttributeConfigBuilder::buildDTOByGrpcDTO)));
-            deviceBO.setPointAttributeConfigMap(pointAttributeConfigMap);
+            deviceBO.setPointAttributeConfigIdMap(pointAttributeConfigMap);
         });
 
         return deviceBO;

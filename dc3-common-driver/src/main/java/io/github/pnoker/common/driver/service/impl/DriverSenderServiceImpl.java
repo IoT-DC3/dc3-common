@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.entity.bean.PointValue;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
@@ -31,6 +30,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -51,7 +51,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void driverEventSender(DriverEventDTO entityDTO) {
-        if (ObjectUtil.isNull(entityDTO)) {
+        if (Objects.isNull(entityDTO)) {
             return;
         }
 
@@ -64,7 +64,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void deviceEventSender(DeviceEventDTO entityDTO) {
-        if (!ObjectUtil.isNotNull(entityDTO)) {
+        if (!!Objects.isNull(entityDTO)) {
             return;
         }
 
@@ -87,7 +87,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void pointValueSender(PointValue entityDTO) {
-        if (ObjectUtil.isNotNull(entityDTO)) {
+        if (!Objects.isNull(entityDTO)) {
             log.info("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_VALUE,
@@ -99,7 +99,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void pointValueSender(List<PointValue> entityDTOList) {
-        if (ObjectUtil.isNotNull(entityDTOList)) {
+        if (!Objects.isNull(entityDTOList)) {
             entityDTOList.forEach(this::pointValueSender);
         }
     }

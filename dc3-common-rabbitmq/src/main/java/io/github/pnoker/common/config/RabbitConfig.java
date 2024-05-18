@@ -17,7 +17,6 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -37,8 +36,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    @Resource
-    private ConnectionFactory connectionFactory;
+    private final ConnectionFactory connectionFactory;
+
+    public RabbitConfig(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Bean
     RabbitTemplate rabbitTemplate() {

@@ -28,7 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
- * Driver Initial
+ * 驱动初始化 ApplicationRunner
  *
  * @author pnoker
  * @since 2022.1.0
@@ -55,7 +55,7 @@ public class DriverInitRunner implements ApplicationRunner {
         // 执行驱动模块的自定义初始化函数
         driverCustomService.initial();
 
-        // 初始化驱动任务, 包括驱动状态、读和自定义任务
+        // 初始化驱动任务, 包括驱动状态, 读和自定义任务
         driverScheduleService.initial();
     }
 }

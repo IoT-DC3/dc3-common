@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.entity.bean;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
@@ -28,6 +27,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -72,7 +72,7 @@ public class RValue implements Serializable {
      * @return 根据位号配置计算返回计算值
      */
     public String getFinalValue() {
-        if (ObjectUtil.isNull(point)) {
+        if (Objects.isNull(point)) {
             throw new EmptyException("Point is empty");
         }
 

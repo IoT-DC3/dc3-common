@@ -50,7 +50,7 @@ public class DriverTopicConfig {
     }
 
     @Bean
-    Queue driverMetadataQueue() {
+    Queue metadataQueue() {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
@@ -58,9 +58,9 @@ public class DriverTopicConfig {
     }
 
     @Bean
-    Binding driverMetadataBinding(Queue driverMetadataQueue) {
+    Binding metadataBinding(Queue metadataQueue) {
         Binding binding = BindingBuilder
-                .bind(driverMetadataQueue)
+                .bind(metadataQueue)
                 .to(metadataExchange)
                 .with(RabbitConstant.ROUTING_DRIVER_METADATA_PREFIX + driverProperty.getService());
         binding.addArgument(RabbitConstant.AUTO_DELETE, true);

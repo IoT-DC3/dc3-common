@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.entity.property.ScheduleProperty;
@@ -30,6 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.CronExpression;
 import org.quartz.SchedulerException;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -50,7 +51,7 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
     @Override
     public void initial() {
         ScheduleProperty property = driverProperty.getSchedule();
-        if (ObjectUtil.isNull(property)) {
+        if (Objects.isNull(property)) {
             return;
         }
 

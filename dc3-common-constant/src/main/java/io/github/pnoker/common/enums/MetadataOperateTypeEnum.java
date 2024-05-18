@@ -24,14 +24,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用元数据指令类型枚举
+ * 通用元数据操作类型枚举
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Getter
 @AllArgsConstructor
-public enum MetadataCommandTypeEnum {
+public enum MetadataOperateTypeEnum {
     /**
      * 新增
      */
@@ -68,10 +68,10 @@ public enum MetadataCommandTypeEnum {
      * 根据枚举索引获取枚举
      *
      * @param index 索引
-     * @return {@link MetadataCommandTypeEnum}
+     * @return {@link MetadataOperateTypeEnum}
      */
-    public static MetadataCommandTypeEnum ofIndex(Byte index) {
-        Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+    public static MetadataOperateTypeEnum ofIndex(Byte index) {
+        Optional<MetadataOperateTypeEnum> any = Arrays.stream(MetadataOperateTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
         return any.orElse(null);
     }
 
@@ -79,10 +79,10 @@ public enum MetadataCommandTypeEnum {
      * 根据枚举编码获取枚举
      *
      * @param code 编码
-     * @return {@link MetadataCommandTypeEnum}
+     * @return {@link MetadataOperateTypeEnum}
      */
-    public static MetadataCommandTypeEnum ofCode(String code) {
-        Optional<MetadataCommandTypeEnum> any = Arrays.stream(MetadataCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
+    public static MetadataOperateTypeEnum ofCode(String code) {
+        Optional<MetadataOperateTypeEnum> any = Arrays.stream(MetadataOperateTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
         return any.orElse(null);
     }
 
@@ -90,9 +90,9 @@ public enum MetadataCommandTypeEnum {
      * 根据枚举内容获取枚举
      *
      * @param name 枚举内容
-     * @return {@link MetadataCommandTypeEnum}
+     * @return {@link MetadataOperateTypeEnum}
      */
-    public static MetadataCommandTypeEnum ofName(String name) {
+    public static MetadataOperateTypeEnum ofName(String name) {
         try {
             return valueOf(name);
         } catch (IllegalArgumentException e) {

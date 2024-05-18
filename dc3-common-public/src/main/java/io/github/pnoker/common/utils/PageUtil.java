@@ -17,7 +17,6 @@
 package io.github.pnoker.common.utils;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.pnoker.common.constant.common.DefaultConstant;
@@ -26,6 +25,7 @@ import io.github.pnoker.common.entity.common.Pages;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 分页相关工具类
@@ -49,7 +49,7 @@ public class PageUtil {
      */
     public static <T> Page<T> page(Pages pages) {
         Page<T> page = new Page<>();
-        if (ObjectUtil.isNull(pages)) {
+        if (Objects.isNull(pages)) {
             pages = new Pages();
         }
 
@@ -65,12 +65,12 @@ public class PageUtil {
 
         List<OrderItem> orders = pages.getOrders();
         boolean anyMatch = orders.stream()
-                .filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn()))
+                .filter(order -> !Objects.isNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn()))
                 .anyMatch(order -> "create_time".equals(order.getColumn()));
         if (!anyMatch) {
             orders.add(OrderItem.desc("create_time"));
         }
-        List<OrderItem> orderItemList = orders.stream().filter(order -> ObjectUtil.isNotNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
+        List<OrderItem> orderItemList = orders.stream().filter(order -> !Objects.isNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
         page.setOrders(orderItemList);
         return page;
     }

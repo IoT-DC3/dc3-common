@@ -40,7 +40,7 @@ public @interface Transform {
     /**
      * 来源字段
      * <p>
-     * 默认自动推断（要求转换后字段名必须以Name结尾, 推断规则: 如注解标注的字段是userName, 自动推断结果为"user", "userId"或"userCode"）
+     * 默认自动推断(要求转换后字段名必须以Name结尾, 推断规则: 如注解标注的字段是userName, 自动推断结果为"user", "userId"或"userCode")
      */
     String from() default "";
 }

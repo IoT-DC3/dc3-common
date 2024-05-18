@@ -61,9 +61,9 @@ public class RabbitMQClusterServiceImpl implements RabbitMQClusterService {
                 JsonNode metricNode = rootNode.path("data").path("result").get(i).path("metric");
                 String str = metricNode.path("rabbitmq_cluster").asText();
                 cluster.setOriginal(str);
-                if(str.contains("rabbit")){
+                if (str.contains("rabbit")) {
                     cluster.setDisplay(str.replace("rabbit", ""));
-                }else {
+                } else {
                     cluster.setDisplay(str);
                 }
                 clusters.add(cluster);

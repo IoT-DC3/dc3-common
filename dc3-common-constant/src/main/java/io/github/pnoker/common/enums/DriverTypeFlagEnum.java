@@ -40,7 +40,7 @@ public enum DriverTypeFlagEnum {
     /**
      * 协议驱动,  服务端模式
      */
-    DRIVER_SERVER((byte) 1, "driver_server", "协议类型驱动, 客户端模式"),
+    DRIVER_SERVER((byte) 1, "driver_server", "协议类型驱动, 服务端模式"),
 
     /**
      * 网关驱动

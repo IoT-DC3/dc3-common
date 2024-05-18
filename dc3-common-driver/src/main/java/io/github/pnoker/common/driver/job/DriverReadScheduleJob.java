@@ -31,6 +31,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -60,12 +61,13 @@ public class DriverReadScheduleJob extends QuartzJobBean {
         }
 
         for (Long deviceId : deviceIds) {
-            DeviceBO entityBO = deviceMetadata.getDevice(deviceId);
-            if (EnableFlagEnum.ENABLE.equals(entityBO.getEnableFlag())
+            DeviceBO entityBO = deviceMetadata.getCache(deviceId);
+            if (!Objects.isNull(entityBO)
+                    && EnableFlagEnum.ENABLE.equals(entityBO.getEnableFlag())
                     && CollUtil.isNotEmpty(entityBO.getProfileIds())
                     && CollUtil.isNotEmpty(entityBO.getPointIds())
-                    && MapUtil.isNotEmpty(entityBO.getDriverAttributeConfigMap())
-                    && MapUtil.isNotEmpty(entityBO.getPointAttributeConfigMap())
+                    && MapUtil.isNotEmpty(entityBO.getDriverAttributeConfigIdMap())
+                    && MapUtil.isNotEmpty(entityBO.getPointAttributeConfigIdMap())
             ) {
                 Set<Long> pointIds = entityBO.getPointIds();
                 for (Long pointId : pointIds) {

@@ -23,7 +23,7 @@ import org.springframework.lang.NonNull;
 /**
  * 解包器
  * <p>
- * 当方法返回值是包装类（如Page、ResultWrapper等）时, 指定解包的逻辑
+ * 当方法返回值是包装类(如Page, ResultWrapper等)时, 指定解包的逻辑
  * 注意解包之后的返回参数必须是某个bean或者集合类型
  *
  * @author pnoker

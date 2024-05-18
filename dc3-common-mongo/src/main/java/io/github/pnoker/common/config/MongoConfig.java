@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.config;
 
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -40,10 +39,13 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 @Configuration
 public class MongoConfig {
 
-    @Resource
-    private MongoDatabaseFactory factory;
-    @Resource
-    private MongoMappingContext context;
+    private final MongoDatabaseFactory factory;
+    private final MongoMappingContext context;
+
+    public MongoConfig(MongoDatabaseFactory factory, MongoMappingContext context) {
+        this.factory = factory;
+        this.context = context;
+    }
 
     @Bean
     public MappingMongoConverter mappingMongoConverter(BeanFactory beanFactory) {

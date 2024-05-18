@@ -17,7 +17,6 @@
 package io.github.pnoker.common.aspect;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.annotation.CheckPermission;
 import io.github.pnoker.common.constant.AuthConstant;
 import io.github.pnoker.common.enums.AuthMode;
@@ -32,6 +31,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -66,7 +66,7 @@ public class CheckPermissionAspect {
 
     private Boolean checkRole(CheckPermission annotation, AuthUser authUser) {
         String[] requireRoles = annotation.role();
-        if (ObjectUtil.isNull(requireRoles) || requireRoles.length == 0) {
+        if (Objects.isNull(requireRoles) || requireRoles.length == 0) {
             return Boolean.FALSE;
         }
 
@@ -87,7 +87,7 @@ public class CheckPermissionAspect {
 
     private Boolean checkResource(CheckPermission annotation, AuthUser authUser) {
         String[] requireResources = annotation.value();
-        if (ObjectUtil.isNull(requireResources) || requireResources.length == 0) {
+        if (Objects.isNull(requireResources) || requireResources.length == 0) {
             return Boolean.FALSE;
         }
 

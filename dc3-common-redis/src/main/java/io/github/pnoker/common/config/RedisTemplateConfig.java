@@ -20,8 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -38,12 +36,14 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @since 2022.1.0
  */
 @Configuration
-@AllArgsConstructor
 @AutoConfigureBefore(RedisAutoConfiguration.class)
 public class RedisTemplateConfig {
 
-    @Resource
-    private RedisConnectionFactory factory;
+    private final RedisConnectionFactory factory;
+
+    public RedisTemplateConfig(RedisConnectionFactory factory) {
+        this.factory = factory;
+    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {

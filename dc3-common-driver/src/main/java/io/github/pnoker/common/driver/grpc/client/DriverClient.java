@@ -32,7 +32,7 @@ import io.github.pnoker.common.driver.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.enums.DriverStatusEnum;
-import io.github.pnoker.common.exception.ServiceException;
+import io.github.pnoker.common.exception.RegisterException;
 import io.github.pnoker.common.optional.CollectionOptional;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +66,6 @@ public class DriverClient {
      * @param entityDTO DriverRegisterDTO
      */
     public void driverRegister(DriverRegisterDTO entityDTO) {
-
         GrpcDriverRegisterDTO.Builder builder = GrpcDriverRegisterDTO.newBuilder();
         GrpcDriverDTO grpcDriverDTO = driverBuilder.buildGrpcDTOByDTO(entityDTO.getDriver());
         builder.setTenant(entityDTO.getTenant())
@@ -86,7 +85,7 @@ public class DriverClient {
 
         GrpcRDriverRegisterDTO rDriverRegisterDTO = driverApiBlockingStub.driverRegister(builder.build());
         if (!rDriverRegisterDTO.getResult().getOk()) {
-            throw new ServiceException(rDriverRegisterDTO.getResult().getMessage());
+            throw new RegisterException(rDriverRegisterDTO.getResult().getMessage());
         }
 
         DriverBO driverBO = driverBuilder.buildDTOByGrpcDTO(rDriverRegisterDTO.getDriver());
@@ -95,12 +94,16 @@ public class DriverClient {
         driverMetadata.setDeviceIds(rDriverRegisterDTO.getDeviceIdsList());
 
         List<GrpcDriverAttributeDTO> driverAttributesList = rDriverRegisterDTO.getDriverAttributesList();
-        Map<Long, DriverAttributeDTO> driverAttributeDTOMap = driverAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcDriverAttributeBuilder::buildDTOByGrpcDTO));
-        driverMetadata.setDriverAttributeMap(driverAttributeDTOMap);
+        Map<Long, DriverAttributeDTO> driverAttributeIdMap = driverAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcDriverAttributeBuilder::buildDTOByGrpcDTO));
+        Map<String, DriverAttributeDTO> driverAttributeNameMap = driverAttributesList.stream().collect(Collectors.toMap(GrpcDriverAttributeDTO::getAttributeName, grpcDriverAttributeBuilder::buildDTOByGrpcDTO));
+        driverMetadata.setDriverAttributeIdMap(driverAttributeIdMap);
+        driverMetadata.setDriverAttributeNameMap(driverAttributeNameMap);
 
         List<GrpcPointAttributeDTO> pointAttributesList = rDriverRegisterDTO.getPointAttributesList();
-        Map<Long, PointAttributeDTO> pointAttributeDTOMap = pointAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcPointAttributeBuilder::buildDTOByGrpcDTO));
-        driverMetadata.setPointAttributeMap(pointAttributeDTOMap);
+        Map<Long, PointAttributeDTO> pointAttributeIdMap = pointAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcPointAttributeBuilder::buildDTOByGrpcDTO));
+        Map<String, PointAttributeDTO> pointAttributeNameMap = pointAttributesList.stream().collect(Collectors.toMap(GrpcPointAttributeDTO::getAttributeName, grpcPointAttributeBuilder::buildDTOByGrpcDTO));
+        driverMetadata.setPointAttributeIdMap(pointAttributeIdMap);
+        driverMetadata.setPointAttributeNameMap(pointAttributeNameMap);
 
         driverMetadata.setDriverStatus(DriverStatusEnum.ONLINE);
     }

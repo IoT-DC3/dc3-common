@@ -17,7 +17,6 @@
 package io.github.pnoker.common.driver.entity.bean;
 
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.exception.EmptyException;
 import io.github.pnoker.common.exception.TypeException;
@@ -26,6 +25,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 写数据实体类
@@ -64,7 +64,7 @@ public class WValue implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public <T> T getValue(Class<T> clazz) {
-        if (ObjectUtil.isNull(type)) {
+        if (Objects.isNull(type)) {
             throw new UnSupportException("Unsupported point type of " + type);
         }
         if (CharSequenceUtil.isEmpty(value)) {

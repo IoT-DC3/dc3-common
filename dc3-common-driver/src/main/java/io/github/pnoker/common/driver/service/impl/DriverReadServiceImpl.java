@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.driver.entity.bean.PointValue;
 import io.github.pnoker.common.driver.entity.bean.RValue;
 import io.github.pnoker.common.driver.entity.bo.AttributeBO;
@@ -35,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -56,8 +56,8 @@ public class DriverReadServiceImpl implements DriverReadService {
     @Override
     public void read(Long deviceId, Long pointId) {
         try {
-            DeviceBO device = deviceMetadata.getDevice(deviceId);
-            if (ObjectUtil.isNull(device)) {
+            DeviceBO device = deviceMetadata.getCache(deviceId);
+            if (Objects.isNull(device)) {
                 throw new ReadPointException("Failed to read point value, device[{}] is null", deviceId);
             }
 
@@ -68,13 +68,13 @@ public class DriverReadServiceImpl implements DriverReadService {
             Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverConfig(deviceId);
             Map<String, AttributeBO> pointConfig = deviceMetadata.getPointConfig(deviceId, pointId);
 
-            PointBO point = pointMetadata.getPoint(pointId);
-            if (ObjectUtil.isNull(point)) {
+            PointBO point = pointMetadata.getCache(pointId);
+            if (Objects.isNull(point)) {
                 throw new ReadPointException("Failed to read point value, point[{}] is null" + deviceId);
             }
 
             RValue rValue = driverCustomService.read(driverConfig, pointConfig, device, point);
-            if (ObjectUtil.isEmpty(rValue)) {
+            if (Objects.isNull(rValue)) {
                 throw new ReadPointException("Failed to read point value, point value is null");
             }
 
@@ -87,7 +87,7 @@ public class DriverReadServiceImpl implements DriverReadService {
     @Override
     public void read(DeviceCommandDTO commandDTO) {
         DeviceCommandDTO.DeviceRead deviceRead = JsonUtil.parseObject(commandDTO.getContent(), DeviceCommandDTO.DeviceRead.class);
-        if (ObjectUtil.isNull(deviceRead)) {
+        if (Objects.isNull(deviceRead)) {
             return;
         }
 

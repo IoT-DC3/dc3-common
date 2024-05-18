@@ -49,7 +49,7 @@ public class RegexUtil {
     }
 
     /**
-     * 判断字符串是否为 名称格式（2-32）
+     * 判断字符串是否为 名称格式(2-32)
      *
      * @param name String
      * @return boolean
@@ -82,7 +82,7 @@ public class RegexUtil {
     }
 
     /**
-     * 判断字符串是否为 密码格式（8-16）
+     * 判断字符串是否为 密码格式(8-16)
      *
      * @param password String
      * @return boolean

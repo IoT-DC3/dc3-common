@@ -16,14 +16,17 @@
 
 package io.github.pnoker.common.driver.receiver.rabbit;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
+import io.github.pnoker.common.driver.event.device.DeviceMetadataEvent;
+import io.github.pnoker.common.driver.event.device.DeviceMetadataEventPublisher;
+import io.github.pnoker.common.driver.event.point.PointMetadataEvent;
+import io.github.pnoker.common.driver.event.point.PointMetadataEventPublisher;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
-import io.github.pnoker.common.enums.MetadataCommandTypeEnum;
+import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +34,8 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 /**
  * 接收驱动元数据
@@ -47,15 +52,20 @@ public class MetadataReceiver {
     @Resource
     PointMetadata pointMetadata;
 
+    @Resource
+    private DeviceMetadataEventPublisher deviceMetadataEventPublisher;
+    @Resource
+    private PointMetadataEventPublisher pointMetadataEventPublisher;
+
     @RabbitHandler
-    @RabbitListener(queues = "#{driverMetadataQueue.name}")
-    public void driverMetadataReceive(Channel channel, Message message, DriverTransferMetadataDTO entityDTO) {
+    @RabbitListener(queues = "#{metadataQueue.name}")
+    public void metadataReceive(Channel channel, Message message, DriverTransferMetadataDTO entityDTO) {
         try {
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
             log.info("Receive driver metadata: {}", JsonUtil.toJsonString(entityDTO));
-            if (ObjectUtil.isNull(entityDTO)
-                    || ObjectUtil.isNull(entityDTO.getType())
-                    || ObjectUtil.isNull(entityDTO.getMetadataCommandType())) {
+            if (Objects.isNull(entityDTO)
+                    || Objects.isNull(entityDTO.getType())
+                    || Objects.isNull(entityDTO.getMetadataCommandType())) {
                 log.error("Invalid driver metadata: {}", entityDTO);
                 return;
             }
@@ -65,23 +75,29 @@ public class MetadataReceiver {
                 }
                 case DEVICE -> {
                     DeviceBO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceBO.class);
-                    if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
+                    if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
                         log.info("Upsert device: {}", JsonUtil.toJsonString(device));
                         deviceMetadata.loadCache(device.getId());
-                    } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
+                    } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
                         log.info("Delete device: {}", JsonUtil.toJsonString(device));
                         deviceMetadata.removeCache(device.getId());
                     }
+
+                    // publish device metadata event
+                    deviceMetadataEventPublisher.publishEvent(new DeviceMetadataEvent(this, device.getId(), entityDTO.getMetadataCommandType(), device));
                 }
                 case POINT -> {
                     PointBO point = JsonUtil.parseObject(entityDTO.getContent(), PointBO.class);
-                    if (MetadataCommandTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataCommandTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
+                    if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
                         log.info("Upsert point: {}", JsonUtil.toJsonString(point));
                         pointMetadata.loadCache(point.getId());
-                    } else if (MetadataCommandTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
+                    } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
                         log.info("Delete point: {}", JsonUtil.toJsonString(point));
                         pointMetadata.removeCache(point.getId());
                     }
+
+                    // publish point metadata event
+                    pointMetadataEventPublisher.publishEvent(new PointMetadataEvent(this, point.getId(), entityDTO.getMetadataCommandType(), point));
                 }
             }
         } catch (Exception e) {

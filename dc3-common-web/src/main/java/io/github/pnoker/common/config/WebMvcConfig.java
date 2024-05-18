@@ -17,7 +17,6 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.utils.JsonUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -41,9 +40,11 @@ import java.util.List;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    private final InterceptorConfig interceptorConfig;
 
-    @Resource
-    private InterceptorConfig interceptorConfig;
+    public WebMvcConfig(InterceptorConfig interceptorConfig) {
+        this.interceptorConfig = interceptorConfig;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

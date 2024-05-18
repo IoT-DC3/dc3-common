@@ -18,7 +18,6 @@ package io.github.pnoker.common.init;
 
 import io.github.pnoker.common.mqtt.entity.property.MqttProperties;
 import io.github.pnoker.common.mqtt.service.MqttScheduleService;
-import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -38,8 +37,11 @@ import org.springframework.stereotype.Component;
 @EnableConfigurationProperties({MqttProperties.class})
 public class MqttInitRunner implements ApplicationRunner {
 
-    @Resource
-    private MqttScheduleService mqttScheduleService;
+    private final MqttScheduleService mqttScheduleService;
+
+    public MqttInitRunner(MqttScheduleService mqttScheduleService) {
+        this.mqttScheduleService = mqttScheduleService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
