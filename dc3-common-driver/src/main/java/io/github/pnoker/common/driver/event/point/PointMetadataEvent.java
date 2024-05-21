@@ -24,7 +24,7 @@ import org.springframework.context.ApplicationEvent;
 /**
  * 位号元数据事件
  *
- * @author pnoker
+ * @author zhangzi
  * @since 2022.1.0
  */
 @Getter

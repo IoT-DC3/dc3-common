@@ -44,6 +44,6 @@ public class TransformAspect {
         Object result = genericConversionService.convert(returnValue, Object.class);
         TransformUtil.transform(result);
         long time = System.currentTimeMillis() - l;
-        log.debug("转换耗时: {}ms", time);
+        log.debug("Conversion time: {}ms", time);
     }
 }

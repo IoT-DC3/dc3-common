@@ -160,13 +160,12 @@ public final class DeviceMetadata {
 
         return attributeMap.entrySet().stream()
                 .collect(Collectors.toMap(
-                                entry -> entry.getValue().getAttributeName(),
-                                entry -> AttributeBO.builder()
-                                        .type(entry.getValue().getAttributeTypeFlag())
-                                        .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
-                                        .build()
-                        )
-                );
+                        entry -> entry.getValue().getAttributeName(),
+                        entry -> AttributeBO.builder()
+                                .type(entry.getValue().getAttributeTypeFlag())
+                                .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                .build()
+                ));
     }
 
     /**
@@ -204,13 +203,12 @@ public final class DeviceMetadata {
 
         return attributeMap.entrySet().stream()
                 .collect(Collectors.toMap(
-                                entry -> entry.getValue().getAttributeName(),
-                                entry -> AttributeBO.builder()
-                                        .type(entry.getValue().getAttributeTypeFlag())
-                                        .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
-                                        .build()
-                        )
-                );
+                        entry -> entry.getValue().getAttributeName(),
+                        entry -> AttributeBO.builder()
+                                .type(entry.getValue().getAttributeTypeFlag())
+                                .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                .build()
+                ));
     }
 
     /**
@@ -248,13 +246,12 @@ public final class DeviceMetadata {
 
             return attributeMap.entrySet().stream()
                     .collect(Collectors.toMap(
-                                    entry -> entry.getValue().getAttributeName(),
-                                    entry -> AttributeBO.builder()
-                                            .type(entry.getValue().getAttributeTypeFlag())
-                                            .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
-                                            .build()
-                            )
-                    );
+                            entry -> entry.getValue().getAttributeName(),
+                            entry -> AttributeBO.builder()
+                                    .type(entry.getValue().getAttributeTypeFlag())
+                                    .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
+                                    .build()
+                    ));
         }));
     }
 

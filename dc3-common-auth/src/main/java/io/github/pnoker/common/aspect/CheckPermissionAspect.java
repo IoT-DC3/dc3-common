@@ -60,7 +60,7 @@ public class CheckPermissionAspect {
 
         //2. check permission
         if (!checkResource(annotation, authUser)) {
-            throw new UnAuthorizedException("您没有访问权限！");
+            throw new UnAuthorizedException("No access");
         }
     }
 

@@ -33,16 +33,16 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum ResponseEnum {
 
-    OK((byte) 200, "R200", "成功"),
-    TOKEN_INVALID((byte) 20301, "R20301", "令牌无效"),
-    IP_INVALID((byte) 20302, "R20302", "IP无效"),
-    FAILURE((byte) 500, "R500", "服务异常"),
-    NO_RESOURCE((byte) 404, "R404", "资源不存在"),
-    OUT_RANGE((byte) 900, "R900", "数字超出范围"),
+    OK((byte) 200, "R200", "Success"),
+    TOKEN_INVALID((byte) 20301, "R20301", "Token is invalid"),
+    IP_INVALID((byte) 20302, "R20302", "Invalid IP"),
+    FAILURE((byte) 500, "R500", "Service exception"),
+    NO_RESOURCE((byte) 404, "R404", "Resource does not exist"),
+    OUT_RANGE((byte) 900, "R900", "Number out of range"),
 
-    ADD_SUCCESS((byte) 20001, "R20001", "添加成功"),
-    DELETE_SUCCESS((byte) 20002, "R20002", "删除成功"),
-    UPDATE_SUCCESS((byte) 20003, "R20003", "更新成功"),
+    ADD_SUCCESS((byte) 20001, "R20001", "Added successfully"),
+    DELETE_SUCCESS((byte) 20002, "R20002", "Deleted successfully"),
+    UPDATE_SUCCESS((byte) 20003, "R20003", "Updated successfully"),
     ;
 
     /**

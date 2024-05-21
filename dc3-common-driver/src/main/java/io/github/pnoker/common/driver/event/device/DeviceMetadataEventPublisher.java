@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 /**
  * 设备元数据事件 Publisher
  *
- * @author pnoker
+ * @author zhangzi
  * @since 2022.1.0
  */
 @Slf4j
