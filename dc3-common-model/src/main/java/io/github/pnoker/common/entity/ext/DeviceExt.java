@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Device Ext
+ * 设备 Ext
  * <p>
  * 设备相关拓展信息
  *

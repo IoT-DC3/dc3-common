@@ -33,7 +33,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@SuppressWarnings("all")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class R<T> implements Serializable {
 
@@ -58,7 +57,7 @@ public class R<T> implements Serializable {
     /**
      * 响应数据
      */
-    private T data;
+    private transient T data;
 
     /**
      * 成功

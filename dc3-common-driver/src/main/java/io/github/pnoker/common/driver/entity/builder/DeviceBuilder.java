@@ -33,7 +33,7 @@ import org.mapstruct.MappingTarget;
 import java.util.HashSet;
 
 /**
- * Device Builder
+ * 设备 Builder
  *
  * @author pnoker
  * @since 2022.1.0

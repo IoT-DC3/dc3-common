@@ -16,7 +16,10 @@
 
 package io.github.pnoker.common.driver.event.device;
 
+import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.MetadataEventBO;
 import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +45,11 @@ public class DeviceMetadataEventListener implements ApplicationListener<DeviceMe
     @Override
     public void onApplicationEvent(@NotNull DeviceMetadataEvent event) {
         log.info("Device metadata event listener received: {}", JsonUtil.toJsonString(event));
-        driverCustomService.event(event);
+        MetadataEventBO<DeviceBO> entityEvent = new MetadataEventBO<>();
+        entityEvent.setId(entityEvent.getId());
+        entityEvent.setMetadataType(MetadataTypeEnum.DEVICE);
+        entityEvent.setOperateType(event.getOperateType());
+        entityEvent.setMetadata(event.getDevice());
+        driverCustomService.event(entityEvent);
     }
 }

@@ -20,9 +20,10 @@ import io.github.pnoker.common.driver.entity.bean.RValue;
 import io.github.pnoker.common.driver.entity.bean.WValue;
 import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
+import io.github.pnoker.common.driver.entity.bo.MetadataEventBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.event.device.DeviceMetadataEvent;
-import io.github.pnoker.common.driver.event.point.PointMetadataEvent;
+import io.github.pnoker.common.entity.base.BaseBO;
 
 import java.util.Map;
 
@@ -48,22 +49,14 @@ public interface DriverCustomService {
     void schedule();
 
     /**
-     * 设备元数据事件
+     * 驱动, 设备, 位号元数据事件
      * <p>
-     * 设备元数据新增, 更新, 删除都会触发改事件
+     * 驱动, 设备, 位号元数据新增, 更新, 删除都会触发改事件,
+     * 需要根据数据类型{@link io.github.pnoker.common.enums.MetadataTypeEnum}决定是驱动, 设备, 位号
      *
-     * @param event 设备事件{@link DeviceMetadataEvent}
+     * @param metadataEvent 设备事件{@link DeviceMetadataEvent}
      */
-    void event(DeviceMetadataEvent event);
-
-    /**
-     * 位号元数据事件
-     * <p>
-     * 位号元数据新增, 更新, 删除都会触发改事件
-     *
-     * @param event 位号事件{@link PointMetadataEvent}
-     */
-    void event(PointMetadataEvent event);
+    void event(MetadataEventBO<? extends BaseBO> metadataEvent);
 
     /**
      * 读操作

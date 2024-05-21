@@ -16,7 +16,10 @@
 
 package io.github.pnoker.common.driver.event.point;
 
+import io.github.pnoker.common.driver.entity.bo.MetadataEventBO;
+import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.service.DriverCustomService;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +45,11 @@ public class PointMetadataEventListener implements ApplicationListener<PointMeta
     @Override
     public void onApplicationEvent(@NotNull PointMetadataEvent event) {
         log.info("Point metadata event listener received: {}", JsonUtil.toJsonString(event));
-        driverCustomService.event(event);
+        MetadataEventBO<PointBO> entityEvent = new MetadataEventBO<>();
+        entityEvent.setId(entityEvent.getId());
+        entityEvent.setMetadataType(MetadataTypeEnum.POINT);
+        entityEvent.setOperateType(event.getOperateType());
+        entityEvent.setMetadata(event.getPoint());
+        driverCustomService.event(entityEvent);
     }
 }

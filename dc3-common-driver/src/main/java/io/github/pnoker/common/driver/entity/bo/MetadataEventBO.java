@@ -14,57 +14,51 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.bo;
+package io.github.pnoker.common.driver.entity.bo;
 
-import lombok.*;
+import io.github.pnoker.common.entity.base.BaseBO;
+import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * Dictionary BO
+ * 元数据事件 BO
  *
- * @author pnoker
+ * @author zhangzi
  * @since 2022.1.0
  */
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DictionaryBO implements Serializable {
+public class MetadataEventBO<T extends BaseBO> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * 字典类型
+     * 根据元数据类型{@link MetadataTypeEnum}决定是驱动, 设备, 位号
      */
-    private String type;
+    private Long id;
 
     /**
-     * 字典标签名称
+     * 元数据类型
      */
-    private String label;
+    private MetadataTypeEnum metadataType;
 
     /**
-     * 字典标签值
+     * 元数据操作类型, 新增, 删除, 修改
      */
-    private transient Object value;
+    private MetadataOperateTypeEnum operateType;
 
     /**
-     * 是否禁用
+     * 同ID, 根据数据类型{@link MetadataTypeEnum}决定是驱动, 设备, 位号的ID
      */
-    private boolean disabled;
-
-    /**
-     * 是否展开
-     */
-    private boolean expand;
-
-    /**
-     * 子节点
-     */
-    private List<DictionaryBO> children;
+    private T metadata;
 }
