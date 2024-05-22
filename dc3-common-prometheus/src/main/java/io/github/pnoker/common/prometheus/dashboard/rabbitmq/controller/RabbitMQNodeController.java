@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -44,30 +45,30 @@ public class RabbitMQNodeController {
     private RabbitMQNodeService rabbitMQNodeService;
 
     @GetMapping("/nodes")
-    public R<RabbitMQDataVo> queryNodes(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryNodes(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQNodeService.queryNode(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
     @GetMapping("/nodes_table")
-    public R<List<RabbitMQNodeVo>> queryNodesTable(@RequestParam String cluster) {
+    public Mono<R<List<RabbitMQNodeVo>>> queryNodesTable(@RequestParam String cluster) {
         try {
             List<RabbitMQNodeVo> rabbbit = rabbitMQNodeService.queryNodeTable(cluster);
             if (rabbbit != null) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 }

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * RabbitMQ队列 Controller
@@ -41,17 +42,17 @@ public class RabbitMQQueueController {
     private RabbitMQQueueService rabbitMQQueueService;
 
     @GetMapping("/queues")
-    public R<RabbitMQDataVo> queryQues(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryQues(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQQueueService.queryQue(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
 }

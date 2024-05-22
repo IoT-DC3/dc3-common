@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 
 /**
- * OkHttp Configuration
+ * OkHttp 配置
  *
  * @author pnoker
  * @since 2022.1.0

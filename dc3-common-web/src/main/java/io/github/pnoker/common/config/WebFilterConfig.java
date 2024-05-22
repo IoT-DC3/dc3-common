@@ -23,42 +23,32 @@ import io.github.pnoker.common.utils.DecodeUtil;
 import io.github.pnoker.common.utils.HeaderUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.UserHeaderUtil;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.server.WebFilter;
 
 /**
- * Interceptor 配置
+ * WebFilter 配置
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Slf4j
 @Configuration
-public class InterceptorConfig implements HandlerInterceptor {
+public class WebFilterConfig {
 
-    @Override
-    public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-        setUserHeader(request);
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+    @Bean
+    public WebFilter interceptor() {
+        return (exchange, chain) -> {
+            //setUserHeader(exchange.getRequest());
+//            return chain.filter(exchange).then(Mono.fromRunnable(UserHeaderUtil::removeUserHeader));
+            return chain.filter(exchange);
+        };
     }
 
-    @Override
-    public void postHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-    }
-
-    @Override
-    public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) throws Exception {
-        UserHeaderUtil.removeUserHeader();
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
-    }
-
-    private void setUserHeader(HttpServletRequest request) {
+    private void setUserHeader(ServerHttpRequest request) {
         try {
             String user = HeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
             if (CharSequenceUtil.isEmpty(user)) {

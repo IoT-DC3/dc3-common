@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * RabbitMQ发布者 Controller
@@ -42,16 +43,16 @@ public class RabbitMQPublisherController {
     private RabbitMQPublisherService rabbitMQPublisherService;
 
     @GetMapping("/publishers")
-    public R<RabbitMQDataVo> queryPubs(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryPubs(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQPublisherService.queryPub(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 }

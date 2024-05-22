@@ -14,9 +14,9 @@
 # limitations under the License.
 #
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.github.pnoker.common.config.GlobalExceptionConfig,\
-  io.github.pnoker.common.config.InterceptorConfig,\
-  io.github.pnoker.common.config.WebMvcConfig,\
+  io.github.pnoker.common.config.ExceptionConfig,\
+  io.github.pnoker.common.config.WebFilterConfig,\
+  io.github.pnoker.common.config.WebFluxConfig,\
   io.github.pnoker.common.config.OkHttpConfig
 org.springframework.boot.env.EnvironmentPostProcessor=\
   io.github.pnoker.common.config.ActiveWebProfileConfig

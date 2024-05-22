@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * RabbitMQ消费者 Controller
@@ -44,16 +45,16 @@ public class RabbitMQConsumerController {
     private RabbitMQConsumerService rabbitMQConsumerService;
 
     @GetMapping("/consumers")
-    public R<RabbitMQDataVo> queryCons(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryCons(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQConsumerService.queryCon(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 }

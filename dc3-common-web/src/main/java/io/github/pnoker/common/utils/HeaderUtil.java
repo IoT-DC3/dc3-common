@@ -16,9 +16,16 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import jakarta.servlet.http.HttpServletRequest;
+import io.github.pnoker.common.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+
+import java.net.InetSocketAddress;
+import java.util.Objects;
 
 /**
  * 请求头 相关工具类
@@ -34,13 +41,54 @@ public class HeaderUtil {
     }
 
     /**
-     * 从 Request 中获取指定 Key 的 Header 值
+     * 获取远程客户端 IP
      *
-     * @param request {@link HttpServletRequest}
-     * @param key     Header Name
-     * @return Header Value
+     * @param request ServerHttpRequest
+     * @return Remote Ip
      */
-    public static String getRequestHeader(HttpServletRequest request, String key) {
-        return request.getHeader(key);
+    public static String getRemoteIp(ServerHttpRequest request) {
+        String ip = "";
+        String[] headers = {"X-Original-Forwarded-For", "X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
+        for (String header : headers) {
+            ip = request.getHeaders().getFirst(header);
+            if (!NetUtil.isUnknown(ip)) {
+                return NetUtil.getMultistageReverseProxyIp(ip);
+            }
+        }
+        InetSocketAddress remoteAddress = request.getRemoteAddress();
+        if (!Objects.isNull(remoteAddress)) {
+            ip = remoteAddress.getHostString();
+        }
+        return NetUtil.getMultistageReverseProxyIp(ip);
+    }
+
+    /**
+     * 获取 Request Header
+     *
+     * @param request ServerHttpRequest
+     * @param key     header key
+     * @return request header value
+     */
+    public static String getRequestHeader(ServerHttpRequest request, String key) {
+        String header = request.getHeaders().getFirst(key);
+        if (!CharSequenceUtil.isNotEmpty(header)) {
+            throw new NotFoundException("Invalid request header of " + key);
+        }
+        return header;
+    }
+
+    /**
+     * 获取 Request Cookie
+     *
+     * @param request ServerHttpRequest
+     * @param key     cookie key
+     * @return request cookie value
+     */
+    public static String getRequestCookie(ServerHttpRequest request, String key) {
+        HttpCookie cookie = request.getCookies().getFirst(key);
+        if (Objects.isNull(cookie) || !CharSequenceUtil.isNotEmpty(cookie.getValue())) {
+            throw new NotFoundException("Invalid request cookie of " + key);
+        }
+        return cookie.getValue();
     }
 }

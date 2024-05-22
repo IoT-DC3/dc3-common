@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 /**
  * RabbitMQ消息 Controller
@@ -42,59 +43,59 @@ public class RabbitMQMessageController {
     private RabbitMQMessageService rabbitMQMessageService;
 
     @GetMapping("/message_in")
-    public R<RabbitMQDataVo> queryInMess(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryInMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQInMess(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
     @GetMapping("/message_ready")
-    public R<RabbitMQDataVo> queryReMess(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryReMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQReMess(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
     @GetMapping("/message_unack")
-    public R<RabbitMQDataVo> queryUnackMess(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryUnackMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQUnackMess(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
     @GetMapping("/message_out")
-    public R<RabbitMQDataVo> queryOutMess(@RequestParam String cluster) {
+    public Mono<R<RabbitMQDataVo>> queryOutMess(@RequestParam String cluster) {
         try {
             RabbitMQDataVo rabbbit = rabbitMQMessageService.queryMQOutMess(cluster);
             if (!rabbbit.getTimes().isEmpty() && !rabbbit.getValues().isEmpty()) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 
 }

@@ -73,6 +73,12 @@
             <artifactId>spring-boot</artifactId>
         </dependency>
 
+        <!-- Reactor Core -->
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+        </dependency>
+
         <!-- Ok Http -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

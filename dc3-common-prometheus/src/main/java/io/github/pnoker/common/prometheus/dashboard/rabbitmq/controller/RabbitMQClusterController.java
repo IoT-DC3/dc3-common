@@ -25,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -43,16 +44,16 @@ public class RabbitMQClusterController {
     private RabbitMQClusterService rabbitMQClusterService;
 
     @GetMapping("/clusters")
-    public R<List<RabbitMQClusterVo>> queryCluster() {
+    public Mono<R<List<RabbitMQClusterVo>>> queryCluster() {
         try {
             List<RabbitMQClusterVo> rabbbit = rabbitMQClusterService.queryCluster();
             if (rabbbit != null) {
-                return R.ok(rabbbit);
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return R.fail(e.getMessage());
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return R.fail();
+        return Mono.just(R.fail());
     }
 }
