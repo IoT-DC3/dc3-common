@@ -26,10 +26,9 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -42,8 +41,7 @@ import java.util.List;
  * @since 2022.1.0
  */
 @Slf4j
-@ResponseBody
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionConfig {
 
     /**
