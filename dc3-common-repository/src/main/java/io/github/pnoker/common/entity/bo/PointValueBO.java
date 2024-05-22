@@ -20,7 +20,6 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -75,7 +74,7 @@ public class PointValueBO implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 创建时间
+     * 操作时间
      */
-    private Timestamp ts;
+    private LocalDateTime updateTime;
 }

@@ -53,7 +53,7 @@ public class DictionaryVO implements Serializable {
     /**
      * 字典标签值
      */
-    private Object value;
+    private String value;
 
     /**
      * 是否禁用

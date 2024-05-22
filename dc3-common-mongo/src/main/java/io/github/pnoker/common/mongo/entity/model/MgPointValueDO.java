@@ -71,4 +71,9 @@ public class MgPointValueDO implements Serializable {
      * 创建时间
      */
     private LocalDateTime createTime;
+
+    /**
+     * 操作时间
+     */
+    private LocalDateTime updateTime;
 }

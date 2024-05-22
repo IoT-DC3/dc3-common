@@ -57,7 +57,8 @@ public class R<T> implements Serializable {
     /**
      * 响应数据
      */
-    private transient T data;
+    @SuppressWarnings("all")
+    private T data;
 
     /**
      * 成功

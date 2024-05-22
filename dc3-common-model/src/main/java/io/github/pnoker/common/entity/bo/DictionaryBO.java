@@ -51,7 +51,7 @@ public class DictionaryBO implements Serializable {
     /**
      * 字典标签值
      */
-    private transient Object value;
+    private String value;
 
     /**
      * 是否禁用
