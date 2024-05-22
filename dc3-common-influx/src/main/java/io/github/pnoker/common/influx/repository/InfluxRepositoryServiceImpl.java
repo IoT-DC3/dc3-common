@@ -82,13 +82,13 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
     }
 
     @Override
-    public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
+    public void savePointValue(Long deviceId, List<PointValueBO> entityBOList) {
         if (Objects.isNull(deviceId)) {
             return;
         }
         WriteApiBlocking writeApiBlocking = influxDBClient.getWriteApiBlocking();
-        List<InfluxPointValueDO> influxPointValueDOS = influxPointValueBuilder.buildMgDOListByBOList(entityBOS);
-        for (InfluxPointValueDO influxPointValueDO : influxPointValueDOS) {
+        List<InfluxPointValueDO> influxPointValueDOList = influxPointValueBuilder.buildMgDOListByBOList(entityBOList);
+        for (InfluxPointValueDO influxPointValueDO : influxPointValueDOList) {
             Point point = Point.measurement("dc3")
                     .addTag("deviceId", influxPointValueDO.getDeviceId().toString())
                     .addTag("pointId", influxPointValueDO.getPointId().toString())
@@ -108,8 +108,8 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
                 "|> filter(fn: (r) => r._measurement == \"dc3\" and r.deviceId == \"" + deviceId + "\" and r.pointId == \"" + pointId + "\")" +
                 "|> sort(columns: [\"_time\"], desc: true)";
         List<InfluxMapperDO> query = queryApi.query(flux, InfluxMapperDO.class);
-        List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
-        List<InfluxMapperBO> sortedList = influxMapperBOS.stream()
+        List<InfluxMapperBO> influxMapperBOList = convertToBO(query);
+        List<InfluxMapperBO> sortedList = influxMapperBOList.stream()
                 .sorted((a, b) -> b.getTime().compareTo(a.getTime())) // 倒序排序
                 .toList();
         List<InfluxMapperBO> takenList = sortedList.subList(0, count);
@@ -137,10 +137,10 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
         //   System.out.println(flux);
         // 执行查询
         List<InfluxMapperDO> query = queryApi.query(flux, InfluxMapperDO.class);
-        List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
+        List<InfluxMapperBO> influxMapperBOList = convertToBO(query);
         Map<String, InfluxMapperBO> latestDataMap = new HashMap<>();
         //  System.out.println("-------------------------------------------");
-        for (InfluxMapperBO bo : influxMapperBOS) {
+        for (InfluxMapperBO bo : influxMapperBOList) {
             String key = bo.getDeviceId() + "-" + bo.getPointId();
             if (!latestDataMap.containsKey(key) || bo.getTime().compareTo(latestDataMap.get(key).getTime()) > 0) {
                 latestDataMap.put(key, bo);
@@ -148,9 +148,9 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
         }
 
         List<InfluxMapperBO> latestDataList = new ArrayList<>(latestDataMap.values());
-        List<InfluxPointValueDO> influxPointValueDOS = convertMapperBoToValueDo(latestDataList);
-        List<PointValueBO> pointValueBOS = influxPointValueBuilder.buildBOListByDOList(influxPointValueDOS);
-        return pointValueBOS;
+        List<InfluxPointValueDO> influxPointValueDOList = convertMapperBoToValueDo(latestDataList);
+        List<PointValueBO> pointValueBOList = influxPointValueBuilder.buildBOListByDOList(influxPointValueDOList);
+        return pointValueBOList;
     }
 
     @Override
@@ -173,12 +173,12 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
         flux.append(")");
         //System.out.println(flux.toString());
         List<InfluxMapperDO> query = queryApi.query(flux.toString(), InfluxMapperDO.class);
-        List<InfluxMapperBO> influxMapperBOS = convertToBO(query);
-        List<InfluxPointValueDO> influxPointValueDOS = convertMapperBoToValueDo(influxMapperBOS);
+        List<InfluxMapperBO> influxMapperBOList = convertToBO(query);
+        List<InfluxPointValueDO> influxPointValueDOList = convertMapperBoToValueDo(influxMapperBOList);
         Pages pages = entityQuery.getPage();
-        List<InfluxPointValueDO> page = getPage(influxPointValueDOS, (int) pages.getSize(), (int) pages.getCurrent());
-        List<PointValueBO> pointValueBOS = influxPointValueBuilder.buildBOListByDOList(page);
-        Page<PointValueBO> pointValueBOPage = entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(influxPointValueDOS.size()).setRecords(pointValueBOS);
+        List<InfluxPointValueDO> page = getPage(influxPointValueDOList, (int) pages.getSize(), (int) pages.getCurrent());
+        List<PointValueBO> pointValueBOList = influxPointValueBuilder.buildBOListByDOList(page);
+        Page<PointValueBO> pointValueBOPage = entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(influxPointValueDOList.size()).setRecords(pointValueBOList);
         return pointValueBOPage;
     }
 

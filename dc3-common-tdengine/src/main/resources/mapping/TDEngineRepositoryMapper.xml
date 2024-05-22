@@ -28,7 +28,7 @@
     <insert id="saveBatchPointValue">
         insert
         into
-        <foreach separator=" " collection="tdEnginePointValueDOS" item="tdEnginePointValueDO" index="index">
+        <foreach separator=" " collection="tdEnginePointValueDOList" item="tdEnginePointValueDO" index="index">
             dc3.${tableName}
             using dc3.device_point_data(device_id,point_id,origin_time)
             TAGS

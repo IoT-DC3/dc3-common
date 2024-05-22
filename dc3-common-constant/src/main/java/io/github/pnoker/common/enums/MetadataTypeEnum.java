@@ -33,19 +33,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum MetadataTypeEnum {
     /**
-     * 驱动类型元数据
-     */
-    DRIVER((byte) 0, "driver", "驱动类型元数据"),
-
-    /**
      * 设备类型元数据
      */
-    DEVICE((byte) 1, "device", "设备类型元数据"),
+    DEVICE((byte) 0, "device", "设备类型元数据"),
 
     /**
      * 位号类型元数据
      */
-    POINT((byte) 2, "point", "位号类型元数据"),
+    POINT((byte) 1, "point", "位号类型元数据"),
     ;
 
     /**

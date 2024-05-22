@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.entity.dto;
+package io.github.pnoker.common.driver.entity.bo;
 
-import io.github.pnoker.common.driver.entity.bo.DriverBO;
+import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import lombok.*;
 
 import java.io.Serial;
@@ -32,7 +33,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverRegisterDTO implements Serializable {
+public class DriverRegisterBO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

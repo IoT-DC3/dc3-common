@@ -33,7 +33,7 @@ import io.github.pnoker.common.optional.CollectionOptional;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Component
 public class DeviceClient {
 
     @GrpcClient(ManagerConstant.SERVICE_NAME)
@@ -72,8 +72,8 @@ public class DeviceClient {
             GrpcRPageDeviceDTO tPageDeviceDTO = getGrpcRPageDeviceDTO(current);
             GrpcPageDeviceDTO tPageDTO = tPageDeviceDTO.getData();
             List<GrpcRDeviceAttachDTO> tDataList = tPageDTO.getDataList();
-            List<DeviceBO> tDeviceBOS = tDataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
-            allDeviceBOList.addAll(tDeviceBOS);
+            List<DeviceBO> tDeviceBOList = tDataList.stream().map(this::buildDTOByGrpcAttachDTO).toList();
+            allDeviceBOList.addAll(tDeviceBOList);
             pages = tPageDTO.getPage().getPages();
         }
         return allDeviceBOList;

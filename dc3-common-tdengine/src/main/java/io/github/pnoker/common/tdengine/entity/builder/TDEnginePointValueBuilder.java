@@ -39,8 +39,6 @@ public interface TDEnginePointValueBuilder {
      * @param entityBO EntityBO
      * @return EntityDO
      */
-    @Mapping(source = "originTime", target = "originTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
-    // @Mapping(source = "createTime", target = "createTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
     @Mapping(target = "ts", ignore = true)
     TDEnginePointValueDO buildMgDOByBO(PointValueBO entityBO);
 
@@ -58,8 +56,6 @@ public interface TDEnginePointValueBuilder {
      * @param entityDO EntityDO
      * @return EntityBO
      */
-    @Mapping(source = "originTime", target = "originTime", dateFormat = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Mapping(target = "ts", ignore = true)
     PointValueBO buildBOByMgDO(TDEnginePointValueDO entityDO);
 
     /**

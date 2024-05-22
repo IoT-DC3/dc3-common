@@ -30,7 +30,6 @@ import org.quartz.JobExecutionContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -55,7 +54,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(@NotNull JobExecutionContext jobExecutionContext) {
-        List<Long> deviceIds = driverMetadata.getDeviceIds();
+        Set<Long> deviceIds = driverMetadata.getDeviceIds();
         if (CollUtil.isEmpty(deviceIds)) {
             return;
         }

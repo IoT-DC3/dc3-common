@@ -50,11 +50,11 @@ public interface RepositoryService {
     /**
      * 保存 PointValue 集合
      *
-     * @param deviceId  设备ID
-     * @param entityBOS PointValue Array
+     * @param deviceId     设备ID
+     * @param entityBOList PointValue Array
      * @throws IOException IOException
      */
-    void savePointValue(Long deviceId, List<PointValueBO> entityBOS) throws IOException;
+    void savePointValue(Long deviceId, List<PointValueBO> entityBOList) throws IOException;
 
     /**
      * 获取历史 PointValue

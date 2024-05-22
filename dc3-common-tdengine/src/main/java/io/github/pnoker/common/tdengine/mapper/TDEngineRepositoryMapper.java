@@ -31,7 +31,7 @@ import java.util.List;
 public interface TDEngineRepositoryMapper extends BaseMapper<TDEnginePointValueDO> {
     void savePointValue(@Param("tableName") String tableName, @Param("pointValueDO") TDEnginePointValueDO pointValueDO);
 
-    void saveBatchPointValue(@Param("tableName") String tableName, @Param("tdEnginePointValueDOS") List<TDEnginePointValueDO> tdEnginePointValueDOS);
+    void saveBatchPointValue(@Param("tableName") String tableName, @Param("tdEnginePointValueDOList") List<TDEnginePointValueDO> tdEnginePointValueDOList);
 
     List<TDEnginePointValueDO> selectHistoryPointValue(@Param("deviceId") Long deviceId, @Param("pointId") Long pointId, @Param("count") int count);
 

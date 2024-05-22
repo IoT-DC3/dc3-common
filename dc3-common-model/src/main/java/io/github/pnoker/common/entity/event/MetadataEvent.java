@@ -14,38 +14,41 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.event.point;
+package io.github.pnoker.common.entity.event;
 
-import io.github.pnoker.common.driver.entity.bo.PointBO;
+import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
 /**
- * 位号元数据事件
+ * 元数据事件
  *
  * @author zhangzi
  * @since 2022.1.0
  */
 @Getter
-public class PointMetadataEvent extends ApplicationEvent {
+public class MetadataEvent<T extends BaseBO> extends ApplicationEvent {
 
     private final Long id;
+    private final MetadataTypeEnum metadataType;
     private final MetadataOperateTypeEnum operateType;
-    private final PointBO point;
+    private final T metadata;
 
     /**
      * 构造函数
      *
-     * @param source      Object
-     * @param id          位号ID
-     * @param operateType 元数据操作类型
-     * @param point       位号
+     * @param source       Object
+     * @param metadataType 元数据类型
+     * @param operateType  元数据操作类型
+     * @param metadata     元数据
      */
-    public PointMetadataEvent(Object source, Long id, MetadataOperateTypeEnum operateType, PointBO point) {
+    public MetadataEvent(Object source, MetadataTypeEnum metadataType, MetadataOperateTypeEnum operateType, T metadata) {
         super(source);
-        this.id = id;
+        this.id = metadata.getId();
+        this.metadataType = metadataType;
         this.operateType = operateType;
-        this.point = point;
+        this.metadata = metadata;
     }
 }

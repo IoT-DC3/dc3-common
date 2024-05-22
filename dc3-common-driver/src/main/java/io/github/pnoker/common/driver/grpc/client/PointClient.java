@@ -27,13 +27,13 @@ import io.github.pnoker.common.exception.ServiceException;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Service
+@Component
 public class PointClient {
 
     @GrpcClient(ManagerConstant.SERVICE_NAME)
@@ -50,8 +50,8 @@ public class PointClient {
         GrpcRPagePointDTO rPagePointDTO = getGrpcRPagePointDTO(current);
         GrpcPagePointDTO pageDTO = rPagePointDTO.getData();
         List<GrpcPointDTO> dataList = pageDTO.getDataList();
-        List<PointBO> pointBOS = dataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
-        ArrayList<PointBO> allPointBOList = new ArrayList<>(pointBOS);
+        List<PointBO> pointBOList = dataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
+        ArrayList<PointBO> allPointBOList = new ArrayList<>(pointBOList);
 
         long pages = pageDTO.getPage().getPages();
         while (current < pages) {
@@ -59,8 +59,8 @@ public class PointClient {
             GrpcRPagePointDTO tPagePointDTO = getGrpcRPagePointDTO(current);
             GrpcPagePointDTO tPageDTO = tPagePointDTO.getData();
             List<GrpcPointDTO> tDataList = tPageDTO.getDataList();
-            List<PointBO> tPointBOS = tDataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
-            allPointBOList.addAll(tPointBOS);
+            List<PointBO> tPointBOList = tDataList.stream().map(pointBuilder::buildDTOByGrpcDTO).toList();
+            allPointBOList.addAll(tPointBOList);
             pages = tPageDTO.getPage().getPages();
         }
         return allPointBOList;

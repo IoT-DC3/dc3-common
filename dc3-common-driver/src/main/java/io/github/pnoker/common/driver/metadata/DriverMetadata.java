@@ -25,8 +25,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 驱动元数据
@@ -52,7 +52,7 @@ public final class DriverMetadata {
     /**
      * 设备ID集合
      */
-    private List<Long> deviceIds;
+    private Set<Long> deviceIds;
 
     /**
      * 驱动属性ID Map

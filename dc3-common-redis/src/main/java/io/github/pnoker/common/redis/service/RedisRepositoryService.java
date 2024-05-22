@@ -57,13 +57,13 @@ public class RedisRepositoryService {
         redisService.setKey(prefix + entityBO.getPointId(), entityDO);
     }
 
-    public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
+    public void savePointValue(Long deviceId, List<PointValueBO> entityBOList) {
         if (Objects.isNull(deviceId)) {
             return;
         }
 
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
-        List<RedisPointValueDO> entityDOList = redisPointValueBuilder.buildDOListByBOList(entityBOS);
+        List<RedisPointValueDO> entityDOList = redisPointValueBuilder.buildDOListByBOList(entityBOList);
         Map<String, RedisPointValueDO> entityDOMap = entityDOList.stream()
                 .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
                 .collect(Collectors.toMap(entityBO -> prefix + entityBO.getPointId(), Function.identity()));

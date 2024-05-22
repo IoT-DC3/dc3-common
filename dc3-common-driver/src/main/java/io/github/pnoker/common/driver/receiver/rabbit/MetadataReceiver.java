@@ -19,14 +19,14 @@ package io.github.pnoker.common.driver.receiver.rabbit;
 import com.rabbitmq.client.Channel;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
-import io.github.pnoker.common.driver.event.device.DeviceMetadataEvent;
-import io.github.pnoker.common.driver.event.device.DeviceMetadataEventPublisher;
-import io.github.pnoker.common.driver.event.point.PointMetadataEvent;
-import io.github.pnoker.common.driver.event.point.PointMetadataEventPublisher;
+import io.github.pnoker.common.driver.event.metadata.MetadataEventPublisher;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
+import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.entity.dto.DriverTransferMetadataDTO;
+import io.github.pnoker.common.entity.event.MetadataEvent;
 import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
+import io.github.pnoker.common.enums.MetadataTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -48,14 +48,14 @@ import java.util.Objects;
 public class MetadataReceiver {
 
     @Resource
+    private DriverMetadata driverMetadata;
+    @Resource
     private DeviceMetadata deviceMetadata;
     @Resource
     PointMetadata pointMetadata;
 
     @Resource
-    private DeviceMetadataEventPublisher deviceMetadataEventPublisher;
-    @Resource
-    private PointMetadataEventPublisher pointMetadataEventPublisher;
+    private MetadataEventPublisher metadataEventPublisher;
 
     @RabbitHandler
     @RabbitListener(queues = "#{metadataQueue.name}")
@@ -70,35 +70,32 @@ public class MetadataReceiver {
                 return;
             }
 
-            switch (entityDTO.getType()) {
-                case DRIVER -> {
+            if (MetadataTypeEnum.DEVICE.equals(entityDTO.getType())) {
+                DeviceBO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceBO.class);
+                if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
+                    log.info("Upsert device: {}", JsonUtil.toJsonString(device));
+                    deviceMetadata.loadCache(device.getId());
+                    driverMetadata.getDeviceIds().add(device.getId());
+                } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
+                    log.info("Delete device: {}", JsonUtil.toJsonString(device));
+                    deviceMetadata.removeCache(device.getId());
+                    driverMetadata.getDeviceIds().remove(device.getId());
                 }
-                case DEVICE -> {
-                    DeviceBO device = JsonUtil.parseObject(entityDTO.getContent(), DeviceBO.class);
-                    if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
-                        log.info("Upsert device: {}", JsonUtil.toJsonString(device));
-                        deviceMetadata.loadCache(device.getId());
-                    } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
-                        log.info("Delete device: {}", JsonUtil.toJsonString(device));
-                        deviceMetadata.removeCache(device.getId());
-                    }
 
-                    // publish device metadata event
-                    deviceMetadataEventPublisher.publishEvent(new DeviceMetadataEvent(this, device.getId(), entityDTO.getMetadataCommandType(), device));
+                // publish device metadata event
+                metadataEventPublisher.publishEvent(new MetadataEvent<>(this, MetadataTypeEnum.DEVICE, entityDTO.getMetadataCommandType(), device));
+            } else if (MetadataTypeEnum.POINT.equals(entityDTO.getType())) {
+                PointBO point = JsonUtil.parseObject(entityDTO.getContent(), PointBO.class);
+                if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
+                    log.info("Upsert point: {}", JsonUtil.toJsonString(point));
+                    pointMetadata.loadCache(point.getId());
+                } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
+                    log.info("Delete point: {}", JsonUtil.toJsonString(point));
+                    pointMetadata.removeCache(point.getId());
                 }
-                case POINT -> {
-                    PointBO point = JsonUtil.parseObject(entityDTO.getContent(), PointBO.class);
-                    if (MetadataOperateTypeEnum.ADD.equals(entityDTO.getMetadataCommandType()) || MetadataOperateTypeEnum.UPDATE.equals(entityDTO.getMetadataCommandType())) {
-                        log.info("Upsert point: {}", JsonUtil.toJsonString(point));
-                        pointMetadata.loadCache(point.getId());
-                    } else if (MetadataOperateTypeEnum.DELETE.equals(entityDTO.getMetadataCommandType())) {
-                        log.info("Delete point: {}", JsonUtil.toJsonString(point));
-                        pointMetadata.removeCache(point.getId());
-                    }
 
-                    // publish point metadata event
-                    pointMetadataEventPublisher.publishEvent(new PointMetadataEvent(this, point.getId(), entityDTO.getMetadataCommandType(), point));
-                }
+                // publish point metadata event
+                metadataEventPublisher.publishEvent(new MetadataEvent<>(this, MetadataTypeEnum.POINT, entityDTO.getMetadataCommandType(), point));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);

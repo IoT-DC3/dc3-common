@@ -22,7 +22,6 @@ import io.github.pnoker.common.driver.entity.bo.AttributeBO;
 import io.github.pnoker.common.driver.entity.bo.DeviceBO;
 import io.github.pnoker.common.driver.entity.bo.MetadataEventBO;
 import io.github.pnoker.common.driver.entity.bo.PointBO;
-import io.github.pnoker.common.driver.event.device.DeviceMetadataEvent;
 import io.github.pnoker.common.entity.base.BaseBO;
 
 import java.util.Map;
@@ -54,7 +53,7 @@ public interface DriverCustomService {
      * 驱动, 设备, 位号元数据新增, 更新, 删除都会触发改事件,
      * 需要根据数据类型{@link io.github.pnoker.common.enums.MetadataTypeEnum}决定是驱动, 设备, 位号
      *
-     * @param metadataEvent 设备事件{@link DeviceMetadataEvent}
+     * @param metadataEvent 设备事件{@link MetadataEventBO}
      */
     void event(MetadataEventBO<? extends BaseBO> metadataEvent);
 

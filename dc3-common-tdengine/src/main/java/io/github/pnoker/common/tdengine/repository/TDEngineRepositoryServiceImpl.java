@@ -68,13 +68,13 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
     }
 
     @Override
-    public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
+    public void savePointValue(Long deviceId, List<PointValueBO> entityBOList) {
         if (Objects.isNull(deviceId)) {
             return;
         }
         String tableName = stable + deviceId;
-        List<TDEnginePointValueDO> tdEnginePointValueDOS = tdEnginePointValueBuilder.buildMgDOListByBOList(entityBOS);
-        tdEngineRepositoryMapper.saveBatchPointValue(tableName, tdEnginePointValueDOS);
+        List<TDEnginePointValueDO> tdEnginePointValueDOList = tdEnginePointValueBuilder.buildMgDOListByBOList(entityBOList);
+        tdEngineRepositoryMapper.saveBatchPointValue(tableName, tdEnginePointValueDOList);
     }
 
     @Override
@@ -88,8 +88,8 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
         if (CollUtil.isEmpty(pointIds)) {
             return Collections.emptyList();
         }
-        List<TDEnginePointValueDO> tdEnginePointValueDOS = tdEngineRepositoryMapper.selectLatestPointValue(deviceId, pointIds);
-        return tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOS);
+        List<TDEnginePointValueDO> tdEnginePointValueDOList = tdEngineRepositoryMapper.selectLatestPointValue(deviceId, pointIds);
+        return tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOList);
     }
 
     @Override
@@ -101,12 +101,12 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
         Pages pages = entityQuery.getPage();
         long count = tdEngineRepositoryMapper.count(entityQuery);
         pages.setCurrent((pages.getCurrent() - 1) * pages.getSize());
-        List<TDEnginePointValueDO> pointValueDOS = tdEngineRepositoryMapper.selectPagePointValue(entityQuery, pages);
-        for (TDEnginePointValueDO pointValueDO : pointValueDOS) {
+        List<TDEnginePointValueDO> pointValueDOList = tdEngineRepositoryMapper.selectPagePointValue(entityQuery, pages);
+        for (TDEnginePointValueDO pointValueDO : pointValueDOList) {
             pointValueDO.setCreateTime(pointValueDO.getTs().toLocalDateTime());
         }
-        List<PointValueBO> pointValueBOS = tdEnginePointValueBuilder.buildBOListByDOList(pointValueDOS);
-        entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOS);
+        List<PointValueBO> pointValueBOList = tdEnginePointValueBuilder.buildBOListByDOList(pointValueDOList);
+        entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOList);
         return entityPageBO;
     }
 

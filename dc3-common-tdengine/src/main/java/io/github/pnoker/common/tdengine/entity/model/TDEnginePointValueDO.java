@@ -63,12 +63,17 @@ public class TDEnginePointValueDO implements Serializable {
     /**
      * 原始时间
      */
-    private String originTime;
+    private LocalDateTime originTime;
 
     /**
      * 创建时间
      */
     private LocalDateTime createTime;
+
+    /**
+     * 操作时间
+     */
+    private LocalDateTime updateTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     private Timestamp ts;

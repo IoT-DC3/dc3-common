@@ -24,11 +24,11 @@ import io.github.pnoker.api.common.driver.GrpcDriverRegisterDTO;
 import io.github.pnoker.api.common.driver.GrpcRDriverRegisterDTO;
 import io.github.pnoker.common.constant.service.ManagerConstant;
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
+import io.github.pnoker.common.driver.entity.bo.DriverRegisterBO;
 import io.github.pnoker.common.driver.entity.builder.DriverBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcDriverAttributeBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcPointAttributeBuilder;
 import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
-import io.github.pnoker.common.driver.entity.dto.DriverRegisterDTO;
 import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.driver.metadata.DriverMetadata;
 import io.github.pnoker.common.enums.DriverStatusEnum;
@@ -37,14 +37,15 @@ import io.github.pnoker.common.optional.CollectionOptional;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Service
+@Component
 public class DriverClient {
 
     @GrpcClient(ManagerConstant.SERVICE_NAME)
@@ -63,26 +64,28 @@ public class DriverClient {
     /**
      * 根据 位号ID 获取位号元数据
      *
-     * @param entityDTO DriverRegisterDTO
+     * @param entityBO DriverRegisterBO
      */
-    public void driverRegister(DriverRegisterDTO entityDTO) {
+    public void driverRegister(DriverRegisterBO entityBO) {
+        // 构造驱动注册信息
         GrpcDriverRegisterDTO.Builder builder = GrpcDriverRegisterDTO.newBuilder();
-        GrpcDriverDTO grpcDriverDTO = driverBuilder.buildGrpcDTOByDTO(entityDTO.getDriver());
-        builder.setTenant(entityDTO.getTenant())
-                .setClient(entityDTO.getClient())
+        GrpcDriverDTO grpcDriverDTO = driverBuilder.buildGrpcDTOByDTO(entityBO.getDriver());
+        builder.setTenant(entityBO.getTenant())
+                .setClient(entityBO.getClient())
                 .setDriver(grpcDriverDTO);
 
-        CollectionOptional.ofNullable(entityDTO.getDriverAttributes()).ifPresent(value -> {
+        CollectionOptional.ofNullable(entityBO.getDriverAttributes()).ifPresent(value -> {
                     List<GrpcDriverAttributeDTO> grpcDriverAttributeDTOList = value.stream().map(grpcDriverAttributeBuilder::buildGrpcDTOByDTO).toList();
                     builder.addAllDriverAttributes(grpcDriverAttributeDTOList);
                 }
         );
-        CollectionOptional.ofNullable(entityDTO.getPointAttributes()).ifPresent(value -> {
+        CollectionOptional.ofNullable(entityBO.getPointAttributes()).ifPresent(value -> {
                     List<GrpcPointAttributeDTO> grpcPointAttributeDTOList = value.stream().map(grpcPointAttributeBuilder::buildGrpcDTOByDTO).toList();
                     builder.addAllPointAttributes(grpcPointAttributeDTOList);
                 }
         );
 
+        // 发起驱动注册
         GrpcRDriverRegisterDTO rDriverRegisterDTO = driverApiBlockingStub.driverRegister(builder.build());
         if (!rDriverRegisterDTO.getResult().getOk()) {
             throw new RegisterException(rDriverRegisterDTO.getResult().getMessage());
@@ -91,7 +94,7 @@ public class DriverClient {
         DriverBO driverBO = driverBuilder.buildDTOByGrpcDTO(rDriverRegisterDTO.getDriver());
         driverMetadata.setDriver(driverBO);
 
-        driverMetadata.setDeviceIds(rDriverRegisterDTO.getDeviceIdsList());
+        driverMetadata.setDeviceIds(new HashSet<>(rDriverRegisterDTO.getDeviceIdsList()));
 
         List<GrpcDriverAttributeDTO> driverAttributesList = rDriverRegisterDTO.getDriverAttributesList();
         Map<Long, DriverAttributeDTO> driverAttributeIdMap = driverAttributesList.stream().collect(Collectors.toMap(entity -> entity.getBase().getId(), grpcDriverAttributeBuilder::buildDTOByGrpcDTO));

@@ -17,11 +17,9 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
-import io.github.pnoker.common.driver.entity.dto.DriverRegisterDTO;
+import io.github.pnoker.common.driver.entity.bo.DriverRegisterBO;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
-import io.github.pnoker.common.driver.grpc.client.DeviceClient;
 import io.github.pnoker.common.driver.grpc.client.DriverClient;
-import io.github.pnoker.common.driver.grpc.client.PointClient;
 import io.github.pnoker.common.driver.metadata.DeviceMetadata;
 import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverRegisterService;
@@ -47,10 +45,6 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
     @Resource
     private DriverClient driverClient;
     @Resource
-    private DeviceClient deviceClient;
-    @Resource
-    private PointClient pointClient;
-    @Resource
     private DeviceMetadata deviceMetadata;
     @Resource
     private PointMetadata pointMetadata;
@@ -58,10 +52,12 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
     @Override
     public void initial() {
         try {
-            DriverRegisterDTO entityDTO = buildRegisterDTOByProperty();
-            log.info("The driver information is: {}", JsonUtil.toJsonString(entityDTO));
-            driverClient.driverRegister(entityDTO);
-            if (DriverTypeFlagEnum.DRIVER_CLIENT.equals(entityDTO.getDriver().getDriverTypeFlag())) {
+            DriverRegisterBO entityBO = buildRegisterBOByProperty();
+            log.info("The driver information is: {}", JsonUtil.toJsonString(entityBO));
+            driverClient.driverRegister(entityBO);
+
+            // 根据驱动类型决定是否加载该驱动到设备和位号数据到本地缓存
+            if (DriverTypeFlagEnum.DRIVER_CLIENT.equals(entityBO.getDriver().getDriverTypeFlag())) {
                 deviceMetadata.loadAllCache();
                 pointMetadata.loadAllCache();
             }
@@ -74,9 +70,9 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
     /**
      * 构建驱动注册信息
      *
-     * @return DriverRegisterDTO
+     * @return DriverRegisterBO
      */
-    private DriverRegisterDTO buildRegisterDTOByProperty() {
+    private DriverRegisterBO buildRegisterBOByProperty() {
         DriverBO driverBO = new DriverBO();
         driverBO.setDriverName(driverProperty.getName());
         driverBO.setDriverCode(driverProperty.getCode());
@@ -85,13 +81,13 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
         driverBO.setDriverTypeFlag(driverProperty.getType());
         driverBO.setRemark(driverProperty.getRemark());
 
-        DriverRegisterDTO driverRegisterDTO = new DriverRegisterDTO();
-        driverRegisterDTO.setDriver(driverBO);
-        driverRegisterDTO.setTenant(driverProperty.getTenant());
-        driverRegisterDTO.setClient(driverProperty.getClient());
-        driverRegisterDTO.setDriverAttributes(driverProperty.getDriverAttribute());
-        driverRegisterDTO.setPointAttributes(driverProperty.getPointAttribute());
-        return driverRegisterDTO;
+        DriverRegisterBO driverRegisterBO = new DriverRegisterBO();
+        driverRegisterBO.setDriver(driverBO);
+        driverRegisterBO.setTenant(driverProperty.getTenant());
+        driverRegisterBO.setClient(driverProperty.getClient());
+        driverRegisterBO.setDriverAttributes(driverProperty.getDriverAttribute());
+        driverRegisterBO.setPointAttributes(driverProperty.getPointAttribute());
+        return driverRegisterBO;
     }
 
 }

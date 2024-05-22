@@ -78,14 +78,14 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
     }
 
     @Override
-    public void savePointValue(Long deviceId, List<PointValueBO> entityBOS) {
+    public void savePointValue(Long deviceId, List<PointValueBO> entityBOList) {
         if (Objects.isNull(deviceId)) {
             return;
         }
 
         final String collection = StorageConstant.POINT_VALUE_PREFIX + deviceId;
         ensurePointValueIndex(collection);
-        List<MgPointValueDO> entityDOList = mgPointValueBuilder.buildMgDOListByBOList(entityBOS);
+        List<MgPointValueDO> entityDOList = mgPointValueBuilder.buildMgDOListByBOList(entityBOList);
         entityDOList = entityDOList.stream()
                 .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
                 .toList();
@@ -153,9 +153,9 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         long count = mongoTemplate.count(query, collection);
         query.limit((int) pages.getSize()).skip(pages.getSize() * (pages.getCurrent() - 1));
         query.with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));
-        List<MgPointValueDO> pointValueDOS = mongoTemplate.find(query, MgPointValueDO.class, collection);
-        List<PointValueBO> pointValueBOS = mgPointValueBuilder.buildBOListByDOList(pointValueDOS);
-        entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOS);
+        List<MgPointValueDO> pointValueDOList = mongoTemplate.find(query, MgPointValueDO.class, collection);
+        List<PointValueBO> pointValueBOList = mgPointValueBuilder.buildBOListByDOList(pointValueDOList);
+        entityPageBO.setCurrent(pages.getCurrent()).setSize(pages.getSize()).setTotal(count).setRecords(pointValueBOList);
         return entityPageBO;
     }
 

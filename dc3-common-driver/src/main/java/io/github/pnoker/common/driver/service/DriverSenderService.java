@@ -74,8 +74,8 @@ public interface DriverSenderService {
     /**
      * 批量发送位号值到消息组件
      *
-     * @param entityDTOS PointValue Array
+     * @param entityDTOList PointValue Array
      */
-    void pointValueSender(List<PointValue> entityDTOS);
+    void pointValueSender(List<PointValue> entityDTOList);
 
 }
