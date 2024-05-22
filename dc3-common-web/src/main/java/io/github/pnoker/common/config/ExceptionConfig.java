@@ -17,6 +17,7 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.entity.R;
+import io.github.pnoker.common.exception.NotFoundException;
 import io.github.pnoker.common.exception.UnAuthorizedException;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import reactor.core.publisher.Mono;
 
@@ -40,6 +42,7 @@ import java.util.List;
  * @since 2022.1.0
  */
 @Slf4j
+@ResponseBody
 @ControllerAdvice
 public class ExceptionConfig {
 
@@ -53,6 +56,19 @@ public class ExceptionConfig {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Mono<R<String>> globalException(Exception exception, ServerHttpRequest request) {
         log.error("Global exception handler: {}", exception.getMessage(), exception);
+        return Mono.just(R.fail(exception.getMessage()));
+    }
+
+    /**
+     * NotFound Exception
+     *
+     * @param exception NotFoundException
+     * @return Mono R
+     */
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Mono<R<String>> notFoundException(NotFoundException exception, ServerHttpRequest request) {
+        log.warn("NotFound exception handler: {}", exception.getMessage(), exception);
         return Mono.just(R.fail(exception.getMessage()));
     }
 

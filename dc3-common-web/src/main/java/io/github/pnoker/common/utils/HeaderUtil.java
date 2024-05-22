@@ -19,7 +19,6 @@ package io.github.pnoker.common.utils;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -47,7 +46,7 @@ public class HeaderUtil {
      * @return Remote Ip
      */
     public static String getRemoteIp(ServerHttpRequest request) {
-        String ip = "";
+        String ip = CharSequenceUtil.EMPTY;
         String[] headers = {"X-Original-Forwarded-For", "X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
         for (String header : headers) {
             ip = request.getHeaders().getFirst(header);
@@ -70,11 +69,7 @@ public class HeaderUtil {
      * @return request header value
      */
     public static String getRequestHeader(ServerHttpRequest request, String key) {
-        String header = request.getHeaders().getFirst(key);
-        if (!CharSequenceUtil.isNotEmpty(header)) {
-            throw new NotFoundException("Invalid request header of " + key);
-        }
-        return header;
+        return request.getHeaders().getFirst(key);
     }
 
     /**
@@ -86,9 +81,6 @@ public class HeaderUtil {
      */
     public static String getRequestCookie(ServerHttpRequest request, String key) {
         HttpCookie cookie = request.getCookies().getFirst(key);
-        if (Objects.isNull(cookie) || !CharSequenceUtil.isNotEmpty(cookie.getValue())) {
-            throw new NotFoundException("Invalid request cookie of " + key);
-        }
-        return cookie.getValue();
+        return Objects.isNull(cookie) ? CharSequenceUtil.EMPTY : cookie.getValue();
     }
 }

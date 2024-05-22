@@ -47,5 +47,4 @@ public class WebFluxConfig implements WebFluxConfigurer {
         configurer.customCodecs().registerWithDefaultConfig(new Jackson2JsonEncoder(JsonUtil.getJsonMapper()));
         configurer.customCodecs().registerWithDefaultConfig(new Jackson2JsonDecoder(JsonUtil.getJsonMapper()));
     }
-
 }

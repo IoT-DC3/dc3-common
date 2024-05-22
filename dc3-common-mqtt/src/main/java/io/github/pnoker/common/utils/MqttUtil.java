@@ -50,7 +50,7 @@ public class MqttUtil {
                     mqttProperties.getCaCrt(),
                     mqttProperties.getClientCrt(),
                     mqttProperties.getClientKey(),
-                    CharSequenceUtil.isEmpty(mqttProperties.getClientKeyPass()) ? "" : mqttProperties.getClientKeyPass()
+                    CharSequenceUtil.isEmpty(mqttProperties.getClientKeyPass()) ? CharSequenceUtil.EMPTY : mqttProperties.getClientKeyPass()
             ));
 
         }

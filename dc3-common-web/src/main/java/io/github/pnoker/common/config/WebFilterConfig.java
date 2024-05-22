@@ -23,11 +23,14 @@ import io.github.pnoker.common.utils.DecodeUtil;
 import io.github.pnoker.common.utils.HeaderUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.UserHeaderUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.WebFilter;
+import reactor.core.publisher.Mono;
 
 /**
  * WebFilter 配置
@@ -39,25 +42,35 @@ import org.springframework.web.server.WebFilter;
 @Configuration
 public class WebFilterConfig {
 
+    @Resource
+    private ServerProperties serverProperties;
+
     @Bean
-    public WebFilter interceptor() {
+    public WebFilter contextPathWebFilter() {
+        String contextPath = serverProperties.getServlet().getContextPath();
         return (exchange, chain) -> {
-            //setUserHeader(exchange.getRequest());
-//            return chain.filter(exchange).then(Mono.fromRunnable(UserHeaderUtil::removeUserHeader));
+            ServerHttpRequest request = exchange.getRequest();
+            if (request.getURI().getPath().startsWith(contextPath)) {
+                return chain.filter(
+                        exchange.mutate()
+                                .request(request.mutate().contextPath(contextPath).build())
+                                .build());
+            }
             return chain.filter(exchange);
         };
     }
 
-    private void setUserHeader(ServerHttpRequest request) {
-        try {
+    @Bean
+    public WebFilter interceptor() {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
             String user = HeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
-            if (CharSequenceUtil.isEmpty(user)) {
-                return;
+            if (CharSequenceUtil.isNotEmpty(user)) {
+                byte[] decode = DecodeUtil.decode(user);
+                RequestHeader.UserHeader entityBO = JsonUtil.parseObject(decode, RequestHeader.UserHeader.class);
+                UserHeaderUtil.setUserHeader(entityBO);
             }
-            byte[] decode = DecodeUtil.decode(user);
-            RequestHeader.UserHeader entityBO = JsonUtil.parseObject(decode, RequestHeader.UserHeader.class);
-            UserHeaderUtil.setUserHeader(entityBO);
-        } catch (Exception ignored) {
-        }
+            return chain.filter(exchange).then(Mono.fromRunnable(UserHeaderUtil::removeUserHeader));
+        };
     }
 }
