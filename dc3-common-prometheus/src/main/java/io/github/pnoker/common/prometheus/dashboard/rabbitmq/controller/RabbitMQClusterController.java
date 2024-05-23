@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -44,16 +45,16 @@ public class RabbitMQClusterController {
     private RabbitMQClusterService rabbitMQClusterService;
 
     @GetMapping("/clusters")
-    public Flux<R<List<RabbitMQClusterVo>>> queryCluster() {
+    public Mono<R<List<RabbitMQClusterVo>>> queryCluster() {
         try {
             List<RabbitMQClusterVo> rabbbit = rabbitMQClusterService.queryCluster();
             if (rabbbit != null) {
-                return Flux.just(R.ok(rabbbit));
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return Flux.just(R.fail(e.getMessage()));
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return Flux.just(R.fail());
+        return Mono.just(R.fail());
     }
 }

@@ -18,6 +18,7 @@ package io.github.pnoker.common.optional;
 
 import io.github.pnoker.common.constant.common.DefaultConstant;
 
+import java.util.Objects;
 import java.util.function.IntConsumer;
 
 /**
@@ -28,24 +29,24 @@ import java.util.function.IntConsumer;
  */
 public final class IntegerOptional {
 
-    private final int value;
+    private final Integer value;
 
-    private IntegerOptional(int value) {
+    private IntegerOptional(Integer value) {
         this.value = value;
     }
 
-    public static IntegerOptional ofNullable(int value) {
+    public static IntegerOptional ofNullable(Integer value) {
         return new IntegerOptional(value);
     }
 
     public void ifPresent(IntConsumer action) {
-        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+        if (!Objects.isNull(value) && value > DefaultConstant.DEFAULT_ZERO_VALUE) {
             action.accept(value);
         }
     }
 
     public void ifPresentOrElse(IntConsumer action, Runnable emptyAction) {
-        if (value > DefaultConstant.DEFAULT_NULL_INT_VALUE) {
+        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
             action.accept(value);
         } else {
             emptyAction.run();

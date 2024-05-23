@@ -18,6 +18,7 @@ package io.github.pnoker.common.optional;
 
 import io.github.pnoker.common.constant.common.DefaultConstant;
 
+import java.util.Objects;
 import java.util.function.LongConsumer;
 
 /**
@@ -28,18 +29,18 @@ import java.util.function.LongConsumer;
  */
 public final class LongOptional {
 
-    private final long value;
+    private final Long value;
 
-    private LongOptional(long value) {
+    private LongOptional(Long value) {
         this.value = value;
     }
 
-    public static LongOptional ofNullable(long value) {
+    public static LongOptional ofNullable(Long value) {
         return new LongOptional(value);
     }
 
     public void ifPresent(LongConsumer action) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+        if (!Objects.isNull(value) && value > DefaultConstant.DEFAULT_ZERO_VALUE) {
             action.accept(value);
         }
     }

@@ -60,16 +60,16 @@ public class RabbitMQNodeController {
     }
 
     @GetMapping("/nodes_table")
-    public Flux<R<List<RabbitMQNodeVo>>> queryNodesTable(@RequestParam String cluster) {
+    public Mono<R<List<RabbitMQNodeVo>>> queryNodesTable(@RequestParam String cluster) {
         try {
             List<RabbitMQNodeVo> rabbbit = rabbitMQNodeService.queryNodeTable(cluster);
             if (rabbbit != null) {
-                return Flux.just(R.ok(rabbbit));
+                return Mono.just(R.ok(rabbbit));
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            return Flux.just(R.fail(e.getMessage()));
+            return Mono.just(R.fail(e.getMessage()));
         }
-        return Flux.just(R.fail());
+        return Mono.just(R.fail());
     }
 }
