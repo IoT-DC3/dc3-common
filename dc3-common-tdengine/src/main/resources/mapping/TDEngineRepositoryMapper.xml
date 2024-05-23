@@ -56,10 +56,10 @@
         from
         dc3.device_point_data
         <where>
-            <if test="deviceId != null and deviceId != ''">
+            <if test="deviceId != null and deviceId != '' and deviceId > 0">
                 device_id = #{deviceId}
             </if>
-            <if test="pointIds != null and pointIds.size>0">
+            <if test="pointIds != null and pointIds.size > 0">
                 and point_id in
                 <foreach collection="pointIds" item="pointId" index="index" open="(" close=")" separator=",">
                     #{pointId}
@@ -72,10 +72,10 @@
         select count(*)
         from device_point_data
         <where>
-            <if test="entityQuery.deviceId != null and entityQuery.deviceId != ''">
+            <if test="entityQuery.deviceId != null and entityQuery.deviceId != '' and entityQuery.deviceId > 0">
                 device_id = #{entityQuery.deviceId}
             </if>
-            <if test="entityQuery.pointId != null and entityQuery.pointId != ''">
+            <if test="entityQuery.pointId != null and entityQuery.pointId != '' and entityQuery.pointId > 0">
                 and point_id = #{entityQuery.pointId}
             </if>
         </where>
@@ -86,10 +86,10 @@
         select create_time as ts,`value`,raw_value ,device_id ,point_id ,origin_time
         from device_point_data
         <where>
-            <if test="entityQuery.deviceId != null and entityQuery.deviceId != ''">
+            <if test="entityQuery.deviceId != null and entityQuery.deviceId != '' and entityQuery.deviceId > 0">
                 device_id = #{entityQuery.deviceId}
             </if>
-            <if test="entityQuery.pointId != null and entityQuery.pointId != ''">
+            <if test="entityQuery.pointId != null and entityQuery.pointId != '' and entityQuery.pointId > 0">
                 and point_id = #{entityQuery.pointId}
             </if>
         </where>

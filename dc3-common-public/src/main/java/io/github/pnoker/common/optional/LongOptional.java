@@ -40,13 +40,13 @@ public final class LongOptional {
     }
 
     public void ifPresent(LongConsumer action) {
-        if (!Objects.isNull(value) && value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+        if (!Objects.isNull(value) && value > DefaultConstant.ZERO) {
             action.accept(value);
         }
     }
 
     public void ifPresentOrElse(LongConsumer action, Runnable emptyAction) {
-        if (value > DefaultConstant.DEFAULT_ZERO_VALUE) {
+        if (value > DefaultConstant.ZERO) {
             action.accept(value);
         } else {
             emptyAction.run();

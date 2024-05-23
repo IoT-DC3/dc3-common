@@ -53,13 +53,13 @@ public class PageUtil {
             pages = new Pages();
         }
 
-        if (pages.getCurrent() < DefaultConstant.DEFAULT_ONE_VALUE) {
-            pages.setCurrent(DefaultConstant.DEFAULT_ONE_VALUE);
+        if (pages.getCurrent() < DefaultConstant.ONE) {
+            pages.setCurrent(DefaultConstant.ONE);
         }
         page.setCurrent(pages.getCurrent());
 
-        if (pages.getSize() > DefaultConstant.DEFAULT_MAX_PAGE_SIZE) {
-            pages.setSize(DefaultConstant.DEFAULT_MAX_PAGE_SIZE);
+        if (pages.getSize() > DefaultConstant.MAX_PAGE_SIZE) {
+            pages.setSize(DefaultConstant.MAX_PAGE_SIZE);
         }
         page.setSize(pages.getSize());
 

@@ -42,7 +42,7 @@ public class Pages implements Serializable {
 
     private long current = 1;
 
-    private long size = DefaultConstant.DEFAULT_PAGE_SIZE;
+    private long size = DefaultConstant.PAGE_SIZE;
 
     private long startTime;
 

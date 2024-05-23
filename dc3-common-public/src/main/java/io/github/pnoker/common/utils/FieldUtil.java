@@ -19,9 +19,12 @@ package io.github.pnoker.common.utils;
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.LambdaMeta;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.property.PropertyNamer;
+
+import java.util.Objects;
 
 /**
  * 字段名称相关工具类
@@ -46,5 +49,15 @@ public class FieldUtil {
     public static <T> String getField(SFunction<T, ?> column) {
         LambdaMeta meta = LambdaUtils.extract(column);
         return PropertyNamer.methodToProperty(meta.getImplMethodName());
+    }
+
+    /**
+     * 判断是否为有效的ID
+     *
+     * @param id ID
+     * @return 是否有效
+     */
+    public static boolean isValidIdField(Long id) {
+        return !Objects.isNull(id) && id > DefaultConstant.ZERO;
     }
 }
