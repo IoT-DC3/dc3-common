@@ -31,7 +31,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 
 /**
- * Request 相关工具类
+ * 响应 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0

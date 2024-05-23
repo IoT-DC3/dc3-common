@@ -27,15 +27,15 @@ import java.net.InetSocketAddress;
 import java.util.Objects;
 
 /**
- * 请求头 相关工具类
+ * 请求 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Slf4j
-public class HeaderUtil {
+public class RequestUtil {
 
-    private HeaderUtil() {
+    private RequestUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 

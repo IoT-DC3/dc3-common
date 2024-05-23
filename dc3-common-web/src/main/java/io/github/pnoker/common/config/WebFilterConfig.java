@@ -20,7 +20,7 @@ import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.RequestConstant;
 import io.github.pnoker.common.entity.common.RequestHeader;
 import io.github.pnoker.common.utils.DecodeUtil;
-import io.github.pnoker.common.utils.HeaderUtil;
+import io.github.pnoker.common.utils.RequestUtil;
 import io.github.pnoker.common.utils.JsonUtil;
 import io.github.pnoker.common.utils.UserHeaderUtil;
 import jakarta.annotation.Resource;
@@ -31,6 +31,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.WebFilter;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 /**
  * WebFilter 配置
@@ -47,7 +49,7 @@ public class WebFilterConfig {
 
     @Bean
     public WebFilter contextPathWebFilter() {
-        String contextPath = serverProperties.getServlet().getContextPath();
+        String contextPath = Optional.ofNullable(serverProperties.getServlet().getContextPath()).orElse("/");
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
             if (request.getURI().getPath().startsWith(contextPath)) {
@@ -64,7 +66,7 @@ public class WebFilterConfig {
     public WebFilter interceptor() {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            String user = HeaderUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
+            String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
             if (CharSequenceUtil.isNotEmpty(user)) {
                 byte[] decode = DecodeUtil.decode(user);
                 RequestHeader.UserHeader entityBO = JsonUtil.parseObject(decode, RequestHeader.UserHeader.class);
