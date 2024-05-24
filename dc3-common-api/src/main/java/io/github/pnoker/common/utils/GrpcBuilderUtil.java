@@ -81,10 +81,10 @@ public class GrpcBuilderUtil {
         Optional.ofNullable(entityBO.getRemark()).ifPresent(builder::setRemark);
         Optional.ofNullable(entityBO.getCreatorId()).ifPresentOrElse(builder::setCreatorId, () -> builder.setCreatorId(DefaultConstant.NULL_INT));
         Optional.ofNullable(entityBO.getCreatorName()).ifPresent(builder::setCreatorName);
-        Optional.ofNullable(entityBO.getCreateTime()).ifPresent(time -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(time)));
+        Optional.ofNullable(entityBO.getCreateTime()).ifPresent(value -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(value)));
         Optional.ofNullable(entityBO.getOperatorId()).ifPresentOrElse(builder::setOperatorId, () -> builder.setOperatorId(DefaultConstant.NULL_INT));
         Optional.ofNullable(entityBO.getOperatorName()).ifPresent(builder::setOperatorName);
-        Optional.ofNullable(entityBO.getOperateTime()).ifPresent(time -> builder.setOperateTime(LocalDateTimeUtil.milliSeconds(time)));
+        Optional.ofNullable(entityBO.getOperateTime()).ifPresent(value -> builder.setOperateTime(LocalDateTimeUtil.milliSeconds(value)));
         return builder.build();
     }
 
@@ -127,7 +127,7 @@ public class GrpcBuilderUtil {
         Optional.ofNullable(entityDTO.getRemark()).ifPresent(builder::setRemark);
         Optional.ofNullable(entityDTO.getCreatorId()).ifPresentOrElse(builder::setCreatorId, () -> builder.setCreatorId(DefaultConstant.NULL_INT));
         Optional.ofNullable(entityDTO.getCreatorName()).ifPresent(builder::setCreatorName);
-        Optional.ofNullable(entityDTO.getCreateTime()).ifPresent(time -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(time)));
+        Optional.ofNullable(entityDTO.getCreateTime()).ifPresent(value -> builder.setCreateTime(LocalDateTimeUtil.milliSeconds(value)));
         Optional.ofNullable(entityDTO.getOperatorId()).ifPresentOrElse(builder::setOperatorId, () -> builder.setOperatorId(DefaultConstant.NULL_INT));
         Optional.ofNullable(entityDTO.getOperatorName()).ifPresent(builder::setOperatorName);
         Optional.ofNullable(entityDTO.getOperateTime()).ifPresent(time -> builder.setOperateTime(LocalDateTimeUtil.milliSeconds(time)));
