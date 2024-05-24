@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用使能标识枚举
+ * 通用使能标识 枚举
  *
  * @author pnoker
  * @since 2022.1.0
@@ -33,19 +33,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum EnableFlagEnum {
     /**
-     * 禁用
-     */
-    DISABLE((byte) 0, "disable", "禁用"),
-
-    /**
      * 启用
      */
-    ENABLE((byte) 1, "enable", "启用"),
+    ENABLE((byte) 0, "enable", "启用"),
 
     /**
-     * 暂存
+     * 禁用
      */
-    TEMP((byte) 2, "temp", "暂存"),
+    DISABLE((byte) 1, "disable", "禁用"),
     ;
 
     /**

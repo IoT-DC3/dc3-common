@@ -32,7 +32,6 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum ResponseEnum {
-
     OK((byte) 200, "R200", "Success"),
     TOKEN_INVALID((byte) 20301, "R20301", "Token is invalid"),
     IP_INVALID((byte) 20302, "R20302", "Invalid IP"),

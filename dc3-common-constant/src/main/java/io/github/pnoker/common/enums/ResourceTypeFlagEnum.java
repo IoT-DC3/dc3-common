@@ -32,7 +32,6 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum ResourceTypeFlagEnum {
-
     /**
      * 驱动
      */
