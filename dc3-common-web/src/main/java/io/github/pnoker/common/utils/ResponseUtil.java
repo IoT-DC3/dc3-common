@@ -18,15 +18,14 @@ package io.github.pnoker.common.utils;
 
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import io.github.pnoker.common.exception.NotFoundException;
-import io.github.pnoker.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 
@@ -50,23 +49,24 @@ public class ResponseUtil {
      * @return Resource
      * @throws MalformedURLException MalformedURLException
      */
-    public static ResponseEntity<Resource> responseFile(Path path) throws MalformedURLException {
-        Resource resource = new UrlResource(path.toUri());
-        if (!resource.exists()) {
-            throw new NotFoundException("File not found: " + path.getFileName());
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
-
+    public static ResponseEntity<Resource> responseFile(Path path) {
         try {
+            Resource resource = new UrlResource(path.toUri());
+            if (!resource.exists()) {
+                throw new NotFoundException("File not found: " + path.getFileName());
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
+            headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
+
             return ResponseEntity.ok()
                     .headers(headers)
                     .contentLength(resource.contentLength())
                     .body(resource);
-        } catch (IOException e) {
-            throw new ServiceException("Error occurred while response file: {}", path.getFileName());
+        } catch (Exception e) {
+            log.error("Error occurred while response file: {}, {}", path.getFileName(), e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

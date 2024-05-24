@@ -16,11 +16,8 @@
 
 package io.github.pnoker.common.driver.event.metadata;
 
-import io.github.pnoker.common.driver.entity.bo.DeviceBO;
-import io.github.pnoker.common.driver.entity.bo.MetadataEventBO;
-import io.github.pnoker.common.driver.entity.bo.PointBO;
 import io.github.pnoker.common.driver.service.DriverCustomService;
-import io.github.pnoker.common.entity.base.BaseBO;
+import io.github.pnoker.common.entity.dto.MetadataEventDTO;
 import io.github.pnoker.common.entity.event.MetadataEvent;
 import io.github.pnoker.common.enums.MetadataTypeEnum;
 import io.github.pnoker.common.utils.JsonUtil;
@@ -37,7 +34,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class MetadataEventListener implements ApplicationListener<MetadataEvent<? extends BaseBO>> {
+public class MetadataEventListener implements ApplicationListener<MetadataEvent> {
 
     private final DriverCustomService driverCustomService;
 
@@ -47,23 +44,19 @@ public class MetadataEventListener implements ApplicationListener<MetadataEvent<
 
     @Override
     public void onApplicationEvent(@NotNull MetadataEvent metadataEvent) {
-        log.info("Device metadata event listener received: {}", JsonUtil.toJsonString(metadataEvent));
+        log.info("Metadata event listener received: {}", JsonUtil.toJsonString(metadataEvent));
         MetadataTypeEnum metadataType = metadataEvent.getMetadataType();
         if (MetadataTypeEnum.DEVICE.equals(metadataType)) {
-            DeviceBO metadata = (DeviceBO) metadataEvent.getMetadata();
-            MetadataEventBO<DeviceBO> entityEvent = new MetadataEventBO<>();
-            entityEvent.setId(entityEvent.getId());
+            MetadataEventDTO entityEvent = new MetadataEventDTO();
+            entityEvent.setId(metadataEvent.getId());
             entityEvent.setMetadataType(MetadataTypeEnum.DEVICE);
             entityEvent.setOperateType(metadataEvent.getOperateType());
-            entityEvent.setMetadata(metadata);
             driverCustomService.event(entityEvent);
         } else if (MetadataTypeEnum.POINT.equals(metadataType)) {
-            PointBO metadata = (PointBO) metadataEvent.getMetadata();
-            MetadataEventBO<PointBO> entityEvent = new MetadataEventBO<>();
-            entityEvent.setId(entityEvent.getId());
+            MetadataEventDTO entityEvent = new MetadataEventDTO();
+            entityEvent.setId(metadataEvent.getId());
             entityEvent.setMetadataType(MetadataTypeEnum.POINT);
             entityEvent.setOperateType(metadataEvent.getOperateType());
-            entityEvent.setMetadata(metadata);
             driverCustomService.event(entityEvent);
         }
     }

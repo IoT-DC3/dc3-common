@@ -25,7 +25,6 @@ import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -64,24 +63,6 @@ public final class PointMetadata {
     }
 
     /**
-     * 重新加载缓存, 全量
-     */
-    public void loadAllCache() {
-        List<PointBO> entityDTOList = pointClient.list();
-        entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
-    }
-
-    /**
-     * 重新加载缓存, 指定位号
-     *
-     * @param id 位号ID
-     */
-    public void loadCache(long id) {
-        PointBO entityDTO = pointClient.selectById(id);
-        setCache(entityDTO.getId(), entityDTO);
-    }
-
-    /**
      * 获取缓存, 指定位号
      *
      * @param id 位号ID
@@ -99,13 +80,13 @@ public final class PointMetadata {
     }
 
     /**
-     * 设置缓存, 指定位号
+     * 重新加载缓存, 指定位号
      *
-     * @param id      位号ID
-     * @param pointBO 位号
+     * @param id 位号ID
      */
-    public void setCache(long id, PointBO pointBO) {
-        cache.put(id, CompletableFuture.completedFuture(pointBO));
+    public void loadCache(long id) {
+        CompletableFuture<PointBO> future = CompletableFuture.supplyAsync(() -> pointClient.selectById(id));
+        cache.put(id, future);
     }
 
     /**

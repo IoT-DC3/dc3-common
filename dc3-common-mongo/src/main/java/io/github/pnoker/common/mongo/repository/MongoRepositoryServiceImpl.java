@@ -87,7 +87,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
         ensurePointValueIndex(collection);
         List<MgPointValueDO> entityDOList = mgPointValueBuilder.buildMgDOListByBOList(entityBOList);
         entityDOList = entityDOList.stream()
-                .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
+                .filter(entityBO -> Objects.nonNull(entityBO.getPointId()))
                 .toList();
         mongoTemplate.insert(entityDOList, collection);
     }
@@ -102,6 +102,17 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         List<MgPointValueDO> entityDOList = mongoTemplate.find(query, MgPointValueDO.class, StorageConstant.POINT_VALUE_PREFIX + deviceId);
         return entityDOList.stream().map(MgPointValueDO::getValue).toList();
+    }
+
+    @Override
+    public PointValueBO selectLatestPointValue(Long deviceId, Long pointId) {
+        Criteria criteria = new Criteria();
+        Query query = new Query(criteria);
+        criteria.and(FieldUtil.getField(MgPointValueDO::getDeviceId)).is(deviceId).and(FieldUtil.getField(MgPointValueDO::getPointId)).is(pointId);
+        query.fields().include(FieldUtil.getField(MgPointValueDO::getValue)).exclude(FieldUtil.getField(MgPointValueDO::getId));
+        query.limit(1).with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));
+        MgPointValueDO entityDO = mongoTemplate.findOne(query, MgPointValueDO.class, StorageConstant.POINT_VALUE_PREFIX + deviceId);
+        return mgPointValueBuilder.buildBOByMgDO(entityDO);
     }
 
     @Override
@@ -139,9 +150,9 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
 
         Criteria criteria = new Criteria();
         Query query = new Query(criteria);
-        if (!Objects.isNull(entityQuery.getDeviceId()))
+        if (Objects.nonNull(entityQuery.getDeviceId()))
             criteria.and(FieldUtil.getField(MgPointValueDO::getDeviceId)).is(entityQuery.getDeviceId());
-        if (!Objects.isNull(entityQuery.getPointId()))
+        if (Objects.nonNull(entityQuery.getPointId()))
             criteria.and(FieldUtil.getField(MgPointValueDO::getPointId)).is(entityQuery.getPointId());
 
         Pages pages = entityQuery.getPage();
@@ -149,7 +160,7 @@ public class MongoRepositoryServiceImpl implements RepositoryService, Initializi
             criteria.and(FieldUtil.getField(MgPointValueDO::getCreateTime)).gte(new Date(pages.getStartTime())).lte(new Date(pages.getEndTime()));
         }
 
-        final String collection = !Objects.isNull(entityQuery.getDeviceId()) ? StorageConstant.POINT_VALUE_PREFIX + entityQuery.getDeviceId() : PrefixConstant.POINT + SuffixConstant.VALUE;
+        final String collection = Objects.nonNull(entityQuery.getDeviceId()) ? StorageConstant.POINT_VALUE_PREFIX + entityQuery.getDeviceId() : PrefixConstant.POINT + SuffixConstant.VALUE;
         long count = mongoTemplate.count(query, collection);
         query.limit((int) pages.getSize()).skip(pages.getSize() * (pages.getCurrent() - 1));
         query.with(Sort.by(Sort.Direction.DESC, FieldUtil.getField(MgPointValueDO::getCreateTime)));

@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.driver.event.metadata;
 
-import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.event.MetadataEvent;
 import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +43,7 @@ public class MetadataEventPublisher {
      *
      * @param metadataEvent MetadataEvent
      */
-    public void publishEvent(MetadataEvent<? extends BaseBO> metadataEvent) {
+    public void publishEvent(MetadataEvent metadataEvent) {
         log.info("Metadata event publisher publishEvent: {}", JsonUtil.toJsonString(metadataEvent));
         applicationEventPublisher.publishEvent(metadataEvent);
     }

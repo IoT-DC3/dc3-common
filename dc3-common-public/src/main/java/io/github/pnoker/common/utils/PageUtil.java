@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 分页相关工具类
+ * 分页 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -65,12 +65,12 @@ public class PageUtil {
 
         List<OrderItem> orders = pages.getOrders();
         boolean anyMatch = orders.stream()
-                .filter(order -> !Objects.isNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn()))
+                .filter(order -> Objects.nonNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn()))
                 .anyMatch(order -> "create_time".equals(order.getColumn()));
         if (!anyMatch) {
             orders.add(OrderItem.desc("create_time"));
         }
-        List<OrderItem> orderItemList = orders.stream().filter(order -> !Objects.isNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
+        List<OrderItem> orderItemList = orders.stream().filter(order -> Objects.nonNull(order) && CharSequenceUtil.isNotEmpty(order.getColumn())).toList();
         page.setOrders(orderItemList);
         return page;
     }

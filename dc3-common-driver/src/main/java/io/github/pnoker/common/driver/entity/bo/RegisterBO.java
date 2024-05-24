@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.dto;
+package io.github.pnoker.common.driver.entity.bo;
 
-import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
-import io.github.pnoker.common.enums.MetadataTypeEnum;
+import io.github.pnoker.common.driver.entity.dto.DriverAttributeDTO;
+import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
- * 元数据
- *
  * @author pnoker
  * @since 2022.1.0
  */
@@ -35,35 +33,15 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DriverTransferMetadataDTO implements Serializable {
+public class RegisterBO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 元数据类型
-     */
-    private MetadataTypeEnum type;
+    private String tenant;
+    private String client;
+    private DriverBO driver;
+    private List<DriverAttributeDTO> driverAttributes;
+    private List<PointAttributeDTO> pointAttributes;
 
-    /**
-     * 元数据操作类型
-     */
-    private MetadataOperateTypeEnum metadataCommandType;
-
-    /**
-     * 元数据内容
-     */
-    private String content;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    public DriverTransferMetadataDTO(MetadataTypeEnum type, MetadataOperateTypeEnum metadataCommandType, String content) {
-        this.type = type;
-        this.metadataCommandType = metadataCommandType;
-        this.content = content;
-        this.createTime = LocalDateTime.now();
-    }
 }

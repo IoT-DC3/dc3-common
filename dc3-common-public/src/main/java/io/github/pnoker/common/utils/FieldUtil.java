@@ -27,7 +27,7 @@ import org.apache.ibatis.reflection.property.PropertyNamer;
 import java.util.Objects;
 
 /**
- * 字段名称相关工具类
+ * 字段名称 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -58,6 +58,6 @@ public class FieldUtil {
      * @return 是否有效
      */
     public static boolean isValidIdField(Long id) {
-        return !Objects.isNull(id) && id > DefaultConstant.ZERO;
+        return Objects.nonNull(id) && id > DefaultConstant.ZERO;
     }
 }

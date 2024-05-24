@@ -100,7 +100,7 @@ public class X509Util {
             if (caCrtFile.startsWith(classPath)) {
                 InputStream inputStream = X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""));
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                if (!Objects.isNull(password)) {
+                if (Objects.nonNull(password)) {
                     reader = new PemReader(inputStreamReader);
                 } else {
                     reader = new PemReader(inputStreamReader);
@@ -109,7 +109,7 @@ public class X509Util {
                 Path path = Paths.get(caCrtFile);
                 ByteArrayInputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(path));
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                if (!Objects.isNull(password)) {
+                if (Objects.nonNull(password)) {
                     reader = new PemReader(inputStreamReader);
                 } else {
                     reader = new PemReader(inputStreamReader);
@@ -117,7 +117,7 @@ public class X509Util {
             }
             return (T) reader.readPemObject();
         } finally {
-            if (!Objects.isNull(reader)) {
+            if (Objects.nonNull(reader)) {
                 reader.close();
             }
         }

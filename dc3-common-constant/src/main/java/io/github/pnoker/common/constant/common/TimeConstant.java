@@ -26,23 +26,21 @@ import java.time.ZoneId;
  */
 public class TimeConstant {
 
-    private TimeConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 时区, 默认为 Asia/Shanghai
      */
     public static final String DEFAULT_TIMEZONE = "Asia/Shanghai";
-
     /**
      * 时区ID, 默认为 Asia/Shanghai
      */
     public static final ZoneId DEFAULT_ZONEID = ZoneId.of(DEFAULT_TIMEZONE);
-
     /**
      * 时间格式化
      */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String COMPLETE_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    private TimeConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

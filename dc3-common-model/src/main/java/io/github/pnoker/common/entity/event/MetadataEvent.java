@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.entity.event;
 
-import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
 import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.Getter;
@@ -29,26 +28,27 @@ import org.springframework.context.ApplicationEvent;
  * @since 2022.1.0
  */
 @Getter
-public class MetadataEvent<T extends BaseBO> extends ApplicationEvent {
+public class MetadataEvent extends ApplicationEvent {
 
     private final Long id;
     private final MetadataTypeEnum metadataType;
     private final MetadataOperateTypeEnum operateType;
-    private final T metadata;
 
     /**
      * 构造函数
      *
      * @param source       Object
+     * @param id           ID
      * @param metadataType 元数据类型
      * @param operateType  元数据操作类型
-     * @param metadata     元数据
      */
-    public MetadataEvent(Object source, MetadataTypeEnum metadataType, MetadataOperateTypeEnum operateType, T metadata) {
+    public MetadataEvent(Object source,
+                         Long id,
+                         MetadataTypeEnum metadataType,
+                         MetadataOperateTypeEnum operateType) {
         super(source);
-        this.id = metadata.getId();
+        this.id = id;
         this.metadataType = metadataType;
         this.operateType = operateType;
-        this.metadata = metadata;
     }
 }

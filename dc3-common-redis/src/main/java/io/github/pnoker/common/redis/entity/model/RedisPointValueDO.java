@@ -37,6 +37,11 @@ public class RedisPointValueDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * ID
+     */
+    private String id;
+
+    /**
      * 设备ID
      */
     private Long deviceId;

@@ -58,6 +58,84 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
     @Resource
     private InfluxDBClient influxDBClient;
 
+    /**
+     * mapper转换DO
+     *
+     * @param listBo
+     * @return
+     */
+    public static List<InfluxPointValueDO> convertMapperBoToValueDo(List<InfluxMapperBO> listBo) {
+        List<InfluxPointValueDO> listDo = new ArrayList<>();
+
+        for (InfluxMapperBO bo : listBo) {
+            InfluxPointValueDO entity = new InfluxPointValueDO();
+            entity.setDeviceId(Long.parseLong(bo.getDeviceId()));
+            entity.setPointId(Long.parseLong(bo.getPointId()));
+            entity.setRawValue(bo.getRawValue().toString());
+            entity.setValue(bo.getValue().toString());
+            entity.setOriginTime(LocalDateTime.parse(bo.getOriginTime())); // Assuming originTime is in ISO-8601 format
+
+            // Convert Instant to LocalDateTime
+            Instant instant = bo.getTime();
+            LocalDateTime time = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+            entity.setCreateTime(time);
+
+            listDo.add(entity);
+        }
+
+        return listDo;
+    }
+
+    /**
+     * 分页
+     *
+     * @param data
+     * @param pageSize
+     * @param pageNumber
+     * @return
+     */
+    public static List<InfluxPointValueDO> getPage(List<InfluxPointValueDO> data, int pageSize, int pageNumber) {
+        int startIndex = (pageNumber - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, data.size());
+        if (startIndex >= endIndex) {
+            return new ArrayList<>();
+        }
+        return data.subList(startIndex, endIndex);
+    }
+
+    @Override
+    public PointValueBO selectLatestPointValue(Long deviceId, Long pointId) {
+        return null;
+    }
+
+    /**
+     * influx库转为BO类
+     *
+     * @param dos
+     * @return
+     */
+    public static List<InfluxMapperBO> convertToBO(List<InfluxMapperDO> dos) {
+        Map<String, InfluxMapperBO> boMap = new HashMap<>();
+
+        for (InfluxMapperDO dobj : dos) {
+            String key = dobj.getTime() + "-" + dobj.getDeviceId() + "-" + dobj.getPointId();
+
+            InfluxMapperBO bo = boMap.get(key);
+            if (bo == null) {
+                bo = new InfluxMapperBO(dobj.getTime(), dobj.getDeviceId(), dobj.getPointId(), dobj.getOriginTime(), null, null);
+                boMap.put(key, bo);
+            }
+
+            if ("value".equals(dobj.getField())) {
+                bo.setValue(dobj.getValue());
+            } else if ("rawValue".equals(dobj.getField())) {
+                bo.setRawValue(dobj.getValue());
+            }
+        }
+
+        return new ArrayList<>(boMap.values());
+    }
+
     @Override
     public String getRepositoryName() {
         return StrategyConstant.Storage.INFLUXDB;
@@ -164,10 +242,10 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
                 + " |> range(start: -100h)" // 查询过去1小时的数据
                 + " |> filter(fn: (r) => r._measurement == \"dc3\"");
         Page<PointValueBO> entityPageBO = new Page<>();
-        if (!Objects.isNull(entityQuery.getDeviceId())) {
+        if (Objects.nonNull(entityQuery.getDeviceId())) {
             flux.append("and r.deviceId ==\"" + entityQuery.getDeviceId() + "\"");
         }
-        if (!Objects.isNull(entityQuery.getPointId())) {
+        if (Objects.nonNull(entityQuery.getPointId())) {
             flux.append("and r.pointId ==\"" + entityQuery.getPointId() + "\"");
         }
         flux.append(")");
@@ -185,78 +263,5 @@ public class InfluxRepositoryServiceImpl implements RepositoryService, Initializ
     @Override
     public void afterPropertiesSet() {
         RepositoryStrategyFactory.put(StrategyConstant.Storage.INFLUXDB, this);
-    }
-
-    /**
-     * mapper转换DO
-     *
-     * @param listBo
-     * @return
-     */
-    public static List<InfluxPointValueDO> convertMapperBoToValueDo(List<InfluxMapperBO> listBo) {
-        List<InfluxPointValueDO> listDo = new ArrayList<>();
-
-        for (InfluxMapperBO bo : listBo) {
-            InfluxPointValueDO entity = new InfluxPointValueDO();
-            entity.setDeviceId(Long.parseLong(bo.getDeviceId()));
-            entity.setPointId(Long.parseLong(bo.getPointId()));
-            entity.setRawValue(bo.getRawValue().toString());
-            entity.setValue(bo.getValue().toString());
-            entity.setOriginTime(LocalDateTime.parse(bo.getOriginTime())); // Assuming originTime is in ISO-8601 format
-
-            // Convert Instant to LocalDateTime
-            Instant instant = bo.getTime();
-            LocalDateTime time = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
-            entity.setCreateTime(time);
-
-            listDo.add(entity);
-        }
-
-        return listDo;
-    }
-
-    /**
-     * 分页
-     *
-     * @param data
-     * @param pageSize
-     * @param pageNumber
-     * @return
-     */
-    public static List<InfluxPointValueDO> getPage(List<InfluxPointValueDO> data, int pageSize, int pageNumber) {
-        int startIndex = (pageNumber - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize, data.size());
-        if (startIndex >= endIndex) {
-            return new ArrayList<>();
-        }
-        return data.subList(startIndex, endIndex);
-    }
-
-    /**
-     * influx库转为BO类
-     *
-     * @param dos
-     * @return
-     */
-    public static List<InfluxMapperBO> convertToBO(List<InfluxMapperDO> dos) {
-        Map<String, InfluxMapperBO> boMap = new HashMap<>();
-
-        for (InfluxMapperDO dobj : dos) {
-            String key = dobj.getTime() + "-" + dobj.getDeviceId() + "-" + dobj.getPointId();
-
-            InfluxMapperBO bo = boMap.get(key);
-            if (bo == null) {
-                bo = new InfluxMapperBO(dobj.getTime(), dobj.getDeviceId(), dobj.getPointId(), dobj.getOriginTime(), null, null);
-                boMap.put(key, bo);
-            }
-
-            if ("value".equals(dobj.getField())) {
-                bo.setValue(dobj.getValue());
-            } else if ("rawValue".equals(dobj.getField())) {
-                bo.setRawValue(dobj.getValue());
-            }
-        }
-
-        return new ArrayList<>(boMap.values());
     }
 }

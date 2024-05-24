@@ -40,6 +40,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Component
 public class MqttScheduleJob extends QuartzJobBean {
 
+    public static final ReentrantReadWriteLock messageLock = new ReentrantReadWriteLock();
+    public static final AtomicLong messageCount = new AtomicLong(0);
+    public static final AtomicLong messageSpeed = new AtomicLong(0);
+    private static final List<MqttMessage> mqttMessages = new ArrayList<>();
     @Value("${driver.mqtt.batch.speed}")
     private Integer batchSpeed;
     @Value("${driver.mqtt.batch.interval}")
@@ -48,12 +52,6 @@ public class MqttScheduleJob extends QuartzJobBean {
     private MqttReceiveService mqttReceiveService;
     @Resource
     private ThreadPoolExecutor threadPoolExecutor;
-
-    public static final ReentrantReadWriteLock messageLock = new ReentrantReadWriteLock();
-    public static final AtomicLong messageCount = new AtomicLong(0);
-    public static final AtomicLong messageSpeed = new AtomicLong(0);
-
-    private static final List<MqttMessage> mqttMessages = new ArrayList<>();
 
     /**
      * 获取 MqttMessage 长度

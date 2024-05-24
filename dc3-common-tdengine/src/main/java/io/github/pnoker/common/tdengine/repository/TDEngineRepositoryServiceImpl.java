@@ -44,13 +44,11 @@ import java.util.Objects;
 @Service("tdEngineRepositoryService")
 public class TDEngineRepositoryServiceImpl implements RepositoryService, InitializingBean {
 
+    private final String stable = "device_point_data";
     @Resource
     private TDEnginePointValueBuilder tdEnginePointValueBuilder;
-
     @Resource
     private TDEngineRepositoryMapper tdEngineRepositoryMapper;
-
-    private final String stable = "device_point_data";
 
     @Override
     public String getRepositoryName() {
@@ -90,6 +88,11 @@ public class TDEngineRepositoryServiceImpl implements RepositoryService, Initial
         }
         List<TDEnginePointValueDO> tdEnginePointValueDOList = tdEngineRepositoryMapper.selectLatestPointValue(deviceId, pointIds);
         return tdEnginePointValueBuilder.buildBOListByDOList(tdEnginePointValueDOList);
+    }
+
+    @Override
+    public PointValueBO selectLatestPointValue(Long deviceId, Long pointId) {
+        return null;
     }
 
     @Override

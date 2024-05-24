@@ -55,7 +55,7 @@ public class RequestUtil {
             }
         }
         InetSocketAddress remoteAddress = request.getRemoteAddress();
-        if (!Objects.isNull(remoteAddress)) {
+        if (Objects.nonNull(remoteAddress)) {
             ip = remoteAddress.getHostString();
         }
         return NetUtil.getMultistageReverseProxyIp(ip);

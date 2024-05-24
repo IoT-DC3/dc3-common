@@ -61,7 +61,7 @@ public class DriverReadScheduleJob extends QuartzJobBean {
 
         for (Long deviceId : deviceIds) {
             DeviceBO entityBO = deviceMetadata.getCache(deviceId);
-            if (!Objects.isNull(entityBO)
+            if (Objects.nonNull(entityBO)
                     && EnableFlagEnum.ENABLE.equals(entityBO.getEnableFlag())
                     && CollUtil.isNotEmpty(entityBO.getProfileIds())
                     && CollUtil.isNotEmpty(entityBO.getPointIds())
@@ -70,7 +70,11 @@ public class DriverReadScheduleJob extends QuartzJobBean {
             ) {
                 Set<Long> pointIds = entityBO.getPointIds();
                 for (Long pointId : pointIds) {
-                    driverReadService.read(deviceId, pointId);
+                    try {
+                        driverReadService.read(deviceId, pointId);
+                    } catch (Exception e) {
+                        log.error("Read device[{}], point[{}] error: {}", deviceId, pointId, e.getMessage(), e);
+                    }
                 }
             }
         }

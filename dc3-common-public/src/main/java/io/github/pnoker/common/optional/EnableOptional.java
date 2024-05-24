@@ -48,13 +48,13 @@ public final class EnableOptional {
     }
 
     public void ifPresent(Consumer<EnableFlagEnum> action) {
-        if (!Objects.isNull(value)) {
+        if (Objects.nonNull(value)) {
             action.accept(value);
         }
     }
 
     public void ifPresentOrElse(Consumer<EnableFlagEnum> action, Runnable emptyAction) {
-        if (!Objects.isNull(value)) {
+        if (Objects.nonNull(value)) {
             action.accept(value);
         } else {
             emptyAction.run();

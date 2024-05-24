@@ -37,11 +37,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 @ConfigurationProperties(prefix = "server")
 public class ThreadPoolConfig {
 
-    @Setter
-    private ThreadProperty thread;
-
     private final AtomicInteger threadPoolAtomic = new AtomicInteger(1);
     private final AtomicInteger scheduledThreadPoolAtomic = new AtomicInteger(1);
+    @Setter
+    private ThreadProperty thread;
 
     /**
      * LinkedBlockingQueue ThreadPoolExecutor

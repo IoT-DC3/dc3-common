@@ -43,7 +43,7 @@ public class MessageHeader implements Serializable {
     private Long timestamp;
 
     public MessageHeader(MessageHeaders messageHeaders) {
-        if (!Objects.isNull(messageHeaders)) {
+        if (Objects.nonNull(messageHeaders)) {
             this.id = messageHeaders.getId();
             this.mqttId = getMessageHeader(messageHeaders, "mqtt_id", Integer.class);
             this.mqttReceivedQos = getMessageHeader(messageHeaders, "mqtt_receivedQos", Integer.class);

@@ -33,7 +33,6 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -78,24 +77,6 @@ public final class DeviceMetadata {
     }
 
     /**
-     * 重新加载缓存, 全量
-     */
-    public void loadAllCache() {
-        List<DeviceBO> entityDTOList = deviceClient.list();
-        entityDTOList.forEach(entityDTO -> setCache(entityDTO.getId(), entityDTO));
-    }
-
-    /**
-     * 重新加载缓存, 指定设备
-     *
-     * @param id 设备ID
-     */
-    public void loadCache(long id) {
-        DeviceBO entityDTO = deviceClient.selectById(id);
-        setCache(entityDTO.getId(), entityDTO);
-    }
-
-    /**
      * 获取缓存, 指定设备
      *
      * @param id 设备ID
@@ -113,13 +94,13 @@ public final class DeviceMetadata {
     }
 
     /**
-     * 设置缓存, 指定设备
+     * 重新加载缓存, 指定设备
      *
-     * @param id       设备ID
-     * @param deviceBO 设备
+     * @param id 设备ID
      */
-    public void setCache(long id, DeviceBO deviceBO) {
-        cache.put(id, CompletableFuture.completedFuture(deviceBO));
+    public void loadCache(long id) {
+        CompletableFuture<DeviceBO> future = CompletableFuture.supplyAsync(() -> deviceClient.selectById(id));
+        cache.put(id, future);
     }
 
     /**
@@ -185,20 +166,20 @@ public final class DeviceMetadata {
 
         DeviceBO device = getCache(deviceId);
         if (Objects.isNull(device)) {
-            throw new ConfigException("Failed to get point config, the device is empty");
+            throw new ConfigException("Failed to get point config[{}:{}], the device is empty", deviceId, pointId);
         }
 
         Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigIdMap();
         if (Objects.isNull(pointAttributeConfigMap)) {
-            throw new ConfigException("Failed to get point config, the device point attribute config is empty");
+            throw new ConfigException("Failed to get point config[{}:{}], the device point attribute config is empty", deviceId, pointId);
         }
 
         Map<Long, PointAttributeConfigDTO> attributeConfigMap = pointAttributeConfigMap.get(pointId);
         if (MapUtil.isEmpty(attributeConfigMap)) {
-            throw new ConfigException("Failed to get point config, the point attribute config is empty");
+            throw new ConfigException("Failed to get point config[{}:{}], the point attribute config is empty", deviceId, pointId);
         }
         if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
-            throw new ConfigException("Failed to get point config, the point attribute config is incomplete");
+            throw new ConfigException("Failed to get point config[{}:{}], the point attribute config is incomplete", deviceId, pointId);
         }
 
         return attributeMap.entrySet().stream()
@@ -227,32 +208,23 @@ public final class DeviceMetadata {
 
         DeviceBO device = getCache(deviceId);
         if (Objects.isNull(device)) {
-            throw new ConfigException("Failed to get point config, the device is empty");
+            throw new ConfigException("Failed to get point config[{}], the device is empty", deviceId);
         }
 
         Map<Long, Map<Long, PointAttributeConfigDTO>> pointAttributeConfigMap = device.getPointAttributeConfigIdMap();
         if (Objects.isNull(pointAttributeConfigMap)) {
-            throw new ConfigException("Failed to get point config, the device point attribute config is empty");
+            throw new ConfigException("Failed to get point config[{}], the device point attribute config is empty", deviceId);
         }
 
-        return pointAttributeConfigMap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entryMap -> {
-            Map<Long, PointAttributeConfigDTO> attributeConfigMap = entryMap.getValue();
-            if (MapUtil.isEmpty(attributeConfigMap)) {
-                throw new ConfigException("Failed to get point config, the point attribute config is empty");
-            }
-            if (!attributeConfigMap.keySet().containsAll(attributeMap.keySet())) {
-                throw new ConfigException("Failed to get point config, the point attribute config is incomplete");
-            }
-
-            return attributeMap.entrySet().stream()
-                    .collect(Collectors.toMap(
-                            entry -> entry.getValue().getAttributeName(),
-                            entry -> AttributeBO.builder()
-                                    .type(entry.getValue().getAttributeTypeFlag())
-                                    .value(attributeConfigMap.get(entry.getKey()).getConfigValue())
-                                    .build()
-                    ));
-        }));
+        return pointAttributeConfigMap.entrySet().stream()
+                .filter(entry -> MapUtil.isEmpty(entry.getValue()) && entry.getValue().keySet().containsAll(attributeMap.keySet()))
+                .collect(Collectors.toMap(Map.Entry::getKey, entryMap -> attributeMap.entrySet().stream().collect(Collectors.toMap(
+                                entry -> entry.getValue().getAttributeName(),
+                                entry -> AttributeBO.builder()
+                                        .type(entry.getValue().getAttributeTypeFlag())
+                                        .value(entryMap.getValue().get(entry.getKey()).getConfigValue())
+                                        .build())
+                        )
+                ));
     }
-
 }

@@ -29,12 +29,12 @@ import io.github.pnoker.common.constant.common.SymbolConstant;
  */
 public class StorageConstant {
 
-    private StorageConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 设备数据存储集合前缀
      */
     public static final String POINT_VALUE_PREFIX = PrefixConstant.POINT + SuffixConstant.VALUE + SymbolConstant.UNDERSCORE;
+
+    private StorageConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

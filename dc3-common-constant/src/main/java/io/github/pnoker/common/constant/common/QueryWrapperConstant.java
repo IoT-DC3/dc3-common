@@ -24,13 +24,13 @@ package io.github.pnoker.common.constant.common;
  */
 public class QueryWrapperConstant {
 
-    private QueryWrapperConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * LIMIT
      */
     public static final String LIMIT_ONE = "LIMIT 1";
+
+    private QueryWrapperConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 
 }

@@ -26,10 +26,6 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
  */
 public class TimeoutConstant {
 
-    private TimeoutConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * salt 在 redis 中的失效时间, 分钟
      */
@@ -42,4 +38,8 @@ public class TimeoutConstant {
      * token 在 redis 中的失效时间, 小时
      */
     public static final int TOKEN_CACHE_TIMEOUT = 12;
+
+    private TimeoutConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

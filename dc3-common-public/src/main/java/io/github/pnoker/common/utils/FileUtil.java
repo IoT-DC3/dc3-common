@@ -14,41 +14,45 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.constant.driver;
+package io.github.pnoker.common.utils;
 
+import cn.hutool.core.util.IdUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.constant.common.SymbolConstant;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * 策略工厂 相关常量
+ * 文件 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
  */
-public class StrategyConstant {
+@Slf4j
+public class FileUtil {
 
-    private StrategyConstant() {
+    private FileUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
     /**
-     * 存储相关的策略工厂 相关常量
+     * 获取临时上传文件目录
      *
-     * @author pnoker
-     * @since 2022.1.0
+     * @return 临时上传文件目录
      */
-    public static class Storage {
-
-        public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.COLON;
-        public static final String MONGO = "mongo";
-        public static final String INFLUXDB = "influxdb";
-        public static final String STRATEGY_OPENTSDB = "opentsdb";
-        public static final String STRATEGY_ELASTICSEARCH = "elasticsearch";
-        public static final String TDENGINE = "tdengine";
-
-        private Storage() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    public static String getTempPath() {
+        String path = "/Users/pnoker/Code/";
+        if (!cn.hutool.core.io.FileUtil.exist(path) || !cn.hutool.core.io.FileUtil.isDirectory(path)) {
+            cn.hutool.core.io.FileUtil.mkdir(path);
         }
+        return path;
+    }
+
+    /**
+     * 获取随机的xlsx文件名
+     *
+     * @return xlsx文件名
+     */
+    public static String getRandomXlsxName() {
+        return IdUtil.fastSimpleUUID() + ".xlsx";
     }
 
 }

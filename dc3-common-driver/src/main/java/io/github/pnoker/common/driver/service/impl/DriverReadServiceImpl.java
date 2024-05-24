@@ -55,33 +55,29 @@ public class DriverReadServiceImpl implements DriverReadService {
 
     @Override
     public void read(Long deviceId, Long pointId) {
-        try {
-            DeviceBO device = deviceMetadata.getCache(deviceId);
-            if (Objects.isNull(device)) {
-                throw new ReadPointException("Failed to read point value, device[{}] is null", deviceId);
-            }
-
-            if (!device.getPointIds().contains(pointId)) {
-                throw new ReadPointException("Failed to read point value, device[{}] not contained point[{}]", deviceId, pointId);
-            }
-
-            Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverConfig(deviceId);
-            Map<String, AttributeBO> pointConfig = deviceMetadata.getPointConfig(deviceId, pointId);
-
-            PointBO point = pointMetadata.getCache(pointId);
-            if (Objects.isNull(point)) {
-                throw new ReadPointException("Failed to read point value, point[{}] is null" + deviceId);
-            }
-
-            RValue rValue = driverCustomService.read(driverConfig, pointConfig, device, point);
-            if (Objects.isNull(rValue)) {
-                throw new ReadPointException("Failed to read point value, point value is null");
-            }
-
-            driverSenderService.pointValueSender(new PointValue(rValue));
-        } catch (Exception e) {
-            throw new ReadPointException(e.getMessage(), e);
+        DeviceBO device = deviceMetadata.getCache(deviceId);
+        if (Objects.isNull(device)) {
+            throw new ReadPointException("Failed to read point value, device[{}] is null", deviceId);
         }
+
+        if (!device.getPointIds().contains(pointId)) {
+            throw new ReadPointException("Failed to read point value, device[{}] not contained point[{}]", deviceId, pointId);
+        }
+
+        Map<String, AttributeBO> driverConfig = deviceMetadata.getDriverConfig(deviceId);
+        Map<String, AttributeBO> pointConfig = deviceMetadata.getPointConfig(deviceId, pointId);
+
+        PointBO point = pointMetadata.getCache(pointId);
+        if (Objects.isNull(point)) {
+            throw new ReadPointException("Failed to read point value, point[{}] is null" + deviceId);
+        }
+
+        RValue rValue = driverCustomService.read(driverConfig, pointConfig, device, point);
+        if (Objects.isNull(rValue)) {
+            throw new ReadPointException("Failed to read point value, point value is null");
+        }
+
+        driverSenderService.pointValueSender(new PointValue(rValue));
     }
 
     @Override

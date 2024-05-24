@@ -24,17 +24,11 @@ package io.github.pnoker.common.constant.common;
  */
 public class PrefixConstant {
 
-    private PrefixConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     public static final String HTTP = "http";
     public static final String HTTPS = "https";
-
     public static final String ADD = "add";
     public static final String DELETE = "delete";
     public static final String UPDATE = "update";
-
     public static final String TENANT = "tenant";
     public static final String TENANT_BIND = "tenant_bind";
     public static final String LIMITED_IP = "limited_ip";
@@ -52,8 +46,11 @@ public class PrefixConstant {
     public static final String LABEL = "label";
     public static final String LABEL_BIND = "label_bind";
     public static final String DATA_STATISTICS = "data_statistics";
-
     public static final String REAL_TIME_VALUE_KEY_PREFIX = POINT + SuffixConstant.VALUE + SymbolConstant.COLON;
     public static final String DRIVER_STATUS_KEY_PREFIX = DRIVER + SuffixConstant.STATUS + SymbolConstant.COLON;
     public static final String DEVICE_STATUS_KEY_PREFIX = DEVICE + SuffixConstant.STATUS + SymbolConstant.COLON;
+
+    private PrefixConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

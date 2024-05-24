@@ -40,7 +40,7 @@ public final class IntegerOptional {
     }
 
     public void ifPresent(IntConsumer action) {
-        if (!Objects.isNull(value) && value > DefaultConstant.ZERO) {
+        if (Objects.nonNull(value) && value > DefaultConstant.ZERO) {
             action.accept(value);
         }
     }

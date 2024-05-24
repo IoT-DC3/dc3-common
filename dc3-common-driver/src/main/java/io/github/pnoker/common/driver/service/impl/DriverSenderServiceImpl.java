@@ -64,7 +64,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void deviceEventSender(DeviceEventDTO entityDTO) {
-        if (!!Objects.isNull(entityDTO)) {
+        if (!Objects.nonNull(entityDTO)) {
             return;
         }
 
@@ -87,7 +87,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void pointValueSender(PointValue entityDTO) {
-        if (!Objects.isNull(entityDTO)) {
+        if (Objects.nonNull(entityDTO)) {
             log.info("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_VALUE,
@@ -99,7 +99,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
     @Override
     public void pointValueSender(List<PointValue> entityDTOList) {
-        if (!Objects.isNull(entityDTOList)) {
+        if (Objects.nonNull(entityDTOList)) {
             entityDTOList.forEach(this::pointValueSender);
         }
     }

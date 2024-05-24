@@ -40,13 +40,13 @@ public class MetadataConstant {
      */
     public static class Profile {
 
-        private Profile() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         public static final String ADD = PrefixConstant.ADD + SuffixConstant.PROFILE;
         public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.PROFILE;
         public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.PROFILE;
+
+        private Profile() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
     /**
@@ -57,13 +57,13 @@ public class MetadataConstant {
      */
     public static class Point {
 
-        private Point() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         public static final String ADD = PrefixConstant.ADD + SuffixConstant.POINT;
         public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.POINT;
         public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.POINT;
+
+        private Point() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
     /**
@@ -74,13 +74,13 @@ public class MetadataConstant {
      */
     public static class Device {
 
-        private Device() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         public static final String ADD = PrefixConstant.ADD + SuffixConstant.DEVICE;
         public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.DEVICE;
         public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.DEVICE;
+
+        private Device() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
     /**
@@ -91,13 +91,13 @@ public class MetadataConstant {
      */
     public static class DriverConfig {
 
-        private DriverConfig() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         public static final String ADD = PrefixConstant.ADD + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
         public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
         public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.DRIVER_ATTRIBUTE_CONFIG;
+
+        private DriverConfig() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
     /**
@@ -108,13 +108,13 @@ public class MetadataConstant {
      */
     public static class PointConfig {
 
-        private PointConfig() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         public static final String ADD = PrefixConstant.ADD + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
         public static final String DELETE = PrefixConstant.DELETE + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
         public static final String UPDATE = PrefixConstant.UPDATE + SuffixConstant.POINT_ATTRIBUTE_CONFIG;
+
+        private PointConfig() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
 }

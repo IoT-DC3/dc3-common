@@ -26,15 +26,10 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
  */
 public class DataConstant {
 
-    private DataConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 服务名
      */
     public static final String SERVICE_NAME = "dc3-center-data";
-
     public static final String POINT_VALUE_URL_PREFIX = "/point_value";
     public static final String POINT_VALUE_COMMAND_URL_PREFIX = "/point_value_command";
     public static final String DRIVER_STATUS_URL_PREFIX = "/driver/status";
@@ -49,4 +44,8 @@ public class DataConstant {
     public static final String RABBITMQ_CHANNEL_URL_PREFIX = "/rabbitmq/channel";
     public static final String RABBITMQ_NODE_URL_PREFIX = "/rabbitmq/node";
     public static final String RABBITMQ_CLUSTER_URL_PREFIX = "/rabbitmq/cluster";
+
+    private DataConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

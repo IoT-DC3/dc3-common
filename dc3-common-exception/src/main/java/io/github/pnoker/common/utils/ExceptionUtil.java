@@ -21,7 +21,7 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 异常相关工具类
+ * 异常 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0

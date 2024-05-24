@@ -70,6 +70,15 @@ public interface RepositoryService {
      * 查询最新 PointValue
      *
      * @param deviceId 设备ID
+     * @param pointId  位号ID
+     * @return PointValueBO Array
+     */
+    PointValueBO selectLatestPointValue(Long deviceId, Long pointId);
+
+    /**
+     * 查询最新 PointValue
+     *
+     * @param deviceId 设备ID
      * @param pointIds 位号ID集
      * @return PointValueBO Array
      */

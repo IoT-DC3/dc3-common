@@ -24,7 +24,7 @@ import io.github.pnoker.api.common.driver.GrpcDriverRegisterDTO;
 import io.github.pnoker.api.common.driver.GrpcRDriverRegisterDTO;
 import io.github.pnoker.common.constant.service.ManagerConstant;
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
-import io.github.pnoker.common.driver.entity.bo.DriverRegisterBO;
+import io.github.pnoker.common.driver.entity.bo.RegisterBO;
 import io.github.pnoker.common.driver.entity.builder.DriverBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcDriverAttributeBuilder;
 import io.github.pnoker.common.driver.entity.builder.GrpcPointAttributeBuilder;
@@ -66,7 +66,7 @@ public class DriverClient {
      *
      * @param entityBO DriverRegisterBO
      */
-    public void driverRegister(DriverRegisterBO entityBO) {
+    public void driverRegister(RegisterBO entityBO) {
         // 构造驱动注册信息
         GrpcDriverRegisterDTO.Builder builder = GrpcDriverRegisterDTO.newBuilder();
         GrpcDriverDTO grpcDriverDTO = driverBuilder.buildGrpcDTOByDTO(entityBO.getDriver());

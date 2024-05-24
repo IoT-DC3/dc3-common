@@ -24,7 +24,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import java.util.Objects;
 
 /**
- * 表格操作相关工具类
+ * 表格操作 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -112,7 +112,7 @@ public class PoiUtil {
         Cell deviceNameCell = row.createCell(cellIndex);
         deviceNameCell.setCellValue(cellValue);
 
-        if (!Objects.isNull(cellStyle)) {
+        if (Objects.nonNull(cellStyle)) {
             deviceNameCell.setCellStyle(cellStyle);
         }
     }

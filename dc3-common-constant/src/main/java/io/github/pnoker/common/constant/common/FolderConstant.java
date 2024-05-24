@@ -24,17 +24,16 @@ package io.github.pnoker.common.constant.common;
  */
 public class FolderConstant {
 
-    private FolderConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 用户主目录
      */
     public static final String USER_HOME_PATH = System.getProperty("user.home") + "/.dc3/";
-
     /**
      * 默认上传文件的缓存位置
      */
-    public static final String TEMP_FILE_PATH = System.getProperty("java.io.tmpdir") + "/dc3/";
+    public static final String TEMP_FILE_PATH = System.getProperty("java.io.tmpdir") + "/dc3/upload/";
+
+    private FolderConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

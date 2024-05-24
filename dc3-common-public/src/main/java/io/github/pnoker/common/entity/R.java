@@ -61,6 +61,21 @@ public class R<T> implements Serializable {
     private T data;
 
     /**
+     * 构造函数
+     */
+    private R() {
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param data 数据
+     */
+    private R(T data) {
+        this.data = data;
+    }
+
+    /**
      * 成功
      *
      * @param <T> Object
@@ -192,21 +207,6 @@ public class R<T> implements Serializable {
      */
     public static <T> R<T> fail(T data, String message) {
         return new R<T>(data).failure(message);
-    }
-
-    /**
-     * 构造函数
-     */
-    private R() {
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param data 数据
-     */
-    private R(T data) {
-        this.data = data;
     }
 
     /**

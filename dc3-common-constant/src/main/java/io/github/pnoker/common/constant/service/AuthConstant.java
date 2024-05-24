@@ -26,18 +26,17 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
  */
 public class AuthConstant {
 
-    private AuthConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 服务名
      */
     public static final String SERVICE_NAME = "dc3-center-auth";
-
     public static final String USER_URL_PREFIX = "/user";
     public static final String TENANT_URL_PREFIX = "/tenant";
     public static final String TOKEN_URL_PREFIX = "/token";
     public static final String LIMITED_IP_URL_PREFIX = "/limited_ip";
     public static final String DICTIONARY_URL_PREFIX = "/dictionary";
+
+    private AuthConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

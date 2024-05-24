@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -47,11 +48,11 @@ import java.util.List;
  */
 public final class JsonUtil {
 
+    private static final JsonMapper JSON_MAPPER = getJsonMapper();
+
     private JsonUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
-
-    private static final JsonMapper JSON_MAPPER = getJsonMapper();
 
     /**
      * 返回一个 JsonMapper 对象
@@ -84,6 +85,10 @@ public final class JsonUtil {
      */
     public static <T> T parseObject(String text, Class<T> valueType) {
         try {
+            if (CharSequenceUtil.isEmpty(text)) {
+                return null;
+            }
+
             return JSON_MAPPER.readValue(text, valueType);
         } catch (Exception e) {
             throw new JsonException(e);

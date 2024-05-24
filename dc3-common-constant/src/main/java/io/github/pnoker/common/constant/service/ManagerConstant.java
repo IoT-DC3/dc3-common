@@ -26,15 +26,10 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
  */
 public class ManagerConstant {
 
-    private ManagerConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 服务名
      */
     public static final String SERVICE_NAME = "dc3-center-manager";
-
     public static final String DRIVER_URL_PREFIX = "/driver";
     public static final String BATCH_URL_PREFIX = "/batch";
     public static final String DRIVER_ATTRIBUTE_URL_PREFIX = "/driver_attribute";
@@ -50,4 +45,7 @@ public class ManagerConstant {
     public static final String DICTIONARY_URL_PREFIX = "/dictionary";
     public static final String TOPIC_URL_PREFIX = "/topic";
 
+    private ManagerConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

@@ -33,11 +33,11 @@ import java.util.Objects;
 @Slf4j
 public class UserHeaderUtil {
 
+    private static final ThreadLocal<RequestHeader.UserHeader> USER_HEADER_THREAD_LOCAL = new NamedThreadLocal<>("Request of user header");
+
     private UserHeaderUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
-
-    private static final ThreadLocal<RequestHeader.UserHeader> USER_HEADER_THREAD_LOCAL = new NamedThreadLocal<>("Request of user header");
 
     /**
      * 获取用户请求头信息
@@ -51,6 +51,19 @@ public class UserHeaderUtil {
         }
 
         return entityBO;
+    }
+
+    /**
+     * 设置用户请求头信息
+     *
+     * @param entityBO {@link RequestHeader.UserHeader}
+     */
+    public static void setUserHeader(RequestHeader.UserHeader entityBO) {
+        if (Objects.isNull(entityBO) || Objects.isNull(entityBO.getTenantId()) || Objects.isNull(entityBO.getUserId())) {
+            removeUserHeader();
+        } else {
+            USER_HEADER_THREAD_LOCAL.set(entityBO);
+        }
     }
 
     /**
@@ -83,19 +96,6 @@ public class UserHeaderUtil {
         }
 
         return userId;
-    }
-
-    /**
-     * 设置用户请求头信息
-     *
-     * @param entityBO {@link RequestHeader.UserHeader}
-     */
-    public static void setUserHeader(RequestHeader.UserHeader entityBO) {
-        if (Objects.isNull(entityBO) || Objects.isNull(entityBO.getTenantId()) || Objects.isNull(entityBO.getUserId())) {
-            removeUserHeader();
-        } else {
-            USER_HEADER_THREAD_LOCAL.set(entityBO);
-        }
     }
 
     /**

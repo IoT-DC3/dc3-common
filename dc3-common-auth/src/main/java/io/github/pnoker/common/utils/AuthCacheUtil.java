@@ -33,11 +33,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class AuthCacheUtil {
 
+    private static final RedisTemplate redisTemplate = SpringUtil.getBean(RedisTemplate.class);
+
     private AuthCacheUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
-
-    private static final RedisTemplate redisTemplate = SpringUtil.getBean(RedisTemplate.class);
 
     /**
      * 获取Redis User key

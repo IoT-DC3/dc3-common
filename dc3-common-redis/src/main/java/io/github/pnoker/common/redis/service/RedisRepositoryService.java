@@ -65,20 +65,22 @@ public class RedisRepositoryService {
         final String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
         List<RedisPointValueDO> entityDOList = redisPointValueBuilder.buildDOListByBOList(entityBOList);
         Map<String, RedisPointValueDO> entityDOMap = entityDOList.stream()
-                .filter(entityBO -> !Objects.isNull(entityBO.getPointId()))
+                .filter(entityBO -> Objects.nonNull(entityBO.getPointId()))
                 .collect(Collectors.toMap(entityBO -> prefix + entityBO.getPointId(), Function.identity()));
         redisService.setKey(entityDOMap);
     }
 
-    public List<PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds) {
+    public Map<Long, PointValueBO> selectLatestPointValue(Long deviceId, List<Long> pointIds) {
         if (CollUtil.isEmpty(pointIds)) {
-            return Collections.emptyList();
+            return Collections.emptyMap();
         }
 
         String prefix = PrefixConstant.REAL_TIME_VALUE_KEY_PREFIX + deviceId + SymbolConstant.DOT;
         List<String> keys = pointIds.stream().map(pointId -> prefix + pointId).toList();
         List<RedisPointValueDO> entityDOList = redisService.getKey(keys);
-        return redisPointValueBuilder.buildBOListByDOList(entityDOList);
+        entityDOList = entityDOList.stream().filter(Objects::nonNull).toList();
+        List<PointValueBO> entityBOList = redisPointValueBuilder.buildBOListByDOList(entityDOList);
+        return entityBOList.stream().collect(Collectors.toMap(PointValueBO::getPointId, Function.identity()));
     }
 
 }

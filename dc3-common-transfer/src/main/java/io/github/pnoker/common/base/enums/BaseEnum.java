@@ -28,6 +28,39 @@ import java.util.Optional;
 public interface BaseEnum {
 
     /**
+     * 根据枚举索引获取枚举
+     *
+     * @param index 索引
+     * @return 枚举
+     */
+    static <E extends BaseEnum> E ofIndex(Class<E> clazz, Byte index) {
+        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return first.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return 枚举
+     */
+    static <E extends BaseEnum> E ofCode(Class<E> clazz, String code) {
+        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getCode().equals(code)).findFirst();
+        return first.orElse(null);
+    }
+
+    /**
+     * 根据枚举内容获取枚举
+     *
+     * @param text 枚举内容
+     * @return 枚举
+     */
+    static <E extends BaseEnum> E ofName(Class<E> clazz, String text) {
+        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getText().equals(text)).findFirst();
+        return first.orElse(null);
+    }
+
+    /**
      * 初始化
      *
      * @param index 索引
@@ -63,38 +96,5 @@ public interface BaseEnum {
      */
     default String getText() {
         return EnumPool.get(this).getText();
-    }
-
-    /**
-     * 根据枚举索引获取枚举
-     *
-     * @param index 索引
-     * @return 枚举
-     */
-    static <E extends BaseEnum> E ofIndex(Class<E> clazz, Byte index) {
-        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getIndex().equals(index)).findFirst();
-        return first.orElse(null);
-    }
-
-    /**
-     * 根据枚举编码获取枚举
-     *
-     * @param code 编码
-     * @return 枚举
-     */
-    static <E extends BaseEnum> E ofCode(Class<E> clazz, String code) {
-        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getCode().equals(code)).findFirst();
-        return first.orElse(null);
-    }
-
-    /**
-     * 根据枚举内容获取枚举
-     *
-     * @param text 枚举内容
-     * @return 枚举
-     */
-    static <E extends BaseEnum> E ofName(Class<E> clazz, String text) {
-        Optional<E> first = Arrays.stream(clazz.getEnumConstants()).filter(type -> type.getText().equals(text)).findFirst();
-        return first.orElse(null);
     }
 }

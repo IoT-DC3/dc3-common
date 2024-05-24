@@ -33,11 +33,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RepositoryStrategyFactory {
 
+    private static final Map<String, RepositoryService> savingStrategyServiceMap = new ConcurrentHashMap<>();
+
     private RepositoryStrategyFactory() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
-
-    private static final Map<String, RepositoryService> savingStrategyServiceMap = new ConcurrentHashMap<>();
 
     public static List<RepositoryService> get() {
         return new ArrayList<>(savingStrategyServiceMap.values());

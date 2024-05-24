@@ -17,13 +17,10 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
-import io.github.pnoker.common.driver.entity.bo.DriverRegisterBO;
+import io.github.pnoker.common.driver.entity.bo.RegisterBO;
 import io.github.pnoker.common.driver.entity.property.DriverProperty;
 import io.github.pnoker.common.driver.grpc.client.DriverClient;
-import io.github.pnoker.common.driver.metadata.DeviceMetadata;
-import io.github.pnoker.common.driver.metadata.PointMetadata;
 import io.github.pnoker.common.driver.service.DriverRegisterService;
-import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.utils.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -44,23 +41,13 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
 
     @Resource
     private DriverClient driverClient;
-    @Resource
-    private DeviceMetadata deviceMetadata;
-    @Resource
-    private PointMetadata pointMetadata;
 
     @Override
     public void initial() {
         try {
-            DriverRegisterBO entityBO = buildRegisterBOByProperty();
+            RegisterBO entityBO = buildRegisterBOByProperty();
             log.info("The driver information is: {}", JsonUtil.toJsonString(entityBO));
             driverClient.driverRegister(entityBO);
-
-            // 根据驱动类型决定是否加载该驱动到设备和位号数据到本地缓存
-            if (DriverTypeFlagEnum.DRIVER_CLIENT.equals(entityBO.getDriver().getDriverTypeFlag())) {
-                deviceMetadata.loadAllCache();
-                pointMetadata.loadAllCache();
-            }
         } catch (Exception e) {
             log.error("Driver initialization failed: {}", e.getMessage(), e);
             System.exit(1);
@@ -72,7 +59,7 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
      *
      * @return DriverRegisterBO
      */
-    private DriverRegisterBO buildRegisterBOByProperty() {
+    private RegisterBO buildRegisterBOByProperty() {
         DriverBO driverBO = new DriverBO();
         driverBO.setDriverName(driverProperty.getName());
         driverBO.setDriverCode(driverProperty.getCode());
@@ -81,13 +68,13 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
         driverBO.setDriverTypeFlag(driverProperty.getType());
         driverBO.setRemark(driverProperty.getRemark());
 
-        DriverRegisterBO driverRegisterBO = new DriverRegisterBO();
-        driverRegisterBO.setDriver(driverBO);
-        driverRegisterBO.setTenant(driverProperty.getTenant());
-        driverRegisterBO.setClient(driverProperty.getClient());
-        driverRegisterBO.setDriverAttributes(driverProperty.getDriverAttribute());
-        driverRegisterBO.setPointAttributes(driverProperty.getPointAttribute());
-        return driverRegisterBO;
+        RegisterBO entityBO = new RegisterBO();
+        entityBO.setDriver(driverBO);
+        entityBO.setTenant(driverProperty.getTenant());
+        entityBO.setClient(driverProperty.getClient());
+        entityBO.setDriverAttributes(driverProperty.getDriverAttribute());
+        entityBO.setPointAttributes(driverProperty.getPointAttribute());
+        return entityBO;
     }
 
 }

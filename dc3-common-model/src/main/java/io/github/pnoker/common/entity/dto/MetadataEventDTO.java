@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.driver.entity.bo;
+package io.github.pnoker.common.entity.dto;
 
-import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.enums.MetadataOperateTypeEnum;
 import io.github.pnoker.common.enums.MetadataTypeEnum;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 元数据事件 BO
+ * 元数据事件 DTO
  *
  * @author zhangzi
  * @since 2022.1.0
@@ -37,7 +36,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MetadataEventBO<T extends BaseBO> implements Serializable {
+public class MetadataEventDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -56,9 +55,4 @@ public class MetadataEventBO<T extends BaseBO> implements Serializable {
      * 元数据操作类型, 新增, 删除, 修改
      */
     private MetadataOperateTypeEnum operateType;
-
-    /**
-     * 同ID, 根据数据类型{@link MetadataTypeEnum}决定是驱动, 设备, 位号的ID
-     */
-    private T metadata;
 }
