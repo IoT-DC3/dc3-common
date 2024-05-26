@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,34 +20,38 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.constant.common.TimeConstant;
 import io.github.pnoker.common.valid.Update;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
- * 基础 VO 实体类
+ * Base VO
  *
  * @author pnoker
  * @since 2022.1.0
  */
-@Data
-@SuperBuilder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class BaseVO implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
-    @NotNull(message = "Id can't be empty", groups = {Update.class})
-    private String id;
+    @NotNull(message = "主键ID不能为空",
+            groups = {Update.class})
+    private Long id;
 
     /**
      * 描述
@@ -57,7 +61,7 @@ public class BaseVO implements Serializable {
     /**
      * 创建者ID
      */
-    private String creatorId;
+    private Long creatorId;
 
     /**
      * 创建者名称
@@ -67,13 +71,13 @@ public class BaseVO implements Serializable {
     /**
      * 创建时间
      */
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date createTime;
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    private LocalDateTime createTime;
 
     /**
      * 操作者ID
      */
-    private String operatorId;
+    private Long operatorId;
 
     /**
      * 操作者名称
@@ -83,6 +87,6 @@ public class BaseVO implements Serializable {
     /**
      * 操作时间
      */
-    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.TIMEZONE)
-    private Date updateTime;
+    @JsonFormat(pattern = TimeConstant.COMPLETE_DATE_FORMAT, timezone = TimeConstant.DEFAULT_TIMEZONE)
+    private LocalDateTime operateTime;
 }

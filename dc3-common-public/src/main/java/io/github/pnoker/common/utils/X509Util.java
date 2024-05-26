@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.exception.ConnectorException;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMReader;
+import org.bouncycastle.util.io.pem.PemReader;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -28,13 +28,16 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.X509Certificate;
+import java.util.Objects;
 
 /**
  * @author pnoker
@@ -47,6 +50,7 @@ public class X509Util {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     public static SSLSocketFactory getSSLSocketFactory(final String caCrtFile, final String crtFile, final String keyFile, final String password) {
         try {
             Security.addProvider(new BouncyCastleProvider());
@@ -64,7 +68,7 @@ public class X509Util {
             X509Certificate cert = loadCertificate(crtFile);
             // load client private key
             KeyPair key = loadCertificateWithPassword(keyFile, password);
-            // client key and certificates are sent to server so it can authenticate us
+            // client key and certificates are sent to server, so it can authenticate us
             KeyStore certKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());
             certKeyStore.load(null, null);
             certKeyStore.setCertificateEntry("certfile", cert);
@@ -78,29 +82,42 @@ public class X509Util {
 
             return context.getSocketFactory();
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
+            throw new ConnectorException(e.getMessage());
         }
     }
 
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     private static <T> T loadCertificate(String caCrtFile) throws IOException {
         return loadCertificateWithPassword(caCrtFile, null);
     }
 
+    // TODO: 2023.10.16 此处有问题, 目前为不可用状态
     @SuppressWarnings("unchecked")
     private static <T> T loadCertificateWithPassword(String caCrtFile, String password) throws IOException {
-        PEMReader reader = null;
+        PemReader reader = null;
         try {
             String classPath = "classpath:";
             if (caCrtFile.startsWith(classPath)) {
-                reader = ObjectUtil.isNotNull(password) ? new PEMReader(new InputStreamReader(X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""))), password::toCharArray)
-                        : new PEMReader(new InputStreamReader(X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""))));
+                InputStream inputStream = X509Util.class.getResourceAsStream(caCrtFile.replace(classPath, ""));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                if (Objects.nonNull(password)) {
+                    reader = new PemReader(inputStreamReader);
+                } else {
+                    reader = new PemReader(inputStreamReader);
+                }
             } else {
-                reader = ObjectUtil.isNotNull(password) ? new PEMReader(new InputStreamReader(new ByteArrayInputStream(Files.readAllBytes(Paths.get(caCrtFile)))), password::toCharArray)
-                        : new PEMReader(new InputStreamReader(new ByteArrayInputStream(Files.readAllBytes(Paths.get(caCrtFile)))));
+                Path path = Paths.get(caCrtFile);
+                ByteArrayInputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(path));
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                if (Objects.nonNull(password)) {
+                    reader = new PemReader(inputStreamReader);
+                } else {
+                    reader = new PemReader(inputStreamReader);
+                }
             }
-            return (T) reader.readObject();
+            return (T) reader.readPemObject();
         } finally {
-            if (ObjectUtil.isNotNull(reader)) {
+            if (Objects.nonNull(reader)) {
                 reader.close();
             }
         }

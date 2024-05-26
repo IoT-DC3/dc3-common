@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,24 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ThreadProperty {
+
+    /**
+     * 线程名称前缀
+     */
     private String prefix;
+
+    /**
+     * 线程池核心线程数量
+     */
     private int corePoolSize;
+
+    /**
+     * 线程池线程最大数量
+     */
     private int maximumPoolSize;
+
+    /**
+     * 空闲线程等待时间
+     */
     private int keepAliveTime;
 }

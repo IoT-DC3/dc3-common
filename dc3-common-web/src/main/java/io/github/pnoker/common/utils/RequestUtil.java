@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,18 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.thread.threadlocal.NamedThreadLocal;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
-import io.github.pnoker.common.entity.bo.AuthInfoBO;
-import io.github.pnoker.common.exception.NotFoundException;
-import io.github.pnoker.common.exception.ServiceException;
-import io.github.pnoker.common.exception.UnAuthorizedException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
+import java.net.InetSocketAddress;
+import java.util.Objects;
 
 /**
- * Request 相关工具类
+ * 请求 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -50,85 +39,48 @@ public class RequestUtil {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    private static final ThreadLocal<AuthInfoBO> authInfoLocal = new NamedThreadLocal<>("Request auth info");
-
     /**
-     * 从 Request 中获取指定 Key 的 Header 值
+     * 获取远程客户端 IP
      *
-     * @param request {@link HttpServletRequest}
-     * @param key     Header Name
-     * @return Header Value
+     * @param request ServerHttpRequest
+     * @return Remote Ip
      */
-    public static String getRequestHeader(HttpServletRequest request, String key) {
-        return request.getHeader(key);
+    public static String getRemoteIp(ServerHttpRequest request) {
+        String ip = CharSequenceUtil.EMPTY;
+        String[] headers = {"X-Original-Forwarded-For", "X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
+        for (String header : headers) {
+            ip = request.getHeaders().getFirst(header);
+            if (!NetUtil.isUnknown(ip)) {
+                return NetUtil.getMultistageReverseProxyIp(ip);
+            }
+        }
+        InetSocketAddress remoteAddress = request.getRemoteAddress();
+        if (Objects.nonNull(remoteAddress)) {
+            ip = remoteAddress.getHostString();
+        }
+        return NetUtil.getMultistageReverseProxyIp(ip);
     }
 
     /**
-     * 获取权限信息
+     * 获取 Request Header
      *
-     * @return {@link AuthInfoBO}
+     * @param request ServerHttpRequest
+     * @param key     header key
+     * @return request header value
      */
-    public static AuthInfoBO getAuthInfo() {
-        AuthInfoBO entityBO = authInfoLocal.get();
-        if (ObjectUtil.isNull(entityBO)) {
-            throw new UnAuthorizedException("Unable to get auth info");
-        }
-
-        if (CharSequenceUtil.isEmpty(entityBO.getTenantId())) {
-            throw new UnAuthorizedException("Unable to get tenant id of auth info");
-        }
-
-        if (CharSequenceUtil.isEmpty(entityBO.getUserId())) {
-            throw new UnAuthorizedException("Unable to get user id of auth info");
-        }
-
-        return entityBO;
+    public static String getRequestHeader(ServerHttpRequest request, String key) {
+        return request.getHeaders().getFirst(key);
     }
 
     /**
-     * 设置权限信息
+     * 获取 Request Cookie
      *
-     * @param entityBO {@link AuthInfoBO}
+     * @param request ServerHttpRequest
+     * @param key     cookie key
+     * @return request cookie value
      */
-    public static void setAuthInfo(@Nullable AuthInfoBO entityBO) {
-        if (ObjectUtil.isNull(entityBO)) {
-            resetAuthInfo();
-        } else {
-            authInfoLocal.set(entityBO);
-        }
-    }
-
-    /**
-     * 重置权限信息
-     */
-    public static void resetAuthInfo() {
-        authInfoLocal.remove();
-    }
-
-    /**
-     * 返回下载文件
-     *
-     * @param path 文件 Path
-     * @return Resource
-     * @throws MalformedURLException MalformedURLException
-     */
-    public static ResponseEntity<Resource> responseFile(Path path) throws MalformedURLException {
-        Resource resource = new UrlResource(path.toUri());
-        if (!resource.exists()) {
-            throw new NotFoundException("File not found: " + path.getFileName());
-        }
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename());
-        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_OCTET_STREAM_VALUE);
-
-        try {
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .contentLength(resource.contentLength())
-                    .body(resource);
-        } catch (IOException e) {
-            throw new ServiceException("Error occurred while response file: {}", path.getFileName());
-        }
+    public static String getRequestCookie(ServerHttpRequest request, String key) {
+        HttpCookie cookie = request.getCookies().getFirst(key);
+        return Objects.isNull(cookie) ? CharSequenceUtil.EMPTY : cookie.getValue();
     }
 }

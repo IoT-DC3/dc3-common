@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,12 +36,12 @@ public enum DriverEventTypeEnum {
     /**
      * 心跳事件
      */
-    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
+    HEARTBEAT((byte) 0, "heartbeat", "心跳事件"),
 
     /**
      * 报警事件
      */
-    ALARM((byte) 0x01, "alarm", "报警事件"),
+    ALARM((byte) 1, "alarm", "报警事件"),
     ;
 
     /**
@@ -56,15 +56,26 @@ public enum DriverEventTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return DriverEventTypeEnum
+     * @param index 索引
+     * @return {@link DriverEventTypeEnum}
+     */
+    public static DriverEventTypeEnum ofIndex(Byte index) {
+        Optional<DriverEventTypeEnum> any = Arrays.stream(DriverEventTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link DriverEventTypeEnum}
      */
     public static DriverEventTypeEnum ofCode(String code) {
         Optional<DriverEventTypeEnum> any = Arrays.stream(DriverEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -72,10 +83,10 @@ public enum DriverEventTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return DriverEventTypeEnum
+     * @param name 枚举内容
+     * @return {@link DriverEventTypeEnum}
      */
     public static DriverEventTypeEnum ofName(String name) {
         try {

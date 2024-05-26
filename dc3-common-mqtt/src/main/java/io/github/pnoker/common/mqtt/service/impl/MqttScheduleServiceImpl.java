@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package io.github.pnoker.common.mqtt.service.impl;
 
-import io.github.pnoker.common.mqtt.job.MqttScheduleJob;
 import io.github.pnoker.common.mqtt.service.MqttScheduleService;
-import lombok.SneakyThrows;
+import io.github.pnoker.common.mqtt.service.job.MqttScheduleJob;
+import io.github.pnoker.common.quartz.QuartzService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.*;
+import org.quartz.DateBuilder;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author pnoker
@@ -38,36 +38,16 @@ public class MqttScheduleServiceImpl implements MqttScheduleService {
     private Integer interval;
 
     @Resource
-    private Scheduler scheduler;
+    private QuartzService quartzService;
 
     @Override
     public void initial() {
-        createScheduleJobWithInterval("ScheduleGroup", "MqttScheduleJob", interval, MqttScheduleJob.class);
         try {
-            if (!scheduler.isShutdown()) {
-                scheduler.start();
-            }
+            quartzService.createJobWithInterval("ScheduleGroup", "MqttScheduleJob", interval, DateBuilder.IntervalUnit.SECOND, MqttScheduleJob.class);
+
+            quartzService.startScheduler();
         } catch (SchedulerException e) {
             log.error(e.getMessage(), e);
         }
-    }
-
-    /**
-     * Create schedule job
-     *
-     * @param group    group
-     * @param name     name
-     * @param interval interval
-     * @param jobClass class
-     */
-    @SneakyThrows
-    public void createScheduleJobWithInterval(String group, String name, Integer interval, Class<? extends Job> jobClass) {
-        JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(name, group).build();
-        Trigger trigger = TriggerBuilder.newTrigger()
-                .withIdentity(name, group)
-                .startAt(DateBuilder.futureDate(1, DateBuilder.IntervalUnit.SECOND))
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(interval).repeatForever())
-                .startNow().build();
-        scheduler.scheduleJob(jobDetail, trigger);
     }
 }

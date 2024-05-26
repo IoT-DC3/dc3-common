@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -31,12 +32,17 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum DriverStatusEnum {
-    ONLINE("ONLINE", "在线"),
-    OFFLINE("OFFLINE", "离线"),
-    MAINTAIN("MAINTAIN", "维护"),
-    FAULT("FAULT", "故障"),
+    ONLINE((byte) 0, "ONLINE", "在线"),
+    OFFLINE((byte) 1, "OFFLINE", "离线"),
+    MAINTAIN((byte) 2, "MAINTAIN", "维护"),
+    FAULT((byte) 3, "FAULT", "故障"),
     ;
 
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 状态编码
@@ -44,15 +50,26 @@ public enum DriverStatusEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return StatusEnum
+     * @param index 索引
+     * @return {@link DriverStatusEnum}
+     */
+    public static DriverStatusEnum ofIndex(Byte index) {
+        Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link DriverStatusEnum}
      */
     public static DriverStatusEnum ofCode(String code) {
         Optional<DriverStatusEnum> any = Arrays.stream(DriverStatusEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -60,10 +77,10 @@ public enum DriverStatusEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return DriverStatusEnum
+     * @param name 枚举内容
+     * @return {@link DriverStatusEnum}
      */
     public static DriverStatusEnum ofName(String name) {
         try {

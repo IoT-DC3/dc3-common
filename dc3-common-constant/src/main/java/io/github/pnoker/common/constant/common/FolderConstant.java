@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,17 +24,16 @@ package io.github.pnoker.common.constant.common;
  */
 public class FolderConstant {
 
-    private FolderConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 用户主目录
      */
     public static final String USER_HOME_PATH = System.getProperty("user.home") + "/.dc3/";
-
     /**
      * 默认上传文件的缓存位置
      */
-    public static final String TEMP_FILE_PATH = System.getProperty("java.io.tmpdir") + "/dc3/";
+    public static final String TEMP_FILE_PATH = System.getProperty("java.io.tmpdir") + "/dc3/upload/";
+
+    private FolderConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

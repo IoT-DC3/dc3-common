@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,10 +24,6 @@ package io.github.pnoker.common.constant.common;
  */
 public class SuffixConstant {
 
-    private SuffixConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     public static final String ID = "_id";
     public static final String TENANT_ID = "_tenant_id";
     public static final String USER_ID = "_user_id";
@@ -38,7 +34,6 @@ public class SuffixConstant {
     public static final String DEVICE_ID = "_device_id";
     public static final String ATTRIBUTE_ID = "_attribute_id";
     public static final String ENTITY_ID = "_entity_id";
-
     public static final String DEVICE = "_device";
     public static final String PROFILE = "_profile";
     public static final String POINT = "_point";
@@ -57,10 +52,12 @@ public class SuffixConstant {
     public static final String IP = "_ip";
     public static final String HOST_PORT = "_host_port";
     public static final String SERVICE_NAME = "_service_name";
-
     public static final String LIST = "_list";
     public static final String DIC = "_dic";
-
     public static final String ROLE = "_role";
     public static final String RESOURCE = "_resource";
+
+    private SuffixConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

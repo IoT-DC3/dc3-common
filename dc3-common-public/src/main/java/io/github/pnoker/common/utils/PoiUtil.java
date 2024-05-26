@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@
 
 package io.github.pnoker.common.utils;
 
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+import java.util.Objects;
+
 /**
- * 表格操作相关工具类
+ * 表格操作 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -71,16 +72,16 @@ public class PoiUtil {
      * @param sheet     Sheet
      * @param rowIndex  Row Index
      * @param cellIndex Cell Index
-     * @return String Value
+     * @return R of String Value
      */
     public static String getCellStringValue(Sheet sheet, int rowIndex, int cellIndex) {
         Row driverAttributesRow = sheet.getRow(rowIndex);
-        if (ObjectUtil.isNull(driverAttributesRow)) {
+        if (Objects.isNull(driverAttributesRow)) {
             return "";
         }
 
         Cell driverAttributesCell = driverAttributesRow.getCell(cellIndex);
-        if (ObjectUtil.isNull(driverAttributesCell)) {
+        if (Objects.isNull(driverAttributesCell)) {
             return "";
         }
 
@@ -111,7 +112,7 @@ public class PoiUtil {
         Cell deviceNameCell = row.createCell(cellIndex);
         deviceNameCell.setCellValue(cellValue);
 
-        if (ObjectUtil.isNotNull(cellStyle)) {
+        if (Objects.nonNull(cellStyle)) {
             deviceNameCell.setCellStyle(cellStyle);
         }
     }

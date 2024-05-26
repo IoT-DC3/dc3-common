@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 提供精确的浮点数运算，包括加减乘除和四舍五入
+ * 提供精确的浮点数运算, 包括加减乘除和四舍五入
  *
  * @author pnoker
  * @since 2022.1.0
@@ -140,9 +140,9 @@ public class ArithmeticUtil {
     }
 
     /**
-     * 提供（相对）精确的除法运算
+     * 提供(相对)精确的除法运算
      * <p>
-     * 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入
+     * 当发生除不尽的情况时, 由scale参数指定精度, 以后的数字四舍五入
      *
      * @param value1 被除数
      * @param value2 除数
@@ -158,7 +158,7 @@ public class ArithmeticUtil {
     /**
      * 提供float除法运算
      * <p>
-     * 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入
+     * 当发生除不尽的情况时, 由scale参数指定精度, 以后的数字四舍五入
      *
      * @param value1 被除数
      * @param value2 除数
@@ -176,7 +176,7 @@ public class ArithmeticUtil {
     /**
      * 提供double除法运算
      * <p>
-     * 当发生除不尽的情况时，由scale参数指定精度，以后的数字四舍五入
+     * 当发生除不尽的情况时, 由scale参数指定精度, 以后的数字四舍五入
      *
      * @param value1 被除数
      * @param value2 除数

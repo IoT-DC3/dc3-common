@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,26 +32,25 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum ResourceScopeFlagEnum {
+    /**
+     * 新增
+     */
+    ADD((byte) 0, "add", "新增"),
 
     /**
-     * 驱动
+     * 删除
      */
-    ADD((byte) 0x01, "add", "新增"),
+    DELETE((byte) 1, "delete", "删除"),
 
     /**
-     * 模板
+     * 更新
      */
-    DELETE((byte) 0x02, "delete", "删除"),
+    UPDATE((byte) 2, "update", "更新"),
 
     /**
-     * 位号
+     * 查询
      */
-    UPDATE((byte) 0x04, "update", "修改"),
-
-    /**
-     * 设备
-     */
-    LIST((byte) 0x08, "list", "查询"),
+    LIST((byte) 3, "list", "查询"),
     ;
 
     /**
@@ -66,15 +65,26 @@ public enum ResourceScopeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return ResourceScopeFlagEnum
+     * @param index 索引
+     * @return {@link ResourceScopeFlagEnum}
+     */
+    public static ResourceScopeFlagEnum ofIndex(Byte index) {
+        Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link ResourceScopeFlagEnum}
      */
     public static ResourceScopeFlagEnum ofCode(String code) {
         Optional<ResourceScopeFlagEnum> any = Arrays.stream(ResourceScopeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -82,10 +92,10 @@ public enum ResourceScopeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return ResourceScopeFlagEnum
+     * @param name 枚举内容
+     * @return {@link ResourceScopeFlagEnum}
      */
     public static ResourceScopeFlagEnum ofName(String name) {
         try {

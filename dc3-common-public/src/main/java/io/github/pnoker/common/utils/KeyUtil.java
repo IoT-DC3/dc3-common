@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import io.github.pnoker.common.constant.common.SymbolConstant;
 import io.github.pnoker.common.entity.auth.Keys;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.crypto.*;
@@ -40,7 +40,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * AES、RSA、JWT相关工具类
+ * AES, RSA, JWT 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -60,7 +60,7 @@ public class KeyUtil {
      */
     public static Keys.Aes genAesKey() throws NoSuchAlgorithmException {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(AlgorithmConstant.ALGORITHM_AES);
-        keyGenerator.init(128);
+        keyGenerator.init(256);
         SecretKey secretKey = keyGenerator.generateKey();
         return new Keys.Aes(DecodeUtil.byteToString(DecodeUtil.encode(secretKey.getEncoded())));
     }
@@ -150,7 +150,7 @@ public class KeyUtil {
         KeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance(AlgorithmConstant.ALGORITHM_RSA).generatePublic(keySpec);
         //RSA加密
-        Cipher cipher = Cipher.getInstance(AlgorithmConstant.ALGORITHM_RSA);
+        Cipher cipher = Cipher.getInstance(AlgorithmConstant.ALGORITHM_AES);
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
         return DecodeUtil.byteToString(DecodeUtil.encode(cipher.doFinal(DecodeUtil.stringToByte(content))));
     }
@@ -185,37 +185,39 @@ public class KeyUtil {
     /**
      * 生成Token令牌
      *
-     * @param username 用户名称
+     * @param userName 用户名称
      * @param salt     Salt
      * @param tenantId 租户ID
      * @return Token String
      */
-    public static String generateToken(String username, String salt, String tenantId) {
+    public static String generateToken(String userName, String salt, Long tenantId) {
+        SecretKey key = io.jsonwebtoken.security.Keys.hmacShaKeyFor(DecodeUtil.stringToByte(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + salt));
         JwtBuilder builder = Jwts.builder()
-                .setIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .setSubject(username)
-                .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, DecodeUtil.stringToByte(salt))
-                .setExpiration(TimeUtil.expireTime(TimeoutConstant.TOKEN_CACHE_TIMEOUT, Calendar.HOUR));
+                .issuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + tenantId)
+                .subject(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + userName)
+                .issuedAt(new Date())
+                .signWith(key, Jwts.SIG.HS256)
+                .expiration(TimeUtil.expireTime(TimeoutConstant.TOKEN_CACHE_TIMEOUT, Calendar.HOUR));
         return builder.compact();
     }
 
     /**
      * 解析Token令牌
      *
-     * @param username 用户名称
+     * @param userName 用户名称
      * @param salt     Salt
      * @param token    Token
      * @param tenantId 租户ID
      * @return Claims
      */
-    public static Claims parserToken(String username, String salt, String token, String tenantId) {
-        return Jwts.parser()
-                .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.SLASH + tenantId)
-                .requireSubject(username)
-                .setSigningKey(DecodeUtil.stringToByte(salt))
-                .parseClaimsJws(token)
-                .getBody();
+    public static Claims parserToken(String userName, String salt, String token, Long tenantId) {
+        SecretKey key = io.jsonwebtoken.security.Keys.hmacShaKeyFor(DecodeUtil.stringToByte(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + salt));
+        JwtParser parser = Jwts.parser()
+                .requireIssuer(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + tenantId)
+                .requireSubject(AlgorithmConstant.DEFAULT_KEY + SymbolConstant.COLON + userName)
+                .verifyWith(key)
+                .build();
+        return parser.parseSignedClaims(token).getPayload();
     }
 
 }

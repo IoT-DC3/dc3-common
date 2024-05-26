@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Host 相关工具类
@@ -39,7 +38,7 @@ public class HostUtil {
     /**
      * 获取当前主机的 Local Host
      *
-     * @return String
+     * @return R of String
      */
     public static String localHost() {
         try {
@@ -65,21 +64,21 @@ public class HostUtil {
      * Given an address resolve it to as many unique addresses or hostnames as can be found.
      *
      * @param address         the address to resolve.
-     * @param includeLoopback if {@code true} loopback addresses will be included in the returned set.
+     * @param includeLoopBack if {@code true} loopback addresses will be included in the returned set.
      * @return the addresses and hostnames that were resolved from {@code address}.
      */
-    public static Set<String> getHostNames(String address, boolean includeLoopback) {
-        Set<String> hostNames = new HashSet<>(16);
+    public static Set<String> getHostNames(String address, boolean includeLoopBack) {
+        Set<String> hostNames = new HashSet<>(4);
 
         try {
             InetAddress inetAddress = InetAddress.getByName(address);
 
             if (inetAddress.isAnyLocalAddress()) {
-                loopbackAddresses(hostNames, includeLoopback);
+                loopBackAddresses(hostNames, includeLoopBack);
             } else {
                 boolean loopback = inetAddress.isLoopbackAddress();
 
-                if (!loopback || includeLoopback) {
+                if (!loopback || includeLoopBack) {
                     hostNames.add(inetAddress.getHostName());
                     hostNames.add(inetAddress.getHostAddress());
                     hostNames.add(inetAddress.getCanonicalHostName());
@@ -106,7 +105,7 @@ public class HostUtil {
                 lookupLocalMac(macList, networkInterface);
             }
             if (!macList.isEmpty()) {
-                return macList.stream().distinct().collect(Collectors.toList());
+                return macList.stream().distinct().toList();
             }
         } catch (Exception e) {
             log.warn("Failed to get local mac address");
@@ -118,10 +117,10 @@ public class HostUtil {
      * Get loopback addresses
      *
      * @param hostNames       HostName Set
-     * @param includeLoopback includeLoopback if {@code true} loopback addresses will be included in the returned set.
+     * @param includeLoopBack includeLoopBack if {@code true} loopback addresses will be included in the returned set.
      * @throws SocketException SocketException
      */
-    private static void loopbackAddresses(Set<String> hostNames, boolean includeLoopback) throws SocketException {
+    private static void loopBackAddresses(Set<String> hostNames, boolean includeLoopBack) throws SocketException {
         Enumeration<NetworkInterface> interfaceEnumeration = NetworkInterface.getNetworkInterfaces();
 
         for (NetworkInterface networkInterface : Collections.list(interfaceEnumeration)) {
@@ -129,7 +128,7 @@ public class HostUtil {
                 if (inetAddress instanceof Inet4Address) {
                     boolean loopback = inetAddress.isLoopbackAddress();
 
-                    if (!loopback || includeLoopback) {
+                    if (!loopback || includeLoopBack) {
                         hostNames.add(inetAddress.getHostName());
                         hostNames.add(inetAddress.getHostAddress());
                         hostNames.add(inetAddress.getCanonicalHostName());

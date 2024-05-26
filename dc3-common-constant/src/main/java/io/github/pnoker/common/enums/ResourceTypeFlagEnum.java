@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,41 +32,40 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum ResourceTypeFlagEnum {
-
     /**
      * 驱动
      */
-    DRIVER((byte) 0x00, "driver", "驱动"),
+    DRIVER((byte) 0, "driver", "驱动"),
 
     /**
-     * 模板
+     * 模版
      */
-    PROFILE((byte) 0x01, "profile", "模板"),
+    PROFILE((byte) 1, "profile", "模版"),
 
     /**
      * 位号
      */
-    POINT((byte) 0x01, "point", "位号"),
+    POINT((byte) 2, "point", "位号"),
 
     /**
      * 设备
      */
-    DEVICE((byte) 0x01, "device", "设备"),
+    DEVICE((byte) 3, "device", "设备"),
 
     /**
      * 数据
      */
-    DATA((byte) 0x01, "data", "数据"),
+    DATA((byte) 4, "data", "数据"),
 
     /**
      * 菜单
      */
-    MENU((byte) 0x01, "menu", "菜单"),
+    MENU((byte) 5, "menu", "菜单"),
 
     /**
      * 接口
      */
-    API((byte) 0x01, "api", "接口"),
+    API((byte) 6, "api", "接口"),
     ;
 
     /**
@@ -81,15 +80,26 @@ public enum ResourceTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
-    private final String remark;
+    private final String text;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return ResourceTypeFlagEnum
+     * @param index 索引
+     * @return {@link ResourceTypeFlagEnum}
+     */
+    public static ResourceTypeFlagEnum ofIndex(Byte index) {
+        Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link ResourceTypeFlagEnum}
      */
     public static ResourceTypeFlagEnum ofCode(String code) {
         Optional<ResourceTypeFlagEnum> any = Arrays.stream(ResourceTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -97,10 +107,10 @@ public enum ResourceTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return ResourceTypeFlagEnum
+     * @param name 枚举内容
+     * @return {@link ResourceTypeFlagEnum}
      */
     public static ResourceTypeFlagEnum ofName(String name) {
         try {

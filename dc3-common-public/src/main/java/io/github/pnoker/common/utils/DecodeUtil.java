@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * 编码相关工具类集合
+ * 编码 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -79,7 +79,7 @@ public class DecodeUtil {
      * @return MD5 字符串
      */
     public static String md5(String content, String salt) {
-        return md5(md5(content) + salt);
+        return md5(content + salt);
     }
 
     /**
@@ -103,7 +103,7 @@ public class DecodeUtil {
     }
 
     /**
-     * 必须配合encode使用，用于encode编码之后解码
+     * 必须配合encode使用, 用于encode编码之后解码
      *
      * @param bytes Byte Array
      * @return Byte Array
@@ -113,7 +113,7 @@ public class DecodeUtil {
     }
 
     /**
-     * 必须配合encode使用，用于encode编码之后解码
+     * 必须配合encode使用, 用于encode编码之后解码
      *
      * @param content 字符串
      * @return Byte Array

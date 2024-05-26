@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,34 +33,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum MetadataTypeEnum {
     /**
-     * 元数据
+     * 设备类型元数据
      */
-    METADATA((byte) 0x00, "metadata", "元数据"),
-
-    /**
-     * 模板类型元数据
-     */
-    PROFILE((byte) 0x01, "profile", "模板类型元数据"),
+    DEVICE((byte) 0, "device", "设备类型元数据"),
 
     /**
      * 位号类型元数据
      */
-    POINT((byte) 0x02, "point", "位号类型元数据"),
-
-    /**
-     * 设备类型元数据
-     */
-    DEVICE((byte) 0x03, "device", "设备类型元数据"),
-
-    /**
-     * 驱动属性配置类型元数据
-     */
-    DRIVER_ATTRIBUTE_CONFIG((byte) 0x04, "driver_attribute_config", "驱动属性配置类型元数据"),
-
-    /**
-     * 位号属性配置类型元数据
-     */
-    POINT_ATTRIBUTE_CONFIG((byte) 0x05, "point_attribute_config", "位号属性配置类型元数据"),
+    POINT((byte) 1, "point", "位号类型元数据"),
     ;
 
     /**
@@ -75,15 +55,26 @@ public enum MetadataTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return MetadataTypeEnum
+     * @param index 索引
+     * @return {@link MetadataTypeEnum}
+     */
+    public static MetadataTypeEnum ofIndex(Byte index) {
+        Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link MetadataTypeEnum}
      */
     public static MetadataTypeEnum ofCode(String code) {
         Optional<MetadataTypeEnum> any = Arrays.stream(MetadataTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -91,10 +82,10 @@ public enum MetadataTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return MetadataTypeEnum
+     * @param name 枚举内容
+     * @return {@link MetadataTypeEnum}
      */
     public static MetadataTypeEnum ofName(String name) {
         try {

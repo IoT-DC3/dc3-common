@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,12 +35,12 @@ public enum DeviceEventTypeEnum {
     /**
      * 心跳事件
      */
-    HEARTBEAT((byte) 0x00, "heartbeat", "心跳事件"),
+    HEARTBEAT((byte) 0, "heartbeat", "心跳事件"),
 
     /**
      * 报警事件
      */
-    ALARM((byte) 0x01, "alarm", "报警事件"),
+    ALARM((byte) 1, "alarm", "报警事件"),
     ;
 
     /**
@@ -55,15 +55,26 @@ public enum DeviceEventTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return DeviceEventTypeEnum
+     * @param index 索引
+     * @return {@link DeviceEventTypeEnum}
+     */
+    public static DeviceEventTypeEnum ofIndex(Byte index) {
+        Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link DeviceEventTypeEnum}
      */
     public static DeviceEventTypeEnum ofCode(String code) {
         Optional<DeviceEventTypeEnum> any = Arrays.stream(DeviceEventTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -71,10 +82,10 @@ public enum DeviceEventTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return DeviceEventTypeEnum
+     * @param name 枚举内容
+     * @return {@link DeviceEventTypeEnum}
      */
     public static DeviceEventTypeEnum ofName(String name) {
         try {

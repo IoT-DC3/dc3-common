@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ package io.github.pnoker.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.enums.ResponseEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -31,20 +31,49 @@ import java.io.Serializable;
  * @since 2022.1.0
  */
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class R<T> implements Serializable {
+
+    @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 响应状态
+     */
     private boolean ok = false;
+
+    /**
+     * 响应编码
+     */
     private String code = ResponseEnum.OK.getCode();
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String message = ResponseEnum.FAILURE.getMessage();
+    /**
+     * 响应信息
+     */
+    private String message = ResponseEnum.OK.getText();
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    /**
+     * 响应数据
+     */
+    @SuppressWarnings("all")
     private T data;
+
+    /**
+     * 构造函数
+     */
+    private R() {
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param data 数据
+     */
+    private R(T data) {
+        this.data = data;
+    }
 
     /**
      * 成功
@@ -68,10 +97,21 @@ public class R<T> implements Serializable {
     }
 
     /**
+     * 成功 自定义 Code 和 提示信息ff
+     *
+     * @param <T>  Object
+     * @param code {@link ResponseEnum}
+     * @return Response
+     */
+    public static <T> R<T> ok(ResponseEnum code) {
+        return new R<T>().success(code.getCode(), code.getText());
+    }
+
+    /**
      * 成功 自定义 Code 和 提示信息
      *
      * @param <T>     Object
-     * @param code    ResponseEnum
+     * @param code    {@link ResponseEnum}
      * @param message 成功信息
      * @return Response
      */
@@ -126,8 +166,19 @@ public class R<T> implements Serializable {
     /**
      * 失败 自定义 Code 和 提示信息
      *
+     * @param <T>  Object
+     * @param code {@link ResponseEnum}
+     * @return Response
+     */
+    public static <T> R<T> fail(ResponseEnum code) {
+        return new R<T>().failure(code.getCode(), code.getText());
+    }
+
+    /**
+     * 失败 自定义 Code 和 提示信息
+     *
      * @param <T>     Object
-     * @param code    ResponseEnum
+     * @param code    {@link ResponseEnum}
      * @param message 失败信息
      * @return Response
      */
@@ -159,15 +210,6 @@ public class R<T> implements Serializable {
     }
 
     /**
-     * 构造函数
-     *
-     * @param data 数据
-     */
-    private R(T data) {
-        this.data = data;
-    }
-
-    /**
      * 成功
      *
      * @return Response
@@ -175,7 +217,7 @@ public class R<T> implements Serializable {
     private R<T> success() {
         this.ok = true;
         this.code = ResponseEnum.OK.getCode();
-        this.message = ResponseEnum.OK.getMessage();
+        this.message = ResponseEnum.OK.getText();
         return this;
     }
 
@@ -214,7 +256,7 @@ public class R<T> implements Serializable {
     private R<T> failure() {
         this.ok = false;
         this.code = ResponseEnum.FAILURE.getCode();
-        this.message = ResponseEnum.FAILURE.getMessage();
+        this.message = ResponseEnum.FAILURE.getText();
         return this;
     }
 

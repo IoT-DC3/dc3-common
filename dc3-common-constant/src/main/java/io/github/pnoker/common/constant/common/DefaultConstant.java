@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,22 +24,32 @@ package io.github.pnoker.common.constant.common;
  */
 public class DefaultConstant {
 
+    /**
+     * 默认 Integer 空值: -1
+     */
+    public static final Integer NULL_INT = -1;
+    /**
+     * 零: 0
+     */
+    public static final Integer ZERO = 0;
+    /**
+     * 一: 1
+     */
+    public static final Integer ONE = 1;
+    /**
+     * 默认 String 空值: nil
+     */
+    public static final String NULL_STRING = "nil";
+    /**
+     * 默认分页数
+     */
+    public static final Integer PAGE_SIZE = 20;
+    /**
+     * 默认最大分页数
+     */
+    public static final Integer MAX_PAGE_SIZE = 100;
+
     private DefaultConstant() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
-
-    /**
-     * 默认ID：-1
-     */
-    public static final String DEFAULT_ID = "-1";
-
-    /**
-     * 默认数字：-1
-     */
-    public static final Integer DEFAULT_INT = -1;
-
-    /**
-     * 默认值：nil
-     */
-    public static final String DEFAULT_VALUE = "nil";
 }

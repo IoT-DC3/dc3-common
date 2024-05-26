@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 时间相关工具类集合
+ * 时间 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -42,6 +42,26 @@ public class TimeUtil {
 
     private TimeUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
+
+    /**
+     * 获取毫秒
+     *
+     * @param date {@link Date}
+     * @return 毫秒
+     */
+    public static long milliSeconds(Date date) {
+        return date.getTime();
+    }
+
+    /**
+     * 获取 Date
+     *
+     * @param milliSeconds 毫秒
+     * @return Date {@link Date}
+     */
+    public static Date localDateTime(long milliSeconds) {
+        return new Date(milliSeconds);
     }
 
     /**
@@ -61,8 +81,8 @@ public class TimeUtil {
     /**
      * 使用 yyyy-MM-dd HH:mm:ss 格式化时间
      *
-     * @param date Date
-     * @return String
+     * @param date {@link Date}
+     * @return R of String
      */
     public static String defaultFormat(Date date) {
         return DEFAULT_DATE_FORMAT_THREAD_LOCAL.get().format(date);
@@ -71,8 +91,8 @@ public class TimeUtil {
     /**
      * 使用 yyyy-MM-dd HH:mm:ss.SSS 格式化时间
      *
-     * @param date Date
-     * @return String
+     * @param date {@link Date}
+     * @return R of String
      */
     public static String completeFormat(Date date) {
         return COMPLETE_DATE_FORMAT_THREAD_LOCAL.get().format(date);
@@ -81,7 +101,7 @@ public class TimeUtil {
     /**
      * 将时间字符串 yyyy-MM-dd HH:mm:ss 转为时间类型
      *
-     * @param dateString Date String
+     * @param dateString yyyy-MM-dd HH:mm:ss
      * @return Date
      */
     public static Date defaultDate(String dateString) {
@@ -95,7 +115,7 @@ public class TimeUtil {
     /**
      * 将时间字符串 yyyy-MM-dd HH:mm:ss.SSS 转为时间类型
      *
-     * @param dateString Date String
+     * @param dateString yyyy-MM-dd HH:mm:ss.SSS
      * @return Date
      */
     public static Date completeDate(String dateString) {
@@ -104,6 +124,14 @@ public class TimeUtil {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    /**
+     * 删除此线程局部变量的当前线程值
+     */
+    public static void clean() {
+        DEFAULT_DATE_FORMAT_THREAD_LOCAL.remove();
+        COMPLETE_DATE_FORMAT_THREAD_LOCAL.remove();
     }
 
 }

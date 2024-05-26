@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public class KeyStoreUtil {
                 return resource;
             }
         }
-        throw new NotFoundException("Certificate file '{}' does not exist", fileName);
+        throw new NotFoundException("Certificate file '{}' doesn't exist", fileName);
     }
 
     private static void importKeystore(InputStream crtInputStream, String crtAliasName, String passphrase) throws Exception {
@@ -92,6 +92,6 @@ public class KeyStoreUtil {
             }
             keystore.store(outputStream, passphraseArray);
         }
-        log.info("Certificate '{}' imported successfully.", crtAliasName);
+        log.info("Certificate '{}' imported successfully", crtAliasName);
     }
 }

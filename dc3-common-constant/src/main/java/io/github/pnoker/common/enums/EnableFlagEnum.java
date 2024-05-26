@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * 通用使能标识枚举
+ * 通用使能标识 枚举
  *
  * @author pnoker
  * @since 2022.1.0
@@ -33,19 +33,14 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum EnableFlagEnum {
     /**
-     * 禁用
-     */
-    DISABLE((byte) 0x00, "disable", "禁用"),
-
-    /**
      * 启用
      */
-    ENABLE((byte) 0x01, "enable", "启用"),
+    ENABLE((byte) 0, "enable", "启用"),
 
     /**
-     * 暂存
+     * 禁用
      */
-    TEMP((byte) 0x02, "temp", "暂存"),
+    DISABLE((byte) 1, "disable", "禁用"),
     ;
 
     /**
@@ -60,15 +55,26 @@ public enum EnableFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return EnableFlagEnum
+     * @param index 索引
+     * @return {@link EnableFlagEnum}
+     */
+    public static EnableFlagEnum ofIndex(Byte index) {
+        Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link EnableFlagEnum}
      */
     public static EnableFlagEnum ofCode(String code) {
         Optional<EnableFlagEnum> any = Arrays.stream(EnableFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +82,10 @@ public enum EnableFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return EnableFlagEnum
+     * @param name 枚举内容
+     * @return {@link EnableFlagEnum}
      */
     public static EnableFlagEnum ofName(String name) {
         try {

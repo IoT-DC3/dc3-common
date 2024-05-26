@@ -1,7 +1,22 @@
+/*
+ * Copyright 2016-present the IoT DC3 original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.pnoker.common.aspect;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.ObjectUtil;
 import io.github.pnoker.common.annotation.CheckPermission;
 import io.github.pnoker.common.constant.AuthConstant;
 import io.github.pnoker.common.enums.AuthMode;
@@ -16,11 +31,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * @author linys
- * @since 2023.04.08
+ * @since 2022.1.0
  */
 @Slf4j
 @Aspect
@@ -44,13 +60,13 @@ public class CheckPermissionAspect {
 
         //2. check permission
         if (!checkResource(annotation, authUser)) {
-            throw new UnAuthorizedException("您没有访问权限！");
+            throw new UnAuthorizedException("No access");
         }
     }
 
     private Boolean checkRole(CheckPermission annotation, AuthUser authUser) {
         String[] requireRoles = annotation.role();
-        if (ObjectUtil.isNull(requireRoles) || requireRoles.length == 0) {
+        if (Objects.isNull(requireRoles) || requireRoles.length == 0) {
             return Boolean.FALSE;
         }
 
@@ -71,7 +87,7 @@ public class CheckPermissionAspect {
 
     private Boolean checkResource(CheckPermission annotation, AuthUser authUser) {
         String[] requireResources = annotation.value();
-        if (ObjectUtil.isNull(requireResources) || requireResources.length == 0) {
+        if (Objects.isNull(requireResources) || requireResources.length == 0) {
             return Boolean.FALSE;
         }
 

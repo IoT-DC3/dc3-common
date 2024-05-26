@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,14 @@ package io.github.pnoker.common.constant.common;
  */
 public class RequestConstant {
 
-    private RequestConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 最大请求次数限制
      */
     public static final int DEFAULT_MAX_REQUEST_SIZE = 100;
+
+    private RequestConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 
     /**
      * 自定义请求 Header 相关常量
@@ -41,44 +41,33 @@ public class RequestConstant {
      */
     public static class Header {
 
-        private Header() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
         /**
-         * 自定义 租户 请求头
+         * 自定义 租户编号 请求头
+         * 用于前端请求头
          */
         public static final String X_AUTH_TENANT = "X-Auth-Tenant";
 
         /**
          * 自定义 用户登陆名称 请求头
+         * 用于前端请求头
          */
         public static final String X_AUTH_LOGIN = "X-Auth-Login";
 
         /**
          * 自定义 Token 请求头
+         * 用于前端请求头
          */
         public static final String X_AUTH_TOKEN = "X-Auth-Token";
 
         /**
-         * 自定义 租户ID 请求头
-         */
-        public static final String X_AUTH_TENANT_ID = "X-Auth-Tenant-Id";
-
-        /**
-         * 自定义 用户ID 请求头
-         */
-        public static final String X_AUTH_USER_ID = "X-Auth-User-Id";
-
-        /**
-         * 自定义 用户昵称 请求头
-         */
-        public static final String X_AUTH_NICK = "X-Auth-Nick";
-
-        /**
-         * 自定义 用户名称 请求头
+         * 自定义 用户 请求头
+         * 用于向其他服务传递用户信息, 其中包括: 租户ID, 用户ID, 用户昵称, 用户名称
          */
         public static final String X_AUTH_USER = "X-Auth-User";
+
+        private Header() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
 
     }
 
@@ -90,14 +79,13 @@ public class RequestConstant {
      */
     public static class Message {
 
-        private Message() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
-
         /**
          * 无效的权限请求头
          */
         public static final String INVALID_REQUEST = "Invalid request auth header";
+
+        private Message() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 }

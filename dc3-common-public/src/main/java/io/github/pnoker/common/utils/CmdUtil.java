@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +46,7 @@ public class CmdUtil {
     public static void destroyProcessWithCmd(Process process, String cmd) {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
         try {
-            if (!cmd.equals("")) {
+            if (!cmd.equals(CharSequenceUtil.EMPTY)) {
                 writer.write(cmd);
                 writer.flush();
                 writer.close();

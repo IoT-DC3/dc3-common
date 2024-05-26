@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,8 +29,6 @@ import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
-import javax.annotation.Resource;
-
 /**
  * MongoDB config
  *
@@ -41,10 +39,13 @@ import javax.annotation.Resource;
 @Configuration
 public class MongoConfig {
 
-    @Resource
-    private MongoDatabaseFactory factory;
-    @Resource
-    private MongoMappingContext context;
+    private final MongoDatabaseFactory factory;
+    private final MongoMappingContext context;
+
+    public MongoConfig(MongoDatabaseFactory factory, MongoMappingContext context) {
+        this.factory = factory;
+        this.context = context;
+    }
 
     @Bean
     public MappingMongoConverter mappingMongoConverter(BeanFactory beanFactory) {

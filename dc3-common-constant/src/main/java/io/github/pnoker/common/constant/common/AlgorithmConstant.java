@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,47 +24,40 @@ package io.github.pnoker.common.constant.common;
  */
 public class AlgorithmConstant {
 
-    private AlgorithmConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
      * 默认密钥
      */
     public static final String DEFAULT_KEY = "io.github.pnoker.dc3";
-
     /**
      * 默认密码
      */
     public static final String DEFAULT_PASSWORD = "dc3dc3dc3";
-
     /**
      * 加密算法 对称AES
      */
-    public static final String ALGORITHM_AES = "AES/GCM/NoPadding";
-
+    public static final String ALGORITHM_AES = "AES";
     /**
      * 加密算法 非对称RSA
      */
-    public static final String ALGORITHM_RSA = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
-
+    public static final String ALGORITHM_RSA = "RSA";
     /**
      * 加密算法 SHA256withRSA
      */
     public static final String ALGORITHM_SHA256_RSA = "SHA256withRSA";
-
     /**
      * 证书类型 X.509
      */
     public static final String CERTIFICATE_X509 = "X.509";
-
     /**
      * 证书类型 PKCS12
      */
     public static final String CERTIFICATE_PKCS12 = "PKCS12";
-
     /**
      * 证书类型 JKS
      */
     public static final String CERTIFICATE_JKS = "jks";
+
+    private AlgorithmConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

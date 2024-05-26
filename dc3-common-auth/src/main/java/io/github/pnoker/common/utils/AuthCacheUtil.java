@@ -1,3 +1,19 @@
+/*
+ * Copyright 2016-present the IoT DC3 original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.github.pnoker.common.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
@@ -13,37 +29,36 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author linys
- * @since 2023.04.11
+ * @since 2022.1.0
  */
 public class AuthCacheUtil {
+
+    private static final RedisTemplate redisTemplate = SpringUtil.getBean(RedisTemplate.class);
 
     private AuthCacheUtil() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
     }
 
-    private static final RedisTemplate redisTemplate = SpringUtil.getBean(RedisTemplate.class);
-
     /**
      * 获取Redis User key
      *
-     * @param suffix   类型，SuffixConstant
+     * @param suffix   类型, SuffixConstant
      * @param tenantId 租户id
      * @param userName 用户名称
      * @return key
      */
-    private static String getKey(String suffix, String tenantId, String userName) {
-        return PrefixConstant.USER + suffix + SymbolConstant.DOUBLE_COLON + userName +
-                SymbolConstant.HASHTAG + tenantId;
+    private static String getKey(String suffix, Long tenantId, String userName) {
+        return PrefixConstant.USER + suffix + SymbolConstant.COLON + userName + SymbolConstant.HASHTAG + tenantId;
     }
 
     /**
      * 获取 用户 - token 映射Key
      *
-     * @param tenantId tenantId
-     * @param userName username
+     * @param tenantId 租户ID
+     * @param userName 用户名
      * @return key
      */
-    public static String getUserTokenKey(String tenantId, String userName) {
+    public static String getUserTokenKey(Long tenantId, String userName) {
         return getKey(SuffixConstant.TOKEN, tenantId, userName);
     }
 
@@ -55,7 +70,7 @@ public class AuthCacheUtil {
      * @return token key
      */
     public static String getTokenKey(String token) {
-        return AuthConstant.redis_prefix + SymbolConstant.DOUBLE_COLON + token;
+        return AuthConstant.redis_prefix + SymbolConstant.COLON + token;
     }
 
     /**
@@ -65,7 +80,7 @@ public class AuthCacheUtil {
      * @param userName 用户名称
      * @return Salt key
      */
-    public static String getSaltKey(String tenantId, String userName) {
+    public static String getSaltKey(Long tenantId, String userName) {
         return getKey(SuffixConstant.SALT, tenantId, userName);
     }
 

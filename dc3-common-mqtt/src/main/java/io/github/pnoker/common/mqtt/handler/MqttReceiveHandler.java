@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,9 @@ package io.github.pnoker.common.mqtt.handler;
 import cn.hutool.core.text.CharSequenceUtil;
 import io.github.pnoker.common.mqtt.entity.MessageHeader;
 import io.github.pnoker.common.mqtt.entity.MqttMessage;
-import io.github.pnoker.common.mqtt.job.MqttScheduleJob;
 import io.github.pnoker.common.mqtt.service.MqttReceiveService;
+import io.github.pnoker.common.mqtt.service.job.MqttScheduleJob;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +29,6 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
@@ -48,9 +48,9 @@ public class MqttReceiveHandler {
     private ThreadPoolExecutor threadPoolExecutor;
 
     /**
-     * 此处用于接收 MQTT 发送过来的数据，订阅的主题为 application.yml 中 mqtt.receive-topics 配置的 Topic 列表
-     * +（加号）：可以（只能）匹配一个单词
-     * #（井号）：可以匹配多个单词（或者零个）
+     * 此处用于接收 MQTT 发送过来的数据, 订阅的主题为 application.yml 中 mqtt.receive-topics 配置的 Topic 列表
+     * +(加号): 可以(只能)匹配一个单词
+     * #(井号): 可以匹配多个单词(或者零个)
      *
      * @return MessageHandler
      */
@@ -66,7 +66,7 @@ public class MqttReceiveHandler {
                     return;
                 }
                 MqttScheduleJob.messageCount.getAndIncrement();
-                MqttMessage mqttMessage = new MqttMessage(messageHeader, payload);
+                MqttMessage mqttMessage = MqttMessage.builder().header(messageHeader).payload(payload).build();
                 log.debug("Mqtt inbound, From: {}, Qos: {}, Payload: {}", messageHeader.getMqttReceivedTopic(), messageHeader.getMqttReceivedQos(), payload);
 
                 // Judge whether to process data in batch according to the data transmission speed

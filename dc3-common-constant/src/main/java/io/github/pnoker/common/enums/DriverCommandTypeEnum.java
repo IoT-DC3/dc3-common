@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public enum DriverCommandTypeEnum {
     /**
      * 驱动配置类型指令
      */
-    CONFIG((byte) 0x00, "config", "驱动配置类型指令"),
+    CONFIG((byte) 0, "config", "驱动配置类型指令"),
     ;
 
     /**
@@ -50,15 +50,26 @@ public enum DriverCommandTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return DriverCommandTypeEnum
+     * @param index 索引
+     * @return {@link DriverCommandTypeEnum}
+     */
+    public static DriverCommandTypeEnum ofIndex(Byte index) {
+        Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link DriverCommandTypeEnum}
      */
     public static DriverCommandTypeEnum ofCode(String code) {
         Optional<DriverCommandTypeEnum> any = Arrays.stream(DriverCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -66,10 +77,10 @@ public enum DriverCommandTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return DriverCommandTypeEnum
+     * @param name 枚举内容
+     * @return {@link DriverCommandTypeEnum}
      */
     public static DriverCommandTypeEnum ofName(String name) {
         try {

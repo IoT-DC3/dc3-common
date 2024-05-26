@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,18 +39,16 @@ public class StrategyConstant {
      */
     public static class Storage {
 
-        private Storage() {
-            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-        }
-
-        public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.DOUBLE_COLON;
-
-        public static final String REDIS = "redis";
+        public static final String REPOSITORY_PREFIX = "storage" + SymbolConstant.COLON;
         public static final String MONGO = "mongo";
         public static final String INFLUXDB = "influxdb";
         public static final String STRATEGY_OPENTSDB = "opentsdb";
         public static final String STRATEGY_ELASTICSEARCH = "elasticsearch";
         public static final String TDENGINE = "tdengine";
+
+        private Storage() {
+            throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+        }
     }
 
 }

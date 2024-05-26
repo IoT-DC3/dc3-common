@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,22 +28,22 @@ import java.util.List;
 public interface MqttReceiveService {
 
     /**
-     * 务必实现，单点逻辑
+     * 务必实现, 单点逻辑
      * <p>
      * 将解析之后的数据封装 io.github.pnoker.common.bean.point.PointValue
      * 然后调用 driverService.pointValueSender(pointValue) 进行数据推送
-     * Tip： 可参考 dc3-driver-listening-virtual 驱动
+     * Tip:  可参考 dc3-driver-listening-virtual 驱动
      *
      * @param mqttMessage MqttMessage
      */
     void receiveValue(MqttMessage mqttMessage);
 
     /**
-     * 务必实现，批量逻辑
+     * 务必实现, 批量逻辑
      * <p>
      * 将解析之后的数据封装 io.github.pnoker.common.bean.point.PointValue
      * 然后调用 driverService.pointValueSender(pointValue) 进行数据推送
-     * Tip： 可参考 dc3-driver-listening-virtual 驱动
+     * Tip:  可参考 dc3-driver-listening-virtual 驱动
      *
      * @param mqttMessageList String Array List
      */

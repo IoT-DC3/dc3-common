@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,19 +33,19 @@ import java.util.Optional;
 @AllArgsConstructor
 public enum ProfileShareFlagEnum {
     /**
-     * 公有模板(租户)
+     * 租户下共享模板
      */
-    TENANT((byte) 0x00, "tenant", "公有模板(租户)"),
+    TENANT((byte) 0, "tenant", "租户下共享模板"),
 
     /**
-     * 私有模板(驱动)
+     * 驱动下共享模板
      */
-    DRIVER((byte) 0x01, "driver", "私有模板(驱动)"),
+    DRIVER((byte) 1, "driver", "驱动下共享模板"),
 
     /**
-     * 私有模板(用户)
+     * 用户下共享模板
      */
-    USER((byte) 0x02, "user", "私有模板(用户)"),
+    USER((byte) 2, "user", "用户下共享模板"),
     ;
 
     /**
@@ -60,15 +60,26 @@ public enum ProfileShareFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return ProfileShareFlagEnum
+     * @param index 索引
+     * @return {@link ProfileShareFlagEnum}
+     */
+    public static ProfileShareFlagEnum ofIndex(Byte index) {
+        Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link ProfileShareFlagEnum}
      */
     public static ProfileShareFlagEnum ofCode(String code) {
         Optional<ProfileShareFlagEnum> any = Arrays.stream(ProfileShareFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +87,10 @@ public enum ProfileShareFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return ProfileShareFlagEnum
+     * @param name 枚举内容
+     * @return {@link ProfileShareFlagEnum}
      */
     public static ProfileShareFlagEnum ofName(String name) {
         try {

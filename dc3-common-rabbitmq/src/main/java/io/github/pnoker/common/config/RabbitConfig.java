@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.config;
 
+import io.github.pnoker.common.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -27,8 +28,6 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
-
 /**
  * @author pnoker
  * @since 2022.1.0
@@ -37,18 +36,21 @@ import javax.annotation.Resource;
 @Configuration
 public class RabbitConfig {
 
-    @Resource
-    private ConnectionFactory connectionFactory;
+    private final ConnectionFactory connectionFactory;
+
+    public RabbitConfig(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Bean
     RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setReturnsCallback(message -> log.error("Send message({}) to exchange({}), routingKey({}) failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
+        rabbitTemplate.setReturnsCallback(message -> log.error("Send message[{}] to exchange[{}], routingKey[{}] failed: {}", message.getMessage(), message.getExchange(), message.getRoutingKey(), message.getReplyText()));
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             if (!ack) {
-                log.error("CorrelationData({}) ack failed: {}", correlationData, cause);
+                log.error("CorrelationData[{}] ack failed: {}", correlationData, cause);
             }
         });
         return rabbitTemplate;
@@ -58,7 +60,7 @@ public class RabbitConfig {
     public RabbitListenerContainerFactory<SimpleMessageListenerContainer> rabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(new Jackson2JsonMessageConverter());
+        factory.setMessageConverter(new Jackson2JsonMessageConverter(JsonUtil.getJsonMapper()));
         factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return factory;
     }

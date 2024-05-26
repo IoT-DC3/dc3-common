@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,17 +35,27 @@ public enum DeviceCommandTypeEnum {
     /**
      * 读位号值类型指令
      */
-    READ((byte) 0x00, "read", "读位号值类型指令"),
+    READ((byte) 0, "read", "读位号值类型指令"),
+
+    /**
+     * 批量读位号值类型指令
+     */
+    READ_BATCH((byte) 1, "read_batch", "批量读位号值类型指令"),
 
     /**
      * 写位号值类型指令
      */
-    WRITE((byte) 0x01, "write", "写位号值类型指令"),
+    WRITE((byte) 2, "write", "写位号值类型指令"),
+
+    /**
+     * 批量写位号值类型指令
+     */
+    WRITE_BATCH((byte) 3, "write_batch", "批量写位号值类型指令"),
 
     /**
      * 配置设备类型指令
      */
-    CONFIG((byte) 0x02, "config", "配置设备类型指令"),
+    CONFIG((byte) 4, "config", "配置设备类型指令"),
     ;
 
     /**
@@ -60,15 +70,26 @@ public enum DeviceCommandTypeEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return DeviceCommandTypeEnum
+     * @param index 索引
+     * @return {@link DeviceCommandTypeEnum}
+     */
+    public static DeviceCommandTypeEnum ofIndex(Byte index) {
+        Optional<DeviceCommandTypeEnum> any = Arrays.stream(DeviceCommandTypeEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link DeviceCommandTypeEnum}
      */
     public static DeviceCommandTypeEnum ofCode(String code) {
         Optional<DeviceCommandTypeEnum> any = Arrays.stream(DeviceCommandTypeEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +97,10 @@ public enum DeviceCommandTypeEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return DeviceCommandTypeEnum
+     * @param name 枚举内容
+     * @return {@link DeviceCommandTypeEnum}
      */
     public static DeviceCommandTypeEnum ofName(String name) {
         try {

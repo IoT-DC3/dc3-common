@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.github.pnoker.common.enums;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -34,38 +35,44 @@ public enum EntityTypeFlagEnum {
     /**
      * 系统
      */
-    SYSTEM("system", "系统"),
+    SYSTEM((byte) 0, "system", "系统"),
 
     /**
      * 用户
      */
-    USER("user", "用户"),
+    USER((byte) 1, "user", "用户"),
 
     /**
      * 分组
      */
-    GROUP("group", "分组"),
+    GROUP((byte) 2, "group", "分组"),
 
     /**
      * 驱动
      */
-    DRIVER("driver", "驱动"),
+    DRIVER((byte) 3, "driver", "驱动"),
 
     /**
-     * 模板
+     * 模版
      */
-    PROFILE("profile", "模板"),
+    PROFILE((byte) 4, "profile", "模版"),
 
     /**
      * 位号
      */
-    POINT("point", "位号"),
+    POINT((byte) 5, "point", "位号"),
 
     /**
      * 设备
      */
-    DEVICE("device", "设备"),
+    DEVICE((byte) 6, "device", "设备"),
     ;
+
+    /**
+     * 索引
+     */
+    @EnumValue
+    private final Byte index;
 
     /**
      * 编码
@@ -73,15 +80,26 @@ public enum EntityTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return EntityTypeFlagEnum
+     * @param index 索引
+     * @return {@link EntityTypeFlagEnum}
+     */
+    public static EntityTypeFlagEnum ofIndex(Byte index) {
+        Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link EntityTypeFlagEnum}
      */
     public static EntityTypeFlagEnum ofCode(String code) {
         Optional<EntityTypeFlagEnum> any = Arrays.stream(EntityTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -89,10 +107,10 @@ public enum EntityTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return EntityTypeFlagEnum
+     * @param name 枚举内容
+     * @return {@link EntityTypeFlagEnum}
      */
     public static EntityTypeFlagEnum ofName(String name) {
         try {

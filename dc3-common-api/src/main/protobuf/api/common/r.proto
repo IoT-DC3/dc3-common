@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,22 @@ syntax = "proto3";
 
 package api.common;
 
-// 配置相关
+/*
+Config
+*/
 option java_package = "io.github.pnoker.api.common";
 option java_outer_classname = "RProto";
+option objc_class_prefix = "Common";
 option java_multiple_files = true;
 
-// R DTO
-message RDTO {
-  bool ok = 1; // 是否成功
-  string code = 2; // 状态码
-  string message = 3; // 消息
+/*R DTO*/
+message GrpcR {
+  /*是否成功*/
+  bool ok = 1;
+
+  /*状态码*/
+  string code = 2;
+
+  /*消息*/
+  string message = 3;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,15 @@ package io.github.pnoker.common.utils;
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.LambdaMeta;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import io.github.pnoker.common.constant.common.DefaultConstant;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.property.PropertyNamer;
 
+import java.util.Objects;
+
 /**
- * 字段名称相关工具类
+ * 字段名称 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -46,5 +49,15 @@ public class FieldUtil {
     public static <T> String getField(SFunction<T, ?> column) {
         LambdaMeta meta = LambdaUtils.extract(column);
         return PropertyNamer.methodToProperty(meta.getImplMethodName());
+    }
+
+    /**
+     * 判断是否为有效的ID
+     *
+     * @param id ID
+     * @return 是否有效
+     */
+    public static boolean isValidIdField(Long id) {
+        return Objects.nonNull(id) && id > DefaultConstant.ZERO;
     }
 }

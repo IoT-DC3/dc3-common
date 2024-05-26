@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,8 @@ import com.influxdb.client.domain.IsOnboarding;
 import com.influxdb.client.domain.OnboardingRequest;
 import com.influxdb.client.domain.OnboardingResponse;
 import com.influxdb.client.service.SetupService;
-import io.github.pnoker.common.property.InfluxProperties;
+import io.github.pnoker.common.influx.entity.property.InfluxProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Response;
@@ -34,19 +32,20 @@ import java.io.IOException;
 import java.time.Instant;
 
 /**
- * MongoDB config
+ * InfluxDB config
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(InfluxProperties.class)
 public class InfluxConfig {
 
-    @Autowired
-    InfluxProperties properties;
+    private final InfluxProperties properties;
 
+    public InfluxConfig(InfluxProperties properties) {
+        this.properties = properties;
+    }
 
     /**
      * 返回influx http客户端,如果用代码的方式进行初始化,则务必查看日志保留token或设置密码

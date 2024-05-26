@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package io.github.pnoker.common.constant.common;
 
+import java.time.ZoneId;
+
 /**
  * 时间 相关常量
  *
@@ -24,18 +26,21 @@ package io.github.pnoker.common.constant.common;
  */
 public class TimeConstant {
 
-    private TimeConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
-     * 时区
+     * 时区, 默认为 Asia/Shanghai
      */
-    public static final String TIMEZONE = "GMT+8";
-
+    public static final String DEFAULT_TIMEZONE = "Asia/Shanghai";
+    /**
+     * 时区ID, 默认为 Asia/Shanghai
+     */
+    public static final ZoneId DEFAULT_ZONEID = ZoneId.of(DEFAULT_TIMEZONE);
     /**
      * 时间格式化
      */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     public static final String COMPLETE_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    private TimeConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

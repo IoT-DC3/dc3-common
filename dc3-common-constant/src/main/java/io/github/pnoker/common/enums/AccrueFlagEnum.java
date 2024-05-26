@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,17 +35,17 @@ public enum AccrueFlagEnum {
     /**
      * 无规律
      */
-    NONE((byte) 0x00, "none", "无规律"),
+    NONE((byte) 0, "none", "无规律"),
 
     /**
      * 递增
      */
-    INCREMENT((byte) 0x01, "increment", "递增"),
+    INCREMENT((byte) 1, "increment", "递增"),
 
     /**
      * 递减
      */
-    DECREMENT((byte) 0x02, "decrement", "递减"),
+    DECREMENT((byte) 2, "decrement", "递减"),
     ;
 
     /**
@@ -60,15 +60,26 @@ public enum AccrueFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return AccrueFlagEnum
+     * @param index 索引
+     * @return {@link AccrueFlagEnum}
+     */
+    public static AccrueFlagEnum ofIndex(Byte index) {
+        Optional<AccrueFlagEnum> any = Arrays.stream(AccrueFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link AccrueFlagEnum}
      */
     public static AccrueFlagEnum ofCode(String code) {
         Optional<AccrueFlagEnum> any = Arrays.stream(AccrueFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -76,10 +87,10 @@ public enum AccrueFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return AccrueFlagEnum
+     * @param name 枚举内容
+     * @return {@link AccrueFlagEnum}
      */
     public static AccrueFlagEnum ofName(String name) {
         try {

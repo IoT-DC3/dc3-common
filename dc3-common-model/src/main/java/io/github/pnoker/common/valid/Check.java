@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package io.github.pnoker.common.valid;
 /**
  * Check 校验分组
  * <p>
- * 在 org.springframework.validation.annotation.Validated
- * 注解后添加具体校验的分组名，可实现不同场景的校验需求
+ * 在 {@link org.springframework.validation.annotation.Validated}
+ * 注解后添加具体校验的分组名, 可实现不同场景的校验需求
  *
  * @author pnoker
  * @since 2022.1.0

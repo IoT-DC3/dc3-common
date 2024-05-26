@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2016-present the original author or authors.
+  ~ Copyright 2016-present the IoT DC3 original author or authors.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,18 +14,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>io.github.pnoker</groupId>
         <artifactId>dc3-common</artifactId>
-        <version>2023.4.5</version>
+        <version>2024.3.0</version>
     </parent>
 
     <name>${project.artifactId}</name>
     <artifactId>dc3-common-api</artifactId>
-    <version>2023.4.5</version>
+    <version>2024.3.0</version>
     <packaging>jar</packaging>
 
     <description>IOT DC3 平台 Api 通用 gRpc Proto。</description>
@@ -34,8 +35,12 @@
         <developer>
             <id>pnoker</id>
             <name>pnoker</name>
-            <email>pnokers@icloud.com</email>
+            <email>pnokers@gmail.com</email>
+            <roles>
+                <role>PMC</role>
+            </roles>
             <organization>pnoker.github.io</organization>
+            <url>https://github.com/pnoker/iot-dc3</url>
         </developer>
     </developers>
 
@@ -55,7 +60,10 @@
 
     <dependencies>
 
-        <!-- Annotation Api -->
+        <!--
+        Javax Annotation Api
+        注意: 需要替换为jakarta.annotation-api, 但grpc官方暂时还没有响应但解决方案, 只能暂时添加这个兼容包
+        -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
@@ -79,16 +87,24 @@
             <artifactId>grpc-stub</artifactId>
         </dependency>
 
-        <!-- DC3 Common Model -->
+        <!-- Netty -->
         <dependency>
-            <groupId>io.github.pnoker</groupId>
-            <artifactId>dc3-common-model</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-resolver-dns-native-macos</artifactId>
         </dependency>
 
-        <!-- DC3 Common Exception -->
+        <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-model</artifactId>
         </dependency>
 
     </dependencies>

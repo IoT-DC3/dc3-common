@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
@@ -28,22 +29,13 @@ import org.springframework.context.annotation.Configuration;
  * @since 2022.1.0
  */
 @Slf4j
-@Data
+@Getter
+@Setter
 @Configuration
 public class ExchangeConfig {
 
     /**
-     * 驱动同步相关，平台端、驱动端可负载
-     *
-     * @return TopicExchange
-     */
-    @Bean
-    TopicExchange syncExchange() {
-        return new TopicExchange(RabbitConstant.TOPIC_EXCHANGE_SYNC, true, false);
-    }
-
-    /**
-     * 事件相关，平台端可负载
+     * 事件相关, 平台端可负载
      *
      * @return TopicExchange
      */
@@ -53,7 +45,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 元数据相关，平台端广播，驱动端订阅
+     * 元数据相关, 平台端广播, 驱动端订阅
      *
      * @return FanoutExchange
      */
@@ -63,7 +55,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 指令相关，驱动端可负载
+     * 指令相关, 驱动端可负载
      *
      * @return TopicExchange
      */
@@ -73,7 +65,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * 数据相关，平台端可负载
+     * 数据相关, 平台端可负载
      *
      * @return TopicExchange
      */
@@ -83,7 +75,7 @@ public class ExchangeConfig {
     }
 
     /**
-     * MQTT 相关，平台端可负载
+     * MQTT 相关, 平台端可负载
      *
      * @return TopicExchange
      */

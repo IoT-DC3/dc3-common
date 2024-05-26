@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,12 +36,12 @@ public enum MenuTypeFlagEnum {
     /**
      * 标题菜单
      */
-    TITLE((byte) 0x00, "title", "标题菜单"),
+    TITLE((byte) 0, "title", "标题菜单"),
 
     /**
      * 通用菜单
      */
-    COMMON((byte) 0x01, "common", "通用菜单"),
+    COMMON((byte) 1, "common", "通用菜单"),
     ;
 
     /**
@@ -56,15 +56,26 @@ public enum MenuTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return MenuTypeFlagEnum
+     * @param index 索引
+     * @return {@link MenuTypeFlagEnum}
+     */
+    public static MenuTypeFlagEnum ofIndex(Byte index) {
+        Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link MenuTypeFlagEnum}
      */
     public static MenuTypeFlagEnum ofCode(String code) {
         Optional<MenuTypeFlagEnum> any = Arrays.stream(MenuTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -72,10 +83,10 @@ public enum MenuTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return MenuTypeFlagEnum
+     * @param name 枚举内容
+     * @return {@link MenuTypeFlagEnum}
      */
     public static MenuTypeFlagEnum ofName(String name) {
         try {

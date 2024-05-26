@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,20 +26,20 @@ import io.github.pnoker.common.constant.common.ExceptionConstant;
  */
 public class TimeoutConstant {
 
-    private TimeoutConstant() {
-        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
-    }
-
     /**
-     * salt 在 redis 中的失效时间，分钟
+     * salt 在 redis 中的失效时间, 分钟
      */
     public static final int SALT_CACHE_TIMEOUT = 5;
     /**
-     * user 登陆限制失效时间，分钟
+     * user 登陆限制失效时间, 分钟
      */
     public static final int USER_LIMIT_TIMEOUT = 5;
     /**
-     * token 在 redis 中的失效时间，小时
+     * token 在 redis 中的失效时间, 小时
      */
     public static final int TOKEN_CACHE_TIMEOUT = 12;
+
+    private TimeoutConstant() {
+        throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
+    }
 }

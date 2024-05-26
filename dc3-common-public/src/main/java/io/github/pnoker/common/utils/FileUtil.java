@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,13 @@
 
 package io.github.pnoker.common.utils;
 
+import cn.hutool.core.util.IdUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.constant.common.FolderConstant;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
 /**
- * 文件相关的工具类集合
+ * 文件 相关工具类
  *
  * @author pnoker
  * @since 2022.1.0
@@ -42,28 +35,24 @@ public class FileUtil {
     }
 
     /**
-     * File 转 MultipartFile
+     * 获取临时上传文件目录
      *
-     * @param fileInputStream FileInputStream
-     * @return MultipartFile
+     * @return 临时上传文件目录
      */
-    public static MultipartFile fileInputStreamToMultipartFile(FileInputStream fileInputStream) {
-        FileItemFactory factory = new DiskFileItemFactory(16, null);
-        String textFieldName = "file";
-        FileItem item = factory.createItem(textFieldName, "text/plain", true, "DC3MultipartFile");
-        try {
-            int length = 0;
-            byte[] buffer = new byte[1024];
-            OutputStream outputStream = item.getOutputStream();
-            while ((length = fileInputStream.read(buffer)) > -1) {
-                outputStream.write(buffer, 0, length);
-            }
-            outputStream.close();
-            fileInputStream.close();
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
+    public static String getTempPath() {
+        String path = FolderConstant.TEMP_FILE_PATH;
+        if (!cn.hutool.core.io.FileUtil.exist(path) || !cn.hutool.core.io.FileUtil.isDirectory(path)) {
+            cn.hutool.core.io.FileUtil.mkdir(path);
         }
-        return new CommonsMultipartFile(item);
+        return path;
     }
 
+    /**
+     * 获取随机的xlsx文件名
+     *
+     * @return xlsx文件名
+     */
+    public static String getRandomXlsxName() {
+        return IdUtil.fastSimpleUUID() + ".xlsx";
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-present the original author or authors.
+ * Copyright 2016-present the IoT DC3 original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,26 +32,25 @@ import java.util.Optional;
 @Getter
 @AllArgsConstructor
 public enum ApiTypeFlagEnum {
-
     /**
      * POST
      */
-    POST((byte) 0x00, "post", "POST"),
+    POST((byte) 0, "post", "POST"),
 
     /**
      * DELETE
      */
-    DELETE((byte) 0x01, "delete", "DELETE"),
+    DELETE((byte) 1, "delete", "DELETE"),
 
     /**
      * PUT
      */
-    PUT((byte) 0x02, "put", "PUT"),
+    PUT((byte) 2, "put", "PUT"),
 
     /**
      * GET
      */
-    GET((byte) 0x03, "get", "GET"),
+    GET((byte) 3, "get", "GET"),
     ;
 
     /**
@@ -66,15 +65,26 @@ public enum ApiTypeFlagEnum {
     private final String code;
 
     /**
-     * 备注
+     * 内容
      */
     private final String remark;
 
     /**
-     * 根据 Code 获取枚举
+     * 根据枚举索引获取枚举
      *
-     * @param code Code
-     * @return ApiTypeFlagEnum
+     * @param index 索引
+     * @return {@link ApiTypeFlagEnum}
+     */
+    public static ApiTypeFlagEnum ofIndex(Byte index) {
+        Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getIndex().equals(index)).findFirst();
+        return any.orElse(null);
+    }
+
+    /**
+     * 根据枚举编码获取枚举
+     *
+     * @param code 编码
+     * @return {@link ApiTypeFlagEnum}
      */
     public static ApiTypeFlagEnum ofCode(String code) {
         Optional<ApiTypeFlagEnum> any = Arrays.stream(ApiTypeFlagEnum.values()).filter(type -> type.getCode().equals(code)).findFirst();
@@ -82,10 +92,10 @@ public enum ApiTypeFlagEnum {
     }
 
     /**
-     * 根据 Name 获取枚举
+     * 根据枚举内容获取枚举
      *
-     * @param name Name
-     * @return ApiTypeFlagEnum
+     * @param name 枚举内容
+     * @return {@link ApiTypeFlagEnum}
      */
     public static ApiTypeFlagEnum ofName(String name) {
         try {
