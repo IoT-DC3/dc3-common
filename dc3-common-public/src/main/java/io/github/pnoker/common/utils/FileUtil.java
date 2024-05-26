@@ -18,6 +18,7 @@ package io.github.pnoker.common.utils;
 
 import cn.hutool.core.util.IdUtil;
 import io.github.pnoker.common.constant.common.ExceptionConstant;
+import io.github.pnoker.common.constant.common.FolderConstant;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -39,7 +40,7 @@ public class FileUtil {
      * @return 临时上传文件目录
      */
     public static String getTempPath() {
-        String path = "/Users/pnoker/Code/";
+        String path = FolderConstant.TEMP_FILE_PATH;
         if (!cn.hutool.core.io.FileUtil.exist(path) || !cn.hutool.core.io.FileUtil.isDirectory(path)) {
             cn.hutool.core.io.FileUtil.mkdir(path);
         }
@@ -54,5 +55,4 @@ public class FileUtil {
     public static String getRandomXlsxName() {
         return IdUtil.fastSimpleUUID() + ".xlsx";
     }
-
 }
