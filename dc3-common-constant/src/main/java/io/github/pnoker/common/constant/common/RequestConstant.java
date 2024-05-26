@@ -46,16 +46,19 @@ public class RequestConstant {
          * 用于前端请求头
          */
         public static final String X_AUTH_TENANT = "X-Auth-Tenant";
+
         /**
          * 自定义 用户登陆名称 请求头
          * 用于前端请求头
          */
         public static final String X_AUTH_LOGIN = "X-Auth-Login";
+
         /**
          * 自定义 Token 请求头
          * 用于前端请求头
          */
         public static final String X_AUTH_TOKEN = "X-Auth-Token";
+
         /**
          * 自定义 用户 请求头
          * 用于向其他服务传递用户信息, 其中包括: 租户ID, 用户ID, 用户昵称, 用户名称
