@@ -65,15 +65,16 @@ public class WebFilterConfig {
     @Bean
     public WebFilter interceptor() {
         return (exchange, chain) -> {
-            try {
-                ServerHttpRequest request = exchange.getRequest();
-                String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
-                if (CharSequenceUtil.isNotEmpty(user)) {
-                    byte[] decode = DecodeUtil.decode(user);
+            ServerHttpRequest request = exchange.getRequest();
+            String user = RequestUtil.getRequestHeader(request, RequestConstant.Header.X_AUTH_USER);
+            if (CharSequenceUtil.isNotEmpty(user)) {
+                byte[] decode = DecodeUtil.decode(user);
+                try {
                     RequestHeader.UserHeader entityBO = JsonUtil.parseObject(decode, RequestHeader.UserHeader.class);
                     UserHeaderUtil.setUserHeader(entityBO);
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
                 }
-            } catch (Exception e) {
             }
             return chain.filter(exchange).then(Mono.fromRunnable(UserHeaderUtil::removeUserHeader));
         };
