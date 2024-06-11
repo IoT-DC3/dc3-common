@@ -48,6 +48,7 @@ public class ExceptionConfig {
      * Global Exception
      *
      * @param exception Exception
+     * @param request   ServerHttpRequest
      * @return Mono R
      */
     @ExceptionHandler(Exception.class)
@@ -61,6 +62,7 @@ public class ExceptionConfig {
      * NotFound Exception
      *
      * @param exception NotFoundException
+     * @param request   ServerHttpRequest
      * @return Mono R
      */
     @ExceptionHandler(NotFoundException.class)
@@ -74,6 +76,7 @@ public class ExceptionConfig {
      * UnAuthorized Exception
      *
      * @param exception UnAuthorizedException
+     * @param request   ServerHttpRequest
      * @return Mono R
      */
     @ExceptionHandler(UnAuthorizedException.class)
@@ -87,6 +90,7 @@ public class ExceptionConfig {
      * Validation Exception
      *
      * @param exception MethodArgumentNotValidException
+     * @param request   ServerHttpRequest
      * @return Mono R
      */
     @ExceptionHandler({

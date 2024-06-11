@@ -47,6 +47,10 @@ public class WebFilterConfig {
     @Resource
     private ServerProperties serverProperties;
 
+    /**
+     *  自定义过滤器
+     * @return WebFilter
+     */
     @Bean
     public WebFilter contextPathWebFilter() {
         String contextPath = Optional.ofNullable(serverProperties.getServlet().getContextPath()).orElse("/");
@@ -62,6 +66,10 @@ public class WebFilterConfig {
         };
     }
 
+    /**
+     *  自定义拦截器
+     * @return WebFilter
+     */
     @Bean
     public WebFilter interceptor() {
         return (exchange, chain) -> {

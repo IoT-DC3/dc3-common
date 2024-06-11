@@ -34,6 +34,11 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class OkHttpConfig {
 
+    /**
+     * 自定义 Http Client 请求客户端
+     *
+     * @return OkHttpClient
+     */
     @Bean
     public OkHttpClient okHttpClient() {
         return new OkHttpClient.Builder()
