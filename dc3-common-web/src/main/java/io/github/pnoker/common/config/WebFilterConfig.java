@@ -48,7 +48,8 @@ public class WebFilterConfig {
     private ServerProperties serverProperties;
 
     /**
-     *  自定义过滤器
+     * 自定义过滤器
+     *
      * @return WebFilter
      */
     @Bean
@@ -67,7 +68,8 @@ public class WebFilterConfig {
     }
 
     /**
-     *  自定义拦截器
+     * 自定义拦截器
+     *
      * @return WebFilter
      */
     @Bean
