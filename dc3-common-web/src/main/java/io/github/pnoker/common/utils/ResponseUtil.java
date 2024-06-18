@@ -47,7 +47,6 @@ public class ResponseUtil {
      *
      * @param path 文件 Path
      * @return Resource
-     * @throws MalformedURLException MalformedURLException
      */
     public static ResponseEntity<Resource> responseFile(Path path) {
         try {

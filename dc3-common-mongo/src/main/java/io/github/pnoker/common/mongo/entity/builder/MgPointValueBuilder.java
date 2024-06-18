@@ -45,7 +45,7 @@ public interface MgPointValueBuilder {
 
     @AfterMapping
     default void afterProcess(PointValueBO entityBO, @MappingTarget MgPointValueDO entityDO) {
-        entityDO.setUpdateTime(LocalDateTime.now());
+        entityDO.setOperateTime(LocalDateTime.now());
     }
 
     /**

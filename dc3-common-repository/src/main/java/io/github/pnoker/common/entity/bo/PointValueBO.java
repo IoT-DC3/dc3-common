@@ -76,5 +76,5 @@ public class PointValueBO implements Serializable {
     /**
      * 操作时间
      */
-    private LocalDateTime updateTime;
+    private LocalDateTime operateTime;
 }
