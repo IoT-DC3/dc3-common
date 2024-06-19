@@ -70,12 +70,16 @@
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- DC3 Api 相关 -->
-        <dc3.api.api.version>2024.3.2</dc3.api.api.version>
+        <dc3.api.auth.version>2024.3.2</dc3.api.auth.version>
+        <dc3.api.data.version>2024.3.2</dc3.api.data.version>
         <dc3.api.driver.version>2024.3.2</dc3.api.driver.version>
+        <dc3.api.manager.version>2024.3.2</dc3.api.manager.version>
 
         <!-- DC3 Common 相关 -->
         <dc3.common.api.version>2024.3.2</dc3.common.api.version>
         <dc3.common.auth.version>2024.3.2</dc3.common.auth.version>
+        <dc3.common.data.version>2024.3.2</dc3.common.data.version>
+        <dc3.common.manager.version>2024.3.2</dc3.common.manager.version>
         <dc3.common.constant.version>2024.3.2</dc3.common.constant.version>
         <dc3.common.driver.version>2024.3.2</dc3.common.driver.version>
         <dc3.common.exception.version>2024.3.2</dc3.common.exception.version>
@@ -101,6 +105,7 @@
     <modules>
         <module>dc3-common-api</module>
         <module>dc3-common-auth</module>
+        <module>dc3-common-data</module>
         <module>dc3-common-constant</module>
         <module>dc3-common-driver</module>
         <module>dc3-common-exception</module>
@@ -183,13 +188,25 @@
             <dependency>
                 <groupId>io.github.pnoker</groupId>
                 <artifactId>dc3-api-auth</artifactId>
-                <version>${dc3.api.api.version}</version>
+                <version>${dc3.api.auth.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.pnoker</groupId>
+                <artifactId>dc3-api-data</artifactId>
+                <version>${dc3.api.data.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
                 <artifactId>dc3-api-driver</artifactId>
                 <version>${dc3.api.driver.version}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.pnoker</groupId>
+                <artifactId>dc3-api-manager</artifactId>
+                <version>${dc3.api.manager.version}</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -203,6 +220,11 @@
                 <groupId>io.github.pnoker</groupId>
                 <artifactId>dc3-common-auth</artifactId>
                 <version>${dc3.common.auth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.pnoker</groupId>
+                <artifactId>dc3-common-data</artifactId>
+                <version>${dc3.common.data.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
