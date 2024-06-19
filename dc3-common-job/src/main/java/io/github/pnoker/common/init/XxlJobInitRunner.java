@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.init;
 
-import io.github.pnoker.common.job.entity.property.XxlJobProperties;
+import io.github.pnoker.common.job.entity.property.JobProperties;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 @ComponentScan(basePackages = {
         "io.github.pnoker.common.job.*"
 })
-@EnableConfigurationProperties({XxlJobProperties.class})
+@EnableConfigurationProperties({JobProperties.class})
 public class XxlJobInitRunner implements ApplicationRunner {
 
     @Override

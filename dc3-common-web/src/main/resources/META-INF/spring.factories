@@ -16,7 +16,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   io.github.pnoker.common.config.ExceptionConfig,\
   io.github.pnoker.common.config.WebFilterConfig,\
-  io.github.pnoker.common.config.WebFluxConfig,\
-  io.github.pnoker.common.config.OkHttpConfig
+  io.github.pnoker.common.config.WebFluxConfig
 org.springframework.boot.env.EnvironmentPostProcessor=\
   io.github.pnoker.common.config.ActiveWebProfileConfig

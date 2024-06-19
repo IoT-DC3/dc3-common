@@ -67,10 +67,10 @@
 
     <dependencies>
 
-        <!-- Spring Web -->
+        <!-- Spring Context -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-context</artifactId>
         </dependency>
 
         <!-- Mybatis Plus Core -->

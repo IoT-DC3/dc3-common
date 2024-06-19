@@ -17,7 +17,7 @@
 package io.github.pnoker.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import io.github.pnoker.common.job.entity.property.XxlJobProperties;
+import io.github.pnoker.common.job.entity.property.JobProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,25 +30,25 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class XxlJobConfig {
+public class JobConfig {
 
-    private final XxlJobProperties xxlJobProperties;
+    private final JobProperties jobProperties;
 
-    public XxlJobConfig(XxlJobProperties xxlJobProperties) {
-        this.xxlJobProperties = xxlJobProperties;
+    public JobConfig(JobProperties jobProperties) {
+        this.jobProperties = jobProperties;
     }
 
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
-        xxlJobSpringExecutor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
-        xxlJobSpringExecutor.setAppname(xxlJobProperties.getAppName());
-        xxlJobSpringExecutor.setAddress(xxlJobProperties.getAddress());
-        xxlJobSpringExecutor.setIp(xxlJobProperties.getIp());
-        xxlJobSpringExecutor.setPort(xxlJobProperties.getExecutorPort());
-        xxlJobSpringExecutor.setAccessToken(xxlJobProperties.getAccessToken());
-        xxlJobSpringExecutor.setLogPath(xxlJobProperties.getLogPath());
-        xxlJobSpringExecutor.setLogRetentionDays(xxlJobProperties.getLogRetentionDays());
+        xxlJobSpringExecutor.setAdminAddresses(jobProperties.getAdminAddresses());
+        xxlJobSpringExecutor.setAppname(jobProperties.getAppName());
+        xxlJobSpringExecutor.setAddress(jobProperties.getAddress());
+        xxlJobSpringExecutor.setIp(jobProperties.getIp());
+        xxlJobSpringExecutor.setPort(jobProperties.getExecutorPort());
+        xxlJobSpringExecutor.setAccessToken(jobProperties.getAccessToken());
+        xxlJobSpringExecutor.setLogPath(jobProperties.getLogPath());
+        xxlJobSpringExecutor.setLogRetentionDays(jobProperties.getLogRetentionDays());
         return xxlJobSpringExecutor;
     }
 

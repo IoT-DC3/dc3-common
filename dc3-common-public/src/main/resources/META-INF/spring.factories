@@ -13,10 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-# 以下内容会覆盖 application.yml, 即: 如果在 application.yml 中昂配置以下内容是不会生效的
-# 如果想要覆盖以下内容需要在 application-dev, application-test, application-pre, application-pro 中进行重新配置
-prometheus:
-  api:
-    query: http://${PROMETHEUS_HOST:dc3-prometheus}:${PROMETHEUS_PORT:9090}/api/v1/query
-    query-range: http://${PROMETHEUS_HOST:dc3-prometheus}:${PROMETHEUS_PORT:9090}/api/v1/query_range
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  io.github.pnoker.common.config.OkHttpConfig

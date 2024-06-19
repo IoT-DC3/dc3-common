@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.prometheus.dashboard.rabbitmq.service;
+package io.github.pnoker.common.job.entity.property;
 
-import io.github.pnoker.common.prometheus.dashboard.rabbitmq.entity.vo.RabbitMQClusterVo;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
- * RabbitMQCluster Interface
- *
- * @author wangshuai
- * @since 2024.3.26
+ * @author pnoker
+ * @since 2022.1.0
  */
-public interface RabbitMQClusterService {
-
-    List<RabbitMQClusterVo> queryCluster();
+@Getter
+@Setter
+@Validated
+@ConfigurationProperties(prefix = "xxl.job")
+public class JobProperties {
+    private String adminAddresses;
+    private String accessToken;
+    private String appName;
+    private String address;
+    private String ip;
+    private int executorPort;
+    private String logPath;
+    private int logRetentionDays;
 }
