@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ Copyright 2016-present the IoT DC3 original author or authors.
   ~
@@ -15,9 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -35,64 +32,47 @@
     <inceptionYear>2016-2022</inceptionYear>
     <url>https://github.com/pnoker/iot-dc3</url>
     <description>
-        IOT DC3 平台 公共的 Auth 配置。
+        IOT DC3 平台 公共的 权限服务 配置。
     </description>
-
-    <developers>
-        <developer>
-            <id>pnoker</id>
-            <name>pnoker</name>
-            <email>pnokers@gmail.com</email>
-            <roles>
-                <role>PMC</role>
-            </roles>
-            <organization>pnoker.github.io</organization>
-            <url>https://github.com/pnoker/iot-dc3</url>
-        </developer>
-    </developers>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <url>https://github.com/pnoker/iot-dc3</url>
-        <connection>https://github.com/pnoker/iot-dc3.git</connection>
-        <developerConnection>https://github.com/pnoker/iot-dc3.git</developerConnection>
-    </scm>
 
     <dependencies>
 
-        <!-- Spring Context -->
+        <!-- gRpc Server + Client -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>net.devh</groupId>
+            <artifactId>grpc-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Aspectj Weaver -->
+        <!-- DC3 Api 相关 -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
-
-        <!-- Jakarta Servlet -->
-        <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-api-auth</artifactId>
         </dependency>
 
         <!-- DC3 Common 相关 -->
         <dependency>
             <groupId>io.github.pnoker</groupId>
-            <artifactId>dc3-common-public</artifactId>
+            <artifactId>dc3-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-mysql</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.pnoker</groupId>
             <artifactId>dc3-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-thread</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.pnoker</groupId>
+            <artifactId>dc3-common-web</artifactId>
         </dependency>
 
     </dependencies>
