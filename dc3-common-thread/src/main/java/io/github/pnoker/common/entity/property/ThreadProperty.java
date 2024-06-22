@@ -18,6 +18,8 @@ package io.github.pnoker.common.entity.property;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * 通用线程池属性
@@ -25,8 +27,10 @@ import lombok.Setter;
  * @author pnoker
  * @since 2022.1.0
  */
-@Setter
 @Getter
+@Setter
+@Validated
+@ConfigurationProperties(prefix = "server")
 public class ThreadProperty {
 
     /**

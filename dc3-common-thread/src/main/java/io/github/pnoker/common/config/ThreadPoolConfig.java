@@ -17,9 +17,7 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.entity.property.ThreadProperty;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,13 +32,16 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 @Configuration
-@ConfigurationProperties(prefix = "server")
 public class ThreadPoolConfig {
 
     private final AtomicInteger threadPoolAtomic = new AtomicInteger(1);
     private final AtomicInteger scheduledThreadPoolAtomic = new AtomicInteger(1);
-    @Setter
-    private ThreadProperty thread;
+
+    private final ThreadProperty thread;
+
+    public ThreadPoolConfig(ThreadProperty thread) {
+        this.thread = thread;
+    }
 
     /**
      * LinkedBlockingQueue ThreadPoolExecutor
