@@ -18,7 +18,7 @@ package io.github.pnoker.common.driver.service.impl;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
 import io.github.pnoker.common.driver.entity.bean.PointValue;
-import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperties;
 import io.github.pnoker.common.driver.service.DriverSenderService;
 import io.github.pnoker.common.entity.dto.DeviceEventDTO;
 import io.github.pnoker.common.entity.dto.DriverEventDTO;
@@ -41,11 +41,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DriverSenderServiceImpl implements DriverSenderService {
 
-    private final DriverProperty driverProperty;
+    private final DriverProperties driverProperties;
     private final RabbitTemplate rabbitTemplate;
 
-    public DriverSenderServiceImpl(DriverProperty driverProperty, RabbitTemplate rabbitTemplate) {
-        this.driverProperty = driverProperty;
+    public DriverSenderServiceImpl(DriverProperties driverProperties, RabbitTemplate rabbitTemplate) {
+        this.driverProperties = driverProperties;
         this.rabbitTemplate = rabbitTemplate;
     }
 
@@ -57,7 +57,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
         rabbitTemplate.convertAndSend(
                 RabbitConstant.TOPIC_EXCHANGE_EVENT,
-                RabbitConstant.ROUTING_DRIVER_EVENT_PREFIX + driverProperty.getService(),
+                RabbitConstant.ROUTING_DRIVER_EVENT_PREFIX + driverProperties.getService(),
                 entityDTO
         );
     }
@@ -70,7 +70,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
 
         rabbitTemplate.convertAndSend(
                 RabbitConstant.TOPIC_EXCHANGE_EVENT,
-                RabbitConstant.ROUTING_DEVICE_EVENT_PREFIX + driverProperty.getService(),
+                RabbitConstant.ROUTING_DEVICE_EVENT_PREFIX + driverProperties.getService(),
                 entityDTO
         );
     }
@@ -91,7 +91,7 @@ public class DriverSenderServiceImpl implements DriverSenderService {
             log.info("Send point value: {}", JsonUtil.toJsonString(entityDTO));
             rabbitTemplate.convertAndSend(
                     RabbitConstant.TOPIC_EXCHANGE_VALUE,
-                    RabbitConstant.ROUTING_POINT_VALUE_PREFIX + driverProperty.getService(),
+                    RabbitConstant.ROUTING_POINT_VALUE_PREFIX + driverProperties.getService(),
                     entityDTO
             );
         }

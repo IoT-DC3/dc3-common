@@ -17,8 +17,7 @@
 package io.github.pnoker.common.driver.service.impl;
 
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
-import io.github.pnoker.common.driver.entity.property.DriverProperty;
-import io.github.pnoker.common.driver.entity.property.ScheduleProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperties;
 import io.github.pnoker.common.driver.job.DriverCustomScheduleJob;
 import io.github.pnoker.common.driver.job.DriverReadScheduleJob;
 import io.github.pnoker.common.driver.job.DriverStatusScheduleJob;
@@ -40,17 +39,17 @@ import java.util.Objects;
 @Service
 public class DriverScheduleServiceImpl implements DriverScheduleService {
 
-    private final DriverProperty driverProperty;
+    private final DriverProperties driverProperties;
     private final QuartzService quartzService;
 
-    public DriverScheduleServiceImpl(DriverProperty driverProperty, QuartzService quartzService) {
-        this.driverProperty = driverProperty;
+    public DriverScheduleServiceImpl(DriverProperties driverProperties, QuartzService quartzService) {
+        this.driverProperties = driverProperties;
         this.quartzService = quartzService;
     }
 
     @Override
     public void initial() {
-        ScheduleProperty property = driverProperty.getSchedule();
+        DriverProperties.ScheduleProperties property = driverProperties.getSchedule();
         if (Objects.isNull(property)) {
             return;
         }

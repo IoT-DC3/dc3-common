@@ -30,12 +30,44 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @ConfigurationProperties(prefix = "xxl.job")
 public class JobProperties {
+
+    /**
+     * Xxl Job admin server addresses
+     */
     private String adminAddresses;
+
+    /**
+     * Xxl Job access token
+     */
     private String accessToken;
+
+    /**
+     * Xxl Job executor app name
+     */
     private String appName;
+
+    /**
+     * Xxl Job address
+     */
     private String address;
+
+    /**
+     * Xxl Job ip
+     */
     private String ip;
+
+    /**
+     * Xxl Job executor port
+     */
     private int executorPort;
+
+    /**
+     * Xxl Job log retention path
+     */
     private String logPath;
+
+    /**
+     * Xxl Job log retention days
+     */
     private int logRetentionDays;
 }

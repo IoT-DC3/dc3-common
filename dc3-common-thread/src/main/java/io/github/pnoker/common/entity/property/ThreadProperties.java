@@ -31,7 +31,7 @@ import org.springframework.validation.annotation.Validated;
 @Setter
 @Validated
 @ConfigurationProperties(prefix = "server")
-public class ThreadProperty {
+public class ThreadProperties {
 
     /**
      * 线程名称前缀

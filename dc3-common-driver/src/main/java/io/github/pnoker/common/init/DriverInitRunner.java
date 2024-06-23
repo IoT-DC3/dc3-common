@@ -16,7 +16,7 @@
 
 package io.github.pnoker.common.init;
 
-import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperties;
 import io.github.pnoker.common.driver.service.DriverCustomService;
 import io.github.pnoker.common.driver.service.DriverRegisterService;
 import io.github.pnoker.common.driver.service.DriverScheduleService;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Component;
 @ComponentScan(basePackages = {
         "io.github.pnoker.common.driver.*"
 })
-@EnableConfigurationProperties({DriverProperty.class})
+@EnableConfigurationProperties({DriverProperties.class})
 public class DriverInitRunner implements ApplicationRunner {
 
     @Resource

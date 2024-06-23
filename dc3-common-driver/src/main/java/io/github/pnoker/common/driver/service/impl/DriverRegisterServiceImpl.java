@@ -18,7 +18,7 @@ package io.github.pnoker.common.driver.service.impl;
 
 import io.github.pnoker.common.driver.entity.bo.DriverBO;
 import io.github.pnoker.common.driver.entity.bo.RegisterBO;
-import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperties;
 import io.github.pnoker.common.driver.grpc.client.DriverClient;
 import io.github.pnoker.common.driver.service.DriverRegisterService;
 import io.github.pnoker.common.utils.JsonUtil;
@@ -37,7 +37,7 @@ import org.springframework.stereotype.Service;
 public class DriverRegisterServiceImpl implements DriverRegisterService {
 
     @Resource
-    private DriverProperty driverProperty;
+    private DriverProperties driverProperties;
 
     @Resource
     private DriverClient driverClient;
@@ -61,19 +61,19 @@ public class DriverRegisterServiceImpl implements DriverRegisterService {
      */
     private RegisterBO buildRegisterBOByProperty() {
         DriverBO driverBO = new DriverBO();
-        driverBO.setDriverName(driverProperty.getName());
-        driverBO.setDriverCode(driverProperty.getCode());
-        driverBO.setServiceName(driverProperty.getService());
-        driverBO.setServiceHost(driverProperty.getHost());
-        driverBO.setDriverTypeFlag(driverProperty.getType());
-        driverBO.setRemark(driverProperty.getRemark());
+        driverBO.setDriverName(driverProperties.getName());
+        driverBO.setDriverCode(driverProperties.getCode());
+        driverBO.setServiceName(driverProperties.getService());
+        driverBO.setServiceHost(driverProperties.getHost());
+        driverBO.setDriverTypeFlag(driverProperties.getType());
+        driverBO.setRemark(driverProperties.getRemark());
 
         RegisterBO entityBO = new RegisterBO();
         entityBO.setDriver(driverBO);
-        entityBO.setTenant(driverProperty.getTenant());
-        entityBO.setClient(driverProperty.getClient());
-        entityBO.setDriverAttributes(driverProperty.getDriverAttribute());
-        entityBO.setPointAttributes(driverProperty.getPointAttribute());
+        entityBO.setTenant(driverProperties.getTenant());
+        entityBO.setClient(driverProperties.getClient());
+        entityBO.setDriverAttributes(driverProperties.getDriverAttribute());
+        entityBO.setPointAttributes(driverProperties.getPointAttribute());
         return entityBO;
     }
 

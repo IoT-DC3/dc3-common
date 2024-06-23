@@ -17,7 +17,7 @@
 package io.github.pnoker.common.config;
 
 import io.github.pnoker.common.constant.driver.RabbitConstant;
-import io.github.pnoker.common.driver.entity.property.DriverProperty;
+import io.github.pnoker.common.driver.entity.property.DriverProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -39,12 +39,12 @@ import java.util.Map;
 @ConditionalOnClass(ExchangeConfig.class)
 public class DriverTopicConfig {
 
-    private final DriverProperty driverProperty;
+    private final DriverProperties driverProperties;
     private final TopicExchange metadataExchange;
     private final TopicExchange commandExchange;
 
-    public DriverTopicConfig(DriverProperty driverProperty, TopicExchange metadataExchange, TopicExchange commandExchange) {
-        this.driverProperty = driverProperty;
+    public DriverTopicConfig(DriverProperties driverProperties, TopicExchange metadataExchange, TopicExchange commandExchange) {
+        this.driverProperties = driverProperties;
         this.metadataExchange = metadataExchange;
         this.commandExchange = commandExchange;
     }
@@ -54,7 +54,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperty.getClient(), false, false, true, arguments);
+        return new Queue(RabbitConstant.QUEUE_DRIVER_METADATA_PREFIX + driverProperties.getClient(), false, false, true, arguments);
     }
 
     @Bean
@@ -62,7 +62,7 @@ public class DriverTopicConfig {
         Binding binding = BindingBuilder
                 .bind(metadataQueue)
                 .to(metadataExchange)
-                .with(RabbitConstant.ROUTING_DRIVER_METADATA_PREFIX + driverProperty.getService());
+                .with(RabbitConstant.ROUTING_DRIVER_METADATA_PREFIX + driverProperties.getService());
         binding.addArgument(RabbitConstant.AUTO_DELETE, true);
         return binding;
     }
@@ -72,7 +72,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
+        return new Queue(RabbitConstant.QUEUE_DRIVER_COMMAND_PREFIX + driverProperties.getService(), false, false, false, arguments);
     }
 
     @Bean
@@ -80,7 +80,7 @@ public class DriverTopicConfig {
         Binding binding = BindingBuilder
                 .bind(driverCommandQueue)
                 .to(commandExchange)
-                .with(RabbitConstant.ROUTING_DRIVER_COMMAND_PREFIX + driverProperty.getService());
+                .with(RabbitConstant.ROUTING_DRIVER_COMMAND_PREFIX + driverProperties.getService());
         binding.addArgument(RabbitConstant.AUTO_DELETE, true);
         return binding;
     }
@@ -90,7 +90,7 @@ public class DriverTopicConfig {
         Map<String, Object> arguments = new HashMap<>();
         // 30秒: 30 * 1000 = 30000L
         arguments.put(RabbitConstant.MESSAGE_TTL, 30000L);
-        return new Queue(RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX + driverProperty.getService(), false, false, false, arguments);
+        return new Queue(RabbitConstant.QUEUE_DEVICE_COMMAND_PREFIX + driverProperties.getService(), false, false, false, arguments);
     }
 
     @Bean
@@ -98,7 +98,7 @@ public class DriverTopicConfig {
         Binding binding = BindingBuilder
                 .bind(deviceCommandQueue)
                 .to(commandExchange)
-                .with(RabbitConstant.ROUTING_DEVICE_COMMAND_PREFIX + driverProperty.getService());
+                .with(RabbitConstant.ROUTING_DEVICE_COMMAND_PREFIX + driverProperties.getService());
         binding.addArgument(RabbitConstant.AUTO_DELETE, true);
         return binding;
     }

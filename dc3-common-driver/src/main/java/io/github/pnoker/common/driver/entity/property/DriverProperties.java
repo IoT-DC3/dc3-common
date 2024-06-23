@@ -22,7 +22,9 @@ import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
@@ -39,14 +41,13 @@ import java.util.List;
 @Setter
 @Validated
 @ConfigurationProperties(prefix = "driver")
-public class DriverProperty {
+public class DriverProperties {
 
     /**
      * 租户
      */
     @NotBlank(message = "租户不能为空")
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "无效的租户")
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$", message = "无效的租户")
     private String tenant;
 
     /**
@@ -59,16 +60,14 @@ public class DriverProperty {
      * 驱动名称
      */
     @NotBlank(message = "驱动名称不能为空")
-    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$",
-            message = "驱动名称格式无效")
+    @Pattern(regexp = "^[A-Za-z0-9\\u4e00-\\u9fa5][A-Za-z0-9\\u4e00-\\u9fa5-_#@/.|]{1,31}$", message = "驱动名称格式无效")
     private String name;
 
     /**
      * 驱动编号
      */
     @NotBlank(message = "驱动编号不能为空")
-    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$",
-            message = "无效的驱动编号")
+    @Pattern(regexp = "^[A-Za-z0-9][A-Za-z0-9-_#@/.|]{1,31}$", message = "无效的驱动编号")
     private String code;
 
     /**
@@ -79,7 +78,7 @@ public class DriverProperty {
     /**
      * 定时任务相关属性
      */
-    private ScheduleProperty schedule;
+    private ScheduleProperties schedule;
 
     /**
      * 驱动属性
@@ -116,4 +115,40 @@ public class DriverProperty {
      * 驱动客户端, 租户/应用名称_驱动节点编号
      */
     private String client;
+
+    /**
+     * 驱动配置文件 driver.schedule 字段内容
+     *
+     * @author pnoker
+     * @since 2022.1.0
+     */
+    @Getter
+    @Setter
+    public static class ScheduleProperties {
+
+        /**
+         * 读任务配置
+         */
+        private ScheduleConfig read;
+
+        /**
+         * 自定义任务配置
+         */
+        private ScheduleConfig custom;
+
+        /**
+         * 驱动调度任务配置
+         *
+         * @author pnoker
+         * @since 2022.1.0
+         */
+        @Getter
+        @Setter
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class ScheduleConfig {
+            private Boolean enable = false;
+            private String cron = "* */15 * * * ?";
+        }
+    }
 }
