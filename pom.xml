@@ -78,14 +78,14 @@
         <!-- DC3 Common 相关 -->
         <dc3.common.api.version>2024.3.2</dc3.common.api.version>
         <dc3.common.auth.version>2024.3.2</dc3.common.auth.version>
-        <dc3.common.data.version>2024.3.2</dc3.common.data.version>
-        <dc3.common.manager.version>2024.3.2</dc3.common.manager.version>
         <dc3.common.constant.version>2024.3.2</dc3.common.constant.version>
+        <dc3.common.data.version>2024.3.2</dc3.common.data.version>
         <dc3.common.driver.version>2024.3.2</dc3.common.driver.version>
         <dc3.common.exception.version>2024.3.2</dc3.common.exception.version>
         <dc3.common.influx.version>2024.3.2</dc3.common.influx.version>
         <dc3.common.job.version>2024.3.2</dc3.common.job.version>
         <dc3.common.log.version>2024.3.2</dc3.common.log.version>
+        <dc3.common.manager.version>2024.3.2</dc3.common.manager.version>
         <dc3.common.model.version>2024.3.2</dc3.common.model.version>
         <dc3.common.mongo.version>2024.3.2</dc3.common.mongo.version>
         <dc3.common.mqtt.version>2024.3.2</dc3.common.mqtt.version>
@@ -105,13 +105,14 @@
     <modules>
         <module>dc3-common-api</module>
         <module>dc3-common-auth</module>
-        <module>dc3-common-data</module>
         <module>dc3-common-constant</module>
+        <module>dc3-common-data</module>
         <module>dc3-common-driver</module>
         <module>dc3-common-exception</module>
         <module>dc3-common-influx</module>
         <module>dc3-common-job</module>
         <module>dc3-common-log</module>
+        <module>dc3-common-manager</module>
         <module>dc3-common-model</module>
         <module>dc3-common-mongo</module>
         <module>dc3-common-mqtt</module>
@@ -223,13 +224,13 @@
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
-                <artifactId>dc3-common-data</artifactId>
-                <version>${dc3.common.data.version}</version>
+                <artifactId>dc3-common-constant</artifactId>
+                <version>${dc3.common.constant.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
-                <artifactId>dc3-common-constant</artifactId>
-                <version>${dc3.common.constant.version}</version>
+                <artifactId>dc3-common-data</artifactId>
+                <version>${dc3.common.data.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
@@ -255,6 +256,11 @@
                 <groupId>io.github.pnoker</groupId>
                 <artifactId>dc3-common-log</artifactId>
                 <version>${dc3.common.log.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.pnoker</groupId>
+                <artifactId>dc3-common-manager</artifactId>
+                <version>${dc3.common.manager.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.pnoker</groupId>
