@@ -17,6 +17,6 @@
 
 <aspectj>
     <weaver options="-Xset:weaveJavaxPackages=true">
-        <include within="io.github.pnoker.center.data.service..*"/>
+        <include within="io.github.pnoker.common.data.service..*"/>
     </weaver>
 </aspectj>

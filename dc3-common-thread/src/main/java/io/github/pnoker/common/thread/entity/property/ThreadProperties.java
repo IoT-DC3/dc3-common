@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.entity.property;
+package io.github.pnoker.common.thread.entity.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,26 +30,26 @@ import org.springframework.validation.annotation.Validated;
 @Getter
 @Setter
 @Validated
-@ConfigurationProperties(prefix = "server")
+@ConfigurationProperties(prefix = "server.thread")
 public class ThreadProperties {
 
     /**
-     * 线程名称前缀
+     * Thread name prefix
      */
     private String prefix;
 
     /**
-     * 线程池核心线程数量
+     * Number of thread pool core threads
      */
     private int corePoolSize;
 
     /**
-     * 线程池线程最大数量
+     * Maximum number of thread pool threads
      */
     private int maximumPoolSize;
 
     /**
-     * 空闲线程等待时间
+     * Idle thread waiting time, unit: seconds
      */
     private int keepAliveTime;
 }

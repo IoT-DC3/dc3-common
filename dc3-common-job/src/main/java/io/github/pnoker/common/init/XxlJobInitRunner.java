@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
- * XXL JOB Initial
+ * XXL JOB initialization runner
  *
  * @author pnoker
  * @since 2022.1.0

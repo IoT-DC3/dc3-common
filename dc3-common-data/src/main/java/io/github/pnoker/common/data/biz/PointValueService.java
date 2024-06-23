@@ -38,7 +38,7 @@ public interface PointValueService {
     /**
      * 批量新增 PointValue
      *
-     * @param pointValueBOListPointValue Array
+     * @param pointValueBOList Array
      */
     void save(List<PointValueBO> pointValueBOList);
 

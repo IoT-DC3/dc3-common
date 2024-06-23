@@ -18,7 +18,6 @@ package io.github.pnoker.common.manager.biz.impl;
 
 import io.github.pnoker.common.constant.driver.ScheduleConstant;
 import io.github.pnoker.common.manager.biz.ScheduleService;
-import io.github.pnoker.common.manager.job.EveryDay6Job;
 import io.github.pnoker.common.manager.job.HourlyJob;
 import io.github.pnoker.common.quartz.QuartzService;
 import jakarta.annotation.Resource;
@@ -41,8 +40,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public void initial() {
         try {
             // 自定义调度
-            quartzService.createJobWithCron(ScheduleConstant.DATA_SCHEDULE_GROUP, "data-every-day-6-job", "0 0 6 * * ?", EveryDay6Job.class);
-            quartzService.createJobWithCron(ScheduleConstant.DATA_SCHEDULE_GROUP, "data-hourly-job", "0 0 0/1 * * ?", HourlyJob.class);
+            quartzService.createJobWithCron(ScheduleConstant.MANAGER_SCHEDULE_GROUP, "hourly-job", "0 0 0/1 * * ?", HourlyJob.class);
 
             quartzService.startScheduler();
         } catch (SchedulerException e) {

@@ -23,19 +23,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * RabbitMQ 环境变量配置
+ * Environment Config
  *
  * @author pnoker
  * @since 2022.1.0
  */
 @Slf4j
+@Order
 @Configuration
-@Order(Ordered.LOWEST_PRECEDENCE)
 public class RabbitmqEnvironmentConfig implements EnvironmentPostProcessor {
 
     @Override

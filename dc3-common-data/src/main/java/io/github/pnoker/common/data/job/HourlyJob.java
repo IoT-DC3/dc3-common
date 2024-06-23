@@ -44,7 +44,6 @@ public class HourlyJob extends QuartzJobBean {
      */
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        // 暂时调整为30秒, 仅供测试
         log.info("hourlyJobHandler: {}", LocalDateTime.now());
     }
 }

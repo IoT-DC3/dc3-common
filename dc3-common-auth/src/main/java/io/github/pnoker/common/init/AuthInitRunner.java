@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * Auth Initial
+ * Auth  initialization runner
  *
  * @author pnoker
  * @since 2022.1.0

@@ -14,36 +14,30 @@
  * limitations under the License.
  */
 
-package io.github.pnoker.common.data.job;
+package io.github.pnoker.common.init;
 
-import lombok.extern.slf4j.Slf4j;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import io.github.pnoker.common.thread.entity.property.ThreadProperties;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 /**
- * 通用: 每天早上6点执行任务
+ * Thread initialization runner
  *
  * @author pnoker
  * @since 2022.1.0
  */
-@Slf4j
 @Component
-public class EveryDay6Job extends QuartzJobBean {
+@ComponentScan(basePackages = {
+        "io.github.pnoker.common.thread.*"
+})
+@EnableConfigurationProperties({ThreadProperties.class})
+public class ThreadInitRunner implements ApplicationRunner {
 
-    /**
-     * 任务执行
-     * * <p>
-     * * 具体逻辑请在 biz service 中定义
-     *
-     * @param context JobExecutionContext
-     * @throws JobExecutionException JobExecutionException
-     */
     @Override
-    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        log.info("everyDay6JobHandler: {}", LocalDateTime.now());
+    public void run(ApplicationArguments args) throws Exception {
+        // nothing to do
     }
 }

@@ -16,7 +16,6 @@
 
 package io.github.pnoker.common.manager.job;
 
-import io.github.pnoker.common.manager.biz.PointStatisticsService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -35,12 +34,6 @@ import java.time.LocalDateTime;
 @Component
 public class HourlyJob extends QuartzJobBean {
 
-    private final PointStatisticsService pointStatisticsService;
-
-    public HourlyJob(PointStatisticsService pointStatisticsService) {
-        this.pointStatisticsService = pointStatisticsService;
-    }
-
     /**
      * 任务执行
      * * <p>
@@ -51,8 +44,6 @@ public class HourlyJob extends QuartzJobBean {
      */
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        // 暂时调整为30秒, 仅供测试
-        pointStatisticsService.statisticsPointHistory(LocalDateTime.now());
         log.info("hourlyJobHandler: {}", LocalDateTime.now());
     }
 }

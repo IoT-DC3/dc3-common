@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Topic Config
+ *
  * @author pnoker
  * @since 2022.1.0
  */
