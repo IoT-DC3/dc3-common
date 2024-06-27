@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import io.github.pnoker.common.entity.ext.JsonExt;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -36,6 +37,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 @TableName("dc3_alarm_notify_profile")
 public class AlarmNotifyProfileDO implements Serializable {
 

@@ -19,10 +19,7 @@ package io.github.pnoker.common.auth.entity.bo;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.ExpireFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -36,6 +33,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class DriverTokenBO extends BaseBO {
 
     /**

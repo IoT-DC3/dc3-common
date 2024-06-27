@@ -21,10 +21,7 @@ import io.github.pnoker.common.entity.base.BaseVO;
 import io.github.pnoker.common.entity.ext.AlarmMessageExt;
 import io.github.pnoker.common.enums.AlarmMessageLevelFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * <p>
@@ -38,6 +35,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class AlarmMessageProfileVO extends BaseVO {
 

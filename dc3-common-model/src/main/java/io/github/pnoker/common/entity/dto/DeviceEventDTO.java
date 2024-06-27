@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceEventDTO implements Serializable {

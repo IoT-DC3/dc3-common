@@ -36,6 +36,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class AttributeBO implements Serializable {

@@ -21,10 +21,7 @@ import io.github.pnoker.common.entity.ext.ProfileExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.ProfileShareFlagEnum;
 import io.github.pnoker.common.enums.ProfileTypeFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Profile BO
@@ -36,6 +33,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class ProfileBO extends BaseBO {
 
     /**

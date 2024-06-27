@@ -26,10 +26,7 @@ import io.github.pnoker.common.valid.Upload;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
@@ -43,6 +40,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class DeviceVO extends BaseVO {
 

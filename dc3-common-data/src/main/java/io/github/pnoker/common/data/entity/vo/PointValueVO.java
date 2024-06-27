@@ -18,10 +18,7 @@ package io.github.pnoker.common.data.entity.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.github.pnoker.common.constant.common.TimeConstant;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -35,6 +32,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PointValueVO implements Serializable {

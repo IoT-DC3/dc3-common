@@ -21,10 +21,7 @@ import io.github.pnoker.common.driver.entity.dto.PointAttributeConfigDTO;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.ext.DeviceExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,6 +36,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class DeviceBO extends BaseBO {
 
     /**

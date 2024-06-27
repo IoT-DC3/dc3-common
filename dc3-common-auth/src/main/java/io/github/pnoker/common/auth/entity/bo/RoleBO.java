@@ -19,10 +19,7 @@ package io.github.pnoker.common.auth.entity.bo;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.ext.RoleExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Role BO
@@ -34,6 +31,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class RoleBO extends BaseBO {
 
     /**

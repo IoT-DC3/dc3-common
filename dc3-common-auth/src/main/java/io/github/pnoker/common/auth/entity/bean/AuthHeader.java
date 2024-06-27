@@ -16,8 +16,10 @@
 
 package io.github.pnoker.common.auth.entity.bean;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * @author pnoker
@@ -25,7 +27,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AuthHeader {
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthHeader implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String user;
     private String salt;
     private String token;

@@ -21,10 +21,7 @@ import io.github.pnoker.common.entity.ext.PointExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.PointTypeFlagEnum;
 import io.github.pnoker.common.enums.RwFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -38,6 +35,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class PointBO extends BaseBO {
 
     /**

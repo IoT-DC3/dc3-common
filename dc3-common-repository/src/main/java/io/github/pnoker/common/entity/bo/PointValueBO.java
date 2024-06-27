@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PointValueBO implements Serializable {

@@ -23,6 +23,7 @@ import io.github.pnoker.common.driver.entity.dto.PointAttributeDTO;
 import io.github.pnoker.common.enums.DriverStatusEnum;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -36,6 +37,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@ToString
 @Component
 public final class DriverMetadata {
 

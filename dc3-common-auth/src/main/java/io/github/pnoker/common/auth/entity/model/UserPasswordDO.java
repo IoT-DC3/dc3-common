@@ -19,6 +19,7 @@ package io.github.pnoker.common.auth.entity.model;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -34,6 +35,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 @TableName("dc3_user_password")
 public class UserPasswordDO implements Serializable {
 

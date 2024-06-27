@@ -18,6 +18,7 @@ package io.github.pnoker.common.redis.entity.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 public class RedisPointValueDO implements Serializable {
 
     @Serial

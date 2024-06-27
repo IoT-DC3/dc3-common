@@ -18,6 +18,7 @@ package io.github.pnoker.common.mongo.entity.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -33,6 +34,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@ToString
 @Document
 public class MgPointValueDO implements Serializable {
 

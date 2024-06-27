@@ -30,6 +30,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class JsonExt implements Serializable {

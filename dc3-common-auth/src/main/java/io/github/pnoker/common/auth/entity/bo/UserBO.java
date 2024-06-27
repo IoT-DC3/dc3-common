@@ -19,10 +19,7 @@ package io.github.pnoker.common.auth.entity.bo;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.ext.UserIdentityExt;
 import io.github.pnoker.common.entity.ext.UserSocialExt;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * User BO
@@ -34,6 +31,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class UserBO extends BaseBO {
 
     /**

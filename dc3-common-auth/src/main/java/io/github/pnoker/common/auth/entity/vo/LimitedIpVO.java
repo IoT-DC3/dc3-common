@@ -23,10 +23,7 @@ import io.github.pnoker.common.valid.Add;
 import io.github.pnoker.common.valid.Update;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * LimitedIp VO
@@ -38,6 +35,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class LimitedIpVO extends BaseVO {
 

@@ -20,10 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.pnoker.common.entity.base.BaseVO;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.ExpireFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -37,6 +34,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class DriverTokenVO extends BaseVO {
 

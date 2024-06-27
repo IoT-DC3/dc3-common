@@ -20,10 +20,7 @@ import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.entity.ext.DriverExt;
 import io.github.pnoker.common.enums.DriverTypeFlagEnum;
 import io.github.pnoker.common.enums.EnableFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Driver BO
@@ -35,6 +32,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class DriverBO extends BaseBO {
 
     /**

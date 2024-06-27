@@ -20,8 +20,10 @@ import io.github.pnoker.common.valid.Auth;
 import io.github.pnoker.common.valid.Check;
 import io.github.pnoker.common.valid.Update;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Login
@@ -31,7 +33,13 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Login {
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Login implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @NotBlank(message = "租户不能为空",
             groups = {Auth.class})

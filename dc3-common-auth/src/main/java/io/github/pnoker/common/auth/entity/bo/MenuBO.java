@@ -21,10 +21,7 @@ import io.github.pnoker.common.entity.ext.MenuExt;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.MenuLevelFlagEnum;
 import io.github.pnoker.common.enums.MenuTypeFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Menu BO
@@ -36,6 +33,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class MenuBO extends BaseBO {
 
     /**

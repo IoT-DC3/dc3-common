@@ -21,10 +21,7 @@ import io.github.pnoker.common.entity.base.BaseVO;
 import io.github.pnoker.common.valid.Add;
 import io.github.pnoker.common.valid.Update;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * RoleResourceBind VO
@@ -36,6 +33,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class RoleResourceBindVO extends BaseVO {
 

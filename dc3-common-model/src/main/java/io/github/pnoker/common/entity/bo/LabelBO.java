@@ -19,10 +19,7 @@ package io.github.pnoker.common.entity.bo;
 import io.github.pnoker.common.entity.base.BaseBO;
 import io.github.pnoker.common.enums.EnableFlagEnum;
 import io.github.pnoker.common.enums.EntityTypeFlagEnum;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * Label BO
@@ -34,6 +31,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
 public class LabelBO extends BaseBO {
 
     /**
