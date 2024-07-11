@@ -1,7 +1,8 @@
-.___     ___________ ________  _________ ________
+${AnsiColor.BRIGHT_WHITE}.___     ___________ ________  _________ ________
 |   | ___\__    ___/ \______ \ \_   ___ \\_____  \
 |   |/  _ \|    |     |    |  \/    \  \/  _(__  <
 |   (  <_> )    |     |    `   \     \____/       \
 |___|\____/|____|    /_______  /\______  /______  /
                              \/        \/       \/
 ${AnsiColor.BRIGHT_CYAN}IoT DC3 Platform V2024.3.2
+${AnsiColor.BRIGHT_WHITE}The source code is in the dc3-common repository, and you can find it on GitHub or Gitee.
