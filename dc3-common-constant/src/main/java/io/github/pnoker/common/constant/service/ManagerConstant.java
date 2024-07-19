@@ -44,6 +44,7 @@ public class ManagerConstant {
     public static final String LABEL_URL_PREFIX = "/label";
     public static final String DICTIONARY_URL_PREFIX = "/dictionary";
     public static final String TOPIC_URL_PREFIX = "/topic";
+    public static final String MQTT_URL_PREFIX = "/mqtt";
 
     private ManagerConstant() {
         throw new IllegalStateException(ExceptionConstant.UTILITY_CLASS);
