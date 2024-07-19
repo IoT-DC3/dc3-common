@@ -16,13 +16,13 @@
 
 package io.github.pnoker.common.entity.bo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 位号值
@@ -35,50 +35,18 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PointValueBO implements Serializable {
+public class PointValueTop100BO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
-     * ID
+     * 位号ID集合
      */
-    private String id;
+    private List<String> pointNames;
 
     /**
-     * 设备ID
+     * 100条数据和位号ID
      */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long deviceId;
-
-    /**
-     * 位号ID
-     */
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long pointId;
-
-    /**
-     * 原始值
-     */
-    private String rawValue;
-
-    /**
-     * 处理值
-     */
-    private String value;
-
-    /**
-     * 原始时间
-     */
-    private LocalDateTime originTime;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 操作时间
-     */
-    private LocalDateTime operateTime;
+    private List<Map<String,Object>> data;
 }
